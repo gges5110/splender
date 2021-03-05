@@ -35,7 +35,14 @@ const populateLevel3Cards = (): Card[] => {
 
 // Setup functions
 const setupGems = (numPlayers: number): number[] => {
-  return [5, 5, 5, 5, 5, 7];
+  switch (numPlayers) {
+    case 2:
+      return [4, 4, 4, 4, 4, 5];
+    case 3:
+      return [5, 5, 5, 5, 5, 5];
+    default:
+      return [7, 7, 7, 7, 7, 5];
+  }
 };
 
 const setupPlayers = (numPlayers: number): Player[] => {

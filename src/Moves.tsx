@@ -1,6 +1,6 @@
 import { Ctx } from "boardgame.io";
 import { INVALID_MOVE } from "boardgame.io/core";
-import { Card } from "./Interfaces";
+import { Card, Noble, Player } from "./Interfaces";
 import { GameState } from "./App";
 
 const gemsInHandLimit = 10;
@@ -64,21 +64,10 @@ export const buildFromReserve = (G: GameState, ctx: Ctx, cardIdx: number) => {
 
 const nobleVisits = (G: GameState, ctx: Ctx) => {
   // Check noble visits
-  const player = G.players[Number(ctx.currentPlayer)];
-  const playerCardCountByColors: number[] = Array(5).fill(0);
-  player.cards.forEach((card) => {
-    playerCardCountByColors[card.color]++;
-  });
-  const visitingNobleIndexArray: number[] = [];
-  G.nobles.forEach((noble, index) => {
-    if (
-      noble.cardCountByColors.every(
-        (count, index) => playerCardCountByColors[index] >= count
-      )
-    ) {
-      visitingNobleIndexArray.push(index);
-    }
-  });
+  const visitingNobleIndexArray: number[] = getVisitingNobleIndexArray(
+    G.players[Number(ctx.currentPlayer)],
+    G.nobles
+  );
 
   if (visitingNobleIndexArray.length === 0) {
     ctx.events?.pass?.();
@@ -88,6 +77,27 @@ const nobleVisits = (G: GameState, ctx: Ctx) => {
   } else {
     ctx.events?.setStage?.({ stage: "PickNoble" });
   }
+};
+
+export const getVisitingNobleIndexArray = (
+  player: Player,
+  nobles: Noble[]
+): number[] => {
+  const playerCardCountByColors: number[] = Array(5).fill(0);
+  player.cards.forEach((card) => {
+    playerCardCountByColors[card.color]++;
+  });
+  const visitingNobleIndexArray: number[] = [];
+  nobles.forEach((noble, index) => {
+    if (
+      noble.cardCountByColors.every(
+        (count, index) => playerCardCountByColors[index] >= count
+      )
+    ) {
+      visitingNobleIndexArray.push(index);
+    }
+  });
+  return visitingNobleIndexArray;
 };
 
 const purchaseDevelopmentCard = (G: GameState, ctx: Ctx, card?: Card) => {

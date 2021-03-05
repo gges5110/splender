@@ -7,6 +7,9 @@ import { NobleDisplay } from "./NobleDisplay";
 import { PlayerGems } from "./PlayerGems";
 import { CardsOnTable } from "./CardsOnTable";
 import { CardDialog } from "./CardDialog";
+import { getVisitingNobleIndexArray } from "../Moves";
+import { GameEndDialog } from "./GameEndDialog";
+import { DiscardGemsDialog } from "./DiscardGemsDialog";
 
 interface SplendorBoardProps {
   ctx: SplendorCtx;
@@ -29,13 +32,11 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
     setBuildDialogProps(undefined);
   };
 
-  if (ctx.gameover?.winner) {
-    alert(`Game over! Winner is ${ctx.gameover?.winner}`);
-  }
-
   return (
     <div className={"flex h-screen"}>
       <div className="container mx-auto my-auto shadow-lg rounded-xl bg-gray-100 p-8">
+        <GameEndDialog ctx={ctx} />
+
         <div className="flex flex-wrap justify-center">
           <div className={"w-max p-4 m-2"}>
             <div
@@ -43,27 +44,20 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
                 "rounded-t-xl overflow-hidden bg-green-100 p-4 shadow-xl"
               }
             >
-              <div className={"flex justify-center"}>
+              <div className={"flex justify-center h-32"}>
                 {G.nobles.map((noble, index) => (
                   <NobleDisplay noble={noble} key={index} />
                 ))}
               </div>
             </div>
 
-            <dialog
-              className={
-                "rounded-xl overflow-hidden bg-gray-300 p-4 mx-auto shadow-lg"
-              }
+            <DiscardGemsDialog
               open={
                 ctx.activePlayers?.[Number(ctx.currentPlayer)] === "DiscardGems"
               }
-            >
-              <GemsPicker
-                gems={G.players[Number(ctx.currentPlayer)].gems}
-                mode={GemsPickerMode.DISCARD}
-                onSelect={moves.discardGems}
-              />
-            </dialog>
+              playerGems={G.players[Number(ctx.currentPlayer)].gems}
+              discardGems={moves.discardGems}
+            />
 
             <dialog
               className={
@@ -74,6 +68,19 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
               }
             >
               Pick Noble
+              <div className={"flex justify-center"}>
+                {getVisitingNobleIndexArray(
+                  G.players[Number(ctx.currentPlayer)],
+                  G.nobles
+                ).map((nobleIndex) => {
+                  return (
+                    <NobleDisplay
+                      noble={G.nobles[nobleIndex]}
+                      onClick={() => moves.pickNoble(nobleIndex)}
+                    />
+                  );
+                })}
+              </div>
             </dialog>
 
             <div
@@ -135,12 +142,13 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
                     >
                       {index + 1}
                     </div>
+                    <div className={"w-2"} />
                     <div className={"text-center"}>
                       <PlayerGems gems={player.gems} />
                       <div className={"h-2"} />
                       <PlayerCards
                         isActivePlayer={Number(ctx.currentPlayer) === index}
-                        player={G.players[Number(ctx.currentPlayer)]}
+                        player={player}
                         cards={player.cards}
                         reservedCards={player.reservedCards}
                         buildFromReserve={moves.buildFromReserve}

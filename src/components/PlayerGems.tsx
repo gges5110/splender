@@ -6,13 +6,11 @@ interface PlayerGemsProps {
 }
 
 export const PlayerGems: React.FC<PlayerGemsProps> = ({ gems }) => (
-  <div className={"flex"}>
-    {gems.map((gemCount, index) =>
-      gemCount > 0 ? (
-        <GemDisplay key={index} color={index} count={gemCount} />
-      ) : (
-        <div key={index} className={"w-12 h-12 mx-2"} />
-      )
-    )}
+  <div className={"flex gap-4"}>
+    {gems.map((gemCount, index) => (
+      <div key={index} className={"w-12 h-12"}>
+        {gemCount > 0 && <GemDisplay color={index} count={gemCount} />}
+      </div>
+    ))}
   </div>
 );

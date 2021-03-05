@@ -10,6 +10,7 @@ export enum GemsPickerMode {
 interface GemsPickerProps {
   gems: number[];
   mode: GemsPickerMode;
+  gemsToDiscard?: number;
   onSelect(gems: number[]): void;
 }
 
@@ -17,6 +18,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
   gems,
   onSelect,
   mode,
+  gemsToDiscard,
 }) => {
   const [selectedGems, setGems] = useState<number[]>(Array(5).fill(0));
 
@@ -39,7 +41,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
           return (
             <button
               key={index}
-              className={"rounded-full w-12 h-12 mx-1"}
+              className={"rounded-full w-12 h-12 mx-1 select-none"}
               style={{
                 backgroundColor: gemsColorStyle[index],
                 color: gemsTextColorStyle[index],
@@ -54,7 +56,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
         return (
           <button
             key={index}
-            className={"rounded-full w-12 h-12 mx-1"}
+            className={"rounded-full w-12 h-12 mx-1 select-none"}
             style={{
               backgroundColor: gemsColorStyle[index],
               color: gemsTextColorStyle[index],
@@ -76,13 +78,17 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
         );
       })}
       <button
-        disabled={selectedGems.every((gem) => gem === 0)}
+        disabled={
+          mode === GemsPickerMode.PICK
+            ? selectedGems.every((gem) => gem === 0)
+            : selectedGems.reduce((p, v) => p + v, 0) < (gemsToDiscard || 0)
+        }
         onClick={() => {
           onSelect(selectedGems);
           setGems(Array(5).fill(0));
         }}
         className={
-          "w-24 h-12 inline-flex items-center bg-indigo-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 disabled:opacity-50"
+          "w-24 h-10 inline-flex items-center bg-indigo-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 disabled:opacity-50"
         }
       >
         <svg
@@ -99,7 +105,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
             d="M5 13l4 4L19 7"
           />
         </svg>
-        <span>{actionLabelText}</span>
+        <span className={"select-none"}>{actionLabelText}</span>
       </button>
 
       <div className={"h-2"} />
@@ -119,7 +125,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
               >
                 <button
                   key={index}
-                  className={"rounded-full w-12 h-12 mx-1"}
+                  className={"rounded-full w-12 h-12 mx-1 select-none"}
                   style={{
                     backgroundColor: gemsColorStyle[index],
                     color: gemsTextColorStyle[index],
@@ -137,7 +143,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
               </motion.div>
             );
           } else {
-            return <div className={"w-12 h-12 mx-1"} key={index} />;
+            return <div className={"w-12 h-12 mx-1 select-none"} key={index} />;
           }
         })}
         <div className={"w-12 h-12 mx-1"} key={5} />
@@ -145,7 +151,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
           disabled={selectedGems.every((gem) => gem === 0)}
           onClick={() => setGems(Array(5).fill(0))}
           className={
-            "w-24 inline-flex items-center bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 disabled:opacity-50"
+            "w-24 h-10 inline-flex items-center bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 disabled:opacity-50"
           }
         >
           <svg

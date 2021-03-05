@@ -8,6 +8,7 @@ interface CardDisplayProps {
   card: Card | undefined;
   enabled: boolean;
   player: Player;
+  hideAffordableHint?: boolean;
   onClick?(): void;
 }
 
@@ -16,6 +17,7 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
   enabled,
   player,
   onClick,
+  hideAffordableHint = false,
 }) => {
   if (card === undefined) {
     return <button className={"w-28 h-40"} />;
@@ -35,8 +37,8 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
         onClick={onClick}
         disabled={!enabled}
         className={
-          playerCanAffordCard(card, player)
-            ? "w-28 h-40 rounded-xl relative ring-4 ring-gray-400 shadow-xl"
+          !hideAffordableHint && playerCanAffordCard(card, player)
+            ? "w-28 h-40 rounded-xl relative shadow-xl ring-4 ring-gray-400"
             : "w-28 h-40 rounded-xl relative shadow-xl"
         }
         style={{
