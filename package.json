@@ -2,6 +2,7 @@
   "name": "splender",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "boardgame.io": "^0.43.3",
     "framer-motion": "^3.9.0",
