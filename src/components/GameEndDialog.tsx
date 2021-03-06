@@ -13,7 +13,7 @@ export const GameEndDialog: React.FC<GameEndDialogProps> = ({ ctx }) => {
         open={true}
         className={"z-50 fixed top-1/2 rounded-lg bg-gray-200 shadow-lg w-max"}
       >
-        <div>Game over! Winner is {ctx.gameover?.winner}</div>
+        <div>Game over! Player {ctx.gameover?.winner + 1} is the winner</div>
       </dialog>
     </div>
   );

@@ -3,6 +3,7 @@ import React from "react";
 import { gemsColorStyle, gemsTextColorStyle } from "./SplendorBoard";
 import { motion } from "framer-motion";
 import { playerCanAffordCard } from "./CardDialog";
+import { GemDisplay } from "./GemDisplay";
 
 interface CardDisplayProps {
   card: Card | undefined;
@@ -38,8 +39,8 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
         disabled={!enabled}
         className={
           !hideAffordableHint && playerCanAffordCard(card, player)
-            ? "w-28 h-40 rounded-xl relative shadow-xl ring-4 ring-gray-400"
-            : "w-28 h-40 rounded-xl relative shadow-xl"
+            ? "w-16 h-32 sm:w-28 sm:h-40 rounded-xl relative shadow-xl ring-4 ring-gray-400"
+            : "w-16 h-32 sm:w-28 sm:h-40 rounded-xl relative shadow-xl"
         }
         style={{
           backgroundColor: gemsColorStyle[card.color],
@@ -51,20 +52,17 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
         >
           {card.points > 0 && card.points}
         </div>
-        <div className={"absolute bottom-0 left-0 p-2"}>
+        <div className={"absolute bottom-0 left-0 p-2 flex flex-col gap-1"}>
           {card.cost.map(
             (gemCount, index) =>
               gemCount > 0 && (
-                <div
+                <GemDisplay
                   key={index}
-                  className={"h-8 w-8 rounded-full border border-black mt-1"}
-                  style={{
-                    backgroundColor: gemsColorStyle[index],
-                    color: gemsTextColorStyle[index],
-                  }}
-                >
-                  {gemCount}
-                </div>
+                  color={index}
+                  count={gemCount}
+                  size={"small"}
+                  className={"border border-black"}
+                />
               )
           )}
         </div>

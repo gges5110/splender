@@ -17,7 +17,7 @@ export const NobleDisplay: React.FC<NobleDisplayProps> = ({
 
   return (
     <div
-      className="cursor-pointer shadow-xl rounded-xl relative h-28 w-28 border-4 border-yellow-300 bg-gradient-to-l from-gray-300 to-gray-200 m-2"
+      className="cursor-pointer shadow-xl rounded-xl relative h-20 w-20 sm:h-28 sm:w-28 border-4 border-yellow-300 bg-gradient-to-l from-gray-300 to-gray-200 m-2"
       onClick={onClick}
     >
       <div

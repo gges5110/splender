@@ -34,17 +34,17 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
 
   return (
     <div className={"flex h-screen"}>
-      <div className="container mx-auto my-auto shadow-lg rounded-xl bg-gray-100 p-8">
+      <div className="container mx-auto my-auto shadow-lg rounded-xl sm:bg-gray-100 sm:p-8 w-screen sm:w-auto">
         <GameEndDialog ctx={ctx} />
 
         <div className="flex flex-wrap justify-center">
-          <div className={"w-max p-4 m-2"}>
+          <div className={"w-max p-1 sm:p-4 sm:m-2"}>
             <div
               className={
-                "rounded-t-xl overflow-hidden bg-green-100 p-4 shadow-xl"
+                "rounded-t-xl overflow-hidden bg-green-100 p-1 sm:p-4 shadow-xl"
               }
             >
-              <div className={"flex justify-center h-32"}>
+              <div className={"flex justify-center h-auto sm:h-32"}>
                 {G.nobles.map((noble, index) => (
                   <NobleDisplay noble={noble} key={index} />
                 ))}
