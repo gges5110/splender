@@ -11,7 +11,8 @@ import {
   pickNoble,
   reserve,
 } from "./Moves";
-import { Ctx } from "boardgame.io";
+import { enumerateAIMoves } from "./AI";
+import { Local } from "boardgame.io/multiplayer";
 
 export interface GameState {
   cardsOnTable: Array<Array<Card | undefined>>;
@@ -45,13 +46,17 @@ const setupGems = (numPlayers: number): number[] => {
   }
 };
 
-const setupPlayers = (numPlayers: number): Player[] => {
-  return Array(numPlayers).fill({
+export const getDefaultPlayer = (): Player => {
+  return {
     cards: [],
     reservedCards: [],
     gems: [0, 0, 0, 0, 0, 0],
     nobles: [],
-  });
+  };
+};
+
+const setupPlayers = (numPlayers: number): Player[] => {
+  return Array(numPlayers).fill(getDefaultPlayer());
 };
 
 export const SplendorGame = {
@@ -96,23 +101,7 @@ export const SplendorGame = {
     },
   },
   ai: {
-    enumerate: (G: GameState, ctx: Ctx) => {
-      const moves: any[] = [];
-      // pick
-      moves.push(
-        {
-          move: "pick",
-          args: [[1, 1, 1, 0, 0]],
-        },
-        {
-          move: "pick",
-          args: [[1, 0, 1, 1, 0]],
-        }
-      );
-
-      // build
-      return moves;
-    },
+    enumerate: enumerateAIMoves,
   },
 
   moves: {
@@ -159,7 +148,8 @@ const App = Client({
   // @ts-ignore
   board: SplendorBoard,
   numPlayers: 3,
-  debug: false,
+  debug: true,
+  multiplayer: Local(),
 });
 
 export default App;
