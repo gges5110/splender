@@ -1,7 +1,7 @@
 import { Ctx } from "boardgame.io";
 import { INVALID_MOVE } from "boardgame.io/core";
 import { Card, Noble, Player } from "./Interfaces";
-import { GameState } from "./App";
+import { GameState } from "./Interfaces";
 
 const gemsInHandLimit = 10;
 

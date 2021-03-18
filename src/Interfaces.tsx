@@ -36,6 +36,14 @@ export interface Moves {
   discardGems: any;
 }
 
+export interface GameState {
+  cardsOnTable: Array<Array<Card | undefined>>;
+  cardsInDeck: Card[][];
+  gems: number[];
+  nobles: Noble[];
+  players: Player[];
+}
+
 export interface SplendorCtx extends Ctx {
   winner?: number;
 }

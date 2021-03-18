@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GameState } from "../App";
+import { GameState } from "../Interfaces";
 import type { Card, Moves, SplendorCtx } from "../Interfaces";
 import { PlayerCards } from "./PlayerCards";
 import { GemsPicker, GemsPickerMode } from "./GemsPicker";

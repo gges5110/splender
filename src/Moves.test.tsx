@@ -1,8 +1,8 @@
 import { build, pick, reserve } from "./Moves";
-import { GameState, SplendorGame } from "./App";
+import { SplendorGame } from "./SplendorGame";
 import { INVALID_MOVE } from "boardgame.io/core";
 import { Ctx } from "boardgame.io";
-import { Card, Color } from "./Interfaces";
+import { Card, Color, GameState } from "./Interfaces";
 
 const getDefaultCtx = (): Ctx => {
   return {
@@ -42,7 +42,7 @@ describe("Moves", () => {
 
       pick(G, ctx, [1, 1, 1, 0, 0]);
 
-      expect(G.gems).toEqual([4, 4, 4, 5, 5, 7]);
+      expect(G.gems).toEqual([4, 4, 4, 5, 5, 5]);
     });
 
     test("picking more than the amount available", () => {

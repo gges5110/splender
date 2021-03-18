@@ -1,10 +1,8 @@
-import { GameState } from "./App";
 import { Ctx } from "boardgame.io";
+import { GameState } from "./Interfaces";
 
 export const enumerateAIMoves = (G: GameState, ctx: Ctx) => {
   const moves: any[] = [];
-  const currentPlayer = G.players[Number(ctx.currentPlayer)];
-  const playerGems = currentPlayer.gems;
   const gems = G.gems;
   // pick
   // 2 gems of same kind
@@ -15,10 +13,10 @@ export const enumerateAIMoves = (G: GameState, ctx: Ctx) => {
       moves.push({
         move: "pick",
         args: [arr],
-      })
+      });
     }
   });
-  permute(gems).forEach(p => {
+  permute(gems).forEach((p) => {
     moves.push({
       move: "pick",
       args: [p],
@@ -27,14 +25,14 @@ export const enumerateAIMoves = (G: GameState, ctx: Ctx) => {
 
   // build
   return moves;
-}
-
+};
 
 const permute = (gems: number[]): number[][] => {
-  const perm: number[] = [], perms: number[][] = [];
+  const perm: number[] = [],
+    perms: number[][] = [];
   const p = (count: number) => {
     if (perm.length === 5) {
-      if (perm.some(g => g === 1)) {
+      if (perm.some((g) => g === 1)) {
         perms.push([...perm]);
       }
 
@@ -50,8 +48,8 @@ const permute = (gems: number[]): number[][] => {
     perm.push(0);
     p(count);
     perm.pop();
-  }
+  };
   p(0);
 
   return perms;
-}
+};
