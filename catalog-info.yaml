@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: splender
+  annotations:
+    github.com/project-slug: gges5110/splender
+spec:
+  type: other
+  lifecycle: unknown
+  owner: boxoffice
