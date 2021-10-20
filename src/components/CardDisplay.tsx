@@ -1,7 +1,6 @@
 import { Card, Player } from "../Interfaces";
 import React from "react";
 import { gemsColorStyle, gemsTextColorStyle } from "./SplendorBoard";
-import { motion } from "framer-motion";
 import { playerCanAffordCard } from "./CardDialog";
 import { GemDisplay } from "./GemDisplay";
 
@@ -25,15 +24,7 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
   }
 
   return (
-    <motion.div
-      initial={{
-        y: 50,
-      }}
-      animate={{
-        opacity: 1,
-        y: 0,
-      }}
-    >
+    <div>
       <button
         onClick={onClick}
         disabled={!enabled}
@@ -67,6 +58,6 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
           )}
         </div>
       </button>
-    </motion.div>
+    </div>
   );
 };

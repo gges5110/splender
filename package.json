@@ -4,6 +4,7 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
+    "@headlessui/react": "^1.4.1",
     "boardgame.io": "^0.43.3",
     "framer-motion": "^3.9.0",
     "react": "^17.0.1",
