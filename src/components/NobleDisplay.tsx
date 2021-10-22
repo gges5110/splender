@@ -28,11 +28,7 @@ export const NobleDisplay: React.FC<NobleDisplayProps> = ({
         {noble.points}
       </div>
       <div className={"absolute bottom-0 left-0 p-2 h-18"}>
-        <div
-          className={
-            "grid grid-cols-2 justify-end flex-wrap-reverse w-full h-full gap-1"
-          }
-        >
+        <div className={"flex flex-wrap-reverse w-full h-full gap-1"}>
           {noble.cardCountByColors.map(
             (gemCount, index) =>
               gemCount > 0 && (

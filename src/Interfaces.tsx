@@ -37,6 +37,8 @@ export interface Moves {
 }
 
 export interface GameState {
+  // intentionally allow undefined element to remember the card position on the table
+  // Index: [level][column], level 0 is the lowest/cheapest and level 2 is the highest.
   cardsOnTable: Array<Array<Card | undefined>>;
   cardsInDeck: Card[][];
   gems: number[];
