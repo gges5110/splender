@@ -1,14 +1,6 @@
 import "./App.css";
-import { Client } from "boardgame.io/react";
-import { SplendorBoard } from "./components/SplendorBoard";
-import { SplendorGame } from "./SplendorGame";
+import { SplendorClient } from "./SplendorClient";
 
-const App = Client({
-  game: SplendorGame,
-  // @ts-ignore
-  board: SplendorBoard,
-  numPlayers: 3,
-  debug: false,
-});
+const App = () => <SplendorClient playerID={"0"} />;
 
 export default App;

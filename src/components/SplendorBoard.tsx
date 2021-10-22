@@ -34,8 +34,8 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
 
   return (
     <div className={"flex h-screen"}>
-      <div className="container mx-auto my-auto shadow-lg rounded-xl sm:bg-gray-100 sm:p-8 w-screen sm:w-auto">
-        <GameEndDialog ctx={ctx} />
+      <div className="container mx-auto my-auto shadow-lg rounded-xl sm:bg-gray-100 p-2 sm:p-8 w-screen sm:w-auto">
+        <GameEndDialog winner={ctx.gameover?.winner} />
 
         <div className="flex flex-wrap justify-center">
           <div className={"w-max p-1 sm:p-4 sm:m-2"}>

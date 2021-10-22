@@ -9,6 +9,7 @@ import {
 import { enumerateAIMoves } from "./AI";
 import { Card, GameState, Player, SplendorCtx } from "./Interfaces";
 import { level1Cards, level2Cards, level3Cards, nobles } from "./constants";
+import { Game } from "boardgame.io";
 
 const populateLevel1Cards = (): Card[] => {
   return Object.assign([], level1Cards);
@@ -47,7 +48,7 @@ const setupPlayers = (numPlayers: number): Player[] => {
   return Array(numPlayers).fill(getDefaultPlayer());
 };
 
-export const SplendorGame = {
+export const SplendorGame: Game = {
   setup: (ctx: SplendorCtx): GameState => {
     // Setup gems, cards and nobles
     const level1Cards: Card[] =
@@ -74,7 +75,6 @@ export const SplendorGame = {
 
   turn: {
     moveLimit: 2,
-
     stages: {
       Main: {
         moves: {

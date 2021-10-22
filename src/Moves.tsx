@@ -2,8 +2,9 @@ import { Ctx } from "boardgame.io";
 import { INVALID_MOVE } from "boardgame.io/core";
 import { Card, Noble, Player } from "./Interfaces";
 import { GameState } from "./Interfaces";
+import { playerCanAffordCard } from "./components/CardDialog";
 
-const gemsInHandLimit = 10;
+export const gemsInHandLimit = 10;
 
 export const pick = (G: GameState, ctx: Ctx, gems: number[]) => {
   for (let i = 0; i < gems.length; ++i) {
@@ -14,16 +15,7 @@ export const pick = (G: GameState, ctx: Ctx, gems: number[]) => {
     G.players[Number(ctx.currentPlayer)].gems[i] += gems[i];
   }
 
-  const totalCount = G.players[Number(ctx.currentPlayer)].gems.reduce(
-    (p, c) => p + c,
-    0
-  );
-
-  if (totalCount > gemsInHandLimit) {
-    ctx.events?.setStage?.({ stage: "DiscardGems" });
-  } else {
-    ctx.events?.pass?.();
-  }
+  considerTriggerDiscardPhase(G, ctx);
 };
 
 const replenishCards = (G: GameState, level: number, cardIdx: number) => {
@@ -102,7 +94,10 @@ export const getVisitingNobleIndexArray = (
 
 const purchaseDevelopmentCard = (G: GameState, ctx: Ctx, card?: Card) => {
   let goldCount = G.players[Number(ctx.currentPlayer)].gems[5];
-  if (card === undefined) {
+  if (
+    card === undefined ||
+    !playerCanAffordCard(card, G.players[Number(ctx.currentPlayer)])
+  ) {
     return INVALID_MOVE;
   }
 
@@ -162,14 +157,21 @@ export const reserve = (
   }
 
   G.players[Number(ctx.currentPlayer)].reservedCards.push(card);
-  G.players[Number(ctx.currentPlayer)].gems[5]++;
-  G.gems[5]--;
+
+  // Only hand out gold gem when available
+  if (G.gems[5] > 0) {
+    G.players[Number(ctx.currentPlayer)].gems[5]++;
+    G.gems[5]--;
+  }
+
   replenishCards(G, level, cardIdx);
 
-  const totalCount = G.players[Number(ctx.currentPlayer)].gems
-    .slice(0, 5)
-    .reduce((p, c) => p + c, 0);
-  if (totalCount > 10) {
+  considerTriggerDiscardPhase(G, ctx);
+};
+
+const considerTriggerDiscardPhase = (G: GameState, ctx: Ctx) => {
+  const totalCount = getTotalCount(G.players[Number(ctx.currentPlayer)].gems);
+  if (totalCount > gemsInHandLimit) {
     ctx.events?.setStage?.({ stage: "DiscardGems" });
   } else {
     ctx.events?.pass?.();
@@ -183,11 +185,9 @@ export const pickNoble = (G: GameState, ctx: Ctx, index: number) => {
 };
 
 export const discardGems = (G: GameState, ctx: Ctx, gems: number[]) => {
-  const totalCount = G.players[Number(ctx.currentPlayer)].gems
-    .slice(0, 5)
-    .reduce((p, c) => p + c, 0);
+  const totalCount = getTotalCount(G.players[Number(ctx.currentPlayer)].gems);
 
-  const totalGemsToDiscard = gems.reduce((p, c) => p + c, 0);
+  const totalGemsToDiscard = getTotalCount(gems);
 
   if (totalCount - totalGemsToDiscard > gemsInHandLimit) {
     return INVALID_MOVE;
@@ -197,4 +197,8 @@ export const discardGems = (G: GameState, ctx: Ctx, gems: number[]) => {
     G.players[Number(ctx.currentPlayer)].gems[i] -= gems[i];
     G.gems[i] += gems[i];
   }
+};
+
+export const getTotalCount = (array: number[]): number => {
+  return array.reduce((p, c) => p + c, 0);
 };
