@@ -7,9 +7,9 @@ import {
   reserve,
 } from "./Moves";
 import { enumerateAIMoves } from "./AI";
-import { Card, GameState, Player, SplendorCtx } from "./Interfaces";
+import { Card, GameState, Player } from "./Interfaces";
 import { level1Cards, level2Cards, level3Cards, nobles } from "./constants";
-import { Game } from "boardgame.io";
+import type { Game } from "boardgame.io";
 
 const populateLevel1Cards = (): Card[] => {
   return Object.assign([], level1Cards);
@@ -48,8 +48,8 @@ const setupPlayers = (numPlayers: number): Player[] => {
   return Array(numPlayers).fill(getDefaultPlayer());
 };
 
-export const SplendorGame: Game = {
-  setup: (ctx: SplendorCtx): GameState => {
+export const SplendorGame: Game<GameState> = {
+  setup: (ctx) => {
     // Setup gems, cards and nobles
     const level1Cards: Card[] =
       ctx.random?.Shuffle(populateLevel1Cards()) || [];
@@ -72,7 +72,15 @@ export const SplendorGame: Game = {
       nobles: ctx.random?.Shuffle(nobles).splice(0, ctx.numPlayers + 1) || [],
     };
   },
-
+  events: {
+    endGame: false,
+    endPhase: false,
+    endTurn: false,
+    setPhase: false,
+    endStage: false,
+    setStage: true,
+    pass: true,
+  },
   turn: {
     moveLimit: 2,
     stages: {
@@ -101,7 +109,7 @@ export const SplendorGame: Game = {
     discardGems,
   },
 
-  endIf: (G: GameState, ctx: SplendorCtx) => {
+  endIf: (G, ctx) => {
     if (Number(ctx.currentPlayer) !== ctx.numPlayers - 1) {
       return;
     }

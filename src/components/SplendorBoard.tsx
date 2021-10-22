@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { GameState } from "../Interfaces";
-import type { Card, Moves, SplendorCtx } from "../Interfaces";
+import type { Card, GameState } from "../Interfaces";
 import { PlayerCards } from "./PlayerCards";
 import { GemsPicker, GemsPickerMode } from "./GemsPicker";
 import { NobleDisplay } from "./NobleDisplay";
@@ -10,14 +9,9 @@ import { CardDialog } from "./CardDialog";
 import { getVisitingNobleIndexArray } from "../Moves";
 import { GameEndDialog } from "./GameEndDialog";
 import { DiscardGemsDialog } from "./DiscardGemsDialog";
+import type { BoardProps } from "boardgame.io/dist/types/packages/react";
 
-interface SplendorBoardProps {
-  ctx: SplendorCtx;
-  G: GameState;
-  moves: Moves;
-}
-
-export const SplendorBoard: React.FC<SplendorBoardProps> = ({
+export const SplendorBoard: React.FC<BoardProps<GameState>> = ({
   ctx,
   G,
   moves,
@@ -31,6 +25,9 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
     setDialogOpen(false);
     setBuildDialogProps(undefined);
   };
+
+  // TODO: fix the issue where playerID is always undefined
+  const currentPlayerActive = ctx.playerID === ctx.currentPlayer;
 
   return (
     <div className={"flex h-screen"}>
@@ -53,7 +50,8 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
 
             <DiscardGemsDialog
               open={
-                ctx.activePlayers?.[Number(ctx.currentPlayer)] === "DiscardGems"
+                ctx.activePlayers?.[Number(ctx.currentPlayer)] ===
+                  "DiscardGems" && currentPlayerActive
               }
               playerGems={G.players[Number(ctx.currentPlayer)].gems}
               discardGems={moves.discardGems}
@@ -102,6 +100,7 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
                   setDialogOpen(true);
                   setBuildDialogProps(buildDialogProps);
                 }}
+                hideAffordableHint={currentPlayerActive}
               />
             </div>
 
@@ -129,6 +128,7 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
               <div className={"mx-auto"}>
                 {G.players.map((player, index: number) => (
                   <div
+                    key={index}
                     className={
                       Number(ctx.currentPlayer) === index
                         ? "flex items-center bg-red-200 my-4 rounded-xl relative p-2 ring-2 ring-gray-400"
