@@ -1,8 +1,9 @@
 import { Card, Player } from "../Interfaces";
 import React from "react";
 import { gemsColorStyle, gemsTextColorStyle } from "./SplendorBoard";
-import { playerCanAffordCard } from "./CardDialog";
+import { playerCanAffordCard } from "./PlayingTable/CardDialog/CardDialog";
 import { GemDisplay } from "./GemDisplay";
+import clsx from "clsx";
 
 interface CardDisplayProps {
   card: Card | undefined;
@@ -29,11 +30,13 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
       onClick={onClick}
       onMouseDown={(event) => event.preventDefault()}
       disabled={!enabled}
-      className={
-        !hideAffordableHint && playerCanAffordCard(card, player)
-          ? "w-16 h-32 sm:w-24 sm:h-32 rounded-xl relative shadow-xl ring-4 ring-gray-400"
-          : "w-16 h-24 sm:w-24 sm:h-32 rounded-xl relative shadow-xl"
-      }
+      className={clsx(
+        "w-16 h-24 sm:w-24 sm:h-32 rounded-xl relative shadow-xl select-none",
+        {
+          "ring-4 ring-gray-400":
+            !hideAffordableHint && playerCanAffordCard(card, player),
+        }
+      )}
       style={{
         backgroundColor: gemsColorStyle[card.color],
         color: gemsTextColorStyle[card.color],

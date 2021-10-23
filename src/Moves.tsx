@@ -2,7 +2,7 @@ import { Ctx } from "boardgame.io";
 import { INVALID_MOVE } from "boardgame.io/core";
 import { Card, Noble, Player } from "./Interfaces";
 import { GameState } from "./Interfaces";
-import { playerCanAffordCard } from "./components/CardDialog";
+import { playerCanAffordCard } from "./components/PlayingTable/CardDialog/CardDialog";
 
 export const gemsInHandLimit = 10;
 

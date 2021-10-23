@@ -1,9 +1,9 @@
 import React from "react";
-import { Card, Player } from "../Interfaces";
-import { BuildDialogProps } from "./SplendorBoard";
-import { CardDisplay } from "./CardDisplay";
-import { Button } from "./Button";
-import { Modal } from "./Modal";
+import { Card, Player } from "../../../Interfaces";
+import { BuildDialogProps } from "../../SplendorBoard";
+import { CardDisplay } from "../../CardDisplay";
+import { Button } from "../../Button";
+import { Modal } from "../../Modal";
 
 interface CardDialogProps {
   open: boolean;

@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { gemsColorStyle, gemsTextColorStyle } from "./SplendorBoard";
+import { gemsColorStyle, gemsTextColorStyle } from "../../SplendorBoard";
 import { motion } from "framer-motion";
+import clsx from "clsx";
 
 export enum GemsPickerMode {
   PICK,
   DISCARD,
 }
 
+export const GemSizeClassName = "w-8 sm:w-12 h-8 sm:h-12";
+
 interface GemsPickerProps {
   gems: number[];
   mode: GemsPickerMode;
   gemsToDiscard?: number;
+
   onSelect(gems: number[]): void;
 }
 
@@ -41,7 +45,10 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
           return (
             <button
               key={index}
-              className={"rounded-full w-12 h-12 mx-1 select-none"}
+              className={clsx(
+                GemSizeClassName,
+                "rounded-full mx-1 select-none"
+              )}
               style={{
                 backgroundColor: gemsColorStyle[index],
                 color: gemsTextColorStyle[index],
@@ -56,11 +63,12 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
         return (
           <button
             key={index}
-            className={"rounded-full w-12 h-12 mx-1 select-none"}
+            className={clsx(GemSizeClassName, "rounded-full mx-1 select-none", {
+              "opacity-20": disabled,
+            })}
             style={{
               backgroundColor: gemsColorStyle[index],
               color: gemsTextColorStyle[index],
-              opacity: disabled ? 0.2 : 1,
             }}
             disabled={disabled}
             onClick={() => {
@@ -88,7 +96,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
           setGems(Array(5).fill(0));
         }}
         className={
-          "w-24 h-10 inline-flex items-center bg-indigo-600 text-white text-base font-semibold py-2 px-4 rounded-full shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 disabled:opacity-50"
+          "w-20 sm:w-24 h-8 sm:h-10 inline-flex items-center bg-indigo-600 text-white text-base font-semibold py-2 px-4 rounded-full shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 disabled:opacity-50"
         }
       >
         <svg
@@ -114,6 +122,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
           if (selectedGems[index] !== 0) {
             return (
               <motion.div
+                key={index}
                 initial={{
                   opacity: 0,
                   y: -50,
@@ -124,8 +133,10 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
                 }}
               >
                 <button
-                  key={index}
-                  className={"rounded-full w-12 h-12 mx-1 select-none"}
+                  className={clsx(
+                    GemSizeClassName,
+                    "rounded-full mx-1 select-none"
+                  )}
                   style={{
                     backgroundColor: gemsColorStyle[index],
                     color: gemsTextColorStyle[index],
@@ -143,15 +154,23 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
               </motion.div>
             );
           } else {
-            return <div className={"w-12 h-12 mx-1 select-none"} key={index} />;
+            return (
+              <div
+                className={clsx(
+                  GemSizeClassName,
+                  "rounded-full mx-1 select-none"
+                )}
+                key={index}
+              />
+            );
           }
         })}
-        <div className={"w-12 h-12 mx-1"} key={5} />
+        <div className={clsx(GemSizeClassName, "mx-1")} key={5} />
         <button
           disabled={selectedGems.every((gem) => gem === 0)}
           onClick={() => setGems(Array(5).fill(0))}
           className={
-            "w-24 h-10 inline-flex items-center bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-full shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 disabled:opacity-50"
+            "w-20 sm:w-24 h-8 sm:h-10 inline-flex items-center bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-full shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 disabled:opacity-50"
           }
         >
           <svg

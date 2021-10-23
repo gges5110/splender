@@ -1,5 +1,5 @@
 import React from "react";
-import { GemsPicker, GemsPickerMode } from "./GemsPicker";
+import { GemsPicker, GemsPickerMode } from "../GemsPicker/GemsPicker";
 
 interface DiscardGemDialogProps {
   open: boolean;
