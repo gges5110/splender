@@ -45,10 +45,7 @@ export const PlayingTable: FC<PlayingTableProps> = ({ G, ctx, moves }) => {
       </div>
 
       <DiscardGemsDialog
-        open={
-          ctx.activePlayers?.[Number(ctx.currentPlayer)] === "DiscardGems" &&
-          currentPlayerActive
-        }
+        open={ctx.activePlayers?.[Number(ctx.currentPlayer)] === "DiscardGems"}
         playerGems={players[Number(ctx.currentPlayer)].gems}
         discardGems={moves.discardGems}
       />
