@@ -6,9 +6,9 @@ import { Local } from "boardgame.io/multiplayer";
 
 export const SplendorClient = Client({
   game: SplendorGame,
-  // @ts-ignore
   board: SplendorBoard,
   numPlayers: 3,
+  debug: false,
   multiplayer: Local({
     bots: { "1": DelayedRandomBot, "2": DelayedRandomBot },
   }),

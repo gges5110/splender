@@ -1,5 +1,3 @@
-import { Ctx } from "boardgame.io";
-
 export enum Color {
   White,
   Blue,
@@ -27,15 +25,6 @@ export interface Player {
   nobles: Noble[];
 }
 
-export interface Moves {
-  pick: any;
-  build: any;
-  reserve: any;
-  buildFromReserve: any;
-  pickNoble: any;
-  discardGems: any;
-}
-
 export interface GameState {
   // intentionally allow undefined element to remember the card position on the table
   // Index: [level][column], level 0 is the lowest/cheapest and level 2 is the highest.
@@ -44,8 +33,4 @@ export interface GameState {
   gems: number[];
   nobles: Noble[];
   players: Player[];
-}
-
-export interface SplendorCtx extends Ctx {
-  winner?: number;
 }
