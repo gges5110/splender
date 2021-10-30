@@ -151,7 +151,11 @@ export const reserve = (
     return INVALID_MOVE;
   }
 
-  const card = G.cardsOnTable[level][cardIdx];
+  const reserveFromDeck = cardIdx < 0;
+
+  const card = !reserveFromDeck
+    ? G.cardsOnTable[level][cardIdx]
+    : G.cardsInDeck[level][0];
   if (card === undefined) {
     return INVALID_MOVE;
   }
@@ -162,11 +166,10 @@ export const reserve = (
   if (G.gems[5] > 0) {
     G.players[Number(ctx.currentPlayer)].gems[5]++;
     G.gems[5]--;
+    considerTriggerDiscardPhase(G, ctx);
   }
 
   replenishCards(G, level, cardIdx);
-
-  considerTriggerDiscardPhase(G, ctx);
 };
 
 const considerTriggerDiscardPhase = (G: GameState, ctx: Ctx) => {

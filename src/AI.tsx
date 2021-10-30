@@ -46,6 +46,8 @@ export const enumerateAIMoves = (G: GameState, ctx: Ctx) => {
     });
   });
 
+  // TODO: build from reserve
+
   if (moves.length > 0) {
     return moves;
   }

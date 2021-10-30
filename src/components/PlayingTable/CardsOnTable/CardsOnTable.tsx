@@ -35,25 +35,29 @@ export const CardsOnTable: React.FC<CardsOnTableProps> = ({
             >
               <div>{cardsInDeck[level].length}</div>
             </div>
-            {cards.map((card, index) => (
-              <div className={"col-span-1"} key={level + index}>
-                <CardDisplay
-                  player={player}
-                  card={card}
-                  enabled={true}
-                  hideAffordableHint={hideAffordableHint}
-                  onClick={() => {
-                    if (card) {
-                      onClick({
-                        level,
-                        index: index,
-                        card,
-                      });
-                    }
-                  }}
-                />
-              </div>
-            ))}
+            {cards.map((card, index) => {
+              const cardOnClick = () => {
+                if (card) {
+                  onClick({
+                    level,
+                    index,
+                    card,
+                  });
+                }
+              };
+
+              return (
+                <div className={"col-span-1"} key={level + index}>
+                  <CardDisplay
+                    player={player}
+                    card={card}
+                    enabled={true}
+                    hideAffordableHint={hideAffordableHint}
+                    onClick={cardOnClick}
+                  />
+                </div>
+              );
+            })}
           </React.Fragment>
         ))
         .reverse()}

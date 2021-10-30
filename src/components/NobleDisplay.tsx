@@ -4,6 +4,7 @@ import { GemDisplay } from "./GemDisplay";
 
 interface NobleDisplayProps {
   noble: Noble;
+
   onClick?(): void;
 }
 
@@ -22,7 +23,7 @@ export const NobleDisplay: React.FC<NobleDisplayProps> = ({
     >
       <div
         className={
-          "absolute top-0 right-0 h-8 w-8 text-center align-middle select-none"
+          "absolute top-0 right-0 h-6 sm:h-8 w-6 sm:w-8 text-center align-middle select-none"
         }
       >
         {noble.points}

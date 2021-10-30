@@ -96,7 +96,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
           setGems(Array(5).fill(0));
         }}
         className={
-          "w-20 sm:w-24 h-8 sm:h-10 inline-flex items-center bg-indigo-600 text-white text-base font-semibold py-2 px-4 rounded-full shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 disabled:opacity-50"
+          "w-24 h-8 sm:h-10 inline-flex items-center bg-indigo-600 text-white text-base font-semibold py-2 px-4 rounded-full shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 disabled:opacity-50"
         }
       >
         <svg
@@ -170,7 +170,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
           disabled={selectedGems.every((gem) => gem === 0)}
           onClick={() => setGems(Array(5).fill(0))}
           className={
-            "w-20 sm:w-24 h-8 sm:h-10 inline-flex items-center bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-full shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 disabled:opacity-50"
+            "w-24 h-8 sm:h-10 inline-flex items-center bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-full shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 disabled:opacity-50"
           }
         >
           <svg

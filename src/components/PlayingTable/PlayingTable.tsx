@@ -13,22 +13,26 @@ interface PlayingTableProps {
   G: GameState;
   ctx: Ctx;
   moves: Record<string, (...args: any[]) => void>;
+  playerID: string | null;
 }
 
-export const PlayingTable: FC<PlayingTableProps> = ({ G, ctx, moves }) => {
+export const PlayingTable: FC<PlayingTableProps> = ({
+  G,
+  ctx,
+  moves,
+  playerID,
+}) => {
   const { nobles, cardsOnTable, cardsInDeck, gems, players } = G;
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [buildDialogProps, setBuildDialogProps] = useState<
     BuildDialogProps | undefined
   >(undefined);
 
-  const resetDialog = () => {
+  const closeBuildDialog = () => {
     setDialogOpen(false);
-    setBuildDialogProps(undefined);
   };
 
-  // TODO: fix the issue where playerID is always undefined
-  const currentPlayerActive = ctx.playerID === ctx.currentPlayer;
+  const currentPlayerActive = playerID === ctx.currentPlayer;
 
   return (
     <>
@@ -45,7 +49,10 @@ export const PlayingTable: FC<PlayingTableProps> = ({ G, ctx, moves }) => {
       </div>
 
       <DiscardGemsDialog
-        open={ctx.activePlayers?.[Number(ctx.currentPlayer)] === "DiscardGems"}
+        open={
+          ctx.activePlayers?.[Number(ctx.currentPlayer)] === "DiscardGems" &&
+          currentPlayerActive
+        }
         playerGems={players[Number(ctx.currentPlayer)].gems}
         discardGems={moves.discardGems}
       />
@@ -54,28 +61,30 @@ export const PlayingTable: FC<PlayingTableProps> = ({ G, ctx, moves }) => {
         className={
           "rounded-xl overflow-hidden bg-gray-300 p-4 mx-auto shadow-lg"
         }
-        open={ctx.activePlayers?.[Number(ctx.currentPlayer)] === "PickNoble"}
+        open={
+          ctx.activePlayers?.[Number(ctx.currentPlayer)] === "PickNoble" &&
+          currentPlayerActive
+        }
       >
         Pick Noble
         <div className={"flex justify-center"}>
           {getVisitingNobleIndexArray(
             players[Number(ctx.currentPlayer)],
             nobles
-          ).map((nobleIndex) => {
-            return (
-              <NobleDisplay
-                noble={nobles[nobleIndex]}
-                onClick={() => moves.pickNoble(nobleIndex)}
-              />
-            );
-          })}
+          ).map((nobleIndex) => (
+            <NobleDisplay
+              key={nobleIndex}
+              noble={nobles[nobleIndex]}
+              onClick={() => moves.pickNoble(nobleIndex)}
+            />
+          ))}
         </div>
       </dialog>
 
       <div className={"overflow-hidden bg-green-200 p-4 mx-auto shadow-xl"}>
         <CardDialog
           open={dialogOpen}
-          closeDialog={resetDialog}
+          closeDialog={closeBuildDialog}
           buildDialogProps={buildDialogProps}
           player={players[Number(ctx.currentPlayer)]}
           build={moves.build}
@@ -89,7 +98,7 @@ export const PlayingTable: FC<PlayingTableProps> = ({ G, ctx, moves }) => {
             setDialogOpen(true);
             setBuildDialogProps(buildDialogProps);
           }}
-          hideAffordableHint={currentPlayerActive}
+          hideAffordableHint={!currentPlayerActive}
         />
       </div>
 

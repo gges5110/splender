@@ -9,15 +9,17 @@ export const SplendorBoard: React.FC<BoardProps<GameState>> = ({
   ctx,
   G,
   moves,
+  playerID,
+  reset,
 }) => {
   return (
     <div className={"h-screen"}>
       <div className="container mx-auto my-auto sm:shadow-lg rounded-xl sm:bg-gray-100 py-2 sm:p-8 w-screen sm:w-auto">
-        <GameEndDialog winner={ctx.gameover?.winner} />
+        <GameEndDialog winner={ctx.gameover?.winner} reset={reset} />
 
         <div className="flex flex-wrap justify-center">
           <div className={"w-max p-1 sm:p-4 sm:m-2"}>
-            <PlayingTable G={G} ctx={ctx} moves={moves} />
+            <PlayingTable G={G} ctx={ctx} moves={moves} playerID={playerID} />
           </div>
 
           <div className={"flex-initial p-4 m-2"}>
