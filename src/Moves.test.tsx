@@ -27,7 +27,12 @@ const getDefaultCtx = (): Ctx => {
 };
 
 const getDefaultGameState = (): GameState => {
-  return Object.assign({}, SplendorGame.setup(getDefaultCtx()));
+  const game = SplendorGame;
+  if (game.setup) {
+    return Object.assign({}, game.setup(getDefaultCtx()));
+  } else {
+    throw Error("Game setup is undefined");
+  }
 };
 
 const getDefaultCard = (): Card => {
