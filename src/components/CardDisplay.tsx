@@ -22,7 +22,7 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
   hideAffordableHint = false,
 }) => {
   if (card === undefined) {
-    return <button className={"w-24 h-32"} />;
+    return <button className={"card-size"} />;
   }
 
   return (
@@ -30,13 +30,10 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
       onClick={onClick}
       onMouseDown={(event) => event.preventDefault()}
       disabled={!enabled}
-      className={clsx(
-        "w-16 h-24 sm:w-24 sm:h-32 rounded-xl relative shadow-xl select-none",
-        {
-          "ring-4 ring-gray-400":
-            !hideAffordableHint && playerCanAffordCard(card, player),
-        }
-      )}
+      className={clsx("card-size rounded-xl relative shadow-xl select-none", {
+        "ring-4 ring-gray-400":
+          !hideAffordableHint && playerCanAffordCard(card, player),
+      })}
       style={{
         backgroundColor: gemsColorStyle[card.color],
         color: gemsTextColorStyle[card.color],

@@ -1,7 +1,7 @@
 import { Card, Player } from "../../../Interfaces";
 import React from "react";
-import { CardDisplay } from "../../CardDisplay";
 import { BuildDialogProps } from "../../SplendorBoard";
+import { CardOnTable } from "./CardOnTable/CardOnTable";
 
 interface CardsOnTableProps {
   cards: Array<Array<Card | undefined>>;
@@ -47,15 +47,13 @@ export const CardsOnTable: React.FC<CardsOnTableProps> = ({
               };
 
               return (
-                <div className={"col-span-1"} key={level + index}>
-                  <CardDisplay
-                    player={player}
-                    card={card}
-                    enabled={true}
-                    hideAffordableHint={hideAffordableHint}
-                    onClick={cardOnClick}
-                  />
-                </div>
+                <CardOnTable
+                  card={card}
+                  player={player}
+                  key={level + index}
+                  hideAffordableHint={hideAffordableHint}
+                  onClick={cardOnClick}
+                />
               );
             })}
           </React.Fragment>

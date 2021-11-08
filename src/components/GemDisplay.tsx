@@ -2,7 +2,6 @@ import { Color } from "../Interfaces";
 import React from "react";
 import { gemsColorStyle, gemsTextColorStyle } from "./SplendorBoard";
 import clsx from "clsx";
-import { GemSizeClassName } from "./PlayingTable/GemsPicker/GemsPicker";
 
 interface GemDisplayProps {
   color: Color;
@@ -20,7 +19,7 @@ export const GemDisplay: React.FC<GemDisplayProps> = ({
   let sizeClassName = "";
   switch (size) {
     case "default": {
-      sizeClassName = GemSizeClassName;
+      sizeClassName = "gem-size";
       break;
     }
     case "small": {

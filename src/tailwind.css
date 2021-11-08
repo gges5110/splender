@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .card-size {
+        @apply w-16 h-24 sm:w-24 sm:h-32;
+    }
+    .gem-size {
+        @apply w-8 sm:w-12 h-8 sm:h-12;
+    }
+}
