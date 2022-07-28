@@ -30,11 +30,12 @@ export const SelectedGems: React.FC<SelectedGemsProps> = ({
               }}
             >
               <button
-                className={clsx("gem-size", "rounded-full mx-1 select-none")}
-                style={{
-                  backgroundColor: gemsColorStyle[index],
-                  color: gemsTextColorStyle[index],
-                }}
+                className={clsx(
+                  "gem-size",
+                  "rounded-full mx-1 select-none",
+                  gemsTextColorStyle[index],
+                  gemsColorStyle[index]
+                )}
                 onClick={() => {
                   selectedGemOnClick(index);
                 }}

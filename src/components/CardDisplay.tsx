@@ -30,19 +30,20 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
       onClick={onClick}
       onMouseDown={(event) => event.preventDefault()}
       disabled={!enabled}
-      className={clsx("card-size rounded-xl relative shadow-xl select-none", {
-        "ring-4 ring-gray-400":
-          !hideAffordableHint && playerCanAffordCard(card, player),
-      })}
-      style={{
-        backgroundColor: gemsColorStyle[card.color],
-        color: gemsTextColorStyle[card.color],
-      }}
+      className={clsx(
+        "card-size rounded-xl relative shadow-xl select-none",
+        gemsColorStyle[card.color],
+        {
+          "ring-4 ring-gray-400":
+            !hideAffordableHint && playerCanAffordCard(card, player),
+        }
+      )}
     >
       <div
-        className={
-          "absolute top-0 sm:top-2 right-0 sm:right-2 h-8 w-8 text-center align-middle"
-        }
+        className={clsx(
+          "absolute top-0 sm:top-2 right-0 sm:right-2 h-8 w-8 text-center align-middle",
+          gemsTextColorStyle[card.color]
+        )}
       >
         {card.points > 0 && card.points}
       </div>

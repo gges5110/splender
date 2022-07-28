@@ -13,7 +13,7 @@ export const SplendorBoard: React.FC<BoardProps<GameState>> = ({
   reset,
 }) => {
   return (
-    <div className={"h-screen"}>
+    <div className={"h-screen flex"}>
       <div className="container mx-auto my-auto sm:shadow-lg rounded-xl sm:bg-gray-100 py-2 sm:p-8 w-screen sm:w-auto">
         <GameEndDialog winner={ctx.gameover?.winner} reset={reset} />
 
@@ -50,18 +50,18 @@ export interface BuildDialogProps {
 }
 
 export const gemsColorStyle: string[] = [
-  "white",
-  "#2196f3",
-  "#4caf50",
-  "#dc004e",
-  "black",
-  "gold",
+  "bg-white",
+  "bg-blue-500",
+  "bg-emerald-500",
+  "bg-red-500",
+  "bg-black",
+  "bg-yellow-300",
 ];
 export const gemsTextColorStyle: string[] = [
-  "black",
-  "white",
-  "white",
-  "white",
-  "white",
-  "black",
+  "text-black",
+  "text-white",
+  "text-white",
+  "text-white",
+  "text-white",
+  "text-black",
 ];

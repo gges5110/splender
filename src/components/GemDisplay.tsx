@@ -32,13 +32,11 @@ export const GemDisplay: React.FC<GemDisplayProps> = ({
     <div
       className={clsx(
         "rounded-full flex items-center justify-center select-none",
+        gemsTextColorStyle[color],
+        gemsColorStyle[color],
         sizeClassName,
         className
       )}
-      style={{
-        backgroundColor: gemsColorStyle[color],
-        color: gemsTextColorStyle[color],
-      }}
     >
       <div>{count}</div>
     </div>

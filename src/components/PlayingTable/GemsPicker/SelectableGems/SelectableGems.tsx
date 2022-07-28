@@ -25,11 +25,12 @@ export const SelectableGems: FC<SelectableGemsProps> = ({
           return (
             <button
               key={index}
-              className={clsx("gem-size", "rounded-full mx-1 select-none")}
-              style={{
-                backgroundColor: gemsColorStyle[index],
-                color: gemsTextColorStyle[index],
-              }}
+              className={clsx(
+                "gem-size",
+                "rounded-full mx-1 select-none",
+                gemsTextColorStyle[index],
+                gemsColorStyle[index]
+              )}
               disabled={true}
             >
               {gemCount}
@@ -40,13 +41,15 @@ export const SelectableGems: FC<SelectableGemsProps> = ({
         return (
           <button
             key={index}
-            className={clsx("gem-size", "rounded-full mx-1 select-none", {
-              "opacity-20": disabled,
-            })}
-            style={{
-              backgroundColor: gemsColorStyle[index],
-              color: gemsTextColorStyle[index],
-            }}
+            className={clsx(
+              "gem-size",
+              "rounded-full mx-1 select-none",
+              gemsTextColorStyle[index],
+              gemsColorStyle[index],
+              {
+                "opacity-20": disabled,
+              }
+            )}
             disabled={disabled}
             onClick={() => {
               if (!disabled) {

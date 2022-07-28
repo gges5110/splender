@@ -4,6 +4,7 @@ import { gemsColorStyle, gemsTextColorStyle } from "../../SplendorBoard";
 import { playerCanAffordCard } from "../../PlayingTable/CardDialog/CardDialog";
 import { PlayerDialog } from "./PlayerDialog/PlayerDialog";
 import { ReservedCardsDialog } from "./ReservedCardsDialog/ReservedCardsDialog";
+import clsx from "clsx";
 
 interface PlayerCardsProps {
   player: Player;
@@ -31,12 +32,11 @@ export const PlayerCards: React.FC<PlayerCardsProps> = ({
         <div className={"w-8 sm:w-12 h-16 sm:h-20"} key={index}>
           {cardCount > 0 && (
             <button
-              // disabled={true}
-              className={"w-full h-full rounded-md"}
-              style={{
-                backgroundColor: gemsColorStyle[index],
-                color: gemsTextColorStyle[index],
-              }}
+              className={clsx(
+                "w-full h-full rounded-md",
+                gemsTextColorStyle[index],
+                gemsColorStyle[index]
+              )}
               onClick={() => setPlayerDialogOpen(true)}
             >
               {cardCount}
@@ -47,13 +47,9 @@ export const PlayerCards: React.FC<PlayerCardsProps> = ({
       <div className={"w-8 sm:w-12 h-16 sm:h-20"}>
         {reservedCards.length > 0 && (
           <button
-            className={"w-full h-full rounded-md"}
+            className={`w-full h-full rounded-md ${gemsTextColorStyle[5]} ${gemsColorStyle[5]}`}
             onClick={() => setReserveDialogOpen(true)}
             disabled={reservedCards.length === 0 || !isActivePlayer}
-            style={{
-              backgroundColor: gemsColorStyle[5],
-              color: gemsTextColorStyle[5],
-            }}
           >
             {reservedCards.length}
           </button>
