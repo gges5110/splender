@@ -67,7 +67,7 @@ const nobleVisits = (G: GameState, ctx: Ctx) => {
     pickNoble(G, ctx, visitingNobleIndexArray[0]);
     ctx.events?.pass?.();
   } else {
-    ctx.events?.setStage?.({ stage: "PickNoble" });
+    ctx.events?.setStage?.("PickNoble");
   }
 };
 
@@ -175,7 +175,7 @@ export const reserve = (
 const considerTriggerDiscardPhase = (G: GameState, ctx: Ctx) => {
   const totalCount = getTotalCount(G.players[Number(ctx.currentPlayer)].gems);
   if (totalCount > gemsInHandLimit) {
-    ctx.events?.setStage?.({ stage: "DiscardGems" });
+    ctx.events?.setStage?.("DiscardGems");
   } else {
     ctx.events?.pass?.();
   }
