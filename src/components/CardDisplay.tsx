@@ -1,6 +1,10 @@
 import { Card, Player } from "../Interfaces";
 import React from "react";
-import { gemsColorStyle, gemsTextColorStyle } from "./SplendorBoard";
+import {
+  gemsColorStyle,
+  gemsHoverColorStyle,
+  gemsTextColorStyle,
+} from "./SplendorBoard";
 import { playerCanAffordCard } from "./PlayingTable/CardDialog/CardDialog";
 import { GemDisplay } from "./GemDisplay";
 import clsx from "clsx";
@@ -31,8 +35,9 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
       onMouseDown={(event) => event.preventDefault()}
       disabled={!enabled}
       className={clsx(
-        "card-size rounded-xl relative shadow-xl select-none",
+        "card-size rounded-lg relative shadow-xl select-none",
         gemsColorStyle[card.color],
+        gemsHoverColorStyle[card.color],
         {
           "ring-4 ring-gray-400":
             !hideAffordableHint && playerCanAffordCard(card, player),
@@ -52,18 +57,23 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
           "absolute bottom-0 left-0 p-2 flex flex-col gap-1 h-24 sm:h-32 justify-end flex-wrap"
         }
       >
-        {card.cost.map(
-          (gemCount, index) =>
-            gemCount > 0 && (
-              <GemDisplay
-                key={index}
-                color={index}
-                count={gemCount}
-                size={"small"}
-                className={"border border-black"}
-              />
-            )
-        )}
+        {card.cost.map((gemCount, index) => {
+          if (gemCount === 0) {
+            return null;
+          }
+
+          return (
+            <GemDisplay
+              key={index}
+              color={index}
+              count={gemCount}
+              size={"small"}
+              className={clsx("shadow-sm", {
+                "border border-gray-300": card?.color === index,
+              })}
+            />
+          );
+        })}
       </div>
     </button>
   );

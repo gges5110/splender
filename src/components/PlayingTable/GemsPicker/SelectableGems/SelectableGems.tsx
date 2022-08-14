@@ -1,6 +1,10 @@
 import { FC } from "react";
 import clsx from "clsx";
-import { gemsColorStyle, gemsTextColorStyle } from "../../../SplendorBoard";
+import {
+  gemsColorStyle,
+  gemsHoverColorStyle,
+  gemsTextColorStyle,
+} from "../../../SplendorBoard";
 import { gemsSelectable } from "../../../../utils/GemUtils";
 import { GemsPickerMode } from "../GemsPicker";
 
@@ -21,33 +25,20 @@ export const SelectableGems: FC<SelectableGemsProps> = ({
   return (
     <>
       {gems.map((gemCount: number, index: number) => {
-        if (index === 5) {
-          return (
-            <button
-              key={index}
-              className={clsx(
-                "gem-size",
-                "rounded-full mx-1 select-none",
-                gemsTextColorStyle[index],
-                gemsColorStyle[index]
-              )}
-              disabled={true}
-            >
-              {gemCount}
-            </button>
-          );
-        }
-        const disabled = !gemsSelectable(selectedGems, gemCount, index, mode);
+        const disabled =
+          index === 5 || !gemsSelectable(selectedGems, gemCount, index, mode);
+        const availableCount =
+          gemCount - (index === 5 ? 0 : selectedGems[index]);
         return (
           <button
             key={index}
             className={clsx(
-              "gem-size",
-              "rounded-full mx-1 select-none",
+              "gem-size gem-button",
               gemsTextColorStyle[index],
+              gemsHoverColorStyle[index],
               gemsColorStyle[index],
               {
-                "opacity-20": disabled,
+                "opacity-20": index !== 5 && disabled,
               }
             )}
             disabled={disabled}
@@ -57,7 +48,7 @@ export const SelectableGems: FC<SelectableGemsProps> = ({
               }
             }}
           >
-            {gemCount - selectedGems[index]}
+            {availableCount}
           </button>
         );
       })}

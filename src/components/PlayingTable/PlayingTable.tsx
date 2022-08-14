@@ -102,7 +102,9 @@ export const PlayingTable: FC<PlayingTableProps> = ({
         />
       </div>
 
-      <div className={"rounded-b-xl overflow-hidden bg-gray-300 p-4 shadow-lg"}>
+      <div
+        className={"rounded-b-xl overflow-hidden bg-green-300 p-4 shadow-lg"}
+      >
         <div className={"w-max mx-auto"}>
           <GemsPicker
             gems={gems}

@@ -4,6 +4,7 @@ import { CardDisplay } from "../../../CardDisplay";
 import { playerCanAffordCard } from "../../../PlayingTable/CardDialog/CardDialog";
 import { Modal } from "../../../Modal";
 import { Button } from "../../../Button";
+import { CloseSVGPath } from "../../../SVGPaths";
 
 interface ReservedCardsDialogProps {
   reservedCardsDialogOpen: boolean;
@@ -40,17 +41,7 @@ export const ReservedCardsDialog: React.FC<ReservedCardsDialogProps> = ({
 
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
         <div className={"flex justify-end my-2"}>
-          <Button
-            svgPath={
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            }
-            onClick={closeReservedCardsDialog}
-          >
+          <Button svgPath={CloseSVGPath} onClick={closeReservedCardsDialog}>
             <span>Close</span>
           </Button>
         </div>

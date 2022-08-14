@@ -51,6 +51,7 @@ export const CardsOnTable: React.FC<CardsOnTableProps> = ({
                   card={card}
                   player={player}
                   key={level + index}
+                  elementKey={level + index}
                   hideAffordableHint={hideAffordableHint}
                   onClick={cardOnClick}
                 />

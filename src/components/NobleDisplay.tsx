@@ -1,6 +1,7 @@
 import React from "react";
 import { Noble } from "../Interfaces";
 import { GemDisplay } from "./GemDisplay";
+import clsx from "clsx";
 
 interface NobleDisplayProps {
   noble: Noble;
@@ -18,12 +19,17 @@ export const NobleDisplay: React.FC<NobleDisplayProps> = ({
 
   return (
     <div
-      className="cursor-pointer shadow-xl rounded-xl relative h-20 w-20 sm:h-28 sm:w-28 border-4 border-yellow-300 bg-gradient-to-l from-gray-300 to-gray-200 m-2"
+      className={clsx(
+        "shadow-xl rounded-xl relative h-20 w-20 sm:h-28 sm:w-28 border-4 border-yellow-300 bg-gradient-to-l from-gray-300 to-gray-200 m-2",
+        {
+          "cursor-pointer": onClick !== undefined,
+        }
+      )}
       onClick={onClick}
     >
       <div
         className={
-          "absolute top-0 right-0 h-6 sm:h-8 w-6 sm:w-8 text-center align-middle select-none"
+          "absolute top-0 right-0 h-6 leading-6 sm:h-8 sm:leading-8 w-6 sm:w-8 text-center align-middle select-none"
         }
       >
         {noble.points}

@@ -6,7 +6,7 @@ import { CardDisplay } from "../../../CardDisplay";
 const variants = {
   fadeIn: {
     opacity: [0, 1],
-    x: [100, 0],
+    x: [-100, 0],
     transition: { duration: 0.5, ease: "easeIn" },
   },
   stop: {
@@ -18,7 +18,7 @@ const variants = {
 interface CardOnTableProps {
   card: Card | undefined;
   player: Player;
-  key: React.Key;
+  elementKey: React.Key;
 
   onClick(): void;
 
@@ -29,7 +29,7 @@ export const CardOnTable: FC<CardOnTableProps> = ({
   card,
   player,
   hideAffordableHint,
-  key,
+  elementKey,
   onClick,
 }) => {
   const cardOnClick = () => {
@@ -59,7 +59,7 @@ export const CardOnTable: FC<CardOnTableProps> = ({
   return (
     <motion.div
       className={"col-span-1"}
-      key={key}
+      key={elementKey}
       variants={variants}
       initial={"stop"}
       animate={state ? "fadeIn" : "stop"}

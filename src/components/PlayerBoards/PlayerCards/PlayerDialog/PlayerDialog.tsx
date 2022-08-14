@@ -4,6 +4,7 @@ import { Button } from "../../../Button";
 import { Player } from "../../../../Interfaces";
 import React from "react";
 import { Modal } from "../../../Modal";
+import { CloseSVGPath } from "../../../SVGPaths";
 
 interface PlayerDialogProps {
   playerDialogOpen: boolean;
@@ -44,17 +45,7 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
       </div>
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
         <div className={"flex my-2"}>
-          <Button
-            svgPath={
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            }
-            onClick={closePlayerDialog}
-          >
+          <Button svgPath={CloseSVGPath} onClick={closePlayerDialog}>
             <span>Cancel</span>
           </Button>
         </div>

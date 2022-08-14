@@ -4,6 +4,7 @@ import { BuildDialogProps } from "../../SplendorBoard";
 import { CardDisplay } from "../../CardDisplay";
 import { Button } from "../../Button";
 import { Modal } from "../../Modal";
+import { CloseSVGPath } from "../../SVGPaths";
 
 interface CardDialogProps {
   open: boolean;
@@ -42,7 +43,7 @@ export const CardDialog: React.FC<CardDialogProps> = ({
       </div>
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
         <div className={"flex my-2"}>
-          <button
+          <Button
             className={
               "bg-gray-100 text-base font-semibold py-2 px-4 rounded-lg shadow-md inline-flex items-center disabled:opacity-50 focus:outline-none focus:ring-2 hover:bg-gray-100"
             }
@@ -57,24 +58,18 @@ export const CardDialog: React.FC<CardDialogProps> = ({
                 closeDialog();
               }
             }}
-          >
-            <svg
-              className="w-4 h-4 mr-2"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
+            svgPath={
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
                 d="M12 6v6m0 0v6m0-6h6m-6 0H6"
               />
-            </svg>
+            }
+          >
             <span>Purchase</span>
-          </button>
-          <button
+          </Button>
+          <Button
             className={
               "bg-gray-100 text-base font-semibold py-2 px-4 rounded-lg shadow-md inline-flex items-center disabled:opacity-50 focus:outline-none focus:ring-2 hover:bg-gray-100 mx-2"
             }
@@ -85,34 +80,18 @@ export const CardDialog: React.FC<CardDialogProps> = ({
                 closeDialog();
               }
             }}
-          >
-            <svg
-              className="w-4 h-4 mr-2"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
+            svgPath={
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
                 d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
               />
-            </svg>
-            <span>Reserve</span>
-          </button>
-          <Button
-            svgPath={
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
             }
-            onClick={closeDialog}
           >
+            <span>Reserve</span>
+          </Button>
+          <Button svgPath={CloseSVGPath} onClick={closeDialog}>
             <span>Cancel</span>
           </Button>
         </div>

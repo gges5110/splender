@@ -2,6 +2,7 @@ import { Player } from "../../Interfaces";
 import { PlayerGems } from "./PlayerGems/PlayerGems";
 import { PlayerCards } from "./PlayerCards/PlayerCards";
 import { FC } from "react";
+import clsx from "clsx";
 
 interface PlayerBoardsProps {
   players: Player[];
@@ -20,11 +21,10 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
       {players.map((player, index: number) => (
         <div
           key={index}
-          className={
-            Number(currentPlayer) === index
-              ? "flex items-center bg-red-200 my-4 rounded-xl relative p-2 ring-2 ring-gray-400"
-              : "flex items-center bg-red-200 my-4 rounded-xl relative p-2 "
-          }
+          className={clsx(
+            "flex items-center bg-red-200 my-4 rounded-xl relative p-2",
+            { "ring-2 ring-gray-400": Number(currentPlayer) === index }
+          )}
         >
           <div
             className={

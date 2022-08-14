@@ -16,42 +16,36 @@ export const SelectedGems: React.FC<SelectedGemsProps> = ({
   return (
     <>
       {selectedGems.map((gemCount: number, index: number) => {
-        if (selectedGems[index] !== 0) {
-          return (
-            <motion.div
-              key={index}
-              initial={{
-                opacity: 0,
-                y: -50,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
+        if (selectedGems[index] === 0) {
+          return <div className={"gem-size gem-button"} key={index} />;
+        }
+
+        return (
+          <motion.div
+            key={index}
+            initial={{
+              opacity: 0,
+              y: -50,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+          >
+            <button
+              className={clsx(
+                "gem-size gem-button",
+                gemsTextColorStyle[index],
+                gemsColorStyle[index]
+              )}
+              onClick={() => {
+                selectedGemOnClick(index);
               }}
             >
-              <button
-                className={clsx(
-                  "gem-size",
-                  "rounded-full mx-1 select-none",
-                  gemsTextColorStyle[index],
-                  gemsColorStyle[index]
-                )}
-                onClick={() => {
-                  selectedGemOnClick(index);
-                }}
-              >
-                {selectedGems[index]}
-              </button>
-            </motion.div>
-          );
-        } else {
-          return (
-            <div
-              className={clsx("gem-size", "rounded-full mx-1 select-none")}
-              key={index}
-            />
-          );
-        }
+              {selectedGems[index]}
+            </button>
+          </motion.div>
+        );
       })}
     </>
   );
