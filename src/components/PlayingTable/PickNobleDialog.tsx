@@ -1,14 +1,13 @@
 import { FC } from "react";
 import { NobleDisplay } from "../NobleDisplay";
 import { Noble, Player } from "../../Interfaces";
-import { PlayerID } from "boardgame.io/src/types";
 import { getVisitingNobleIndexArray } from "../../MovesUtil";
 
 interface PickNobleDialogProps {
   open: boolean;
   players: Array<Player>;
   nobles: Array<Noble>;
-  currentPlayer: PlayerID;
+  currentPlayer: string;
 
   pick(index: number): void;
 }

@@ -1,9 +1,9 @@
 import React from "react";
 import type { Card, GameState } from "../Interfaces";
 import { GameEndDialog } from "./GameEndDialog";
-import type { BoardProps } from "boardgame.io/dist/types/packages/react";
 import { PlayerBoards } from "./PlayerBoards/PlayerBoards";
 import { PlayingTable } from "./PlayingTable/PlayingTable";
+import type { BoardProps } from "boardgame.io/react";
 
 export const SplendorBoard: React.FC<BoardProps<GameState>> = ({
   ctx,
