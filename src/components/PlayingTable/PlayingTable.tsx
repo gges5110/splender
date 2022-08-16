@@ -1,13 +1,13 @@
 import { GameState } from "../../Interfaces";
 import { NobleDisplay } from "../NobleDisplay";
 import { DiscardGemsDialog } from "./DiscardGemsDialog/DiscardGemsDialog";
-import { getVisitingNobleIndexArray } from "../../Moves";
 import { CardDialog } from "./CardDialog/CardDialog";
 import { CardsOnTable } from "./CardsOnTable/CardsOnTable";
 import { GemsPicker, GemsPickerMode } from "./GemsPicker/GemsPicker";
 import { BuildDialogProps } from "../SplendorBoard";
 import { Ctx } from "boardgame.io";
 import { FC, useState } from "react";
+import { PickNobleDialog } from "./PickNobleDialog";
 
 interface PlayingTableProps {
   G: GameState;
@@ -35,53 +35,17 @@ export const PlayingTable: FC<PlayingTableProps> = ({
   const currentPlayerActive = playerID === ctx.currentPlayer;
 
   return (
-    <>
-      <div
-        className={
-          "rounded-t-xl overflow-hidden bg-green-100 p-1 sm:p-4 shadow-xl"
-        }
-      >
-        <div className={"flex justify-center h-auto sm:h-32"}>
+    <div className={"rounded-xl bg-slate-100 shadow-xl p-8"}>
+      <div className={"p-4"}>
+        <span className={"title"}>Nobles</span>
+        <div className={"flex justify-between"}>
           {nobles.map((noble, index) => (
             <NobleDisplay noble={noble} key={index} />
           ))}
         </div>
       </div>
 
-      <DiscardGemsDialog
-        open={
-          ctx.activePlayers?.[Number(ctx.currentPlayer)] === "DiscardGems" &&
-          currentPlayerActive
-        }
-        playerGems={players[Number(ctx.currentPlayer)].gems}
-        discardGems={moves.discardGems}
-      />
-
-      <dialog
-        className={
-          "rounded-xl overflow-hidden bg-gray-300 p-4 mx-auto shadow-lg"
-        }
-        open={
-          ctx.activePlayers?.[Number(ctx.currentPlayer)] === "PickNoble" &&
-          currentPlayerActive
-        }
-      >
-        Pick Noble
-        <div className={"flex justify-center"}>
-          {getVisitingNobleIndexArray(
-            players[Number(ctx.currentPlayer)],
-            nobles
-          ).map((nobleIndex) => (
-            <NobleDisplay
-              key={nobleIndex}
-              noble={nobles[nobleIndex]}
-              onClick={() => moves.pickNoble(nobleIndex)}
-            />
-          ))}
-        </div>
-      </dialog>
-
-      <div className={"overflow-hidden bg-green-200 p-4 mx-auto shadow-xl"}>
+      <div className={"p-4 mx-auto"}>
         <CardDialog
           open={dialogOpen}
           closeDialog={closeBuildDialog}
@@ -90,6 +54,7 @@ export const PlayingTable: FC<PlayingTableProps> = ({
           build={moves.build}
           reserve={moves.reserve}
         />
+        <span className={"title"}>Cards</span>
         <CardsOnTable
           cards={cardsOnTable}
           player={players[Number(ctx.currentPlayer)]}
@@ -102,10 +67,9 @@ export const PlayingTable: FC<PlayingTableProps> = ({
         />
       </div>
 
-      <div
-        className={"rounded-b-xl overflow-hidden bg-green-300 p-4 shadow-lg"}
-      >
-        <div className={"w-max mx-auto"}>
+      <div className={"p-4"}>
+        <span className={"title"}>Gems</span>
+        <div>
           <GemsPicker
             gems={gems}
             onSelect={moves.pick}
@@ -113,6 +77,28 @@ export const PlayingTable: FC<PlayingTableProps> = ({
           />
         </div>
       </div>
-    </>
+
+      <DiscardGemsDialog
+        open={
+          ctx.activePlayers?.[Number(ctx.currentPlayer)] === "DiscardGems" &&
+          currentPlayerActive
+        }
+        playerGems={players[Number(ctx.currentPlayer)].gems}
+        discardGems={moves.discardGems}
+      />
+
+      <PickNobleDialog
+        open={
+          ctx.activePlayers?.[Number(ctx.currentPlayer)] === "PickNoble" &&
+          currentPlayerActive
+        }
+        players={players}
+        nobles={nobles}
+        currentPlayer={ctx.currentPlayer}
+        pick={(index) => {
+          moves.pickNoble(index);
+        }}
+      />
+    </div>
   );
 };

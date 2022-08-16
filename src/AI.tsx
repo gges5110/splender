@@ -1,7 +1,8 @@
 import { Ctx } from "boardgame.io";
 import { GameState } from "./Interfaces";
 import { playerCanAffordCard } from "./components/PlayingTable/CardDialog/CardDialog";
-import { gemsInHandLimit, getTotalCount } from "./Moves";
+import { gemsInHandLimit } from "./Moves";
+import { getTotalCount } from "./MovesUtil";
 
 export const enumerateAIMoves = (G: GameState, ctx: Ctx) => {
   const moves: any[] = [];

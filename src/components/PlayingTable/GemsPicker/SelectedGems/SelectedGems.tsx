@@ -17,7 +17,7 @@ export const SelectedGems: React.FC<SelectedGemsProps> = ({
     <>
       {selectedGems.map((gemCount: number, index: number) => {
         if (selectedGems[index] === 0) {
-          return <div className={"gem-size gem-button"} key={index} />;
+          return <div className={"gem-size gem-button-deselect"} key={index} />;
         }
 
         return (
@@ -34,7 +34,7 @@ export const SelectedGems: React.FC<SelectedGemsProps> = ({
           >
             <button
               className={clsx(
-                "gem-size gem-button",
+                "gem-size gem-button-deselect",
                 gemsTextColorStyle[index],
                 gemsColorStyle[index]
               )}

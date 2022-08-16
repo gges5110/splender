@@ -14,6 +14,7 @@ export interface Card {
 }
 
 export interface Noble {
+  acquired: boolean;
   cardCountByColors: number[];
   points: number;
 }

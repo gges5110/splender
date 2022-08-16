@@ -10,6 +10,15 @@
         @apply w-8 sm:w-12 h-8 sm:h-12;
     }
     .gem-button {
+        @apply rounded-full mx-1 select-none shadow-sm;
+    }
+    .gem-button-deselect {
         @apply rounded-full mx-1 select-none;
+    }
+    .noble-size {
+        @apply h-20 w-20 sm:h-28 sm:w-28;
+    }
+    .title {
+        @apply text-gray-500;
     }
 }
