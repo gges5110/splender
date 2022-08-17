@@ -15,4 +15,5 @@ jobs:
       - name: Test coverage and build 🛠️
         run: |
           npm run coverage
+          npm run coverage-engine
           npm run build
