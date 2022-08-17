@@ -2,7 +2,7 @@ import { build, pick, reserve } from "./Moves";
 import { SplendorGame } from "./SplendorGame";
 import { INVALID_MOVE } from "boardgame.io/core";
 import { Ctx } from "boardgame.io";
-import { Card, Color, GameState } from "./Interfaces";
+import { Card, Color, GameState } from "../Interfaces";
 
 const getDefaultCtx = (): Ctx => {
   return {

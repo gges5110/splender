@@ -2,9 +2,9 @@ import React from "react";
 import { Card, Player } from "../../../Interfaces";
 import { BuildDialogProps } from "../../SplendorBoard";
 import { CardDisplay } from "../../CardDisplay";
-import { Button } from "../../Button";
-import { Modal } from "../../Modal";
-import { CloseSVGPath } from "../../SVGPaths";
+import { Button } from "../../Shared/Button";
+import { Modal } from "../../Shared/Modal";
+import { CloseSVGPath } from "../../Shared/SVGPaths";
 
 interface CardDialogProps {
   open: boolean;

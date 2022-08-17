@@ -1,10 +1,10 @@
 import { NobleDisplay } from "../../../NobleDisplay";
 import { CardDisplay } from "../../../CardDisplay";
-import { Button } from "../../../Button";
+import { Button } from "../../../Shared/Button";
 import { Player } from "../../../../Interfaces";
 import React from "react";
-import { Modal } from "../../../Modal";
-import { CloseSVGPath } from "../../../SVGPaths";
+import { Modal } from "../../../Shared/Modal";
+import { CloseSVGPath } from "../../../Shared/SVGPaths";
 
 interface PlayerDialogProps {
   playerDialogOpen: boolean;
