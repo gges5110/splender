@@ -12,7 +12,7 @@ jobs:
       - name: Install dependencies ⬇️
         run: npm install
 
-      - name: Test and build 🛠️
+      - name: Test coverage and build 🛠️
         run: |
-          npm run test
+          npm run coverage
           npm run build
