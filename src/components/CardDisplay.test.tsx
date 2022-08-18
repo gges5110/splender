@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import React from "react";
 import { CardDisplay } from "./CardDisplay";
-import { Card, Color, Player } from "../Interfaces";
+import { Card, Color } from "../Interfaces";
 
 describe("CardDisplay", function () {
   it("renders empty card", () => {
