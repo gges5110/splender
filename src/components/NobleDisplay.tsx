@@ -13,10 +13,6 @@ export const NobleDisplay: React.FC<NobleDisplayProps> = ({
   noble,
   onClick,
 }) => {
-  if (!noble) {
-    return null;
-  }
-
   if (noble.acquired) {
     return <div className={"noble-size"}></div>;
   }
