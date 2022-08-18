@@ -4,4 +4,5 @@ module.exports = {
   testMatch: ["<rootDir>/src/components/**/*.test.tsx"],
   testPathIgnorePatterns: ["<rootDir>/src/engine/"],
   testEnvironment: "jest-environment-jsdom",
+  coverageReporters: ["text", "cobertura"],
 };
