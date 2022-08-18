@@ -1,5 +1,5 @@
 import { SplendorGame } from "./SplendorGame";
-import { SplendorBoard } from "./components/SplendorBoard";
+import { SplendorBoard } from "../components/SplendorBoard";
 import { DelayedRandomBot } from "./DelayedRandomBot";
 import { Client } from "boardgame.io/react";
 import { Local } from "boardgame.io/multiplayer";

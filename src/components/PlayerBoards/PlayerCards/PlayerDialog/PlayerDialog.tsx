@@ -1,10 +1,10 @@
 import { NobleDisplay } from "../../../NobleDisplay";
 import { CardDisplay } from "../../../CardDisplay";
-import { Button } from "../../../Button";
+import { Button } from "../../../Shared/Button";
 import { Player } from "../../../../Interfaces";
 import React from "react";
-import { Modal } from "../../../Modal";
-import { CloseSVGPath } from "../../../SVGPaths";
+import { Modal } from "../../../Shared/Modal";
+import { CloseSVGPath } from "../../../Shared/SVGPaths";
 
 interface PlayerDialogProps {
   playerDialogOpen: boolean;
@@ -31,13 +31,7 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
             </div>
             <div className={"grid grid-flow-row grid-cols-6 gap-2"}>
               {player.cards.map((card, index) => (
-                <CardDisplay
-                  key={index}
-                  player={player}
-                  card={card}
-                  enabled={false}
-                  hideAffordableHint={true}
-                />
+                <CardDisplay key={index} card={card} enabled={false} />
               ))}
             </div>
           </div>

@@ -7,7 +7,7 @@ import { GemsPicker, GemsPickerMode } from "./GemsPicker/GemsPicker";
 import { BuildDialogProps } from "../SplendorBoard";
 import { Ctx } from "boardgame.io";
 import { FC, useState } from "react";
-import { PickNobleDialog } from "./PickNobleDialog";
+import { PickNobleDialog } from "./PickNobleDialog/PickNobleDialog";
 
 interface PlayingTableProps {
   G: GameState;

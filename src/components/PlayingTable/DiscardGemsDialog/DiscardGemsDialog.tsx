@@ -1,6 +1,6 @@
 import React from "react";
 import { GemsPicker, GemsPickerMode } from "../GemsPicker/GemsPicker";
-import { Modal } from "../../Modal";
+import { Modal } from "../../Shared/Modal";
 import { Dialog } from "@headlessui/react";
 
 interface DiscardGemDialogProps {

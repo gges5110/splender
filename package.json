@@ -21,7 +21,9 @@
     "build": "npm run tailwind:css && tsc && vite build",
     "tailwind:css": "tailwind build src/tailwind.css -c tailwind.config.js -o src/index.css",
     "test": "jest -env=jsdom",
+    "test-engine": "jest --config jest-engine.config.js",
     "coverage": "CI=true jest --coverage",
+    "coverage-engine": "CI=true jest --config jest-engine.config.js --coverage",
     "preview": "vite preview"
   },
   "eslintConfig": {

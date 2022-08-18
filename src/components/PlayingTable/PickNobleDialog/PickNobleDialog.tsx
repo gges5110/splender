@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { NobleDisplay } from "../NobleDisplay";
-import { Noble, Player } from "../../Interfaces";
-import { getVisitingNobleIndexArray } from "../../MovesUtil";
+import { NobleDisplay } from "../../NobleDisplay";
+import { Noble, Player } from "../../../Interfaces";
+import { getVisitingNobleIndexArray } from "../../../engine/MovesUtil";
 
 interface PickNobleDialogProps {
   open: boolean;

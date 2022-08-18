@@ -1,6 +1,6 @@
-import { Card, GameState, Noble, Player } from "./Interfaces";
+import { Card, GameState, Noble, Player } from "../Interfaces";
 import { Ctx } from "boardgame.io";
-import { playerCanAffordCard } from "./components/PlayingTable/CardDialog/CardDialog";
+import { playerCanAffordCard } from "../components/PlayingTable/CardDialog/CardDialog";
 import { INVALID_MOVE } from "boardgame.io/core";
 import { gemsInHandLimit, pickNoble } from "./Moves";
 

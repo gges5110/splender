@@ -1,9 +1,11 @@
 import { Card, Player } from "../../../../Interfaces";
 import React, { FC, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { CardDisplay } from "../../../CardDisplay";
+import { playerCanAffordCard } from "../../CardDialog/CardDialog";
 
-const variants = {
+const variants: Variants = {
   fadeIn: {
     opacity: [0, 1],
     x: [-100, 0],
@@ -56,6 +58,10 @@ export const CardOnTable: FC<CardOnTableProps> = ({
 
   const [state, setState] = useState<boolean>(false);
 
+  if (card === undefined) {
+    return <div className={"col-span-1"} />;
+  }
+
   return (
     <motion.div
       className={"col-span-1"}
@@ -65,10 +71,11 @@ export const CardOnTable: FC<CardOnTableProps> = ({
       animate={state ? "fadeIn" : "stop"}
     >
       <CardDisplay
-        player={player}
         card={card}
         enabled={true}
-        hideAffordableHint={hideAffordableHint}
+        affordable={
+          hideAffordableHint !== true && playerCanAffordCard(card, player)
+        }
         onClick={cardOnClick}
       />
     </motion.div>

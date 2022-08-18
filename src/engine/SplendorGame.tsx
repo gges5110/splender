@@ -7,8 +7,8 @@ import {
   reserve,
 } from "./Moves";
 import { enumerateAIMoves } from "./AI";
-import { Card, GameState, Player } from "./Interfaces";
-import { level1Cards, level2Cards, level3Cards, nobles } from "./constants";
+import { Card, GameState, Player } from "../Interfaces";
+import { level1Cards, level2Cards, level3Cards, nobles } from "../constants";
 import type { Ctx, Game } from "boardgame.io";
 
 const populateLevel1Cards = (): Card[] => {
