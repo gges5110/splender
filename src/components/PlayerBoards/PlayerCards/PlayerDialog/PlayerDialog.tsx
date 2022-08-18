@@ -1,5 +1,5 @@
-import { NobleDisplay } from "../../../NobleDisplay";
-import { CardDisplay } from "../../../CardDisplay";
+import { NobleDisplay } from "../../../Shared/NobleDisplay/NobleDisplay";
+import { CardDisplay } from "../../../Shared/CardDisplay/CardDisplay";
 import { Button } from "../../../Shared/Button";
 import { Player } from "../../../../Interfaces";
 import React from "react";

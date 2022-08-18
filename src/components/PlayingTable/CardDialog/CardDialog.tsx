@@ -1,10 +1,10 @@
 import React from "react";
 import { Card, Player } from "../../../Interfaces";
-import { BuildDialogProps } from "../../SplendorBoard";
-import { CardDisplay } from "../../CardDisplay";
+import { CardDisplay } from "../../Shared/CardDisplay/CardDisplay";
 import { Button } from "../../Shared/Button";
 import { Modal } from "../../Shared/Modal";
 import { CloseSVGPath } from "../../Shared/SVGPaths";
+import { BuildDialogProps } from "../PlayingTable";
 
 interface CardDialogProps {
   open: boolean;

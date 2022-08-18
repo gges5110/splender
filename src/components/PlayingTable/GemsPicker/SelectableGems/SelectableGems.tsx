@@ -1,12 +1,12 @@
 import { FC } from "react";
 import clsx from "clsx";
+import { gemsSelectable } from "../../../../utils/GemUtils";
+import { GemsPickerMode } from "../GemsPicker";
 import {
   gemsColorStyle,
   gemsHoverColorStyle,
   gemsTextColorStyle,
-} from "../../../SplendorBoard";
-import { gemsSelectable } from "../../../../utils/GemUtils";
-import { GemsPickerMode } from "../GemsPicker";
+} from "../../../../styles";
 
 interface SelectableGemsProps {
   gems: number[];
@@ -24,7 +24,7 @@ export const SelectableGems: FC<SelectableGemsProps> = ({
 }) => {
   return (
     <>
-      {gems.map((gemCount: number, index: number) => {
+      {gems.map((gemCount, index) => {
         const disabled =
           index === 5 || !gemsSelectable(selectedGems, gemCount, index, mode);
         const availableCount =

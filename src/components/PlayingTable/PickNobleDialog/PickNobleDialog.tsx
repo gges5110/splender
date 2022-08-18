@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { NobleDisplay } from "../../NobleDisplay";
+import { NobleDisplay } from "../../Shared/NobleDisplay/NobleDisplay";
 import { Noble, Player } from "../../../Interfaces";
 import { getVisitingNobleIndexArray } from "../../../engine/MovesUtil";
 
