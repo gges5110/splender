@@ -12,18 +12,15 @@ import clsx from "clsx";
 interface CardDisplayProps {
   card: Card | undefined;
   enabled: boolean;
-  player: Player;
-  hideAffordableHint?: boolean;
-
+  affordable?: boolean;
   onClick?(): void;
 }
 
 export const CardDisplay: React.FC<CardDisplayProps> = ({
   card,
   enabled,
-  player,
   onClick,
-  hideAffordableHint = false,
+  affordable = false,
 }) => {
   if (card === undefined) {
     return <button className={"card-size"} />;
@@ -39,8 +36,7 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
         gemsColorStyle[card.color],
         gemsHoverColorStyle[card.color],
         {
-          "ring-4 ring-gray-400":
-            !hideAffordableHint && playerCanAffordCard(card, player),
+          "card-affordable": affordable,
         }
       )}
     >

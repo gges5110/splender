@@ -1,4 +1,4 @@
-import type { Ctx } from "boardgame.io";
+import type { Ctx, MoveFn } from "boardgame.io";
 import { INVALID_MOVE } from "boardgame.io/core";
 import { GameState } from "../Interfaces";
 import {
@@ -11,7 +11,11 @@ import {
 
 export const gemsInHandLimit = 10;
 
-export const pick = (G: GameState, ctx: Ctx, gems: number[]) => {
+export const pick: MoveFn<GameState> = (
+  G: GameState,
+  ctx: Ctx,
+  gems: number[]
+) => {
   for (let i = 0; i < gems.length; ++i) {
     if (G.gems[i] < gems[i]) {
       return INVALID_MOVE;
@@ -23,7 +27,7 @@ export const pick = (G: GameState, ctx: Ctx, gems: number[]) => {
   considerTriggerDiscardPhase(G, ctx);
 };
 
-export const build = (
+export const build: MoveFn<GameState> = (
   G: GameState,
   ctx: Ctx,
   level: number,
@@ -50,7 +54,7 @@ export const buildFromReserve = (G: GameState, ctx: Ctx, cardIdx: number) => {
   nobleVisits(G, ctx);
 };
 
-export const reserve = (
+export const reserve: MoveFn<GameState> = (
   G: GameState,
   ctx: Ctx,
   level: number,
@@ -81,19 +85,52 @@ export const reserve = (
   replenishCards(G, level, cardIdx);
 };
 
-export const pickNoble = (G: GameState, ctx: Ctx, index: number) => {
+export const pickNoble: MoveFn<GameState> = (
+  G: GameState,
+  ctx: Ctx,
+  index: number
+) => {
   const noble = G.nobles[index];
+
+  // Check if player is eligible
+  const playerCards = G.players[Number(ctx.currentPlayer)].cards;
+  const cardCountByColors: number[] = [0, 0, 0, 0, 0];
+  playerCards.forEach((card) => {
+    cardCountByColors[card.color]++;
+  });
+  for (let i = 0; i < noble.cardCountByColors.length; i++) {
+    if (noble.cardCountByColors[i] > cardCountByColors[i]) {
+      return INVALID_MOVE;
+    }
+  }
+
   G.players[Number(ctx.currentPlayer)].nobles.push(noble);
   G.nobles[index].acquired = true;
 };
 
-export const discardGems = (G: GameState, ctx: Ctx, gems: number[]) => {
+export const discardGems: MoveFn<GameState> = (
+  G: GameState,
+  ctx: Ctx,
+  gems: number[]
+) => {
   const totalCount = getTotalCount(G.players[Number(ctx.currentPlayer)].gems);
 
   const totalGemsToDiscard = getTotalCount(gems);
 
+  // Check if player discards down to limit
   if (totalCount - totalGemsToDiscard > gemsInHandLimit) {
     return INVALID_MOVE;
+  }
+  // Check if discard is needed
+  if (totalCount <= gemsInHandLimit) {
+    return INVALID_MOVE;
+  }
+
+  // Check if player has sufficient gems
+  for (let i = 0; i < 5; ++i) {
+    if (G.players[Number(ctx.currentPlayer)].gems[i] < gems[i]) {
+      return INVALID_MOVE;
+    }
   }
 
   for (let i = 0; i < 5; ++i) {

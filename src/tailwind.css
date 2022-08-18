@@ -21,4 +21,7 @@
     .title {
         @apply text-gray-500;
     }
+    .card-affordable {
+        @apply ring-4 ring-gray-400;
+    }
 }

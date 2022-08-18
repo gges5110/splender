@@ -12,8 +12,10 @@ jobs:
       - name: Install dependencies ⬇️
         run: npm install
 
-      - name: Test coverage and build 🛠️
+      - name: Test coverage 🚨
         run: |
           npm run coverage
           npm run coverage-engine
-          npm run build
+
+      - name: Build 🛠️
+        run: npm run build

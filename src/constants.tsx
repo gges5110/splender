@@ -166,7 +166,7 @@ export const level1Cards: Card[] = [
   },
   // Black
   {
-    cost: [0, 0, 0, 2, 1, 0],
+    cost: [0, 0, 2, 0, 1, 0],
     color: Color.Black,
     points: 0,
   },

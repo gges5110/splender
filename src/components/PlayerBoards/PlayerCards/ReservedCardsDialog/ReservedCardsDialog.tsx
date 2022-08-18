@@ -29,7 +29,6 @@ export const ReservedCardsDialog: React.FC<ReservedCardsDialogProps> = ({
         {reservedCards.map((reservedCard, index) => (
           <CardDisplay
             key={index}
-            player={player}
             card={reservedCard}
             enabled={playerCanAffordCard(reservedCard, player)}
             onClick={() => {

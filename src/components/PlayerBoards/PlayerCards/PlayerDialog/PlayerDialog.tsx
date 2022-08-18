@@ -31,13 +31,7 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
             </div>
             <div className={"grid grid-flow-row grid-cols-6 gap-2"}>
               {player.cards.map((card, index) => (
-                <CardDisplay
-                  key={index}
-                  player={player}
-                  card={card}
-                  enabled={false}
-                  hideAffordableHint={true}
-                />
+                <CardDisplay key={index} card={card} enabled={false} />
               ))}
             </div>
           </div>

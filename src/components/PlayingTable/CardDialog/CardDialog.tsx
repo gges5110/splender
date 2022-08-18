@@ -32,11 +32,7 @@ export const CardDialog: React.FC<CardDialogProps> = ({
         <div className="sm:flex sm:items-start">
           <div className={"flex justify-center mx-auto"}>
             {buildDialogProps && (
-              <CardDisplay
-                player={player}
-                card={buildDialogProps.card}
-                enabled={true}
-              />
+              <CardDisplay card={buildDialogProps.card} enabled={true} />
             )}
           </div>
         </div>
