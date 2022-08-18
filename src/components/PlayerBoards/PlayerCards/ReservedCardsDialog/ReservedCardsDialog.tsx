@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Player } from "../../../../Interfaces";
-import { CardDisplay } from "../../../CardDisplay";
+import { CardDisplay } from "../../../Shared/CardDisplay/CardDisplay";
 import { playerCanAffordCard } from "../../../PlayingTable/CardDialog/CardDialog";
 import { Modal } from "../../../Shared/Modal";
 import { Button } from "../../../Shared/Button";

@@ -9,6 +9,9 @@
     .gem-size {
         @apply w-8 sm:w-12 h-8 sm:h-12;
     }
+    .gem-size-small {
+        @apply w-6 sm:w-8 h-6 sm:h-8;
+    }
     .gem-button {
         @apply rounded-full mx-1 select-none shadow-sm;
     }

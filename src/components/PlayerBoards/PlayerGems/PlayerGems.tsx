@@ -1,5 +1,5 @@
 import React from "react";
-import { GemDisplay } from "../../GemDisplay";
+import { GemDisplay } from "../../Shared/GemDisplay/GemDisplay";
 
 interface PlayerGemsProps {
   gems: number[];

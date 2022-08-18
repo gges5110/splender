@@ -1,13 +1,13 @@
-import { Card, Player } from "../Interfaces";
+import { Card, Player } from "../../../Interfaces";
 import React from "react";
+import { playerCanAffordCard } from "../../PlayingTable/CardDialog/CardDialog";
+import { GemDisplay } from "../GemDisplay/GemDisplay";
+import clsx from "clsx";
 import {
   gemsColorStyle,
   gemsHoverColorStyle,
   gemsTextColorStyle,
-} from "./SplendorBoard";
-import { playerCanAffordCard } from "./PlayingTable/CardDialog/CardDialog";
-import { GemDisplay } from "./GemDisplay";
-import clsx from "clsx";
+} from "../../../styles";
 
 interface CardDisplayProps {
   card: Card | undefined;
@@ -63,8 +63,7 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
               key={index}
               color={index}
               count={gemCount}
-              size={"small"}
-              className={clsx("shadow-sm", {
+              className={clsx("shadow-sm gem-size-small", {
                 "border border-gray-300": card?.color === index,
               })}
             />

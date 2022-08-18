@@ -1,7 +1,7 @@
 import { Card, Player } from "../../../Interfaces";
 import React from "react";
-import { BuildDialogProps } from "../../SplendorBoard";
 import { CardOnTable } from "./CardOnTable/CardOnTable";
+import { BuildDialogProps } from "../PlayingTable";
 
 interface CardsOnTableProps {
   cards: Array<Array<Card | undefined>>;

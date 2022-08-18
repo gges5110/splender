@@ -1,10 +1,9 @@
-import { GameState } from "../../Interfaces";
-import { NobleDisplay } from "../NobleDisplay";
+import { Card, GameState } from "../../Interfaces";
+import { NobleDisplay } from "../Shared/NobleDisplay/NobleDisplay";
 import { DiscardGemsDialog } from "./DiscardGemsDialog/DiscardGemsDialog";
 import { CardDialog } from "./CardDialog/CardDialog";
 import { CardsOnTable } from "./CardsOnTable/CardsOnTable";
 import { GemsPicker, GemsPickerMode } from "./GemsPicker/GemsPicker";
-import { BuildDialogProps } from "../SplendorBoard";
 import { Ctx } from "boardgame.io";
 import { FC, useState } from "react";
 import { PickNobleDialog } from "./PickNobleDialog/PickNobleDialog";
@@ -14,6 +13,12 @@ interface PlayingTableProps {
   ctx: Ctx;
   moves: Record<string, (...args: any[]) => void>;
   playerID: string | null;
+}
+
+export interface BuildDialogProps {
+  level: number;
+  index: number;
+  card: Card;
 }
 
 export const PlayingTable: FC<PlayingTableProps> = ({

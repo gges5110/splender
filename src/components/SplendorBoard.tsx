@@ -1,6 +1,6 @@
 import React from "react";
-import type { Card, GameState } from "../Interfaces";
-import { GameEndDialog } from "./GameEndDialog";
+import type { GameState } from "../Interfaces";
+import { GameEndDialog } from "./Shared/GameEndDialog";
 import { PlayerBoards } from "./PlayerBoards/PlayerBoards";
 import { PlayingTable } from "./PlayingTable/PlayingTable";
 import type { BoardProps } from "boardgame.io/react";
@@ -34,35 +34,3 @@ export const SplendorBoard: React.FC<BoardProps<GameState>> = ({
     </div>
   );
 };
-
-export interface BuildDialogProps {
-  level: number;
-  index: number;
-  card: Card;
-}
-
-export const gemsColorStyle: string[] = [
-  "bg-gray-50",
-  "bg-sky-500",
-  "bg-emerald-500",
-  "bg-red-500",
-  "bg-gray-700",
-  "bg-yellow-300",
-];
-export const gemsHoverColorStyle: string[] = [
-  "hover:bg-gray-100",
-  "hover:bg-sky-600",
-  "hover:bg-emerald-600",
-  "hover:bg-red-600",
-  "hover:bg-gray-800",
-  "hover:bg-yellow-400",
-];
-
-export const gemsTextColorStyle: string[] = [
-  "text-black",
-  "text-white",
-  "text-white",
-  "text-white",
-  "text-white",
-  "text-black",
-];

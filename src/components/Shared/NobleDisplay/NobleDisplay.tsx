@@ -1,6 +1,6 @@
 import React from "react";
-import { Noble } from "../Interfaces";
-import { GemDisplay } from "./GemDisplay";
+import { Noble } from "../../../Interfaces";
+import { GemDisplay } from "../GemDisplay/GemDisplay";
 import clsx from "clsx";
 
 interface NobleDisplayProps {
@@ -44,7 +44,7 @@ export const NobleDisplay: React.FC<NobleDisplayProps> = ({
                   key={index}
                   color={index}
                   count={gemCount}
-                  size={"small"}
+                  className={"gem-size-small"}
                 />
               )
           )}

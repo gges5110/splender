@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
-import { gemsColorStyle, gemsTextColorStyle } from "../../../SplendorBoard";
+import { gemsColorStyle, gemsTextColorStyle } from "../../../../styles";
 
 interface SelectedGemsProps {
   selectedGems: number[];
@@ -15,7 +15,7 @@ export const SelectedGems: React.FC<SelectedGemsProps> = ({
 }) => {
   return (
     <>
-      {selectedGems.map((gemCount: number, index: number) => {
+      {selectedGems.map((gemCount, index) => {
         if (selectedGems[index] === 0) {
           return <div className={"gem-size gem-button-deselect"} key={index} />;
         }

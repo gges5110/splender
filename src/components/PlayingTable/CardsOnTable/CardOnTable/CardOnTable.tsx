@@ -2,7 +2,7 @@ import { Card, Player } from "../../../../Interfaces";
 import React, { FC, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { CardDisplay } from "../../../CardDisplay";
+import { CardDisplay } from "../../../Shared/CardDisplay/CardDisplay";
 import { playerCanAffordCard } from "../../CardDialog/CardDialog";
 
 const variants: Variants = {
