@@ -1,9 +1,9 @@
-name: Test and Build
+name: Test and Build PR
 on:
   pull_request:
     branches: [ main ]
 jobs:
-  test-and-build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
@@ -13,12 +13,35 @@ jobs:
         run: npm install
 
       - name: Test coverage 🚨
-        run: |
-          npm run coverage
-          npm run coverage-engine
-
-      - name: Build 🛠️
-        run: npm run build
+        run: npm run coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
+  test-engine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3.0.2
+
+      - name: Install dependencies ⬇️
+        run: npm install
+
+      - name: Test coverage 🚨
+        run: npm run coverage-engine
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+  build:
+    runs-on: ubuntu-latest
+    needs:
+      - test
+      - test-engine
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3.0.2
+
+      - name: Install dependencies ⬇️
+        run: npm install
+
+      - name: Build 🛠️
+        run: npm run build
