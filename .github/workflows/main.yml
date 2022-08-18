@@ -15,6 +15,9 @@ jobs:
       - name: Build 🛠️
         run: npm run build
 
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.4.0
         with:
