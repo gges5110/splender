@@ -40,17 +40,17 @@ export const PlayingTable: FC<PlayingTableProps> = ({
   const currentPlayerActive = playerID === ctx.currentPlayer;
 
   return (
-    <div className={"rounded-xl bg-slate-100 shadow-xl p-8"}>
-      <div className={"p-4"}>
+    <div className={"rounded-xl bg-slate-100 shadow-xl p-4 sm:p-8"}>
+      <div className={"p-1 sm:p-4"}>
         <span className={"title"}>Nobles</span>
-        <div className={"flex justify-between"}>
+        <div className={"flex justify-between gap-2"}>
           {nobles.map((noble, index) => (
             <NobleDisplay noble={noble} key={index} />
           ))}
         </div>
       </div>
 
-      <div className={"p-4 mx-auto"}>
+      <div className={"p-1 sm:p-4 mx-auto"}>
         <CardDialog
           open={dialogOpen}
           closeDialog={closeBuildDialog}
@@ -72,7 +72,7 @@ export const PlayingTable: FC<PlayingTableProps> = ({
         />
       </div>
 
-      <div className={"p-4"}>
+      <div className={"p-1 sm:p-4"}>
         <span className={"title"}>Gems</span>
         <div>
           <GemsPicker

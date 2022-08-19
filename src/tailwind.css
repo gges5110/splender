@@ -7,7 +7,7 @@
         @apply w-16 h-24 sm:w-24 sm:h-32;
     }
     .gem-size {
-        @apply w-8 sm:w-12 h-8 sm:h-12;
+        @apply w-8 sm:w-12 h-8 sm:h-12 flex-none;
     }
     .gem-size-small {
         @apply w-6 sm:w-8 h-6 sm:h-8;
@@ -19,7 +19,7 @@
         @apply rounded-full mx-1 select-none;
     }
     .noble-size {
-        @apply h-20 w-20 sm:h-28 sm:w-28;
+        @apply h-16 w-16 sm:h-28 sm:w-28;
     }
     .title {
         @apply text-gray-500;
