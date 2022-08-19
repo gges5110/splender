@@ -1,6 +1,5 @@
-import { Card, Player } from "../../../Interfaces";
+import { Card } from "../../../Interfaces";
 import React from "react";
-import { playerCanAffordCard } from "../../PlayingTable/CardDialog/CardDialog";
 import { GemDisplay } from "../GemDisplay/GemDisplay";
 import clsx from "clsx";
 import {
@@ -50,7 +49,7 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
       </div>
       <div
         className={
-          "absolute bottom-0 left-0 p-2 flex flex-col gap-1 h-24 sm:h-32 justify-end flex-wrap"
+          "absolute bottom-0 left-0 p-1.5 sm:p-2 flex flex-col gap-1 h-24 sm:h-32 justify-end flex-wrap"
         }
       >
         {card.cost.map((gemCount, index) => {

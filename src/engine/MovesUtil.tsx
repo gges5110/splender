@@ -120,3 +120,9 @@ export const considerTriggerDiscardPhase = (G: GameState, ctx: Ctx) => {
 export const getTotalCount = (array: number[]): number => {
   return array.reduce((p, c) => p + c, 0);
 };
+
+export const getCardCountByColor = (cards: Card[]): number[] => {
+  const cardCountByColor: number[] = Array(5).fill(0);
+  cards.map((card) => cardCountByColor[card.color]++);
+  return cardCountByColor;
+};

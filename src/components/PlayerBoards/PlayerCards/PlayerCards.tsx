@@ -5,6 +5,7 @@ import { PlayerDialog } from "./PlayerDialog/PlayerDialog";
 import { ReservedCardsDialog } from "./ReservedCardsDialog/ReservedCardsDialog";
 import clsx from "clsx";
 import { gemsColorStyle, gemsTextColorStyle } from "../../../styles";
+import { getCardCountByColor } from "../../../engine/MovesUtil";
 
 interface PlayerCardsProps {
   player: Player;
@@ -80,10 +81,4 @@ export const PlayerCards: React.FC<PlayerCardsProps> = ({
       />
     </div>
   );
-};
-
-const getCardCountByColor = (cards: Card[]): number[] => {
-  const cardCountByColor: number[] = Array(5).fill(0);
-  cards.map((card) => cardCountByColor[card.color]++);
-  return cardCountByColor;
 };
