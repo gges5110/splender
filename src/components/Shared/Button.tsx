@@ -2,7 +2,7 @@ import React from "react";
 
 interface ButtonProps {
   buttonClassName?: string;
-  svgPath?: React.SVGProps<SVGPathElement>;
+  svgPath?: React.ReactNode;
 }
 
 export const Button: React.FC<
@@ -11,13 +11,13 @@ export const Button: React.FC<
     HTMLButtonElement
   > &
     ButtonProps
-> = ({ buttonClassName, svgPath: SvgPath, children, ...rest }) => {
+> = ({ buttonClassName, svgPath, children, ...rest }) => {
   return (
     <button
       className={`bg-gray-100 text-base font-semibold py-2 px-4 rounded-lg shadow-md inline-flex items-center ${buttonClassName}`}
       {...rest}
     >
-      {SvgPath && (
+      {svgPath && (
         <svg
           className="w-4 h-4 mr-2"
           xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +25,7 @@ export const Button: React.FC<
           viewBox="0 0 24 24"
           stroke="currentColor"
         >
-          {SvgPath}
+          {svgPath}
         </svg>
       )}
 
