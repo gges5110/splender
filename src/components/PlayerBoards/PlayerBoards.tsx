@@ -51,21 +51,25 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
             <div className={"w-8"} />
             <div
               className={
-                "absolute leading-8 top-1 right-1 text-center w-8 h-8 rounded-xl font-semibold text-yellow-500"
+                "absolute leading-8 top-1 right-2 text-center w-18 h-8 rounded-xl font-semibold text-yellow-500"
               }
             >
-              {(player.cards.length > 0 &&
-                player.cards
-                  .map((card) => card.points)
-                  .reduce((p, c) => p + c, 0) +
-                  player.nobles
-                    .map((noble) => noble.points)
-                    .reduce((p, c) => p + c, 0)) ||
-                0}
+              {getPlayerPoints(player)} points
             </div>
           </div>
         ))}
       </div>
     </div>
+  );
+};
+
+const getPlayerPoints = (player: Player): number => {
+  return (
+    (player.cards.length > 0 &&
+      player.cards.map((card) => card.points).reduce((p, c) => p + c, 0) +
+        player.nobles
+          .map((noble) => noble.points)
+          .reduce((p, c) => p + c, 0)) ||
+    0
   );
 };

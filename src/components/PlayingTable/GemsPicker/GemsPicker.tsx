@@ -40,30 +40,32 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
 
   return (
     <>
-      <SelectableGems
-        selectedGems={selectedGems}
-        gems={gems}
-        onSelect={(index) => {
-          setGems(
-            Object.assign([], selectedGems, {
-              [index]: selectedGems[index] + 1,
-            })
-          );
-        }}
-        mode={mode}
-      />
-      <ActionButton
-        actionLabelText={actionLabelText}
-        disabled={
-          mode === GemsPickerMode.PICK
-            ? selectedGems.every((gem) => gem === 0)
-            : selectedGems.reduce((p, v) => p + v, 0) < (gemsToDiscard || 0)
-        }
-        onClick={() => {
-          onSelect(selectedGems);
-          setGems(Array(5).fill(0));
-        }}
-      />
+      <div className={"flex"}>
+        <SelectableGems
+          selectedGems={selectedGems}
+          gems={gems}
+          onSelect={(index) => {
+            setGems(
+              Object.assign([], selectedGems, {
+                [index]: selectedGems[index] + 1,
+              })
+            );
+          }}
+          mode={mode}
+        />
+        <ActionButton
+          actionLabelText={actionLabelText}
+          disabled={
+            mode === GemsPickerMode.PICK
+              ? selectedGems.every((gem) => gem === 0)
+              : selectedGems.reduce((p, v) => p + v, 0) < (gemsToDiscard || 0)
+          }
+          onClick={() => {
+            onSelect(selectedGems);
+            setGems(Array(5).fill(0));
+          }}
+        />
+      </div>
 
       <div className={"h-2"} />
       <div className={"flex"}>
