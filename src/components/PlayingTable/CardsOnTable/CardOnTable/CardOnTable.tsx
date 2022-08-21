@@ -3,7 +3,7 @@ import React, { FC, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { CardDisplay } from "../../../Shared/CardDisplay/CardDisplay";
-import { playerCanAffordCard } from "../../CardDialog/CardDialog";
+import { playerCanAffordCard } from "../../../../engine/MovesUtil";
 
 const variants: Variants = {
   fadeIn: {

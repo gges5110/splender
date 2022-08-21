@@ -25,7 +25,7 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
           <div
             key={index}
             className={clsx(
-              "flex items-center bg-slate-200 my-4 rounded-xl relative p-2 pt-6",
+              "flex items-center bg-slate-200 my-4 rounded-xl relative p-2 pt-8",
               { "bg-slate-400": Number(currentPlayer) === index }
             )}
           >

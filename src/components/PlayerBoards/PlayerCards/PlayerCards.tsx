@@ -1,11 +1,13 @@
 import { Card, Player } from "../../../Interfaces";
 import React, { useState } from "react";
-import { playerCanAffordCard } from "../../PlayingTable/CardDialog/CardDialog";
 import { PlayerDialog } from "./PlayerDialog/PlayerDialog";
 import { ReservedCardsDialog } from "./ReservedCardsDialog/ReservedCardsDialog";
 import clsx from "clsx";
 import { gemsColorStyle, gemsTextColorStyle } from "../../../styles";
-import { getCardCountByColor } from "../../../engine/MovesUtil";
+import {
+  getCardCountByColor,
+  playerCanAffordCard,
+} from "../../../engine/MovesUtil";
 
 interface PlayerCardsProps {
   player: Player;
