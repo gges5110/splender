@@ -1,10 +1,11 @@
 import React from "react";
-import { Card, Player } from "../../../Interfaces";
+import { Player } from "../../../Interfaces";
 import { CardDisplay } from "../../Shared/CardDisplay/CardDisplay";
 import { Button } from "../../Shared/Button";
 import { Modal } from "../../Shared/Modal";
 import { CloseSVGPath } from "../../Shared/SVGPaths";
 import { BuildDialogProps } from "../PlayingTable";
+import { playerCanAffordCard } from "../../../engine/MovesUtil";
 
 interface CardDialogProps {
   open: boolean;
@@ -94,23 +95,4 @@ export const CardDialog: React.FC<CardDialogProps> = ({
       </div>
     </Modal>
   );
-};
-
-export const playerCanAffordCard = (card: Card, player: Player): boolean => {
-  let goldCount = player.gems[5];
-  for (let i = 0; i < 5; ++i) {
-    const gemCost =
-      card.cost[i] -
-      player.cards.filter((card: Card) => card.color === i).length;
-    const diff = gemCost - player.gems[i];
-    if (diff > 0) {
-      if (goldCount >= diff) {
-        goldCount -= diff;
-      } else {
-        return false;
-      }
-    }
-  }
-
-  return true;
 };

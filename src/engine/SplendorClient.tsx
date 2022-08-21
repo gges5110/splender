@@ -8,8 +8,8 @@ export const SplendorClient = Client({
   game: SplendorGame,
   board: SplendorBoard,
   numPlayers: 3,
-  debug: false,
   multiplayer: Local({
+    persist: true,
     bots: { "1": DelayedRandomBot, "2": DelayedRandomBot },
   }),
 });

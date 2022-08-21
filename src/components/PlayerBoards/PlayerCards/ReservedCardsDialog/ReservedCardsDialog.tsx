@@ -1,10 +1,10 @@
 import React from "react";
 import { Card, Player } from "../../../../Interfaces";
 import { CardDisplay } from "../../../Shared/CardDisplay/CardDisplay";
-import { playerCanAffordCard } from "../../../PlayingTable/CardDialog/CardDialog";
 import { Modal } from "../../../Shared/Modal";
 import { Button } from "../../../Shared/Button";
 import { CloseSVGPath } from "../../../Shared/SVGPaths";
+import { playerCanAffordCard } from "../../../../engine/MovesUtil";
 
 interface ReservedCardsDialogProps {
   reservedCardsDialogOpen: boolean;

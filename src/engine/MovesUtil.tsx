@@ -1,6 +1,5 @@
 import { Card, GameState, Noble, Player } from "../Interfaces";
 import { Ctx } from "boardgame.io";
-import { playerCanAffordCard } from "../components/PlayingTable/CardDialog/CardDialog";
 import { INVALID_MOVE } from "boardgame.io/core";
 import { gemsInHandLimit, pickNoble } from "./Moves";
 
@@ -53,6 +52,25 @@ export const getVisitingNobleIndexArray = (
     }
   });
   return visitingNobleIndexArray;
+};
+
+export const playerCanAffordCard = (card: Card, player: Player): boolean => {
+  let goldCount = player.gems[5];
+  for (let i = 0; i < 5; ++i) {
+    const gemCost =
+      card.cost[i] -
+      player.cards.filter((card: Card) => card.color === i).length;
+    const diff = gemCost - player.gems[i];
+    if (diff > 0) {
+      if (goldCount >= diff) {
+        goldCount -= diff;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  return true;
 };
 
 export const purchaseDevelopmentCard = (
