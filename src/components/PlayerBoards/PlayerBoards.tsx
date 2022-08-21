@@ -31,10 +31,12 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
           >
             <div
               className={
-                "absolute leading-8 -top-5 -left-4 text-center w-20 h-8 rounded-lg bg-blue-300"
+                "absolute leading-8 -top-5 -left-4 w-fit h-8 rounded-lg bg-blue-300 px-3"
               }
             >
-              <span className={"text-slate-700"}>Player {index + 1}</span>
+              <span className={"text-slate-700"}>
+                {index === 0 ? "Player" : "Bot"} {index + 1}
+              </span>
             </div>
             <div className={"w-2"} />
             <div className={"text-center"}>
