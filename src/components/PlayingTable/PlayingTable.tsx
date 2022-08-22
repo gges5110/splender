@@ -1,5 +1,4 @@
 import { Card, GameState } from "../../Interfaces";
-import { NobleDisplay } from "../Shared/NobleDisplay/NobleDisplay";
 import { DiscardGemsDialog } from "./DiscardGemsDialog/DiscardGemsDialog";
 import { CardDialog } from "./CardDialog/CardDialog";
 import { CardsOnTable } from "./CardsOnTable/CardsOnTable";
@@ -7,6 +6,8 @@ import { GemsPicker, GemsPickerMode } from "./GemsPicker/GemsPicker";
 import { Ctx } from "boardgame.io";
 import { FC, useState } from "react";
 import { PickNobleDialog } from "./PickNobleDialog/PickNobleDialog";
+import { Button } from "../Shared/Button";
+import { NoblesSection } from "./NoblesSection/NoblesSection";
 
 interface PlayingTableProps {
   G: GameState;
@@ -32,7 +33,7 @@ export const PlayingTable: FC<PlayingTableProps> = ({
   const [buildDialogProps, setBuildDialogProps] = useState<
     BuildDialogProps | undefined
   >(undefined);
-
+  const [showNobles, setShowNobles] = useState<boolean>(true);
   const closeBuildDialog = () => {
     setDialogOpen(false);
   };
@@ -42,12 +43,18 @@ export const PlayingTable: FC<PlayingTableProps> = ({
   return (
     <div className={"rounded-xl bg-slate-100 shadow-xl p-4 sm:p-8"}>
       <div className={"p-1 sm:p-4"}>
-        <span className={"title"}>Nobles</span>
-        <div className={"flex justify-between gap-2"}>
-          {nobles.map((noble, index) => (
-            <NobleDisplay noble={noble} key={index} />
-          ))}
+        <div className={"flex justify-between gap-2 items-center"}>
+          <span className={"title"}>Nobles</span>
+          <Button
+            onClick={() => {
+              setShowNobles(!showNobles);
+            }}
+          >
+            {showNobles ? "Hide" : "Show"} Nobles
+          </Button>
         </div>
+
+        <NoblesSection nobles={nobles} isVisible={showNobles} />
       </div>
 
       <div className={"p-1 sm:p-4 mx-auto"}>
