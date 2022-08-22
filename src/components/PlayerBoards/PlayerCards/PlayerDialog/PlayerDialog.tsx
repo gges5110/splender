@@ -23,13 +23,15 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
     <Modal open={playerDialogOpen} onClose={closePlayerDialog}>
       <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
         <div className="sm:flex sm:items-start">
-          <div className={"flex justify-center mx-auto"}>
+          <div className={"flex flex-col justify-center mx-auto gap-2"}>
             <div className={"flex"}>
               {player.nobles.map((noble, index) => (
                 <NobleDisplay noble={noble} key={index} />
               ))}
             </div>
-            <div className={"grid grid-flow-row grid-cols-6 gap-2"}>
+            <div
+              className={"grid grid-flow-row grid-cols-5 sm:grid-cols-6 gap-2"}
+            >
               {player.cards.map((card, index) => (
                 <CardDisplay key={index} card={card} enabled={false} />
               ))}
@@ -40,7 +42,7 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
         <div className={"flex my-2"}>
           <Button svgPath={CloseSVGPath} onClick={closePlayerDialog}>
-            <span>Cancel</span>
+            <span>Close</span>
           </Button>
         </div>
       </div>
