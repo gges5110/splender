@@ -21,7 +21,7 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
   onClick,
   affordable = false,
 }) => {
-  if (card === undefined) {
+  if (card == null) {
     return <button className={"card-size"} />;
   }
 
