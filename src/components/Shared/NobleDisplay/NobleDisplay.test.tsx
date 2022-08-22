@@ -3,17 +3,6 @@ import { render, screen } from "@testing-library/react";
 import { NobleDisplay } from "./NobleDisplay";
 
 describe("NobleDisplay", function () {
-  test("renders blank for acquired nobles", () => {
-    const noble = {
-      cardCountByColors: [3, 3, 3, 0, 0],
-      points: 3,
-      acquired: true,
-    };
-
-    const { container } = render(<NobleDisplay noble={noble} />);
-    expect(container.firstChild).toBeEmptyDOMElement();
-  });
-
   test("renders card counts and points", () => {
     const noble = {
       cardCountByColors: [1, 2, 3, 4, 5],
