@@ -43,6 +43,10 @@ export const getVisitingNobleIndexArray = (
   });
   const visitingNobleIndexArray: number[] = [];
   nobles.forEach((noble, index) => {
+    if (noble.acquired) {
+      return;
+    }
+
     if (
       noble.cardCountByColors.every(
         (count, index) => playerCardCountByColors[index] >= count
