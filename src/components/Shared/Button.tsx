@@ -1,4 +1,5 @@
 import * as React from "react";
+import clsx from "clsx";
 
 interface ButtonProps {
   buttonClassName?: string;
@@ -14,7 +15,11 @@ export const Button: React.FC<
 > = ({ buttonClassName, svgPath, children, ...rest }) => {
   return (
     <button
-      className={`bg-gray-100 text-base font-semibold py-2 px-4 rounded-lg shadow-md inline-flex items-center ${buttonClassName}`}
+      type={"button"}
+      className={clsx(
+        buttonClassName,
+        "inline-flex justify-center items-center rounded-md shadow-md border border-transparent px-4 py-2 text-gray-900 bg-gray-100 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 select-none disabled:opacity-50"
+      )}
       {...rest}
     >
       {svgPath && (

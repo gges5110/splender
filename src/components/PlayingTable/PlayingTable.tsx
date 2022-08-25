@@ -4,7 +4,6 @@ import { GemsPicker, GemsPickerMode } from "./GemsPicker/GemsPicker";
 import { Ctx } from "boardgame.io";
 import { FC, useState } from "react";
 import { PickNobleDialog } from "./NoblesSection/PickNobleDialog/PickNobleDialog";
-import { Button } from "../Shared/Button";
 import { NoblesSection } from "./NoblesSection/NoblesSection";
 import { CardsSection } from "./CardsSection/CardsSection";
 
@@ -32,7 +31,7 @@ export const PlayingTable: FC<PlayingTableProps> = ({
   const [buildDialogProps, setBuildDialogProps] = useState<
     BuildDialogProps | undefined
   >(undefined);
-  const [showNobles, setShowNobles] = useState<boolean>(true);
+
   const closeBuildDialog = () => {
     setDialogOpen(false);
   };
@@ -42,18 +41,7 @@ export const PlayingTable: FC<PlayingTableProps> = ({
   return (
     <div className={"rounded-xl bg-slate-100 shadow-xl p-4 sm:p-8"}>
       <div className={"p-1 sm:p-4"}>
-        <div className={"flex justify-between gap-2 items-center"}>
-          <span className={"title"}>Nobles</span>
-          <Button
-            onClick={() => {
-              setShowNobles(!showNobles);
-            }}
-          >
-            {showNobles ? "Hide" : "Show"} Nobles
-          </Button>
-        </div>
-
-        <NoblesSection nobles={nobles} isVisible={showNobles} />
+        <NoblesSection nobles={nobles} />
 
         <PickNobleDialog
           open={

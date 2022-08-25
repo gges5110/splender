@@ -12,7 +12,7 @@ export const ResetButton: FC<ResetButtonProps> = ({ onClick, disabled }) => {
       disabled={disabled}
       onClick={onClick}
       className={
-        "w-24 h-8 sm:h-10 inline-flex items-center bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-full shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 disabled:opacity-50"
+        "w-24 h-8 sm:h-10 inline-flex items-center text-base font-semibold py-2 px-4 rounded-full shadow-md bg-gray-100 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 disabled:opacity-50"
       }
     >
       <svg

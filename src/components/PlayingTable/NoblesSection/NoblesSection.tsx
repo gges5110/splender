@@ -1,39 +1,41 @@
 import { Noble } from "../../../Interfaces";
-import { FC } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { FC, useState } from "react";
 import { NobleDisplay } from "../../Shared/NobleDisplay/NobleDisplay";
+import clsx from "clsx";
+import { Button } from "../../Shared/Button";
 
 interface NoblesSectionProps {
   nobles: Array<Noble>;
-  isVisible: boolean;
 }
 
-export const NoblesSection: FC<NoblesSectionProps> = ({
-  nobles,
-  isVisible,
-}) => {
+export const NoblesSection: FC<NoblesSectionProps> = ({ nobles }) => {
+  const [showNobles, setShowNobles] = useState<boolean>(true);
+
   return (
-    // @ts-ignore
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          initial="collapsed"
-          animate="open"
-          exit="collapsed"
-          variants={{
-            open: { opacity: 1, height: "auto" },
-            collapsed: { opacity: 0, height: 0 },
+    <>
+      <div className={"flex justify-between gap-2 items-center"}>
+        <span className={"title"}>Nobles</span>
+        <Button
+          onClick={() => {
+            setShowNobles(!showNobles);
           }}
-          transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
-          className={"flex justify-between gap-2 mt-2"}
         >
-          {nobles.map((noble, index) => (
-            <div className={"noble-size"} key={index}>
-              {!noble.acquired && <NobleDisplay noble={noble} />}
-            </div>
-          ))}
-        </motion.div>
-      )}
-    </AnimatePresence>
+          {showNobles ? "Hide" : "Show"} Nobles
+          {!showNobles &&
+            `(${nobles.filter((noble) => !noble.acquired).length})`}
+        </Button>
+      </div>
+      <div
+        className={clsx("flex justify-between gap-2 mt-2", {
+          hidden: !showNobles,
+        })}
+      >
+        {nobles.map((noble, index) => (
+          <div className={"noble-size"} key={index}>
+            {!noble.acquired && <NobleDisplay noble={noble} />}
+          </div>
+        ))}
+      </div>
+    </>
   );
 };

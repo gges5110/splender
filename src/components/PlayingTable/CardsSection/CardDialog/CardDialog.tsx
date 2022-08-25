@@ -39,11 +39,8 @@ export const CardDialog: React.FC<CardDialogProps> = ({
         </div>
       </div>
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
-        <div className={"flex my-2"}>
+        <div className={"flex gap-2"}>
           <Button
-            className={
-              "bg-gray-100 text-base font-semibold py-2 px-4 rounded-lg shadow-md inline-flex items-center disabled:opacity-50 focus:outline-none focus:ring-2 hover:bg-gray-100"
-            }
             disabled={
               buildDialogProps
                 ? !playerCanAffordCard(buildDialogProps.card, player)
@@ -67,9 +64,6 @@ export const CardDialog: React.FC<CardDialogProps> = ({
             <span>Purchase</span>
           </Button>
           <Button
-            className={
-              "bg-gray-100 text-base font-semibold py-2 px-4 rounded-lg shadow-md inline-flex items-center disabled:opacity-50 focus:outline-none focus:ring-2 hover:bg-gray-100 mx-2"
-            }
             disabled={player.reservedCards.length >= 3}
             onClick={() => {
               if (buildDialogProps && player.reservedCards.length <= 3) {
