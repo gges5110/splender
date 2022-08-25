@@ -1,7 +1,7 @@
 import { Modal } from "../Modal";
 import { Button } from "../Button";
 import { CloseSVGPath } from "../SVGPaths";
-import React, { FC } from "react";
+import { FC } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
 interface WelcomeDialogProps {

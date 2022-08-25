@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import * as React from "react";
 import type { GameState } from "../Interfaces";
 import { GameEndDialog } from "./Shared/Dialogs/GameEndDialog";
 import { PlayerBoards } from "./PlayerBoards/PlayerBoards";

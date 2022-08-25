@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Card, Player } from "../../../../Interfaces";
 import { CardDisplay } from "../../../Shared/CardDisplay/CardDisplay";
 import { Modal } from "../../../Shared/Modal";

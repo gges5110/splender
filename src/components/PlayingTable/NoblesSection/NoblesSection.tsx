@@ -1,5 +1,5 @@
 import { Noble } from "../../../Interfaces";
-import React, { FC } from "react";
+import { FC } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { NobleDisplay } from "../../Shared/NobleDisplay/NobleDisplay";
 

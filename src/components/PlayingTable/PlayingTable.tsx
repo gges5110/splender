@@ -1,13 +1,12 @@
 import { Card, GameState } from "../../Interfaces";
 import { DiscardGemsDialog } from "./DiscardGemsDialog/DiscardGemsDialog";
-import { CardDialog } from "./CardDialog/CardDialog";
-import { CardsOnTable } from "./CardsOnTable/CardsOnTable";
 import { GemsPicker, GemsPickerMode } from "./GemsPicker/GemsPicker";
 import { Ctx } from "boardgame.io";
 import { FC, useState } from "react";
-import { PickNobleDialog } from "./PickNobleDialog/PickNobleDialog";
+import { PickNobleDialog } from "./NoblesSection/PickNobleDialog/PickNobleDialog";
 import { Button } from "../Shared/Button";
 import { NoblesSection } from "./NoblesSection/NoblesSection";
+import { CardsSection } from "./CardsSection/CardsSection";
 
 interface PlayingTableProps {
   G: GameState;
@@ -55,21 +54,30 @@ export const PlayingTable: FC<PlayingTableProps> = ({
         </div>
 
         <NoblesSection nobles={nobles} isVisible={showNobles} />
+
+        <PickNobleDialog
+          open={
+            ctx.activePlayers?.[Number(ctx.currentPlayer)] === "PickNoble" &&
+            currentPlayerActive
+          }
+          players={players}
+          nobles={nobles}
+          currentPlayer={ctx.currentPlayer}
+          pick={(index) => {
+            moves.pickNoble(index);
+          }}
+        />
       </div>
 
       <div className={"p-1 sm:p-4 mx-auto"}>
-        <CardDialog
-          open={dialogOpen}
+        <CardsSection
+          dialogOpen={dialogOpen}
           closeDialog={closeBuildDialog}
           buildDialogProps={buildDialogProps}
           player={players[Number(ctx.currentPlayer)]}
           build={moves.build}
           reserve={moves.reserve}
-        />
-        <span className={"title"}>Cards</span>
-        <CardsOnTable
           cards={cardsOnTable}
-          player={players[Number(ctx.currentPlayer)]}
           cardsInDeck={cardsInDeck}
           onClick={(buildDialogProps) => {
             setDialogOpen(true);
@@ -88,29 +96,16 @@ export const PlayingTable: FC<PlayingTableProps> = ({
             mode={GemsPickerMode.PICK}
           />
         </div>
+
+        <DiscardGemsDialog
+          open={
+            ctx.activePlayers?.[Number(ctx.currentPlayer)] === "DiscardGems" &&
+            currentPlayerActive
+          }
+          playerGems={players[Number(ctx.currentPlayer)].gems}
+          discardGems={moves.discardGems}
+        />
       </div>
-
-      <DiscardGemsDialog
-        open={
-          ctx.activePlayers?.[Number(ctx.currentPlayer)] === "DiscardGems" &&
-          currentPlayerActive
-        }
-        playerGems={players[Number(ctx.currentPlayer)].gems}
-        discardGems={moves.discardGems}
-      />
-
-      <PickNobleDialog
-        open={
-          ctx.activePlayers?.[Number(ctx.currentPlayer)] === "PickNoble" &&
-          currentPlayerActive
-        }
-        players={players}
-        nobles={nobles}
-        currentPlayer={ctx.currentPlayer}
-        pick={(index) => {
-          moves.pickNoble(index);
-        }}
-      />
     </div>
   );
 };

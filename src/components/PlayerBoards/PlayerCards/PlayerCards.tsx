@@ -1,5 +1,6 @@
 import { Card, Player } from "../../../Interfaces";
-import React, { useState } from "react";
+import { useState } from "react";
+import * as React from "react";
 import { PlayerDialog } from "./PlayerDialog/PlayerDialog";
 import { ReservedCardsDialog } from "./ReservedCardsDialog/ReservedCardsDialog";
 import clsx from "clsx";
