@@ -1,5 +1,5 @@
 import { Card } from "../../../Interfaces";
-import React from "react";
+import * as React from "react";
 import { GemDisplay } from "../GemDisplay/GemDisplay";
 import clsx from "clsx";
 import {

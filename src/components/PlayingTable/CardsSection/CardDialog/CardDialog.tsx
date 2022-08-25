@@ -1,11 +1,11 @@
-import React from "react";
-import { Player } from "../../../Interfaces";
-import { CardDisplay } from "../../Shared/CardDisplay/CardDisplay";
-import { Button } from "../../Shared/Button";
-import { Modal } from "../../Shared/Modal";
-import { CloseSVGPath } from "../../Shared/SVGPaths";
-import { BuildDialogProps } from "../PlayingTable";
-import { playerCanAffordCard } from "../../../engine/MovesUtil";
+import * as React from "react";
+import { Player } from "../../../../Interfaces";
+import { CardDisplay } from "../../../Shared/CardDisplay/CardDisplay";
+import { Button } from "../../../Shared/Button";
+import { Modal } from "../../../Shared/Modal";
+import { CloseSVGPath } from "../../../Shared/SVGPaths";
+import { BuildDialogProps } from "../../PlayingTable";
+import { playerCanAffordCard } from "../../../../engine/MovesUtil";
 
 interface CardDialogProps {
   open: boolean;

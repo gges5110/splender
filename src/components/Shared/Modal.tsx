@@ -1,5 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
-import React, { Fragment } from "react";
+import { Fragment } from "react";
+import * as React from "react";
 
 interface ModalProps {
   open: boolean;
@@ -15,7 +16,7 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
         className="fixed inset-0 z-10 overflow-y-auto"
         onClose={onClose}
       >
-        <div className="min-h-screen px-4 text-center">
+        <div className="min-h-screen text-center">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"

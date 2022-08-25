@@ -2,7 +2,7 @@ import { NobleDisplay } from "../../../Shared/NobleDisplay/NobleDisplay";
 import { CardDisplay } from "../../../Shared/CardDisplay/CardDisplay";
 import { Button } from "../../../Shared/Button";
 import { Player } from "../../../../Interfaces";
-import React from "react";
+import * as React from "react";
 import { Modal } from "../../../Shared/Modal";
 import { CloseSVGPath } from "../../../Shared/SVGPaths";
 

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Noble } from "../../../Interfaces";
 import { GemDisplay } from "../GemDisplay/GemDisplay";
 import clsx from "clsx";

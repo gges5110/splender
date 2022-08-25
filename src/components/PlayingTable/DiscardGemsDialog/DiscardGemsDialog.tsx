@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { GemsPicker, GemsPickerMode } from "../GemsPicker/GemsPicker";
 import { Modal } from "../../Shared/Modal";
 import { Dialog } from "@headlessui/react";
@@ -17,7 +17,7 @@ export const DiscardGemsDialog: React.FC<DiscardGemDialogProps> = ({
 }) => {
   return (
     <Modal open={open} onClose={() => {}}>
-      <div className="p-6">
+      <div className="w-max p-6">
         <Dialog.Title
           as="h3"
           className="text-lg leading-6 font-medium text-gray-700"

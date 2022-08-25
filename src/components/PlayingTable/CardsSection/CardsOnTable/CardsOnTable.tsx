@@ -1,7 +1,7 @@
-import { Card, Player } from "../../../Interfaces";
-import React from "react";
+import { Card, Player } from "../../../../Interfaces";
+import * as React from "react";
 import { CardOnTable } from "./CardOnTable/CardOnTable";
-import { BuildDialogProps } from "../PlayingTable";
+import { BuildDialogProps } from "../../PlayingTable";
 
 interface CardsOnTableProps {
   cards: Array<Array<Card | undefined>>;

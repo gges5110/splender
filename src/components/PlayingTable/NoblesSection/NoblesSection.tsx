@@ -1,5 +1,5 @@
 import { Noble } from "../../../Interfaces";
-import React, { FC } from "react";
+import { FC } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { NobleDisplay } from "../../Shared/NobleDisplay/NobleDisplay";
 
@@ -28,8 +28,8 @@ export const NoblesSection: FC<NoblesSectionProps> = ({
           className={"flex justify-between gap-2 mt-2"}
         >
           {nobles.map((noble, index) => (
-            <div className={"noble-size"}>
-              {!noble.acquired && <NobleDisplay noble={noble} key={index} />}
+            <div className={"noble-size"} key={index}>
+              {!noble.acquired && <NobleDisplay noble={noble} />}
             </div>
           ))}
         </motion.div>
