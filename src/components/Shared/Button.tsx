@@ -18,7 +18,7 @@ export const Button: React.FC<
       type={"button"}
       className={clsx(
         buttonClassName,
-        "inline-flex justify-center items-center rounded-md shadow-md border border-transparent px-4 py-2 text-gray-900 bg-gray-100 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 select-none disabled:opacity-50"
+        "inline-flex justify-center items-center rounded-md shadow-md border border-transparent px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base text-gray-900 bg-gray-100 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 select-none disabled:opacity-50"
       )}
       {...rest}
     >
