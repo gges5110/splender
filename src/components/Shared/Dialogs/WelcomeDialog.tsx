@@ -1,8 +1,8 @@
 import { Modal } from "../Modal";
 import { Button } from "../Button";
-import { CloseSVGPath } from "../SVGPaths";
 import { FC } from "react";
 import { useLocalStorage } from "usehooks-ts";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
 interface WelcomeDialogProps {
   open: boolean;
@@ -28,7 +28,7 @@ export const WelcomeDialog: FC<WelcomeDialogProps> = ({ open, onClose }) => {
           >
             <span>Don't show again</span>
           </Button>
-          <Button svgPath={CloseSVGPath} onClick={onClose}>
+          <Button svgPath={<XMarkIcon />} onClick={onClose}>
             <span>Close</span>
           </Button>
         </div>

@@ -3,9 +3,9 @@ import { Player } from "../../../../Interfaces";
 import { CardDisplay } from "../../../Shared/CardDisplay/CardDisplay";
 import { Button } from "../../../Shared/Button";
 import { Modal } from "../../../Shared/Modal";
-import { CloseSVGPath } from "../../../Shared/SVGPaths";
 import { BuildDialogProps } from "../../PlayingTable";
 import { playerCanAffordCard } from "../../../../engine/MovesUtil";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
 interface CardDialogProps {
   open: boolean;
@@ -82,7 +82,7 @@ export const CardDialog: React.FC<CardDialogProps> = ({
           >
             <span>Reserve</span>
           </Button>
-          <Button svgPath={CloseSVGPath} onClick={closeDialog}>
+          <Button svgPath={<XMarkIcon />} onClick={closeDialog}>
             <span>Cancel</span>
           </Button>
         </div>

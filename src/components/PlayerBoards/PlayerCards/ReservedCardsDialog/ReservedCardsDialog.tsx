@@ -3,8 +3,8 @@ import { Card, Player } from "../../../../Interfaces";
 import { CardDisplay } from "../../../Shared/CardDisplay/CardDisplay";
 import { Modal } from "../../../Shared/Modal";
 import { Button } from "../../../Shared/Button";
-import { CloseSVGPath } from "../../../Shared/SVGPaths";
 import { playerCanAffordCard } from "../../../../engine/MovesUtil";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
 interface ReservedCardsDialogProps {
   reservedCardsDialogOpen: boolean;
@@ -40,7 +40,7 @@ export const ReservedCardsDialog: React.FC<ReservedCardsDialogProps> = ({
 
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
         <div className={"flex justify-end my-2"}>
-          <Button svgPath={CloseSVGPath} onClick={closeReservedCardsDialog}>
+          <Button svgPath={<XMarkIcon />} onClick={closeReservedCardsDialog}>
             <span>Close</span>
           </Button>
         </div>
