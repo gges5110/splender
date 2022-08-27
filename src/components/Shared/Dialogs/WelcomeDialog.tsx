@@ -3,7 +3,6 @@ import { Button } from "../Button";
 import * as React from "react";
 import { FC, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
-import { XMarkIcon } from "@heroicons/react/24/solid";
 import { Tab } from "@headlessui/react";
 import clsx from "clsx";
 import { GemDisplay } from "../GemDisplay/GemDisplay";

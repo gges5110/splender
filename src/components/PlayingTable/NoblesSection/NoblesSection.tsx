@@ -2,7 +2,7 @@ import { Noble } from "../../../Interfaces";
 import { FC } from "react";
 import { NobleDisplay } from "../../Shared/NobleDisplay/NobleDisplay";
 import { Disclosure } from "@headlessui/react";
-import { ChevronUpIcon } from "@heroicons/react/24/solid";
+import { ChevronUpIcon } from "@heroicons/react/24/outline";
 
 interface NoblesSectionProps {
   nobles: Array<Noble>;

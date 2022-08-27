@@ -1,10 +1,8 @@
 import { NobleDisplay } from "../../../Shared/NobleDisplay/NobleDisplay";
 import { CardDisplay } from "../../../Shared/CardDisplay/CardDisplay";
-import { Button } from "../../../Shared/Button";
 import { Player } from "../../../../Interfaces";
 import * as React from "react";
 import { Modal } from "../../../Shared/Modal";
-import { XMarkIcon } from "@heroicons/react/24/solid";
 
 interface PlayerDialogProps {
   playerDialogOpen: boolean;

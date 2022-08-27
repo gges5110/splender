@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Button } from "../../../Shared/Button";
-import { CheckIcon } from "@heroicons/react/24/solid";
+import { CheckIcon } from "@heroicons/react/24/outline";
 
 interface ActionButtonProps {
   disabled: boolean;
