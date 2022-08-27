@@ -1,6 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import * as React from "react";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
 export interface ModalProps {
   open: boolean;
@@ -37,6 +38,15 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all">
+                  <button
+                    className={
+                      "absolute rounded-full hover:bg-gray-200 p-1.5 right-2 top-2"
+                    }
+                    onClick={onClose}
+                  >
+                    <XMarkIcon className={"h-6 w-6"} />
+                  </button>
+                  <div className={"h-6"}></div>
                   {children}
                 </Dialog.Panel>
               </Transition.Child>

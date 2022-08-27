@@ -41,14 +41,6 @@ export const ReservedCardsDialog: React.FC<ReservedCardsDialogProps> = ({
           </div>
         ))}
       </div>
-
-      <div className="bg-gray-50 px-4 py-3 sm:px-6">
-        <div className={"flex justify-end my-2"}>
-          <Button svgPath={<XMarkIcon />} onClick={closeReservedCardsDialog}>
-            <span>Close</span>
-          </Button>
-        </div>
-      </div>
     </Modal>
   );
 };

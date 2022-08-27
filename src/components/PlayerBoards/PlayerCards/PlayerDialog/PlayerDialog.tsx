@@ -39,13 +39,6 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
           </div>
         </div>
       </div>
-      <div className="bg-gray-50 px-4 py-3 sm:px-6">
-        <div className={"flex my-2"}>
-          <Button svgPath={<XMarkIcon />} onClick={closePlayerDialog}>
-            <span>Close</span>
-          </Button>
-        </div>
-      </div>
     </Modal>
   );
 };

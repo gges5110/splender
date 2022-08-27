@@ -189,10 +189,6 @@ export const WelcomeDialog: FC<WelcomeDialogProps> = ({ open, onClose }) => {
               <span>Don't show again</span>
             </Button>
           )}
-
-          <Button svgPath={<XMarkIcon />} onClick={onClose}>
-            <span>Close</span>
-          </Button>
         </div>
       </div>
     </Modal>
