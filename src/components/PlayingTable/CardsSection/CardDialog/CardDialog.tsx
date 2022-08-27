@@ -5,7 +5,11 @@ import { Button } from "../../../Shared/Button";
 import { Modal } from "../../../Shared/Modal";
 import { BuildDialogProps } from "../../PlayingTable";
 import { playerCanAffordCard } from "../../../../engine/MovesUtil";
-import { XMarkIcon } from "@heroicons/react/24/solid";
+import {
+  ArrowDownOnSquareStackIcon,
+  PlusIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 
 interface CardDialogProps {
   open: boolean;
@@ -52,14 +56,7 @@ export const CardDialog: React.FC<CardDialogProps> = ({
                 closeDialog();
               }
             }}
-            svgPath={
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-              />
-            }
+            svgPath={<PlusIcon />}
           >
             <span>Purchase</span>
           </Button>
@@ -71,14 +68,7 @@ export const CardDialog: React.FC<CardDialogProps> = ({
                 closeDialog();
               }
             }}
-            svgPath={
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
-              />
-            }
+            svgPath={<ArrowDownOnSquareStackIcon />}
           >
             <span>Reserve</span>
           </Button>

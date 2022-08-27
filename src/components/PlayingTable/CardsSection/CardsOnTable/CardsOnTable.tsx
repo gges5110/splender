@@ -9,7 +9,7 @@ interface CardsOnTableProps {
   player: Player;
 
   onClick(buildDialogProps: BuildDialogProps): void;
-
+  deckOnClick(level: number): void;
   hideAffordableHint?: boolean;
 }
 
@@ -18,6 +18,7 @@ export const CardsOnTable: React.FC<CardsOnTableProps> = ({
   cardsInDeck,
   player,
   onClick,
+  deckOnClick,
   hideAffordableHint,
 }) => {
   return (
@@ -27,14 +28,17 @@ export const CardsOnTable: React.FC<CardsOnTableProps> = ({
       {cards
         .map((cards, level: number) => (
           <React.Fragment key={level}>
-            <div
+            <button
               className={
-                "w-10 h-24 sm:w-16 sm:h-32 rounded-xl bg-gray-200 flex justify-center items-center m-auto sm:mr-2 shadow-xl"
+                "w-10 h-24 sm:w-16 sm:h-32 rounded-xl bg-gray-200 hover:bg-gray-300 flex justify-center items-center m-auto sm:mr-2 shadow-xl"
               }
               key={level}
+              onClick={() => {
+                deckOnClick(level);
+              }}
             >
               <div>{cardsInDeck[level].length}</div>
-            </div>
+            </button>
             {cards.map((card, index) => {
               const cardOnClick = () => {
                 if (card) {

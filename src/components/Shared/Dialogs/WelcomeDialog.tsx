@@ -1,11 +1,16 @@
 import { Modal } from "../Modal";
 import { Button } from "../Button";
+import * as React from "react";
 import { FC, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import * as React from "react";
 import { Tab } from "@headlessui/react";
 import clsx from "clsx";
+import { GemDisplay } from "../GemDisplay/GemDisplay";
+import { Color } from "../../../Interfaces";
+import { CardDisplay } from "../CardDisplay/CardDisplay";
+import { level2Cards, nobles } from "../../../constants";
+import { NobleDisplay } from "../NobleDisplay/NobleDisplay";
 
 interface WelcomeDialogProps {
   open: boolean;
@@ -19,22 +24,46 @@ export const WelcomeDialog: FC<WelcomeDialogProps> = ({ open, onClose }) => {
   );
 
   let [categories] = useState({
-    Actions: (
-      <div>
-        A player must choose to perform only one of the following four actions.
-        <ul className={"list-disc list-inside"}>
-          <li>Take 3 gem tokens of different colors.</li>
-          <li>
-            Take 2 gem tokens of the same color. This action is only possible if
-            there are at least 4 tokens of the chosen color left when the player
-            takes them.
-          </li>
-          <li>Reserve 1 development card and take 1 gold token (joker).</li>
-          <li>
-            Purchase 1 face-up development card from the middle of the table or
-            a previously reserved one.
-          </li>
-        </ul>
+    Legend: (
+      <div className={"flex flex-col gap-2"}>
+        <div
+          className={
+            "bg-slate-200 text-gray-500 p-4 rounded-lg mx-auto w-full grid grid-cols-3"
+          }
+        >
+          <div className={"col-span-1 justify-self-center"}>
+            <GemDisplay color={Color.Green} count={3} />
+          </div>
+          <div className={"col-span-2"}>3 green gems</div>
+        </div>
+        <div
+          className={
+            "bg-slate-200 text-gray-500 p-4 rounded-lg mx-auto w-full grid grid-cols-3"
+          }
+        >
+          <div className={"col-span-1 justify-self-center"}>
+            <CardDisplay card={level2Cards[0]} enabled={false} />
+          </div>
+          <div className={"col-span-2"}>
+            It costs 3 green gems, 2 red gems and 2 black gems.
+            <br />
+            This card worth 1 point.
+          </div>
+        </div>
+        <div
+          className={
+            "bg-slate-200 text-gray-500 p-4 rounded-lg mx-auto w-full grid grid-cols-3"
+          }
+        >
+          <div className={"col-span-1 justify-self-center"}>
+            <NobleDisplay noble={nobles[0]} />
+          </div>
+          <div className={"col-span-2"}>
+            This noble requires 3 green cards, 3 white cards and 3 blue cards.
+            <br />
+            This noble worth 3 points.
+          </div>
+        </div>
       </div>
     ),
     Gems: (
@@ -91,9 +120,31 @@ export const WelcomeDialog: FC<WelcomeDialogProps> = ({ open, onClose }) => {
         <div className={"mb-2"}>
           Welcome! This is an online single player version of Splendor, which
           you will be playing as player 1, against 2 other bots.
+          <br />A player must choose to perform only one of the following four
+          actions.
+          <ul className={"list-disc list-inside"}>
+            <li>
+              Take 3 gem tokens of different colors. Example:
+              <span className={"flex flex-row gap-2"}>
+                <GemDisplay color={Color.Blue} count={1} />{" "}
+                <GemDisplay color={Color.Green} count={1} />{" "}
+                <GemDisplay color={Color.Red} count={1} />
+              </span>
+            </li>
+            <li>
+              Take 2 gem tokens of the same color. This action is only possible
+              if there are at least 4 tokens of the chosen color left when the
+              player takes them.
+            </li>
+            <li>Reserve 1 development card and take 1 gold token (joker).</li>
+            <li>
+              Purchase 1 face-up development card from the middle of the table
+              or a previously reserved one.
+            </li>
+          </ul>
         </div>
         <Tab.Group>
-          <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1 ">
+          <Tab.List className="flex space-x-1 rounded-xl bg-blue-500/20 p-1">
             {Object.keys(categories).map((category) => (
               <Tab
                 key={category}
@@ -103,7 +154,7 @@ export const WelcomeDialog: FC<WelcomeDialogProps> = ({ open, onClose }) => {
                     "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400",
                     selected
                       ? "bg-white shadow"
-                      : "text-blue-100 hover:bg-white/[0.12] hover:text-white"
+                      : "text-blue-300 hover:bg-white/[0.12] hover:text-white"
                   )
                 }
               >
