@@ -4,7 +4,7 @@ import { Button } from "../../../Shared/Button";
 import { Player } from "../../../../Interfaces";
 import * as React from "react";
 import { Modal } from "../../../Shared/Modal";
-import { CloseSVGPath } from "../../../Shared/SVGPaths";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
 interface PlayerDialogProps {
   playerDialogOpen: boolean;
@@ -41,7 +41,7 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
       </div>
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
         <div className={"flex my-2"}>
-          <Button svgPath={CloseSVGPath} onClick={closePlayerDialog}>
+          <Button svgPath={<XMarkIcon />} onClick={closePlayerDialog}>
             <span>Close</span>
           </Button>
         </div>

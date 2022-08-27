@@ -59,7 +59,7 @@ export const CardOnTable: FC<CardOnTableProps> = ({
 
   const [state, setState] = useState<boolean>(false);
 
-  if (card === undefined) {
+  if (card == null) {
     return <div className={"col-span-1"} />;
   }
 
