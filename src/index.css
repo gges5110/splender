@@ -699,6 +699,10 @@ video {
   right: 0.5rem;
 }
 
+.top-2 {
+  top: 0.5rem;
+}
+
 .top-0 {
   top: 0px;
 }
@@ -987,10 +991,6 @@ video {
 
 .justify-between {
   justify-content: space-between;
-}
-
-.justify-items-center {
-  justify-items: center;
 }
 
 .gap-2 {

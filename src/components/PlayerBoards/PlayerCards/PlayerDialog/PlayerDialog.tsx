@@ -1,10 +1,8 @@
 import { NobleDisplay } from "../../../Shared/NobleDisplay/NobleDisplay";
 import { CardDisplay } from "../../../Shared/CardDisplay/CardDisplay";
-import { Button } from "../../../Shared/Button";
 import { Player } from "../../../../Interfaces";
 import * as React from "react";
 import { Modal } from "../../../Shared/Modal";
-import { XMarkIcon } from "@heroicons/react/24/solid";
 
 interface PlayerDialogProps {
   playerDialogOpen: boolean;
@@ -37,13 +35,6 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
               ))}
             </div>
           </div>
-        </div>
-      </div>
-      <div className="bg-gray-50 px-4 py-3 sm:px-6">
-        <div className={"flex my-2"}>
-          <Button svgPath={<XMarkIcon />} onClick={closePlayerDialog}>
-            <span>Close</span>
-          </Button>
         </div>
       </div>
     </Modal>

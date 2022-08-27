@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ArrowPathIcon } from "@heroicons/react/24/solid";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
 interface ResetButtonProps {
   disabled: boolean;

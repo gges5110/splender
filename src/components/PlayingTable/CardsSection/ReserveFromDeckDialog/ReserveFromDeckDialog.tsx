@@ -2,7 +2,7 @@ import { Modal, ModalProps } from "../../../Shared/Modal";
 import { FC } from "react";
 import { Dialog } from "@headlessui/react";
 import { Button, Variant } from "../../../Shared/Button";
-import { CheckIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 interface ReserveFromDeckDialogProps extends ModalProps {
   level: number;

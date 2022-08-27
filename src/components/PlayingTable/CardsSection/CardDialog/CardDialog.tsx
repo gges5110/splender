@@ -72,9 +72,6 @@ export const CardDialog: React.FC<CardDialogProps> = ({
           >
             <span>Reserve</span>
           </Button>
-          <Button svgPath={<XMarkIcon />} onClick={closeDialog}>
-            <span>Cancel</span>
-          </Button>
         </div>
       </div>
     </Modal>
