@@ -2,6 +2,7 @@ import * as React from "react";
 import { Button } from "../Button";
 import { Modal } from "../Modal";
 import { Player } from "../../../Interfaces";
+import { useState } from "react";
 
 interface GameEndDialogProps {
   winner: number | undefined;
@@ -17,8 +18,14 @@ export const GameEndDialog: React.FC<GameEndDialogProps> = ({
     return null;
   }
 
+  const [open, setOpen] = useState(true);
   return (
-    <Modal open={true} onClose={() => {}}>
+    <Modal
+      open={open}
+      onClose={() => {
+        setOpen(false);
+      }}
+    >
       <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
         Game over! Player {winner + 1} is the winner.
       </div>
