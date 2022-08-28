@@ -25,7 +25,7 @@ export const SplendorBoard: React.FC<BoardProps<GameState>> = ({
 
   return (
     <div className={"h-screen flex"}>
-      <div className="container mx-auto my-auto py-4 sm:p-8 w-screen sm:w-auto">
+      <div className="container mx-auto sm:my-auto py-4 sm:p-8 w-screen sm:w-auto">
         <GameEndDialog
           winner={ctx.gameover?.winner}
           players={G.players}
@@ -36,7 +36,7 @@ export const SplendorBoard: React.FC<BoardProps<GameState>> = ({
           <div className={"w-full px-2 sm:px-4 ml-4 sm:mx-4"}>
             <TitleBar startNewGame={startNewGame} />
           </div>
-          <div className={"w-full sm:w-max px-2 sm:p-4 m-2"}>
+          <div className={"w-full sm:w-max sm:p-4 sm:m-2"}>
             <PlayingTable G={G} ctx={ctx} moves={moves} playerID={playerID} />
           </div>
 

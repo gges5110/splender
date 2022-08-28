@@ -1,7 +1,7 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
-import { gemsColorStyle, gemsTextColorStyle } from "../../../../styles";
+import { gemsColorStyle, gemsTextColorStyle } from "../../../../../styles";
 
 interface SelectedGemsProps {
   selectedGems: number[];

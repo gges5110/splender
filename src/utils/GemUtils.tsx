@@ -1,7 +1,7 @@
 import {
   GemsPickerMode,
   reducer,
-} from "../components/PlayingTable/GemsPicker/GemsPicker";
+} from "../components/PlayingTable/GemsSection/GemsPicker/GemsPicker";
 
 export const gemsSelectable = (
   selectedGems: number[],
