@@ -1,12 +1,12 @@
 import { FC } from "react";
 import clsx from "clsx";
-import { gemsSelectable } from "../../../../utils/GemUtils";
+import { gemsSelectable } from "../../../../../utils/GemUtils";
 import { GemsPickerMode } from "../GemsPicker";
 import {
   gemsColorStyle,
   gemsHoverColorStyle,
   gemsTextColorStyle,
-} from "../../../../styles";
+} from "../../../../../styles";
 
 interface SelectableGemsProps {
   gems: number[];

@@ -1,11 +1,11 @@
 import { Card, GameState } from "../../Interfaces";
-import { DiscardGemsDialog } from "./DiscardGemsDialog/DiscardGemsDialog";
-import { GemsPicker, GemsPickerMode } from "./GemsPicker/GemsPicker";
+import { DiscardGemsDialog } from "./GemsSection/DiscardGemsDialog/DiscardGemsDialog";
 import { Ctx } from "boardgame.io";
 import { FC, useState } from "react";
 import { PickNobleDialog } from "./NoblesSection/PickNobleDialog/PickNobleDialog";
 import { NoblesSection } from "./NoblesSection/NoblesSection";
 import { CardsSection } from "./CardsSection/CardsSection";
+import { GemsSection } from "./GemsSection/GemsSection";
 
 interface PlayingTableProps {
   G: GameState;
@@ -39,7 +39,9 @@ export const PlayingTable: FC<PlayingTableProps> = ({
   const currentPlayerActive = playerID === ctx.currentPlayer;
 
   return (
-    <div className={"rounded-xl bg-slate-100 shadow-xl p-4 sm:p-8"}>
+    <div
+      className={"rounded-xl sm:bg-slate-100 sm:shadow-xl sm:p-8 flex flex-col"}
+    >
       <div className={"p-1 sm:p-4"}>
         <NoblesSection nobles={nobles} />
 
@@ -57,7 +59,7 @@ export const PlayingTable: FC<PlayingTableProps> = ({
         />
       </div>
 
-      <div className={"p-1 sm:p-4 mx-auto"}>
+      <div className={"p-1 sm:p-4"}>
         <CardsSection
           dialogOpen={dialogOpen}
           closeDialog={closeBuildDialog}
@@ -76,14 +78,7 @@ export const PlayingTable: FC<PlayingTableProps> = ({
       </div>
 
       <div className={"p-1 sm:p-4"}>
-        <span className={"title"}>Gems</span>
-        <div>
-          <GemsPicker
-            gems={gems}
-            onSelect={moves.pick}
-            mode={GemsPickerMode.PICK}
-          />
-        </div>
+        <GemsSection gems={gems} onSelect={moves.pick} />
 
         <DiscardGemsDialog
           open={
