@@ -1,6 +1,5 @@
 import { useState } from "react";
 import * as React from "react";
-import clsx from "clsx";
 import { SelectedGems } from "./SelectedGems/SelectedGems";
 import { SelectableGems } from "./SelectableGems/SelectableGems";
 import { ActionButton } from "./ActionButton/ActionButton";
@@ -41,7 +40,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
 
   return (
     <>
-      <div className={"flex"}>
+      <div className={"flex gap-2"}>
         <SelectableGems
           selectedGems={selectedGems}
           gems={gems}
@@ -68,8 +67,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
         />
       </div>
 
-      <div className={"h-2"} />
-      <div className={"flex"}>
+      <div className={"flex gap-2"}>
         <SelectedGems
           selectedGems={selectedGems}
           selectedGemOnClick={(index) => {
@@ -80,7 +78,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
             );
           }}
         />
-        <div className={clsx("gem-size", "mx-1")} key={5} />
+        <div className={"gem-size"} key={5} />
         <ResetButton
           disabled={selectedGems.every((gem) => gem === 0)}
           onClick={() => setGems(Array(5).fill(0))}

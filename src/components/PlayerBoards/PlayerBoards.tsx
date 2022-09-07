@@ -19,7 +19,7 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
   return (
     <div
       className={
-        "rounded-xl sm:bg-slate-100 p-2 sm:p-8 mx-auto sm:mb-8 sm:shadow-xl h-full"
+        "rounded-xl sm:bg-slate-100 p-2 sm:p-8 mx-auto sm:mb-8 sm:shadow-xl h-full dark:bg-slate-800"
       }
     >
       <div className={"flex flex-col h-full"}>

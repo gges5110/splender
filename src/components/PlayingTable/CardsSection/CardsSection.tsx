@@ -83,15 +83,17 @@ export const CardsSection: FC<CardsSectionProps> = ({
               />
             </Disclosure.Button>
             <Disclosure.Panel>
-              <div className={"flex justify-between gap-2 mt-2 mb-4"}>
-                <CardsOnTable
-                  cards={cards}
-                  player={player}
-                  cardsInDeck={cardsInDeck}
-                  onClick={onClick}
-                  deckOnClick={deckOnClick}
-                  hideAffordableHint={hideAffordableHint}
-                />
+              <div className={"mt-2 mb-4"}>
+                <div className={"flex justify-between gap-2"}>
+                  <CardsOnTable
+                    cards={cards}
+                    player={player}
+                    cardsInDeck={cardsInDeck}
+                    onClick={onClick}
+                    deckOnClick={deckOnClick}
+                    hideAffordableHint={hideAffordableHint}
+                  />
+                </div>
               </div>
             </Disclosure.Panel>
           </>

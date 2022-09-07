@@ -27,40 +27,49 @@ export const WelcomeDialog: FC<WelcomeDialogProps> = ({ open, onClose }) => {
       <div className={"flex flex-col gap-2"}>
         <div
           className={
-            "bg-slate-200 text-gray-500 p-4 rounded-lg mx-auto w-full grid grid-cols-3"
+            "bg-slate-200  p-4 rounded-lg mx-auto w-full grid grid-cols-3"
           }
         >
+          <div className={"col-span-2"}>
+            <div className={""}>Gem</div>
+            <div className={"text-gray-500 text-sm"}>3 green gems</div>
+          </div>
           <div className={"col-span-1 justify-self-center"}>
             <GemDisplay color={Color.Green} count={3} />
           </div>
-          <div className={"col-span-2"}>3 green gems</div>
         </div>
         <div
           className={
-            "bg-slate-200 text-gray-500 p-4 rounded-lg mx-auto w-full grid grid-cols-3"
+            "bg-slate-200 p-4 rounded-lg mx-auto w-full grid grid-cols-3"
           }
         >
+          <div className={"col-span-2"}>
+            <div className={""}>Card</div>
+            <div className={"text-gray-500 text-sm"}>
+              It costs 3 green gems, 2 red gems and 2 black gems.
+              <br />
+              This card worth 1 point.
+            </div>
+          </div>
           <div className={"col-span-1 justify-self-center"}>
             <CardDisplay card={level2Cards[0]} enabled={false} />
           </div>
-          <div className={"col-span-2"}>
-            It costs 3 green gems, 2 red gems and 2 black gems.
-            <br />
-            This card worth 1 point.
-          </div>
         </div>
         <div
           className={
-            "bg-slate-200 text-gray-500 p-4 rounded-lg mx-auto w-full grid grid-cols-3"
+            "bg-slate-200 p-4 rounded-lg mx-auto w-full grid grid-cols-3"
           }
         >
+          <div className={"col-span-2"}>
+            <div className={""}>Noble</div>
+            <div className={"text-gray-500 text-sm"}>
+              This noble requires 3 green cards, 3 white cards and 3 blue cards.
+              <br />
+              This noble worth 3 points.
+            </div>
+          </div>
           <div className={"col-span-1 justify-self-center"}>
             <NobleDisplay noble={nobles[0]} />
-          </div>
-          <div className={"col-span-2"}>
-            This noble requires 3 green cards, 3 white cards and 3 blue cards.
-            <br />
-            This noble worth 3 points.
           </div>
         </div>
       </div>
