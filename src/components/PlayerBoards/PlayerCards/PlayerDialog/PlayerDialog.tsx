@@ -3,13 +3,13 @@ import { CardDisplay } from "../../../Shared/CardDisplay/CardDisplay";
 import { Player } from "../../../../Interfaces";
 import * as React from "react";
 import { Modal } from "../../../Shared/Modal";
+import { Dialog } from "@headlessui/react";
 
 interface PlayerDialogProps {
+  player: Player;
   playerDialogOpen: boolean;
 
   closePlayerDialog(): void;
-
-  player: Player;
 }
 
 export const PlayerDialog: React.FC<PlayerDialogProps> = ({
@@ -20,6 +20,12 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
   return (
     <Modal open={playerDialogOpen} onClose={closePlayerDialog}>
       <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        <Dialog.Title
+          as="h3"
+          className="text-lg font-medium leading-6 text-gray-900"
+        >
+          Player nobles and cards
+        </Dialog.Title>
         <div className="sm:flex sm:items-start">
           <div className={"flex flex-col justify-center mx-auto gap-2"}>
             <div className={"flex"}>

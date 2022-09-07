@@ -40,7 +40,9 @@ export const PlayingTable: FC<PlayingTableProps> = ({
 
   return (
     <div
-      className={"rounded-xl sm:bg-slate-100 sm:shadow-xl sm:p-8 flex flex-col"}
+      className={
+        "rounded-xl sm:bg-slate-100 sm:shadow-xl sm:p-8 flex flex-col dark:bg-slate-800"
+      }
     >
       <div className={"p-1 sm:p-4"}>
         <NoblesSection nobles={nobles} />
