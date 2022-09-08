@@ -23,8 +23,8 @@ export const GemsSection: FC<GemsSectionProps> = ({ gems, onSelect }) => {
             />
           </Disclosure.Button>
           <Disclosure.Panel>
-            <div className={"px-2 mt-2 mb-4"}>
-              <div className={"flex flex-col justify-between gap-2 "}>
+            <div className={"p-2"}>
+              <div className={"flex flex-col justify-between gap-2"}>
                 <GemsPicker
                   gems={gems}
                   onSelect={onSelect}

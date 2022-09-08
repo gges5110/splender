@@ -124,7 +124,7 @@ export const WelcomeDialog: FC<WelcomeDialogProps> = ({ open, onClose }) => {
 
   return (
     <Modal open={open} onClose={onClose}>
-      <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 min-w-full">
+      <div className="bg-white container px-4 pt-5 pb-4 sm:p-6 sm:pb-4 min-w-full">
         <div className={"mb-2"}>
           Welcome! This is an online single player version of Splendor, which
           you will be playing as player 1, against 2 other bots.

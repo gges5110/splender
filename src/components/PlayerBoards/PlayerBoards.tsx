@@ -22,7 +22,11 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
         "rounded-xl sm:bg-slate-100 p-2 sm:p-8 mx-auto sm:mb-8 sm:shadow-xl h-full dark:bg-slate-800"
       }
     >
-      <div className={"flex flex-col h-full"}>
+      <div
+        className={
+          "flex flex-row gap-6 flex-nowrap overflow-y-scroll sm:flex-col h-full pt-2 pl-4"
+        }
+      >
         {players.map((player, index: number) => (
           <div
             key={index}

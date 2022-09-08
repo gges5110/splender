@@ -79,7 +79,9 @@ export const ColorThemeSelector = () => {
             <Listbox.Option
               className={({ active }) =>
                 `relative p-2 ${
-                  active ? "bg-amber-100 text-amber-900" : "text-gray-900"
+                  active
+                    ? "bg-sky-100 dark:bg-sky-700 text-sky-900"
+                    : "text-gray-900"
                 }`
               }
               value={ColorTheme.Light}
@@ -99,7 +101,9 @@ export const ColorThemeSelector = () => {
             <Listbox.Option
               className={({ active }) =>
                 `relative p-2 ${
-                  active ? "bg-amber-100 text-amber-900" : "text-gray-900"
+                  active
+                    ? "bg-sky-100 dark:bg-sky-700 text-sky-900"
+                    : "text-gray-900"
                 }`
               }
               value={ColorTheme.Dark}
@@ -119,7 +123,9 @@ export const ColorThemeSelector = () => {
             <Listbox.Option
               className={({ active }) =>
                 `relative p-2 ${
-                  active ? "bg-amber-100 text-amber-900" : "text-gray-900"
+                  active
+                    ? "bg-sky-100 dark:bg-sky-700 text-sky-900"
+                    : "text-gray-900"
                 }`
               }
               value={ColorTheme.System}
