@@ -14,7 +14,7 @@ export const NoblesSection: FC<NoblesSectionProps> = ({ nobles }) => {
     <Disclosure defaultOpen={true}>
       {({ open }) => (
         <>
-          <Disclosure.Button className="flex w-full justify-between rounded-lg bg-slate-200 px-4 py-2 text-left font-medium text-slate-900 hover:bg-slate-300 focus:outline-none focus-visible:ring focus-visible:ring-slate-500 focus-visible:ring-opacity-75">
+          <Disclosure.Button className="playing-table-subsections-title">
             <span className={"title"}>
               Nobles{" "}
               {!open && `(${nobles.filter((noble) => !noble.acquired).length})`}

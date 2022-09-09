@@ -124,7 +124,7 @@ export const WelcomeDialog: FC<WelcomeDialogProps> = ({ open, onClose }) => {
 
   return (
     <Modal open={open} onClose={onClose}>
-      <div className="bg-white container px-4 pt-5 pb-4 sm:p-6 sm:pb-4 min-w-full">
+      <div className="container px-4 pt-5 pb-4 sm:p-6 sm:pb-4 min-w-full dark:text-white">
         <div className={"mb-2"}>
           Welcome! This is an online single player version of Splendor, which
           you will be playing as player 1, against 2 other bots.
@@ -174,10 +174,9 @@ export const WelcomeDialog: FC<WelcomeDialogProps> = ({ open, onClose }) => {
             {Object.values(categories).map((posts, idx) => (
               <Tab.Panel
                 key={idx}
-                className={clsx(
-                  "rounded-xl bg-white p-3",
-                  "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400"
-                )}
+                className={
+                  "rounded-xl bg-white dark:bg-slate-800 p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400"
+                }
               >
                 {posts}
               </Tab.Panel>

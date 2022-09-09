@@ -37,10 +37,10 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="transform overflow-hidden rounded-2xl bg-white dark:bg-slate-900 dark:text-white text-left align-middle shadow-xl transition-all">
                   <button
                     className={
-                      "absolute rounded-full hover:bg-gray-200 p-1.5 right-2 top-2"
+                      "absolute rounded-full hover:bg-gray-200 dark:hover:bg-slate-600 p-1.5 right-2 top-2 dark:text-white"
                     }
                     onClick={onClose}
                   >

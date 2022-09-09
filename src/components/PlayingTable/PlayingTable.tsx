@@ -39,12 +39,8 @@ export const PlayingTable: FC<PlayingTableProps> = ({
   const currentPlayerActive = playerID === ctx.currentPlayer;
 
   return (
-    <div
-      className={
-        "rounded-xl sm:bg-slate-100 sm:shadow-xl sm:p-8 flex flex-col dark:bg-slate-800"
-      }
-    >
-      <div className={"p-1 sm:p-4"}>
+    <div className={"sections-container"}>
+      <div className={"playing-table-subsections-container"}>
         <NoblesSection nobles={nobles} />
 
         <PickNobleDialog
@@ -61,7 +57,7 @@ export const PlayingTable: FC<PlayingTableProps> = ({
         />
       </div>
 
-      <div className={"p-1 sm:p-4"}>
+      <div className={"playing-table-subsections-container"}>
         <CardsSection
           dialogOpen={dialogOpen}
           closeDialog={closeBuildDialog}
@@ -79,7 +75,7 @@ export const PlayingTable: FC<PlayingTableProps> = ({
         />
       </div>
 
-      <div className={"p-1 sm:p-4"}>
+      <div className={"playing-table-subsections-container"}>
         <GemsSection gems={gems} onSelect={moves.pick} />
 
         <DiscardGemsDialog

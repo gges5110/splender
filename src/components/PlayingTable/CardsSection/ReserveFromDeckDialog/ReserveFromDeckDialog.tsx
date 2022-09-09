@@ -21,7 +21,7 @@ export const ReserveFromDeckDialog: FC<ReserveFromDeckDialogProps> = ({
       <div className="px-6 py-6 sm:px-6">
         <Dialog.Title
           as="h3"
-          className="text-lg font-medium leading-6 text-gray-900"
+          className="text-lg font-medium leading-6 text-gray-900 dark:text-white"
         >
           Reserve from deck
         </Dialog.Title>
@@ -32,16 +32,12 @@ export const ReserveFromDeckDialog: FC<ReserveFromDeckDialogProps> = ({
         </div>
       </div>
 
-      <div className="px-6 py-3 sm:px-6 bg-gray-50">
+      <div className="px-6 py-3 sm:px-6 bg-gray-50 dark:bg-slate-800">
         <div className={"flex gap-2"}>
           <Button onClick={onConfirm} svgPath={<CheckIcon />}>
             Confirm
           </Button>
-          <Button
-            variant={Variant.WHITE}
-            onClick={onClose}
-            svgPath={<XMarkIcon />}
-          >
+          <Button onClick={onClose} svgPath={<XMarkIcon />}>
             Cancel
           </Button>
         </div>
