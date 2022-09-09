@@ -26,10 +26,10 @@ export const GameEndDialog: React.FC<GameEndDialogProps> = ({
         setOpen(false);
       }}
     >
-      <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+      <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
         Game over! Player {winner + 1} is the winner.
       </div>
-      <div className="bg-gray-50 px-4 py-3 sm:px-6">
+      <div className="px-4 py-3 sm:px-6">
         <Button
           onClick={() => {
             reset();

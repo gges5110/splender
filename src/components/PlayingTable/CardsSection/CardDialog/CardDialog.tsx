@@ -33,7 +33,7 @@ export const CardDialog: React.FC<CardDialogProps> = ({
 }) => {
   return (
     <Modal open={open} onClose={closeDialog}>
-      <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+      <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
         <div className="sm:flex sm:items-start">
           <div className={"flex justify-center mx-auto"}>
             {buildDialogProps && (
@@ -42,7 +42,7 @@ export const CardDialog: React.FC<CardDialogProps> = ({
           </div>
         </div>
       </div>
-      <div className="bg-gray-50 px-4 py-3 sm:px-6">
+      <div className="bg-gray-50 px-4 py-3 sm:px-6 dark:bg-slate-800">
         <div className={"flex gap-2"}>
           <Button
             disabled={

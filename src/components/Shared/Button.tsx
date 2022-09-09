@@ -8,9 +8,9 @@ export enum Variant {
 
 const VARIANT_MAPS: Record<Variant, string> = {
   [Variant.GRAY]:
-    "text-gray-900 bg-gray-100 hover:bg-gray-200  focus-visible:ring-gray-500",
+    "text-gray-900 dark:text-white bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 focus-visible:ring-gray-500",
   [Variant.WHITE]:
-    "text-gray-900 bg-white-100 hover:bg-gray-200  focus-visible:ring-gray-500",
+    "text-gray-900 bg-white-100 hover:bg-gray-200 focus-visible:ring-gray-500",
 };
 
 interface ButtonProps {

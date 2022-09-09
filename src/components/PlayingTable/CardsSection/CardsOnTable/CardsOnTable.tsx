@@ -30,7 +30,7 @@ export const CardsOnTable: React.FC<CardsOnTableProps> = ({
           <React.Fragment key={level}>
             <button
               className={
-                "w-10 h-24 sm:w-16 sm:h-32 rounded-xl bg-gray-200 hover:bg-gray-300 flex justify-center items-center m-auto sm:mr-2 shadow-xl"
+                "w-10 h-24 sm:w-16 sm:h-32 rounded-xl bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 flex justify-center items-center m-auto sm:mr-2 shadow-xl"
               }
               key={level}
               onClick={() => {
