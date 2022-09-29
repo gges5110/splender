@@ -20,7 +20,7 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
     <div className={"sections-container"}>
       <div
         className={
-          "flex flex-row gap-6 flex-nowrap overflow-y-scroll sm:flex-col h-full pt-2 pl-4"
+          "flex flex-row gap-6 flex-nowrap overflow-y-scroll sm:overflow-y-auto sm:flex-col h-full pt-2 pl-4"
         }
       >
         {players.map((player, index: number) => (

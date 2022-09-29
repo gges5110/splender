@@ -17,7 +17,7 @@ export const NobleDisplay: React.FC<NobleDisplayProps> = ({
     <div
       className={clsx(
         "noble-size",
-        "shadow-xl rounded-xl relative bg-gradient-to-l from-yellow-300 to-yellow-200",
+        "shadow-xl rounded-xl relative bg-gradient-to-l from-yellow-300 to-yellow-200 text-black",
         {
           "cursor-pointer": onClick !== undefined,
         }

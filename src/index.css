@@ -1803,6 +1803,10 @@ video {
     gap: 0.5rem;
   }
 
+  .sm\:overflow-y-auto {
+    overflow-y: auto;
+  }
+
   .sm\:p-8 {
     padding: 2rem;
   }

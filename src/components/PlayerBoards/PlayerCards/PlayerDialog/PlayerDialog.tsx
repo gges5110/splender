@@ -19,10 +19,10 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
 }) => {
   return (
     <Modal open={playerDialogOpen} onClose={closePlayerDialog}>
-      <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+      <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
         <Dialog.Title
           as="h3"
-          className="text-lg font-medium leading-6 text-gray-900"
+          className="text-lg font-medium leading-6 text-gray-900 dark:text-white"
         >
           Player nobles and cards
         </Dialog.Title>
