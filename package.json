@@ -22,10 +22,11 @@
     "start": "npm run tailwind:css && vite",
     "build": "npm run tailwind:css && tsc && vite build",
     "tailwind:css": "tailwind build src/tailwind.css -c tailwind.config.js -o src/index.css",
-    "test": "jest -env=jsdom",
-    "test-engine": "jest --config jest-engine.config.js",
-    "coverage": "CI=true jest --coverage",
-    "coverage-engine": "CI=true jest --config jest-engine.config.js --coverage",
+    "test": "CI=true vitest",
+    "test-ui": "vitest --ui",
+    "test-engine": "CI=true vitest --config vitest.engine.config.ts",
+    "coverage": "CI=true vitest --coverage",
+    "coverage-engine": "CI=true vitest --config vitest.engine.config.ts --coverage",
     "preview": "vite preview"
   },
   "eslintConfig": {
@@ -47,26 +48,20 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.18.13",
-    "@babel/preset-env": "^7.18.10",
-    "@babel/preset-react": "^7.18.6",
-    "@babel/preset-typescript": "^7.18.6",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.4.3",
-    "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@vitest/coverage-c8": "^0.25.2",
+    "@vitest/ui": "^0.25.2",
     "autoprefixer": "^10.4.7",
-    "babel-eslint": "^10.1.0",
-    "babel-jest": "^28.1.3",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
-    "jest": "^27.3.1",
-    "jest-environment-jsdom": "^27.3.1",
     "postcss": "^8.4.14",
     "prettier": "^2.2.1",
-    "tailwindcss": "^3.1.6"
+    "tailwindcss": "^3.1.6",
+    "vitest": "^0.25.2"
   }
 }

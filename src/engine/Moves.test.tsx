@@ -10,17 +10,18 @@ import { SplendorGame } from "./SplendorGame";
 import { INVALID_MOVE } from "boardgame.io/core";
 import { Ctx } from "boardgame.io";
 import { Card, Color, GameState, Noble } from "../Interfaces";
+import { vi } from "vitest";
 
 const getDefaultCtx = (): Ctx => {
-  return {
+  const ctx = {
     random: {
-      D4: jest.fn(),
-      D6: jest.fn(),
-      D10: jest.fn(),
-      D12: jest.fn(),
-      D20: jest.fn(),
-      Die: jest.fn(),
-      Number: jest.fn(),
+      D4: vi.fn(),
+      D6: vi.fn(),
+      D10: vi.fn(),
+      D12: vi.fn(),
+      D20: vi.fn(),
+      Die: vi.fn(),
+      Number: vi.fn(),
       Shuffle: (t: any) => t,
     },
     currentPlayer: "0",
@@ -31,6 +32,7 @@ const getDefaultCtx = (): Ctx => {
     playOrderPos: 0,
     turn: 0,
   };
+  return ctx;
 };
 
 const getDefaultGameState = (): GameState => {
