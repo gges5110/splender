@@ -2,12 +2,13 @@ import { SelectableGems } from "./SelectableGems";
 import { render, screen } from "@testing-library/react";
 import { GemsPickerMode } from "../GemsPicker";
 import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
 
 describe("SelectableGems", function () {
   test("renders nothing selected", () => {
     const selectedGems = [0, 0, 0, 0, 0];
     const gems = [4, 4, 4, 4, 4, 4];
-    const onSelectMock = jest.fn();
+    const onSelectMock = vi.fn();
     render(
       <SelectableGems
         selectedGems={selectedGems}
@@ -23,7 +24,7 @@ describe("SelectableGems", function () {
   test("renders single gem selected", () => {
     const selectedGems = [0, 0, 1, 0, 0];
     const gems = [4, 4, 4, 4, 4, 4];
-    const onSelectMock = jest.fn();
+    const onSelectMock = vi.fn();
     render(
       <SelectableGems
         selectedGems={selectedGems}
@@ -43,7 +44,7 @@ describe("SelectableGems", function () {
   test("able to select gems", async () => {
     const selectedGems = [0, 0, 1, 0, 0];
     const gems = [4, 4, 4, 4, 4, 4];
-    const onSelectMock = jest.fn();
+    const onSelectMock = vi.fn();
     render(
       <SelectableGems
         selectedGems={selectedGems}
@@ -63,7 +64,7 @@ describe("SelectableGems", function () {
   test("unable to select disabled gems", async () => {
     const selectedGems = [0, 0, 1, 0, 0];
     const gems = [4, 4, 4, 4, 4, 5];
-    const onSelectMock = jest.fn();
+    const onSelectMock = vi.fn();
     render(
       <SelectableGems
         selectedGems={selectedGems}
