@@ -8,16 +8,16 @@ interface CardsOnTableProps {
   cardsInDeck: Array<Array<Card>>;
   player: Player;
 
-  onClick(buildDialogProps: BuildDialogProps): void;
+  cardOnClick(buildDialogProps: BuildDialogProps): void;
   deckOnClick(level: number): void;
   hideAffordableHint?: boolean;
 }
 
 export const CardsOnTable: React.FC<CardsOnTableProps> = ({
-  cards,
+  cards: cardsPerLevel,
   cardsInDeck,
   player,
-  onClick,
+  cardOnClick,
   deckOnClick,
   hideAffordableHint,
 }) => {
@@ -25,14 +25,13 @@ export const CardsOnTable: React.FC<CardsOnTableProps> = ({
     <div
       className={"grid grid-flow-row grid-cols-5 grid-rows-3 gap-1 sm:gap-2"}
     >
-      {cards
+      {cardsPerLevel
         .map((cards, level: number) => (
           <React.Fragment key={level}>
             <button
-              className={
-                "w-10 h-24 sm:w-16 sm:h-32 rounded-xl bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 flex justify-center items-center m-auto sm:mr-2 shadow-xl"
-              }
+              className={"deck-button"}
               key={level}
+              disabled={cardsInDeck[level].length === 0}
               onClick={() => {
                 deckOnClick(level);
               }}
@@ -40,9 +39,9 @@ export const CardsOnTable: React.FC<CardsOnTableProps> = ({
               <div>{cardsInDeck[level].length}</div>
             </button>
             {cards.map((card, index) => {
-              const cardOnClick = () => {
+              const onClick = () => {
                 if (card) {
-                  onClick({
+                  cardOnClick({
                     level,
                     index,
                     card,
@@ -57,7 +56,7 @@ export const CardsOnTable: React.FC<CardsOnTableProps> = ({
                   key={level + index}
                   elementKey={level + index}
                   hideAffordableHint={hideAffordableHint}
-                  onClick={cardOnClick}
+                  onClick={onClick}
                 />
               );
             })}
