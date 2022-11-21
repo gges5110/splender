@@ -88,7 +88,7 @@ export const CardsSection: FC<CardsSectionProps> = ({
                     cards={cards}
                     player={player}
                     cardsInDeck={cardsInDeck}
-                    onClick={onClick}
+                    cardOnClick={onClick}
                     deckOnClick={deckOnClick}
                     hideAffordableHint={hideAffordableHint}
                   />
