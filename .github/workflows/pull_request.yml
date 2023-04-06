@@ -2,7 +2,15 @@ name: Test and Build PR
 on:
   pull_request:
     branches: [ main ]
+    types: [ opened ]
 jobs:
+  recap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recap changes
+        uses: flowwer-dev/recap@main
+        with:
+          openai-apikey: ${{ secrets.OPENAI_APIKEY }}
   test:
     runs-on: ubuntu-latest
     steps:
