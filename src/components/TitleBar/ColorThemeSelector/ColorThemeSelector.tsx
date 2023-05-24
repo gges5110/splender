@@ -3,7 +3,6 @@ import {
   MoonIcon,
   SunIcon,
 } from "@heroicons/react/24/outline";
-import * as React from "react";
 import { Fragment, useEffect, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 
@@ -14,9 +13,9 @@ enum ColorTheme {
 }
 
 const icons = [
-  <SunIcon width={24} height={24} />,
-  <MoonIcon width={24} height={24} />,
-  <ComputerDesktopIcon width={24} height={24} />,
+  <SunIcon height={24} width={24} />,
+  <MoonIcon height={24} width={24} />,
+  <ComputerDesktopIcon height={24} width={24} />,
 ];
 
 export const ColorThemeSelector = () => {
@@ -64,18 +63,26 @@ export const ColorThemeSelector = () => {
   };
 
   return (
-    <Listbox value={selected} onChange={onChange}>
-      <div className="relative">
-        <Listbox.Button className="relative w-full p-1.5 hover:bg-gray-200 dark:hover:bg-slate-600 rounded-full focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-          <span className="block truncate">{icons[selected]}</span>
+    <Listbox onChange={onChange} value={selected}>
+      <div className={"relative"}>
+        <Listbox.Button
+          className={
+            "relative w-full p-1.5 hover:bg-gray-200 dark:hover:bg-slate-600 rounded-full focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
+          }
+        >
+          <span className={"block truncate"}>{icons[selected]}</span>
         </Listbox.Button>
         <Transition
           as={Fragment}
-          leave="transition ease-in duration-100"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
+          leave={"transition ease-in duration-100"}
+          leaveFrom={"opacity-100"}
+          leaveTo={"opacity-0"}
         >
-          <Listbox.Options className="z-10 absolute mt-1 max-h-60 w-28 overflow-auto rounded-md bg-white dark:bg-slate-800 py-1 text-base dark:text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Listbox.Options
+            className={
+              "z-10 absolute mt-1 max-h-60 w-28 overflow-auto rounded-md bg-white dark:bg-slate-800 py-1 text-base dark:text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+            }
+          >
             <Listbox.Option
               className={({ active }) =>
                 `relative p-2 ${
@@ -93,7 +100,7 @@ export const ColorThemeSelector = () => {
                       selected ? "font-medium" : "font-normal"
                     } flex items-center gap-2 dark:text-white`}
                   >
-                    <SunIcon width={24} height={24} /> Light
+                    <SunIcon height={24} width={24} /> Light
                   </div>
                 </>
               )}
@@ -115,7 +122,7 @@ export const ColorThemeSelector = () => {
                       selected ? "font-medium" : "font-normal"
                     } flex items-center gap-2 dark:text-white`}
                   >
-                    <MoonIcon width={24} height={24} /> Dark
+                    <MoonIcon height={24} width={24} /> Dark
                   </div>
                 </>
               )}
@@ -137,7 +144,7 @@ export const ColorThemeSelector = () => {
                       selected ? "font-medium" : "font-normal"
                     } flex items-center gap-2 dark:text-white`}
                   >
-                    <ComputerDesktopIcon width={24} height={24} /> System
+                    <ComputerDesktopIcon height={24} width={24} /> System
                   </div>
                 </>
               )}

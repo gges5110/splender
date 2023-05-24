@@ -6,12 +6,16 @@
   "dependencies": {
     "@headlessui/react": "^1.6.6",
     "@heroicons/react": "^2.0.7",
+    "@tanstack/react-query": "^4.29.7",
     "@vitejs/plugin-react": "^2.0.0",
     "boardgame.io": "^0.49.12",
     "clsx": "^1.1.1",
+    "express": "^4.18.2",
     "framer-motion": "^3.9.0",
+    "jotai": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.11.2",
     "typescript": "^4.4.4",
     "usehooks-ts": "^2.6.0",
     "vite": "^3.0.4",
@@ -27,7 +31,11 @@
     "test-engine": "CI=true vitest --config vitest.engine.config.ts",
     "coverage": "CI=true vitest --coverage",
     "coverage-engine": "CI=true vitest --config vitest.engine.config.ts --coverage",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build-server": "npx tsc",
+    "start-server": "node ./server/server.ts",
+    "dev": "ts-node-dev -P tsconfig-server.json --watch src/server src/server/server.ts",
+    "lint:fix": "eslint -c .eslintrc.json 'src/**/*.tsx' --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -57,11 +65,16 @@
     "@vitest/coverage-c8": "^0.25.2",
     "@vitest/ui": "^0.25.2",
     "autoprefixer": "^10.4.7",
+    "eslint": "^8.41.0",
     "eslint-config-prettier": "^8.1.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "postcss": "^8.4.14",
     "prettier": "^2.2.1",
     "tailwindcss": "^3.1.6",
+    "ts-node-dev": "^2.0.0",
     "vitest": "^0.25.2"
   }
 }

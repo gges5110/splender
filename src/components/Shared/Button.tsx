@@ -27,20 +27,20 @@ export const Button: React.FC<
 > = ({ svgPath, variant = Variant.GRAY, children, ...rest }) => {
   return (
     <button
-      type={"button"}
       className={clsx(
         "inline-flex justify-center items-center rounded-md shadow-md border border-transparent px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 select-none disabled:opacity-50",
         VARIANT_MAPS[variant]
       )}
+      type={"button"}
       {...rest}
     >
       {svgPath && (
         <svg
-          className="w-4 h-4 mr-2"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+          className={"w-4 h-4 mr-2"}
+          fill={"none"}
+          stroke={"currentColor"}
+          viewBox={"0 0 24 24"}
+          xmlns={"http://www.w3.org/2000/svg"}
         >
           {svgPath}
         </svg>

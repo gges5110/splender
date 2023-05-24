@@ -1,0 +1,40 @@
+import * as React from "react";
+import { GemsPicker, GemsPickerMode } from "../GemsPicker/GemsPicker";
+import { Modal } from "../../../../Shared/Modal";
+import { Dialog } from "@headlessui/react";
+
+interface DiscardGemDialogProps {
+  open: boolean;
+  playerGems: number[];
+
+  discardGems(gems: number[]): void;
+}
+
+export const DiscardGemsDialog: React.FC<DiscardGemDialogProps> = ({
+  open,
+  playerGems,
+  discardGems,
+}) => {
+  return (
+    <Modal onClose={() => {}} open={open}>
+      <div className={"w-max p-6"}>
+        <Dialog.Title
+          as={"h3"}
+          className={"text-lg leading-6 font-medium text-gray-700"}
+        >
+          Discard gems
+        </Dialog.Title>
+        <div className={"mt-2"}>
+          <GemsPicker
+            gems={playerGems}
+            gemsToDiscard={
+              playerGems.slice(0, 5).reduce((p, v) => p + v, 0) - 10
+            }
+            mode={GemsPickerMode.DISCARD}
+            onSelect={discardGems}
+          />
+        </div>
+      </div>
+    </Modal>
+  );
+};

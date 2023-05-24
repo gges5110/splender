@@ -12,32 +12,40 @@ export interface ModalProps {
 export const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
   return (
     <div>
-      <Transition appear show={open} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={onClose}>
+      <Transition appear={true} as={Fragment} show={open}>
+        <Dialog as={"div"} className={"relative z-10"} onClose={onClose}>
           <Transition.Child
             as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
+            enter={"ease-out duration-300"}
+            enterFrom={"opacity-0"}
+            enterTo={"opacity-100"}
+            leave={"ease-in duration-200"}
+            leaveFrom={"opacity-100"}
+            leaveTo={"opacity-0"}
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className={"fixed inset-0 bg-black bg-opacity-25"} />
           </Transition.Child>
 
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
+          <div className={"fixed inset-0 overflow-y-auto"}>
+            <div
+              className={
+                "flex min-h-full items-center justify-center p-4 text-center"
+              }
+            >
               <Transition.Child
                 as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
+                enter={"ease-out duration-300"}
+                enterFrom={"opacity-0 scale-95"}
+                enterTo={"opacity-100 scale-100"}
+                leave={"ease-in duration-200"}
+                leaveFrom={"opacity-100 scale-100"}
+                leaveTo={"opacity-0 scale-95"}
               >
-                <Dialog.Panel className="transform overflow-hidden rounded-2xl bg-white dark:bg-slate-900 dark:text-white text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel
+                  className={
+                    "transform overflow-hidden rounded-2xl bg-white dark:bg-slate-900 dark:text-white text-left align-middle shadow-xl transition-all"
+                  }
+                >
                   <button
                     className={
                       "absolute rounded-full hover:bg-gray-200 dark:hover:bg-slate-600 p-1.5 right-2 top-2 dark:text-white"

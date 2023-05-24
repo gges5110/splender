@@ -37,10 +37,10 @@ export const NobleDisplay: React.FC<NobleDisplayProps> = ({
             (gemCount, index) =>
               gemCount > 0 && (
                 <GemDisplay
-                  key={index}
+                  className={"gem-size-small"}
                   color={index}
                   count={gemCount}
-                  className={"gem-size-small"}
+                  key={index}
                 />
               )
           )}

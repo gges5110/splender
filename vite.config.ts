@@ -11,4 +11,5 @@ export default defineConfig({
   },
   plugins: [svgrPlugin(), react()],
   base: "/splender/",
+  appType: "spa",
 });

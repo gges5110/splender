@@ -100,6 +100,7 @@ const setup = (ctx: Ctx) => {
 };
 
 export const SplendorGame: Game<GameState> = {
+  name: "splendor",
   setup,
   endIf,
   turn: {

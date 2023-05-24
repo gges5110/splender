@@ -27,9 +27,6 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
 
   return (
     <button
-      onClick={onClick}
-      onMouseDown={(event) => event.preventDefault()}
-      disabled={!enabled}
       className={clsx(
         "card-size rounded-lg relative shadow-xl select-none",
         gemsColorStyle[card.color],
@@ -38,6 +35,9 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
           "card-affordable": affordable,
         }
       )}
+      disabled={!enabled}
+      onClick={onClick}
+      onMouseDown={(event) => event.preventDefault()}
     >
       <div
         className={clsx(
@@ -59,12 +59,12 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
 
           return (
             <GemDisplay
-              key={index}
-              color={index}
-              count={gemCount}
               className={clsx("shadow-sm gem-size-small", {
                 "border border-gray-300": card?.color === index,
               })}
+              color={index}
+              count={gemCount}
+              key={index}
             />
           );
         })}

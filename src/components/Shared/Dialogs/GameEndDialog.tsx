@@ -21,15 +21,15 @@ export const GameEndDialog: React.FC<GameEndDialogProps> = ({
   const [open, setOpen] = useState(true);
   return (
     <Modal
-      open={open}
       onClose={() => {
         setOpen(false);
       }}
+      open={open}
     >
-      <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+      <div className={"px-4 pt-5 pb-4 sm:p-6 sm:pb-4"}>
         Game over! Player {winner + 1} is the winner.
       </div>
-      <div className="px-4 py-3 sm:px-6">
+      <div className={"px-4 py-3 sm:px-6"}>
         <Button
           onClick={() => {
             reset();

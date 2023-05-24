@@ -2,7 +2,7 @@ import { RandomBot } from "boardgame.io/ai";
 import { Ctx, PlayerID } from "boardgame.io";
 
 export class DelayedRandomBot extends RandomBot {
-  private timeout: number = 500;
+  private timeout = 500;
 
   play({ G, ctx }: { G: any; ctx: Ctx }, playerID: PlayerID) {
     return new Promise<{
