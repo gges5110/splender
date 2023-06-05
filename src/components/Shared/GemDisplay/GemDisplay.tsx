@@ -4,9 +4,9 @@ import clsx from "clsx";
 import { gemsColorStyle, gemsTextColorStyle } from "../../../styles";
 
 interface GemDisplayProps {
+  className?: string;
   color: Color;
   count: number;
-  className?: string;
 }
 
 export const GemDisplay: React.FC<GemDisplayProps> = ({

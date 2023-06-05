@@ -4,13 +4,14 @@ import { CardOnTable } from "./CardOnTable/CardOnTable";
 import { BuildDialogProps } from "../../PlayingTable";
 
 interface CardsOnTableProps {
+  cardOnClick(buildDialogProps: BuildDialogProps): void;
   cards: Array<Array<Card | undefined>>;
   cardsInDeck: Array<Array<Card>>;
-  player: Player;
 
-  cardOnClick(buildDialogProps: BuildDialogProps): void;
   deckOnClick(level: number): void;
+  disabled?: boolean;
   hideAffordableHint?: boolean;
+  player: Player;
 }
 
 export const CardsOnTable: React.FC<CardsOnTableProps> = ({
@@ -20,6 +21,7 @@ export const CardsOnTable: React.FC<CardsOnTableProps> = ({
   cardOnClick,
   deckOnClick,
   hideAffordableHint,
+  disabled,
 }) => {
   return (
     <div
@@ -32,7 +34,7 @@ export const CardsOnTable: React.FC<CardsOnTableProps> = ({
           <React.Fragment key={level}>
             <button
               className={"deck-button"}
-              disabled={cardsInDeck[level].length === 0}
+              disabled={cardsInDeck[level].length === 0 || disabled}
               key={level}
               onClick={() => {
                 deckOnClick(level);
@@ -54,6 +56,7 @@ export const CardsOnTable: React.FC<CardsOnTableProps> = ({
               return (
                 <CardOnTable
                   card={card}
+                  disabled={disabled}
                   elementKey={level + index}
                   hideAffordableHint={hideAffordableHint}
                   key={level + index}

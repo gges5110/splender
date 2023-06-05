@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { Button } from "../../../../../Shared/Button";
-import { CheckIcon } from "@heroicons/react/24/outline";
+import CheckIcon from "@mui/icons-material/Check";
+import { Button } from "@mui/material";
 
 interface ActionButtonProps {
-  disabled: boolean;
   actionLabelText: string;
+  disabled: boolean;
 
   onClick(): void;
 }
@@ -21,9 +21,10 @@ export const ActionButton: FC<ActionButtonProps> = ({
       }
       disabled={disabled}
       onClick={onClick}
-      svgPath={<CheckIcon />}
     >
-      <span className={"select-none"}>{actionLabelText}</span>
+      <span>
+        <CheckIcon /> {actionLabelText}
+      </span>
     </Button>
   );
 };

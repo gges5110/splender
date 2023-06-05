@@ -1,30 +1,25 @@
-import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
-import { playerCredentialsAtom, playerIDAtom } from "../Atoms";
+import { matchInfoAtom } from "../Atoms";
 import { useMutation } from "@tanstack/react-query";
 import { lobbyClient } from "../pages/Lobby";
+import { queryClient } from "../App";
 
 interface LeaveMatchArgs {
   matchID: string;
 }
 
 export const useLeaveMatch = () => {
-  const navigate = useNavigate();
-  const [playerID, setPlayerID] = useAtom(playerIDAtom);
-  const [playerCredentials, setPlayerCredentials] = useAtom(
-    playerCredentialsAtom
-  );
+  const [matchInfo, setMatchInfo] = useAtom(matchInfoAtom);
 
   return useMutation({
     mutationFn: ({ matchID }: LeaveMatchArgs) =>
       lobbyClient.leaveMatch("splendor", matchID, {
-        playerID: playerID || "",
-        credentials: playerCredentials || "",
+        playerID: matchInfo?.playerID || "",
+        credentials: matchInfo?.playerCredentials || "",
       }),
     onSuccess: () => {
-      setPlayerID(undefined);
-      setPlayerCredentials(undefined);
-      navigate("/");
+      setMatchInfo(undefined);
+      queryClient.invalidateQueries({ queryKey: ["matches"] });
     },
   });
 };

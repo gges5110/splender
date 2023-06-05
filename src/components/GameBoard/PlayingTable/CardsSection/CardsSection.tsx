@@ -4,20 +4,20 @@ import { CardDialog } from "./CardDialog/CardDialog";
 import { CardsOnTable } from "./CardsOnTable/CardsOnTable";
 import { BuildDialogProps } from "../PlayingTable";
 import { ReserveFromDeckDialog } from "./ReserveFromDeckDialog/ReserveFromDeckDialog";
-import { Disclosure } from "@headlessui/react";
-import { ChevronUpIcon } from "@heroicons/react/24/outline";
+import { SectionCollapse } from "../../../Shared/SectionCollapse/SectionCollapse";
 
 interface CardsSectionProps {
-  dialogOpen: boolean;
+  build(...args: any[]): void;
   buildDialogProps?: BuildDialogProps;
-  player: Player;
   cards: Array<Array<Card | undefined>>;
   cardsInDeck: Array<Array<Card>>;
-  hideAffordableHint?: boolean;
-
   closeDialog(): void;
+  dialogOpen: boolean;
+  disabled?: boolean;
+
+  hideAffordableHint?: boolean;
   onClick(buildDialogProps: BuildDialogProps): void;
-  build(...args: any[]): void;
+  player: Player;
   reserve(...args: any[]): void;
 }
 
@@ -32,6 +32,7 @@ export const CardsSection: FC<CardsSectionProps> = ({
   cardsInDeck,
   onClick,
   hideAffordableHint,
+  disabled,
 }) => {
   const [
     reserveFromDeckDialogOpen,
@@ -70,32 +71,19 @@ export const CardsSection: FC<CardsSectionProps> = ({
         />
       )}
 
-      <Disclosure defaultOpen={true}>
-        {({ open }) => (
-          <>
-            <Disclosure.Button className={"playing-table-subsections-title"}>
-              <span className={"title"}>Cards</span>
-              <ChevronUpIcon
-                className={`${
-                  open ? "rotate-180 transform" : ""
-                } h-5 w-5 text-slate-500`}
-              />
-            </Disclosure.Button>
-            <Disclosure.Panel>
-              <div className={"mt-2 mb-4"}>
-                <CardsOnTable
-                  cardOnClick={onClick}
-                  cards={cards}
-                  cardsInDeck={cardsInDeck}
-                  deckOnClick={deckOnClick}
-                  hideAffordableHint={hideAffordableHint}
-                  player={player}
-                />
-              </div>
-            </Disclosure.Panel>
-          </>
-        )}
-      </Disclosure>
+      <SectionCollapse title={"Cards"}>
+        <div className={"mt-2"}>
+          <CardsOnTable
+            cardOnClick={onClick}
+            cards={cards}
+            cardsInDeck={cardsInDeck}
+            deckOnClick={deckOnClick}
+            disabled={disabled}
+            hideAffordableHint={hideAffordableHint}
+            player={player}
+          />
+        </div>
+      </SectionCollapse>
     </>
   );
 };

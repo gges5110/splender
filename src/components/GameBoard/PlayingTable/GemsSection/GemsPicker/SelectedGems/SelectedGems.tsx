@@ -1,12 +1,14 @@
 import * as React from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
 import { gemsColorStyle, gemsTextColorStyle } from "../../../../../../styles";
+import { Button } from "@mui/material";
+import { FC, useState } from "react";
 
 interface SelectedGemsProps {
-  selectedGems: number[];
-
   selectedGemOnClick(index: number): void;
+
+  selectedGems: number[];
 }
 
 export const SelectedGems: React.FC<SelectedGemsProps> = ({
@@ -16,29 +18,57 @@ export const SelectedGems: React.FC<SelectedGemsProps> = ({
   return (
     <>
       {selectedGems.map((gemCount, index) => {
-        if (selectedGems[index] === 0) {
-          return (
-            <div
-              className={"gem-size gem-button-deselect flex-initial"}
-              key={index}
-            />
-          );
-        }
-
         return (
+          <SelectedGem
+            index={index}
+            key={index}
+            selectedGemOnClick={selectedGemOnClick}
+            selectedGems={selectedGems}
+          />
+        );
+      })}
+    </>
+  );
+};
+
+interface SelectedGemProps {
+  index: number;
+  selectedGemOnClick(index: number): void;
+  selectedGems: number[];
+}
+
+const SelectedGem: FC<SelectedGemProps> = ({
+  index,
+  selectedGems,
+  selectedGemOnClick,
+}) => {
+  const [shouldWaitForExit, setShouldWaitForExit] = useState(false);
+  const visible = selectedGems[index] !== 0;
+  return (
+    <>
+      <AnimatePresence
+        key={index}
+        onExitComplete={() => {
+          setShouldWaitForExit(false);
+        }}
+      >
+        {visible && (
           <motion.div
             animate={{
               opacity: 1,
               y: 0,
             }}
             className={"gem-size gem-button-deselect flex-initial"}
+            exit={{ opacity: 0, y: -50 }}
             initial={{
               opacity: 0,
               y: -50,
             }}
-            key={index}
+            onAnimationStart={() => {
+              setShouldWaitForExit(true);
+            }}
           >
-            <button
+            <Button
               className={clsx(
                 "gem-size gem-button-deselect flex-initial",
                 gemsTextColorStyle[index],
@@ -47,12 +77,19 @@ export const SelectedGems: React.FC<SelectedGemsProps> = ({
               onClick={() => {
                 selectedGemOnClick(index);
               }}
+              sx={{ minWidth: 0, borderRadius: "100%" }}
             >
               {selectedGems[index]}
-            </button>
+            </Button>
           </motion.div>
-        );
-      })}
+        )}
+      </AnimatePresence>
+      {!visible && !shouldWaitForExit && (
+        <div
+          className={"gem-size gem-button-deselect flex-initial"}
+          key={"invisible" + index}
+        />
+      )}
     </>
   );
 };

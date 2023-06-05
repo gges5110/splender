@@ -7,13 +7,14 @@ import {
   gemsHoverColorStyle,
   gemsTextColorStyle,
 } from "../../../../../../styles";
+import { Button } from "@mui/material";
 
 interface SelectableGemsProps {
+  disabled?: boolean;
   gems: number[];
-  selectedGems: number[];
   mode: GemsPickerMode;
-
   onSelect(index: number): void;
+  selectedGems: number[];
 }
 
 export const SelectableGems: FC<SelectableGemsProps> = ({
@@ -21,35 +22,39 @@ export const SelectableGems: FC<SelectableGemsProps> = ({
   selectedGems,
   mode,
   onSelect,
+  disabled,
 }) => {
   return (
     <>
       {gems.map((gemCount, index) => {
-        const disabled =
-          index === 5 || !gemsSelectable(selectedGems, gemCount, index, mode);
+        const isDisabled =
+          index === 5 ||
+          !gemsSelectable(selectedGems, gemCount, index, mode) ||
+          disabled;
         const availableCount =
           gemCount - (index === 5 ? 0 : selectedGems[index]);
         return (
-          <button
+          <Button
             className={clsx(
-              "gem-size gem-button flex-initial",
+              "w-12 aspect-square sm:w-12 sm:h-12 rounded-full shadow-sm flex-initial",
               gemsTextColorStyle[index],
               gemsHoverColorStyle[index],
               gemsColorStyle[index],
               {
-                "opacity-20": index !== 5 && disabled,
+                "opacity-20": index !== 5 && isDisabled,
               }
             )}
-            disabled={disabled}
+            disabled={isDisabled}
             key={index}
             onClick={() => {
-              if (!disabled) {
+              if (!isDisabled) {
                 onSelect(index);
               }
             }}
+            sx={{ minWidth: 0 }}
           >
             {availableCount}
-          </button>
+          </Button>
         );
       })}
     </>

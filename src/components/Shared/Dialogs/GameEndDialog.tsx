@@ -1,13 +1,12 @@
 import * as React from "react";
-import { Button } from "../Button";
-import { Modal } from "../Modal";
 import { Player } from "../../../Interfaces";
 import { useState } from "react";
+import { Button, Dialog } from "@mui/material";
 
 interface GameEndDialogProps {
-  winner: number | undefined;
   players: Player[];
   reset(): void;
+  winner: number | undefined;
 }
 
 export const GameEndDialog: React.FC<GameEndDialogProps> = ({
@@ -20,7 +19,7 @@ export const GameEndDialog: React.FC<GameEndDialogProps> = ({
 
   const [open, setOpen] = useState(true);
   return (
-    <Modal
+    <Dialog
       onClose={() => {
         setOpen(false);
       }}
@@ -38,6 +37,6 @@ export const GameEndDialog: React.FC<GameEndDialogProps> = ({
           New Game
         </Button>
       </div>
-    </Modal>
+    </Dialog>
   );
 };

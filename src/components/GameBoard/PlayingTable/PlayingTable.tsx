@@ -6,6 +6,7 @@ import { PickNobleDialog } from "./NoblesSection/PickNobleDialog/PickNobleDialog
 import { NoblesSection } from "./NoblesSection/NoblesSection";
 import { CardsSection } from "./CardsSection/CardsSection";
 import { GemsSection } from "./GemsSection/GemsSection";
+import { Paper } from "@mui/material";
 
 interface PlayingTableProps {
   G: GameState;
@@ -15,9 +16,9 @@ interface PlayingTableProps {
 }
 
 export interface BuildDialogProps {
-  level: number;
-  index: number;
   card: Card;
+  index: number;
+  level: number;
 }
 
 export const PlayingTable: FC<PlayingTableProps> = ({
@@ -39,7 +40,7 @@ export const PlayingTable: FC<PlayingTableProps> = ({
   const currentPlayerActive = playerID === ctx.currentPlayer;
 
   return (
-    <div className={"sections-container"}>
+    <Paper className={"sections-container"} elevation={6}>
       <div className={"playing-table-subsections-container"}>
         <NoblesSection nobles={nobles} />
 
@@ -65,6 +66,7 @@ export const PlayingTable: FC<PlayingTableProps> = ({
           cardsInDeck={cardsInDeck}
           closeDialog={closeBuildDialog}
           dialogOpen={dialogOpen}
+          disabled={!currentPlayerActive}
           hideAffordableHint={!currentPlayerActive}
           onClick={(buildDialogProps) => {
             setDialogOpen(true);
@@ -76,7 +78,11 @@ export const PlayingTable: FC<PlayingTableProps> = ({
       </div>
 
       <div className={"playing-table-subsections-container"}>
-        <GemsSection gems={gems} onSelect={moves.pick} />
+        <GemsSection
+          disabled={!currentPlayerActive}
+          gems={gems}
+          onSelect={moves.pick}
+        />
 
         <DiscardGemsDialog
           discardGems={moves.discardGems}
@@ -87,6 +93,6 @@ export const PlayingTable: FC<PlayingTableProps> = ({
           playerGems={players[Number(ctx.currentPlayer)].gems}
         />
       </div>
-    </div>
+    </Paper>
   );
 };

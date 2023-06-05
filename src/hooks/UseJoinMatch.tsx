@@ -3,7 +3,7 @@ import { useSetAtom } from "jotai";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { lobbyClient } from "../pages/Lobby";
-import { playerCredentialsAtom, playerIDAtom } from "../Atoms";
+import { matchInfoAtom } from "../Atoms";
 
 export interface JoinMatchArgs {
   matchID: string;
@@ -12,8 +12,7 @@ export interface JoinMatchArgs {
 
 export const useJoinMatch = () => {
   const navigate = useNavigate();
-  const setPlayerID = useSetAtom(playerIDAtom);
-  const setPlayerCredentials = useSetAtom(playerCredentialsAtom);
+  const setMatchInfo = useSetAtom(matchInfoAtom);
   const [selectedMatchID, setSelectedMatchID] = useState<string | undefined>(
     undefined
   );
@@ -26,9 +25,15 @@ export const useJoinMatch = () => {
       });
     },
     onSuccess: (data) => {
-      setPlayerID(data.playerID);
-      setPlayerCredentials(data.playerCredentials);
-      navigate(`/room/${selectedMatchID}`);
+      if (selectedMatchID) {
+        setMatchInfo({
+          matchID: selectedMatchID,
+          matchType: "online",
+          playerCredentials: data.playerCredentials,
+          playerID: data.playerID,
+        });
+        navigate(`/room/${selectedMatchID}`);
+      }
     },
   });
 };

@@ -1,55 +1,30 @@
-import { NavLink, useNavigate } from "react-router-dom";
-import { Button } from "../components/Shared/Button";
 import { LobbyClient } from "boardgame.io/client";
-import { useQuery } from "@tanstack/react-query";
-import { useJoinMatch } from "../hooks/UseJoinMatch";
+import { useAtomValue } from "jotai";
+import { playerNameAtom } from "../Atoms";
+import { serverPort } from "../config";
+import { CreateMatchCard } from "../components/Lobby/CreateMatchCard/CreateMatchCard";
+import { Matches } from "../components/Lobby/Matches/Matches";
+import { Container, Typography } from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2";
 
-export const lobbyClient = new LobbyClient({ server: "http://localhost:8000" });
+export const lobbyClient = new LobbyClient({
+  server: `http://localhost:${serverPort}`,
+});
 
 export const Lobby = () => {
-  const navigate = useNavigate();
+  const playerName = useAtomValue(playerNameAtom) || "";
 
-  const { isLoading, error, data, isFetching } = useQuery({
-    queryKey: ["matches"],
-    queryFn: () => lobbyClient.listMatches("splendor"),
-  });
-
-  const joinMatch = useJoinMatch();
   return (
-    <div>
-      Welcome to the lobby!
-      <div>
-        Matches:{" "}
-        {data?.matches.map((match) => {
-          return (
-            <>
-              <div>Match ID: {match.matchID}</div>
-              <div>Players: {JSON.stringify(match.players)}</div>
-              <div>gameover?: {match.gameover}</div>
-              <Button
-                onClick={() => {
-                  joinMatch.mutate({
-                    matchID: match.matchID,
-                    playerName: "2",
-                  });
-                }}
-              >
-                Join
-              </Button>
-            </>
-          );
-        })}
-      </div>
-      <Button
-        onClick={() => {
-          navigate("/createMatch");
-        }}
-      >
-        Create Match
-      </Button>
-      <NavLink to={"/game"}>
-        <Button>Single Player Game</Button>
-      </NavLink>
-    </div>
+    <Container maxWidth={"md"}>
+      <Typography>Welcome to the lobby {playerName}!</Typography>
+      <Grid container={true} spacing={2}>
+        <Grid sm={6} xs={12}>
+          <Matches />
+        </Grid>
+        <Grid sm={6} xs={12}>
+          <CreateMatchCard />
+        </Grid>
+      </Grid>
+    </Container>
   );
 };

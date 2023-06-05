@@ -7,11 +7,12 @@ import {
   gemsHoverColorStyle,
   gemsTextColorStyle,
 } from "../../../styles";
+import { Button } from "@mui/material";
 
 interface CardDisplayProps {
+  affordable?: boolean;
   card: Card | undefined;
   enabled: boolean;
-  affordable?: boolean;
   onClick?(): void;
 }
 
@@ -26,7 +27,7 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
   }
 
   return (
-    <button
+    <Button
       className={clsx(
         "card-size rounded-lg relative shadow-xl select-none",
         gemsColorStyle[card.color],
@@ -36,7 +37,11 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
         }
       )}
       disabled={!enabled}
-      onClick={onClick}
+      onClick={() => {
+        if (enabled) {
+          onClick?.();
+        }
+      }}
       onMouseDown={(event) => event.preventDefault()}
     >
       <div
@@ -69,6 +74,6 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
           );
         })}
       </div>
-    </button>
+    </Button>
   );
 };

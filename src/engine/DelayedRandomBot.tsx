@@ -8,20 +8,20 @@ export class DelayedRandomBot extends RandomBot {
     return new Promise<{
       action:
         | {
-            type: "MAKE_MOVE";
             payload: {
-              type: string;
               args: any;
               playerID: string;
+              type: string;
             };
+            type: "MAKE_MOVE";
           }
         | {
-            type: "GAME_EVENT";
             payload: {
-              type: string;
               args: any;
               playerID: string;
+              type: string;
             };
+            type: "GAME_EVENT";
           };
     }>((resolve) => {
       const c = super.play({ G, ctx }, playerID);

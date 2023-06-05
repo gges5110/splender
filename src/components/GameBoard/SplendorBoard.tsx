@@ -6,12 +6,13 @@ import { PlayerBoards } from "./PlayerBoards/PlayerBoards";
 import { GameEndDialog } from "../Shared/Dialogs/GameEndDialog";
 import { NewGameConfirmationDialog } from "../TitleBar/NewGameConfirmationDialog/NewGameConfirmationDialog";
 import { useState } from "react";
-import { Button } from "../Shared/Button";
-import { useMutation } from "@tanstack/react-query";
-import { lobbyClient } from "../../pages/Lobby";
-import { useNavigate } from "react-router-dom";
+import { LobbyAPI } from "boardgame.io/src/types";
+import { Box, Button, Typography } from "@mui/material";
+import { RoomInfoDialog } from "../Room/RoomInfoDrawer/RoomInfoDialog";
 
-interface SplendorBoardProps extends BoardProps<GameState> {}
+interface SplendorBoardProps extends BoardProps<GameState> {
+  match: LobbyAPI.Match;
+}
 
 export const SplendorBoard: React.FC<SplendorBoardProps> = ({
   ctx,
@@ -19,36 +20,40 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
   moves,
   playerID,
   reset,
-  matchID,
-  credentials,
+  match,
 }) => {
-  const navigate = useNavigate();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [
     newGameConfirmationDialogOpen,
     setNewGameConfirmationDialogOpen,
   ] = useState(false);
-  const leaveMatch = useMutation({
-    mutationFn: () =>
-      lobbyClient.leaveMatch("splendor", matchID, {
-        playerID: playerID || "",
-        credentials: credentials || "",
-      }),
-    onSuccess: () => {
-      navigate("/");
-    },
-  });
 
   return (
-    <div className={"w-screen container"}>
-      <Button
-        onClick={() => {
-          leaveMatch.mutate();
+    <Box>
+      <RoomInfoDialog
+        matchData={match}
+        onClose={() => {
+          setIsDrawerOpen(false);
         }}
-      >
-        Leave
-      </Button>
+        open={isDrawerOpen}
+      />
+      <Box alignItems={"center"} display={"flex"} gap={2} mb={1}>
+        <Button
+          onClick={() => {
+            setIsDrawerOpen(true);
+          }}
+        >
+          Room Info
+        </Button>
+        <Typography>Turn: {ctx.turn}</Typography>
+      </Box>
 
-      <div className={"flex flex-wrap justify-center "}>
+      <Box
+        display={"flex"}
+        flexWrap={{ xs: "wrap", sm: "nowrap" }}
+        gap={4}
+        justifyItems={"center"}
+      >
         <NewGameConfirmationDialog
           onClose={() => {
             setNewGameConfirmationDialogOpen(false);
@@ -67,19 +72,19 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
           winner={ctx.gameover?.winner}
         />
 
-        <div className={"w-full sm:w-max sm:p-4 sm:m-2"}>
+        <Box width={{ xs: "100%", sm: "max-content" }}>
           <PlayingTable G={G} ctx={ctx} moves={moves} playerID={playerID} />
-        </div>
-
-        <div className={"w-full sm:w-max sm:p-4 px-2 m-2"}>
+        </Box>
+        <Box width={{ xs: "100%", sm: "max-content" }}>
           <PlayerBoards
             buildFromReserve={moves.buildFromReserve}
             currentPlayer={ctx.currentPlayer}
+            match={match}
             playerID={playerID}
             players={G.players}
           />
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };

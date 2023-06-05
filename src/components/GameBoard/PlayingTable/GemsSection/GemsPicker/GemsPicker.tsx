@@ -11,10 +11,10 @@ export enum GemsPickerMode {
 }
 
 interface GemsPickerProps {
+  disabled?: boolean;
   gems: number[];
-  mode: GemsPickerMode;
   gemsToDiscard?: number;
-
+  mode: GemsPickerMode;
   onSelect(gems: number[]): void;
 }
 
@@ -23,6 +23,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
   onSelect,
   mode,
   gemsToDiscard,
+  disabled,
 }) => {
   const [selectedGems, setGems] = useState<number[]>(Array(5).fill(0));
 
@@ -42,6 +43,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
     <>
       <div className={"flex justify-between items-center gap-2"}>
         <SelectableGems
+          disabled={disabled}
           gems={gems}
           mode={mode}
           onSelect={(index) => {

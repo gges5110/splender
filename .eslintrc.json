@@ -12,7 +12,8 @@
     "react-hooks",
     "@typescript-eslint",
     "prettier",
-    "unused-imports"
+    "unused-imports",
+    "typescript-sort-keys"
   ],
   "env": {
     "browser": true,
@@ -42,7 +43,8 @@
         "singleQuote": false
       }
     ],
-    "unused-imports/no-unused-imports-ts": 2
+    "unused-imports/no-unused-imports-ts": 2,
+    "typescript-sort-keys/interface": "error"
   },
   "settings": {
     "react": {

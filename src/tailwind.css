@@ -28,7 +28,7 @@
         @apply ring-4 ring-gray-400;
     }
     .sections-container {
-        @apply rounded-xl sm:bg-slate-100 p-2 sm:p-8 mx-auto sm:shadow-xl h-full dark:bg-slate-800
+        @apply rounded-xl  p-2 sm:p-8 mx-auto sm:shadow-xl h-full
     }
     .playing-table-subsections-container {
         @apply p-1 sm:p-4

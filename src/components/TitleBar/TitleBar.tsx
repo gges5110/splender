@@ -1,36 +1,85 @@
-import { FC } from "react";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
-import { GitHubIcon } from "../Shared/Icons";
+import { FC, useEffect, useState } from "react";
 import { ColorThemeSelector } from "./ColorThemeSelector/ColorThemeSelector";
-import { NavLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+import { useAtom } from "jotai/index";
+import { playerNameAtom, usernameDialogOpenAtom } from "../../Atoms";
+import {
+  AppBar,
+  Button,
+  IconButton,
+  Link,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
+import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
+import animals from "../../utils/animals.json";
+import { useSetAtom } from "jotai";
+import MenuIcon from "@mui/icons-material/Menu";
+import { AppDrawer } from "./AppDrawer";
 
+export function generateName() {
+  return "Anonymous " + animals[Math.floor(Math.random() * animals.length)];
+}
 interface TitleBarProps {}
 
 export const TitleBar: FC<TitleBarProps> = () => {
-  return (
-    <>
-      <div className={"flex flex-row justify-between items-center"}>
-        <NavLink
-          className={({ isActive, isPending }) =>
-            isActive ? "active" : isPending ? "pending" : ""
-          }
-          to={"/"}
-        >
-          <h1 className={"font-semibold text-lg"}>Splendor</h1>
-        </NavLink>
+  const setOpen = useSetAtom(usernameDialogOpenAtom);
+  const [playerName, setPlayerName] = useAtom(playerNameAtom);
+  useEffect(() => {
+    if (localStorage.getItem("playerName") == null) {
+      setPlayerName(generateName());
+    }
+  }, [playerName]);
 
-        <div className={"flex flex-row gap-2 items-center"}>
-          <ColorThemeSelector />
-          <button className={"rounded-full hover:bg-gray-200 p-1.5"}>
-            <NavLink to={"/help"}>
-              <InformationCircleIcon className={"h-6 w-6"} />
-            </NavLink>
-          </button>
-          <a href={"https://github.com/gges5110/splender"}>
-            <GitHubIcon />
-          </a>
-        </div>
-      </div>
-    </>
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  return (
+    <AppBar color={"inherit"}>
+      <Toolbar>
+        <AppDrawer
+          onClose={() => {
+            setIsDrawerOpen(false);
+          }}
+          open={isDrawerOpen}
+        />
+        <IconButton
+          aria-label={"menu"}
+          color={"inherit"}
+          edge={"start"}
+          onClick={() => {
+            setIsDrawerOpen(true);
+          }}
+          size={"large"}
+          sx={{ mr: 2 }}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Link
+          color={"inherit"}
+          component={RouterLink}
+          sx={{ display: "flex", gap: 1, alignItems: "center", flexGrow: 1 }}
+          to={"/"}
+          underline={"hover"}
+        >
+          <DiamondOutlinedIcon />
+          <Typography variant={"h5"}>Splendor</Typography>
+        </Link>
+
+        <Button
+          color={"inherit"}
+          onClick={() => {
+            setOpen(true);
+          }}
+          variant={"text"}
+        >
+          <PersonIcon />
+          <Typography variant={"body2"} whiteSpace={"nowrap"}>
+            {playerName}
+          </Typography>
+        </Button>
+
+        <ColorThemeSelector />
+      </Toolbar>
+    </AppBar>
   );
 };

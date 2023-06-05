@@ -10,12 +10,12 @@ import {
 } from "../../../../engine/MovesUtil";
 
 interface PlayerCardsProps {
-  player: Player;
-  cards: Card[];
-  reservedCards: Card[];
-  isActivePlayer: boolean;
-
   buildFromReserve(cardIdx: number): void;
+  cards: Card[];
+  isActivePlayer: boolean;
+  player: Player;
+
+  reservedCards: Card[];
 }
 
 export const PlayerCards: React.FC<PlayerCardsProps> = ({

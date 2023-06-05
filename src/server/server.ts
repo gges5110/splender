@@ -2,13 +2,24 @@ import { Server, Origins } from "boardgame.io/server";
 import { SplendorGame } from "../engine/SplendorGame";
 
 const server = Server({
-  // Provide the definitions for your game(s).
   games: [SplendorGame],
 
-  // Provide the database storage class to use.
-  // db: new DbConnector(),
+  origins: [
+    Origins.LOCALHOST,
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:5173/splender/lobby",
+  ],
+});
+server.router.delete("/matches", async (ctx, next) => {
+  const { db } = server;
+  const staleMatchIDs = await db.listMatches();
+  console.log("number of match ids", staleMatchIDs.length);
+  // Delete matches one-by-one. Could also use a queue or parallel system here.
+  for (const id of staleMatchIDs) {
+    await db.wipe(id);
+  }
 
-  origins: [Origins.LOCALHOST, "http://127.0.0.1:5173"],
+  ctx.body = `Deleted ${staleMatchIDs.length} matches`;
 });
 
-server.run(8000, () => console.log("server running..."));
+server.run(8002, () => console.log("server running..."));

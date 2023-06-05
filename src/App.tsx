@@ -1,17 +1,20 @@
 import "./App.css";
-import { SplendorClient } from "./engine/SplendorClient";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  useParams,
-} from "react-router-dom";
-import { Layout } from "./components/Layout/Layout";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Layout } from "./pages/Layout";
 import { HelpPage } from "./pages/HelpPage";
-import * as React from "react";
 import { Lobby } from "./pages/Lobby";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { CreateMatchPage } from "./pages/CreateMatchPage";
 import { Room } from "./pages/Room";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { closeSnackbar, SnackbarProvider } from "notistack";
+import "@fontsource/nunito/300.css";
+import "@fontsource/nunito/400.css";
+import "@fontsource/nunito/500.css";
+import "@fontsource/nunito/700.css";
+import { Lobby as BGIOLobby } from "boardgame.io/react";
+import { SplendorGame } from "./engine/SplendorGame";
+import { SplendorBoard } from "./components/GameBoard/SplendorBoard";
+import { useAppTheme } from "./hooks/UseAppTheme";
 
 export const queryClient = new QueryClient();
 const App = () => {
@@ -30,42 +33,43 @@ const App = () => {
             element: <Lobby />,
           },
           {
-            path: "/game/:matchID/player/:playerID/:secret",
-            element: <GameInstance />,
-          },
-          {
-            path: "/createMatch",
-            element: <CreateMatchPage />,
-          },
-          {
             path: "/room/:matchID",
             element: <Room />,
+          },
+          {
+            path: "lobby",
+            element: (
+              <BGIOLobby
+                debug={true}
+                gameComponents={[{ game: SplendorGame, board: SplendorBoard }]}
+                gameServer={`http://${window.location.hostname}:8002`}
+                lobbyServer={`http://${window.location.hostname}:8002`}
+              />
+            ),
           },
         ],
       },
     ],
     {
-      basename: "/splender",
+      basename: "/splender/",
     }
   );
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
-  );
-};
-
-const GameInstance: React.FC = () => {
-  const { matchID, playerID, secret } = useParams();
+  const theme = useAppTheme();
 
   return (
-    <SplendorClient
-      credentials={secret}
-      debug={true}
-      matchID={matchID}
-      playerID={playerID}
-    />
+    <ThemeProvider theme={theme}>
+      <CssBaseline enableColorScheme={true} />
+      <SnackbarProvider
+        action={(snackbarId) => (
+          <button onClick={() => closeSnackbar(snackbarId)}>Dismiss</button>
+        )}
+      >
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </SnackbarProvider>
+    </ThemeProvider>
   );
 };
 

@@ -4,44 +4,59 @@ import { PlayerCards } from "./PlayerCards/PlayerCards";
 import { FC, useState } from "react";
 import clsx from "clsx";
 import { PlayerDialog } from "./PlayerCards/PlayerDialog/PlayerDialog";
+import { LobbyAPI } from "boardgame.io/src/types";
+import { Badge, Box, Button, Paper } from "@mui/material";
 
 interface PlayerBoardsProps {
-  players: Player[];
-  currentPlayer: string;
-  playerID: string | null;
   buildFromReserve(cardIdx: number): void;
+  currentPlayer: string;
+  match: LobbyAPI.Match;
+  playerID: string | null;
+  players: Player[];
 }
 
 export const PlayerBoards: FC<PlayerBoardsProps> = ({
   players,
   currentPlayer,
+  playerID,
   buildFromReserve,
+  match,
 }) => {
-  const [playerDialogOpen, setPlayerDialogOpen] = useState<boolean>(false);
-
+  const [playerDialogOpen, setPlayerDialogOpen] = useState(false);
   return (
-    <div className={"sections-container"}>
-      <div
+    <Paper className={"sections-container"} elevation={6}>
+      <Box
         className={
-          "flex flex-row gap-6 flex-nowrap overflow-y-scroll sm:overflow-y-auto sm:flex-col h-full pt-2 pl-4"
+          "flex flex-row gap-6 flex-nowrap sm:flex-col h-full pt-2 pl-4"
         }
+        sx={{ overflowY: "hidden" }}
       >
         {players.map((player, index: number) => (
           <div
             className={clsx(
-              "flex items-center bg-slate-200 my-4 rounded-xl relative p-2 pt-8",
+              "flex items-center bg-slate-200 my-4 rounded-xl relative p-2 pt-8 shadow-md",
               { "bg-slate-400": Number(currentPlayer) === index }
             )}
             key={index}
           >
-            <button
-              className={
+            <Button
+              className={clsx(
                 "absolute leading-8 -top-5 -left-4 w-fit h-8 rounded-lg bg-blue-300 px-3"
-              }
+              )}
               onClick={() => setPlayerDialogOpen(true)}
             >
-              <span className={"text-slate-700"}>Player {index + 1}</span>
-            </button>
+              <Badge
+                color={"success"}
+                invisible={!match.players[index]?.isConnected}
+                variant={"dot"}
+              >
+                <span className={"text-slate-700"}>
+                  {match?.players[index].name ||
+                    `Bot ${match?.players[index].id}`}
+                  {match?.players[index].id === Number(playerID) && <> (you)</>}
+                </span>
+              </Badge>
+            </Button>
             <PlayerDialog
               closePlayerDialog={() => {
                 setPlayerDialogOpen(false);
@@ -71,8 +86,8 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
             </div>
           </div>
         ))}
-      </div>
-    </div>
+      </Box>
+    </Paper>
   );
 };
 

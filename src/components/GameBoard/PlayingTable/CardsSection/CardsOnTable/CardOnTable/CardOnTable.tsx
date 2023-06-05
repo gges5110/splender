@@ -20,12 +20,12 @@ const variants: Variants = {
 
 interface CardOnTableProps {
   card: Card | undefined;
-  player: Player;
+  disabled?: boolean;
   elementKey: React.Key;
 
-  onClick(): void;
-
   hideAffordableHint?: boolean;
+  onClick(): void;
+  player: Player;
 }
 
 export const CardOnTable: FC<CardOnTableProps> = ({
@@ -34,6 +34,7 @@ export const CardOnTable: FC<CardOnTableProps> = ({
   hideAffordableHint,
   elementKey,
   onClick,
+  disabled,
 }) => {
   const cardOnClick = () => {
     if (card) {
@@ -76,7 +77,7 @@ export const CardOnTable: FC<CardOnTableProps> = ({
           hideAffordableHint !== true && playerCanAffordCard(card, player)
         }
         card={card}
-        enabled={true}
+        enabled={!disabled}
         onClick={cardOnClick}
       />
     </motion.div>

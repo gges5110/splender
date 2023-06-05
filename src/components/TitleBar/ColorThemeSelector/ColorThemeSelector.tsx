@@ -1,157 +1,76 @@
-import {
-  ComputerDesktopIcon,
-  MoonIcon,
-  SunIcon,
-} from "@heroicons/react/24/outline";
-import { Fragment, useEffect, useState } from "react";
-import { Listbox, Transition } from "@headlessui/react";
+import React, { useEffect, useState } from "react";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import ComputerOutlinedIcon from "@mui/icons-material/ComputerOutlined";
+import { Box, IconButton, Menu, MenuItem } from "@mui/material";
+import { useAtom } from "jotai";
+import { colorModeAtom } from "../../../Atoms";
 
-enum ColorTheme {
-  Light,
-  Dark,
-  System,
+export enum ColorTheme {
+  Light = "light",
+  Dark = "dark",
+  System = "system",
 }
 
-const icons = [
-  <SunIcon height={24} width={24} />,
-  <MoonIcon height={24} width={24} />,
-  <ComputerDesktopIcon height={24} width={24} />,
+const options = [
+  { theme: ColorTheme.Light, icon: <LightModeOutlinedIcon /> },
+  { theme: ColorTheme.Dark, icon: <DarkModeOutlinedIcon /> },
+  { theme: ColorTheme.System, icon: <ComputerOutlinedIcon /> },
 ];
 
 export const ColorThemeSelector = () => {
-  const [selected, setSelected] = useState<ColorTheme>(
-    localStorage.theme == null
-      ? ColorTheme.System
-      : localStorage.theme === "dark"
-      ? ColorTheme.Dark
-      : ColorTheme.Light
+  const [colorMode, setColorMode] = useAtom(colorModeAtom);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [selectedIndex, setSelectedIndex] = useState(
+    options.findIndex((option) => option.theme === colorMode)
   );
 
   useEffect(() => {
-    if (
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
+    if (colorMode !== undefined) {
+      setSelectedIndex(
+        options.findIndex((option) => option.theme === colorMode)
+      );
     }
-  }, []);
+  }, [colorMode]);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-  const onChange = (colorTheme: ColorTheme) => {
-    if (colorTheme === ColorTheme.Light) {
-      localStorage.theme = "light";
-    } else if (colorTheme === ColorTheme.Dark) {
-      localStorage.theme = "dark";
-    } else {
-      localStorage.removeItem("theme");
-    }
+  const handleMenuItemClick = (
+    event: React.MouseEvent<HTMLElement>,
+    index: number
+  ) => {
+    setSelectedIndex(index);
+    setAnchorEl(null);
 
-    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    if (
-      colorTheme === ColorTheme.Dark ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    const colorTheme = options[index].theme;
+    setColorMode(colorTheme);
+  };
 
-    setSelected(colorTheme);
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
-    <Listbox onChange={onChange} value={selected}>
-      <div className={"relative"}>
-        <Listbox.Button
-          className={
-            "relative w-full p-1.5 hover:bg-gray-200 dark:hover:bg-slate-600 rounded-full focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
-          }
-        >
-          <span className={"block truncate"}>{icons[selected]}</span>
-        </Listbox.Button>
-        <Transition
-          as={Fragment}
-          leave={"transition ease-in duration-100"}
-          leaveFrom={"opacity-100"}
-          leaveTo={"opacity-0"}
-        >
-          <Listbox.Options
-            className={
-              "z-10 absolute mt-1 max-h-60 w-28 overflow-auto rounded-md bg-white dark:bg-slate-800 py-1 text-base dark:text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-            }
+    <>
+      <IconButton color={"inherit"} onClick={handleClick}>
+        {options[selectedIndex].icon}
+      </IconButton>
+
+      <Menu anchorEl={anchorEl} onClose={handleClose} open={open}>
+        {options.map((option, index) => (
+          <MenuItem
+            key={index}
+            onClick={(event) => handleMenuItemClick(event, index)}
+            selected={index === selectedIndex}
           >
-            <Listbox.Option
-              className={({ active }) =>
-                `relative p-2 ${
-                  active
-                    ? "bg-sky-100 dark:bg-sky-700 text-sky-900"
-                    : "text-gray-900"
-                }`
-              }
-              value={ColorTheme.Light}
-            >
-              {({ selected }) => (
-                <>
-                  <div
-                    className={`${
-                      selected ? "font-medium" : "font-normal"
-                    } flex items-center gap-2 dark:text-white`}
-                  >
-                    <SunIcon height={24} width={24} /> Light
-                  </div>
-                </>
-              )}
-            </Listbox.Option>
-            <Listbox.Option
-              className={({ active }) =>
-                `relative p-2 ${
-                  active
-                    ? "bg-sky-100 dark:bg-sky-700 text-sky-900"
-                    : "text-gray-900"
-                }`
-              }
-              value={ColorTheme.Dark}
-            >
-              {({ selected }) => (
-                <>
-                  <div
-                    className={`${
-                      selected ? "font-medium" : "font-normal"
-                    } flex items-center gap-2 dark:text-white`}
-                  >
-                    <MoonIcon height={24} width={24} /> Dark
-                  </div>
-                </>
-              )}
-            </Listbox.Option>
-            <Listbox.Option
-              className={({ active }) =>
-                `relative p-2 ${
-                  active
-                    ? "bg-sky-100 dark:bg-sky-700 text-sky-900"
-                    : "text-gray-900"
-                }`
-              }
-              value={ColorTheme.System}
-            >
-              {({ selected }) => (
-                <>
-                  <div
-                    className={`${
-                      selected ? "font-medium" : "font-normal"
-                    } flex items-center gap-2 dark:text-white`}
-                  >
-                    <ComputerDesktopIcon height={24} width={24} /> System
-                  </div>
-                </>
-              )}
-            </Listbox.Option>
-          </Listbox.Options>
-        </Transition>
-      </div>
-    </Listbox>
+            <Box display={"flex"} gap={1}>
+              {option.icon} {option.theme}
+            </Box>
+          </MenuItem>
+        ))}
+      </Menu>
+    </>
   );
 };

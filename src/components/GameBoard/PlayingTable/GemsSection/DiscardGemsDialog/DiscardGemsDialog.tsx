@@ -1,13 +1,12 @@
 import * as React from "react";
 import { GemsPicker, GemsPickerMode } from "../GemsPicker/GemsPicker";
-import { Modal } from "../../../../Shared/Modal";
-import { Dialog } from "@headlessui/react";
+import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 
 interface DiscardGemDialogProps {
-  open: boolean;
-  playerGems: number[];
-
   discardGems(gems: number[]): void;
+  open: boolean;
+
+  playerGems: number[];
 }
 
 export const DiscardGemsDialog: React.FC<DiscardGemDialogProps> = ({
@@ -16,25 +15,18 @@ export const DiscardGemsDialog: React.FC<DiscardGemDialogProps> = ({
   discardGems,
 }) => {
   return (
-    <Modal onClose={() => {}} open={open}>
-      <div className={"w-max p-6"}>
-        <Dialog.Title
-          as={"h3"}
-          className={"text-lg leading-6 font-medium text-gray-700"}
-        >
-          Discard gems
-        </Dialog.Title>
-        <div className={"mt-2"}>
-          <GemsPicker
-            gems={playerGems}
-            gemsToDiscard={
-              playerGems.slice(0, 5).reduce((p, v) => p + v, 0) - 10
-            }
-            mode={GemsPickerMode.DISCARD}
-            onSelect={discardGems}
-          />
-        </div>
-      </div>
-    </Modal>
+    <Dialog onClose={() => {}} open={open}>
+      <DialogTitle className={"text-lg leading-6 font-medium text-gray-700"}>
+        Discard gems
+      </DialogTitle>
+      <DialogContent>
+        <GemsPicker
+          gems={playerGems}
+          gemsToDiscard={playerGems.slice(0, 5).reduce((p, v) => p + v, 0) - 10}
+          mode={GemsPickerMode.DISCARD}
+          onSelect={discardGems}
+        />
+      </DialogContent>
+    </Dialog>
   );
 };

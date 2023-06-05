@@ -1,23 +1,21 @@
 import * as React from "react";
 import { Player } from "../../../../../Interfaces";
 import { CardDisplay } from "../../../../Shared/CardDisplay/CardDisplay";
-import { Button } from "../../../../Shared/Button";
-import { Modal } from "../../../../Shared/Modal";
 import { BuildDialogProps } from "../../PlayingTable";
 import { playerCanAffordCard } from "../../../../../engine/MovesUtil";
-import {
-  ArrowDownOnSquareStackIcon,
-  PlusIcon,
-} from "@heroicons/react/24/outline";
+import AddIcon from "@mui/icons-material/Add";
+import SystemUpdateAltIcon from "@mui/icons-material/SystemUpdateAlt";
+import { Box, Button, Dialog, DialogActions } from "@mui/material";
+import { DialogTitleWithClose } from "../../../../Shared/DialogTitleWithClose/DialogTitleWithClose";
 
 interface CardDialogProps {
-  open: boolean;
+  build(level: number, index: number): void;
   buildDialogProps?: BuildDialogProps;
-  player: Player;
-
   closeDialog(): void;
 
-  build(level: number, index: number): void;
+  open: boolean;
+
+  player: Player;
 
   reserve(level: number, index: number): void;
 }
@@ -31,7 +29,8 @@ export const CardDialog: React.FC<CardDialogProps> = ({
   player,
 }) => {
   return (
-    <Modal onClose={closeDialog} open={open}>
+    <Dialog onClose={closeDialog} open={open}>
+      <DialogTitleWithClose onClose={closeDialog}>Card</DialogTitleWithClose>
       <div className={"px-4 pt-5 pb-4 sm:p-6 sm:pb-4"}>
         <div className={"sm:flex sm:items-start"}>
           <div className={"flex justify-center mx-auto"}>
@@ -41,38 +40,40 @@ export const CardDialog: React.FC<CardDialogProps> = ({
           </div>
         </div>
       </div>
-      <div className={"bg-gray-50 px-4 py-3 sm:px-6 dark:bg-slate-800"}>
-        <div className={"flex gap-2"}>
-          <Button
-            disabled={
-              buildDialogProps
-                ? !playerCanAffordCard(buildDialogProps.card, player)
-                : true
+      <DialogActions>
+        <Button
+          disabled={
+            buildDialogProps
+              ? !playerCanAffordCard(buildDialogProps.card, player)
+              : true
+          }
+          onClick={() => {
+            if (buildDialogProps) {
+              build(buildDialogProps.level, buildDialogProps.index);
+              closeDialog();
             }
-            onClick={() => {
-              if (buildDialogProps) {
-                build(buildDialogProps.level, buildDialogProps.index);
-                closeDialog();
-              }
-            }}
-            svgPath={<PlusIcon />}
-          >
-            <span>Purchase</span>
-          </Button>
-          <Button
-            disabled={player.reservedCards.length >= 3}
-            onClick={() => {
-              if (buildDialogProps && player.reservedCards.length <= 3) {
-                reserve(buildDialogProps.level, buildDialogProps.index);
-                closeDialog();
-              }
-            }}
-            svgPath={<ArrowDownOnSquareStackIcon />}
-          >
-            <span>Reserve</span>
-          </Button>
-        </div>
-      </div>
-    </Modal>
+          }}
+          variant={"outlined"}
+        >
+          <Box display={"flex"} gap={1}>
+            <AddIcon /> Purchase
+          </Box>
+        </Button>
+        <Button
+          color={"reserve"}
+          disabled={player.reservedCards.length >= 3}
+          onClick={() => {
+            if (buildDialogProps && player.reservedCards.length <= 3) {
+              reserve(buildDialogProps.level, buildDialogProps.index);
+              closeDialog();
+            }
+          }}
+        >
+          <Box display={"flex"} gap={1}>
+            <SystemUpdateAltIcon /> Reserve
+          </Box>
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };

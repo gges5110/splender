@@ -1,19 +1,19 @@
 import * as React from "react";
 import { Card, Player } from "../../../../../Interfaces";
 import { CardDisplay } from "../../../../Shared/CardDisplay/CardDisplay";
-import { Modal } from "../../../../Shared/Modal";
-import { Button } from "../../../../Shared/Button";
 import { playerCanAffordCard } from "../../../../../engine/MovesUtil";
-import { PlusIcon } from "@heroicons/react/24/outline";
+import AddIcon from "@mui/icons-material/Add";
+import { Button, Container, Dialog, DialogContent } from "@mui/material";
+import { DialogTitleWithClose } from "../../../../Shared/DialogTitleWithClose/DialogTitleWithClose";
 
 interface ReservedCardsDialogProps {
-  reservedCardsDialogOpen: boolean;
+  closeReservedCardsDialog(): void;
   player: Player;
+  reservedCardOnClick(reservedCard: Card, index: number): void;
+
   reservedCards: Card[];
 
-  closeReservedCardsDialog(): void;
-
-  reservedCardOnClick(reservedCard: Card, index: number): void;
+  reservedCardsDialogOpen: boolean;
 }
 
 export const ReservedCardsDialog: React.FC<ReservedCardsDialogProps> = ({
@@ -24,23 +24,30 @@ export const ReservedCardsDialog: React.FC<ReservedCardsDialogProps> = ({
   reservedCardOnClick,
 }) => {
   return (
-    <Modal onClose={closeReservedCardsDialog} open={reservedCardsDialogOpen}>
-      <div className={"flex gap-4 m-6"}>
-        {reservedCards.map((reservedCard, index) => (
-          <div className={"flex flex-col gap-2 items-center"} key={index}>
-            <CardDisplay card={reservedCard} enabled={false} key={index} />
-            <Button
-              disabled={!playerCanAffordCard(reservedCard, player)}
-              onClick={() => {
-                reservedCardOnClick(reservedCard, index);
-              }}
-              svgPath={<PlusIcon />}
-            >
-              Purchase
-            </Button>
+    <Dialog onClose={closeReservedCardsDialog} open={reservedCardsDialogOpen}>
+      <DialogTitleWithClose onClose={closeReservedCardsDialog}>
+        Reserved Cards
+      </DialogTitleWithClose>
+      <DialogContent>
+        <Container>
+          <div className={"flex gap-4"}>
+            {reservedCards.map((reservedCard, index) => (
+              <div className={"flex flex-col gap-2 items-center"} key={index}>
+                <CardDisplay card={reservedCard} enabled={false} key={index} />
+                <Button
+                  disabled={!playerCanAffordCard(reservedCard, player)}
+                  onClick={() => {
+                    reservedCardOnClick(reservedCard, index);
+                  }}
+                  variant={"outlined"}
+                >
+                  <AddIcon /> Purchase
+                </Button>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </Modal>
+        </Container>
+      </DialogContent>
+    </Dialog>
   );
 };

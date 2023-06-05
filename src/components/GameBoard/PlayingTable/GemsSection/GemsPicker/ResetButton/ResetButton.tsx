@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { ArrowPathIcon } from "@heroicons/react/24/outline";
+import AutorenewIcon from "@mui/icons-material/Autorenew";
+import { Button } from "@mui/material";
 
 interface ResetButtonProps {
   disabled: boolean;
@@ -9,24 +10,17 @@ interface ResetButtonProps {
 
 export const ResetButton: FC<ResetButtonProps> = ({ onClick, disabled }) => {
   return (
-    <button
+    <Button
       className={
-        "w-24 flex-none h-8 sm:h-10 inline-flex items-center text-base font-semibold dark:text-black py-2 px-4 rounded-full shadow-md bg-gray-100 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 disabled:opacity-50"
+        "font-semibold py-2 px-4 rounded-full shadow-md bg-gray-100 hover:bg-gray-200"
       }
       disabled={disabled}
       onClick={onClick}
+      variant={"outlined"}
     >
-      <svg
-        className={"w-4 h-4 mr-2"}
-        fill={"none"}
-        stroke={"currentColor"}
-        viewBox={"0 0 24 24"}
-        xmlns={"http://www.w3.org/2000/svg"}
-      >
-        <ArrowPathIcon />
-      </svg>
-
-      <span>Reset</span>
-    </button>
+      <span>
+        <AutorenewIcon /> Reset
+      </span>
+    </Button>
   );
 };
