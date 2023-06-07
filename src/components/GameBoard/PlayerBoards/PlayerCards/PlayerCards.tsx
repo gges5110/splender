@@ -1,13 +1,13 @@
-import { Card, Player } from "../../../../Interfaces";
+import { Card, Player } from "../../../../interfaces/Interfaces";
 import { useState } from "react";
 import * as React from "react";
 import { ReservedCardsDialog } from "./ReservedCardsDialog/ReservedCardsDialog";
-import clsx from "clsx";
-import { gemsColorStyle, gemsTextColorStyle } from "../../../../styles";
 import {
   getCardCountByColor,
   playerCanAffordCard,
 } from "../../../../engine/MovesUtil";
+import { Box, Button } from "@mui/material";
+import { colorIndexToPalette } from "../../../../styles/paletteTheme";
 
 interface PlayerCardsProps {
   buildFromReserve(cardIdx: number): void;
@@ -29,31 +29,33 @@ export const PlayerCards: React.FC<PlayerCardsProps> = ({
 
   const cardCountByColor = getCardCountByColor(cards);
   return (
-    <div className={"flex justify-start gap-1 sm:gap-4"}>
+    <Box
+      className={"gap-1 sm:gap-4"}
+      display={"flex"}
+      justifyContent={"flex-start"}
+    >
       {cardCountByColor.map((cardCount, index) => (
         <div className={"w-8 sm:w-12 h-16 sm:h-20"} key={index}>
           {cardCount > 0 && (
-            <button
-              className={clsx(
-                "w-full h-full rounded-md",
-                gemsTextColorStyle[index],
-                gemsColorStyle[index]
-              )}
+            <Button
+              color={colorIndexToPalette[index]}
+              sx={{ height: "100%", width: "100%", borderRadius: 2 }}
             >
               {cardCount}
-            </button>
+            </Button>
           )}
         </div>
       ))}
       <div className={"w-8 sm:w-12 h-16 sm:h-20"}>
         {reservedCards.length > 0 && (
-          <button
-            className={`w-full h-full rounded-md ${gemsTextColorStyle[5]} ${gemsColorStyle[5]}`}
+          <Button
+            color={colorIndexToPalette[5]}
             disabled={reservedCards.length === 0 || !isActivePlayer}
             onClick={() => setReserveDialogOpen(true)}
+            sx={{ height: "100%", width: "100%", borderRadius: 2 }}
           >
             {reservedCards.length}
-          </button>
+          </Button>
         )}
       </div>
 
@@ -71,6 +73,6 @@ export const PlayerCards: React.FC<PlayerCardsProps> = ({
         reservedCards={reservedCards}
         reservedCardsDialogOpen={reserveDialogOpen}
       />
-    </div>
+    </Box>
   );
 };

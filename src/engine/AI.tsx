@@ -1,5 +1,5 @@
 import { Ctx } from "boardgame.io";
-import { GameState } from "../Interfaces";
+import { GameState } from "../interfaces/Interfaces";
 import { gemsInHandLimit } from "./Moves";
 import { getTotalCount, playerCanAffordCard } from "./MovesUtil";
 

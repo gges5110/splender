@@ -1,7 +1,8 @@
-import { Card, GameState, Noble, Player } from "../Interfaces";
+import { Card, GameState, Noble, Player } from "../interfaces/Interfaces";
 import { Ctx } from "boardgame.io";
 import { INVALID_MOVE } from "boardgame.io/core";
 import { gemsInHandLimit, pickNoble } from "./Moves";
+import { deriveNumCardsInDeck } from "./GameSetup";
 
 export const replenishCards = (
   G: GameState,
@@ -14,6 +15,8 @@ export const replenishCards = (
   } else {
     G.cardsOnTable[level][cardIdx] = undefined;
   }
+
+  G.numCardsInDeck = deriveNumCardsInDeck(G.cardsInDeck);
 };
 
 export const nobleVisits = (G: GameState, ctx: Ctx) => {

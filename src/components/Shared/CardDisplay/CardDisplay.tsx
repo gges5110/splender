@@ -1,13 +1,9 @@
-import { Card } from "../../../Interfaces";
+import { Card } from "../../../interfaces/Interfaces";
 import * as React from "react";
 import { GemDisplay } from "../GemDisplay/GemDisplay";
 import clsx from "clsx";
-import {
-  gemsColorStyle,
-  gemsHoverColorStyle,
-  gemsTextColorStyle,
-} from "../../../styles";
 import { Button } from "@mui/material";
+import { colorIndexToPalette } from "../../../styles/paletteTheme";
 
 interface CardDisplayProps {
   affordable?: boolean;
@@ -28,15 +24,10 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
 
   return (
     <Button
-      className={clsx(
-        "card-size rounded-lg relative shadow-xl select-none",
-        gemsColorStyle[card.color],
-        gemsHoverColorStyle[card.color],
-        {
-          "card-affordable": affordable,
-        }
-      )}
-      disabled={!enabled}
+      className={clsx("card-size rounded-lg relative shadow-xl select-none", {
+        "card-affordable": affordable,
+      })}
+      color={colorIndexToPalette[card.color]}
       onClick={() => {
         if (enabled) {
           onClick?.();
@@ -46,8 +37,7 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
     >
       <div
         className={clsx(
-          "absolute top-0 sm:top-2 right-0 sm:right-2 h-8 w-8 text-center align-middle",
-          gemsTextColorStyle[card.color]
+          "absolute top-0 sm:top-2 right-0 sm:right-2 h-8 w-8 text-center align-middle"
         )}
       >
         {card.points > 0 && card.points}

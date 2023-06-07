@@ -13,7 +13,10 @@ import { useParams } from "react-router-dom";
 
 export type PublicPlayerMetadata = Omit<Server.PlayerMetadata, "credentials">;
 
-export const useGameClient = (matchData?: LobbyAPI.Match) => {
+export const useGameClient = (
+  matchData: LobbyAPI.Match | undefined,
+  gameBoardDebug: boolean
+) => {
   const { matchID } = useParams();
   const isLocalAI = matchID === "localAI";
   const matchInfo = useAtomValue(matchInfoAtom);
@@ -47,5 +50,5 @@ export const useGameClient = (matchData?: LobbyAPI.Match) => {
           ? getLocalAIConfig
           : getLocalAIConfig,
     });
-  }, [matchType, numPlayers]);
+  }, [matchType, numPlayers, gameBoardDebug]);
 };

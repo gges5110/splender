@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { PlayerDialog } from "./PlayerDialog";
-import { Player } from "../../../../../Interfaces";
+import { Player } from "../../../../../interfaces/Interfaces";
 import { level1Cards, nobles } from "../../../../../constants";
 import { vi } from "vitest";
 

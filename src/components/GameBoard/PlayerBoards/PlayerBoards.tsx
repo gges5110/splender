@@ -1,4 +1,4 @@
-import { Player } from "../../../Interfaces";
+import { Player } from "../../../interfaces/Interfaces";
 import { PlayerGems } from "./PlayerGems/PlayerGems";
 import { PlayerCards } from "./PlayerCards/PlayerCards";
 import { FC, useState } from "react";
@@ -22,7 +22,9 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
   buildFromReserve,
   match,
 }) => {
-  const [playerDialogOpen, setPlayerDialogOpen] = useState(false);
+  const [playerDialogIndex, setPlayerDialogIndex] = useState<
+    number | undefined
+  >(undefined);
   return (
     <Paper className={"sections-container"} elevation={6}>
       <Box
@@ -43,7 +45,7 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
               className={clsx(
                 "absolute leading-8 -top-5 -left-4 w-fit h-8 rounded-lg bg-blue-300 px-3"
               )}
-              onClick={() => setPlayerDialogOpen(true)}
+              onClick={() => setPlayerDialogIndex(index)}
             >
               <Badge
                 color={"success"}
@@ -59,10 +61,10 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
             </Button>
             <PlayerDialog
               closePlayerDialog={() => {
-                setPlayerDialogOpen(false);
+                setPlayerDialogIndex(undefined);
               }}
-              player={player}
-              playerDialogOpen={playerDialogOpen}
+              player={players[index]}
+              playerDialogOpen={playerDialogIndex === index}
             />
             <div className={"w-2"} />
             <div className={"text-center"}>

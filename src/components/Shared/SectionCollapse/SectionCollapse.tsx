@@ -1,7 +1,6 @@
 import React, { FC, useState } from "react";
 import { Collapse, ListItemButton, ListItemText } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
 
 interface SectionCollapseProps {
   children?: React.ReactNode;
@@ -24,7 +23,15 @@ export const SectionCollapse: FC<SectionCollapseProps> = ({
         }}
       >
         <ListItemText primary={title} />
-        {open ? <ExpandLess /> : <ExpandMore />}
+        <ExpandLess
+          sx={{
+            transform: open ? "rotate(0)" : "rotate(-180deg)",
+            transition: (theme) =>
+              theme.transitions.create(["transform"], {
+                duration: theme.transitions.duration.short,
+              }),
+          }}
+        />
       </ListItemButton>
 
       <Collapse in={open}>{children}</Collapse>

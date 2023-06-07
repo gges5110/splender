@@ -2,12 +2,8 @@ import { FC } from "react";
 import clsx from "clsx";
 import { gemsSelectable } from "../../../../../../utils/GemUtils";
 import { GemsPickerMode } from "../GemsPicker";
-import {
-  gemsColorStyle,
-  gemsHoverColorStyle,
-  gemsTextColorStyle,
-} from "../../../../../../styles";
 import { Button } from "@mui/material";
+import { colorIndexToPalette } from "../../../../../../styles/paletteTheme";
 
 interface SelectableGemsProps {
   disabled?: boolean;
@@ -33,17 +29,13 @@ export const SelectableGems: FC<SelectableGemsProps> = ({
           disabled;
         const availableCount =
           gemCount - (index === 5 ? 0 : selectedGems[index]);
+
         return (
           <Button
             className={clsx(
-              "w-12 aspect-square sm:w-12 sm:h-12 rounded-full shadow-sm flex-initial",
-              gemsTextColorStyle[index],
-              gemsHoverColorStyle[index],
-              gemsColorStyle[index],
-              {
-                "opacity-20": index !== 5 && isDisabled,
-              }
+              "w-12 aspect-square sm:w-12 sm:h-12 rounded-full flex-initial"
             )}
+            color={colorIndexToPalette[index]}
             disabled={isDisabled}
             key={index}
             onClick={() => {
@@ -51,7 +43,6 @@ export const SelectableGems: FC<SelectableGemsProps> = ({
                 onSelect(index);
               }
             }}
-            sx={{ minWidth: 0 }}
           >
             {availableCount}
           </Button>

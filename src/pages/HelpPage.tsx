@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-key */
 import { SyntheticEvent, useState } from "react";
 import { GemDisplay } from "../components/Shared/GemDisplay/GemDisplay";
-import { Color } from "../Interfaces";
+import { Color } from "../interfaces/Interfaces";
 import { CardDisplay } from "../components/Shared/CardDisplay/CardDisplay";
 import { level2Cards, nobles } from "../constants";
 import { NobleDisplay } from "../components/Shared/NobleDisplay/NobleDisplay";

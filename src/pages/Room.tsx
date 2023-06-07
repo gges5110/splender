@@ -19,6 +19,7 @@ import { queryClient } from "../App";
 import { LobbyAPI } from "boardgame.io/src/types";
 import { PublicPlayerMetadata, useGameClient } from "../hooks/UseGameClient";
 import { MatchPlayerList } from "../components/Lobby/Matches/MatchPlayerList";
+import { GameName } from "../engine/SplendorGame";
 
 type RoomPhase = "waiting" | "playing";
 export const Room = () => {
@@ -37,7 +38,7 @@ export const Room = () => {
   const { data: matchData, error } = useQuery<LobbyAPI.Match>({
     queryKey: ["match", matchID],
     enabled: !isLocalAI,
-    queryFn: () => lobbyClient.getMatch("splendor", matchID || ""),
+    queryFn: () => lobbyClient.getMatch(GameName, matchID || ""),
     retry: 0,
     refetchInterval: !matchError ? 3000 : false,
     refetchOnWindowFocus: !matchError,
@@ -75,7 +76,7 @@ export const Room = () => {
       }
     : matchData;
 
-  const GameClient = useGameClient(resolvedMatchData);
+  const GameClient = useGameClient(resolvedMatchData, gameBoardDebug);
 
   useEffect(() => {
     return () => {
@@ -118,7 +119,7 @@ export const Room = () => {
               <Card>
                 <CardHeader
                   subheader={<div>Player: {playerName}</div>}
-                  title={<span>Room for {matchID}</span>}
+                  title={<span>Room ID: {matchID}</span>}
                 ></CardHeader>
                 <CardContent>
                   <MatchPlayerList players={resolvedMatchData?.players || []} />
@@ -177,7 +178,11 @@ export const Room = () => {
           {roomPhase === "playing" && resolvedMatchData && (
             <GameClient
               credentials={playerCredentials}
-              debug={gameBoardDebug}
+              debug={
+                gameBoardDebug
+                  ? { collapseOnLoad: true, hideToggleButton: false }
+                  : false
+              }
               match={resolvedMatchData}
               matchID={matchID}
               playerID={playerID}

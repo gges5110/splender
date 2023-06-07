@@ -1,7 +1,7 @@
 import { CardsOnTable } from "./CardsOnTable";
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
-import { Color } from "../../../../../Interfaces";
+import { Color } from "../../../../../interfaces/Interfaces";
 import userEvent from "@testing-library/user-event";
 
 describe("CardsOnTable", () => {

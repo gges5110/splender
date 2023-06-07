@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Player } from "../../../Interfaces";
+import { Player } from "../../../interfaces/Interfaces";
 import { useState } from "react";
 import { Button, Dialog } from "@mui/material";
 

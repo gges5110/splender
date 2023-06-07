@@ -3,6 +3,7 @@ import { matchInfoAtom } from "../Atoms";
 import { useMutation } from "@tanstack/react-query";
 import { lobbyClient } from "../pages/Lobby";
 import { queryClient } from "../App";
+import { GameName } from "../engine/SplendorGame";
 
 interface LeaveMatchArgs {
   matchID: string;
@@ -13,7 +14,7 @@ export const useLeaveMatch = () => {
 
   return useMutation({
     mutationFn: ({ matchID }: LeaveMatchArgs) =>
-      lobbyClient.leaveMatch("splendor", matchID, {
+      lobbyClient.leaveMatch(GameName, matchID, {
         playerID: matchInfo?.playerID || "",
         credentials: matchInfo?.playerCredentials || "",
       }),

@@ -1,4 +1,4 @@
-import { Card, Player } from "../../../../../../Interfaces";
+import { Card, Player } from "../../../../../../interfaces/Interfaces";
 import { FC, useEffect, useRef, useState } from "react";
 import * as React from "react";
 import { motion } from "framer-motion";

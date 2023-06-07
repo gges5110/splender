@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { NobleDisplay } from "../../../../Shared/NobleDisplay/NobleDisplay";
-import { Noble, Player } from "../../../../../Interfaces";
+import { Noble, Player } from "../../../../../interfaces/Interfaces";
 import { getVisitingNobleIndexArray } from "../../../../../engine/MovesUtil";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 

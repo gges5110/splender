@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Card, Player } from "../../../../../Interfaces";
+import { Card, Player } from "../../../../../interfaces/Interfaces";
 import { CardDisplay } from "../../../../Shared/CardDisplay/CardDisplay";
 import { playerCanAffordCard } from "../../../../../engine/MovesUtil";
 import AddIcon from "@mui/icons-material/Add";
-import { Button, Container, Dialog, DialogContent } from "@mui/material";
+import { Box, Button, Container, Dialog, DialogContent } from "@mui/material";
 import { DialogTitleWithClose } from "../../../../Shared/DialogTitleWithClose/DialogTitleWithClose";
 
 interface ReservedCardsDialogProps {
@@ -30,22 +30,30 @@ export const ReservedCardsDialog: React.FC<ReservedCardsDialogProps> = ({
       </DialogTitleWithClose>
       <DialogContent>
         <Container>
-          <div className={"flex gap-4"}>
+          <Box display={"flex"} gap={4}>
             {reservedCards.map((reservedCard, index) => (
-              <div className={"flex flex-col gap-2 items-center"} key={index}>
+              <Box
+                alignItems={"center"}
+                display={"flex"}
+                flexDirection={"column"}
+                gap={2}
+                key={index}
+              >
                 <CardDisplay card={reservedCard} enabled={false} key={index} />
                 <Button
+                  color={"neutral"}
                   disabled={!playerCanAffordCard(reservedCard, player)}
                   onClick={() => {
                     reservedCardOnClick(reservedCard, index);
                   }}
+                  startIcon={<AddIcon />}
                   variant={"outlined"}
                 >
-                  <AddIcon /> Purchase
+                  Purchase
                 </Button>
-              </div>
+              </Box>
             ))}
-          </div>
+          </Box>
         </Container>
       </DialogContent>
     </Dialog>

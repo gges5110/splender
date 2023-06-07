@@ -1,4 +1,4 @@
-import { Card, GameState } from "../../../Interfaces";
+import { Card, GameState } from "../../../interfaces/Interfaces";
 import { DiscardGemsDialog } from "./GemsSection/DiscardGemsDialog/DiscardGemsDialog";
 import { Ctx } from "boardgame.io";
 import { FC, useState } from "react";
@@ -27,7 +27,7 @@ export const PlayingTable: FC<PlayingTableProps> = ({
   moves,
   playerID,
 }) => {
-  const { nobles, cardsOnTable, cardsInDeck, gems, players } = G;
+  const { nobles, cardsOnTable, numCardsInDeck, gems, players } = G;
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [buildDialogProps, setBuildDialogProps] = useState<
     BuildDialogProps | undefined
@@ -63,11 +63,11 @@ export const PlayingTable: FC<PlayingTableProps> = ({
           build={moves.build}
           buildDialogProps={buildDialogProps}
           cards={cardsOnTable}
-          cardsInDeck={cardsInDeck}
           closeDialog={closeBuildDialog}
           dialogOpen={dialogOpen}
           disabled={!currentPlayerActive}
           hideAffordableHint={!currentPlayerActive}
+          numCardsInDeck={numCardsInDeck}
           onClick={(buildDialogProps) => {
             setDialogOpen(true);
             setBuildDialogProps(buildDialogProps);

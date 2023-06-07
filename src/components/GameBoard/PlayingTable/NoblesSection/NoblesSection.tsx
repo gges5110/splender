@@ -1,4 +1,4 @@
-import { Noble } from "../../../../Interfaces";
+import { Noble } from "../../../../interfaces/Interfaces";
 import { FC } from "react";
 import { NobleDisplay } from "../../../Shared/NobleDisplay/NobleDisplay";
 import { SectionCollapse } from "../../../Shared/SectionCollapse/SectionCollapse";

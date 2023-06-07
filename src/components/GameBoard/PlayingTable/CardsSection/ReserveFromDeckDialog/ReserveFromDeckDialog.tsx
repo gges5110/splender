@@ -1,6 +1,12 @@
 import { DialogProps } from "../../../../../interfaces/DialogProps";
 import { FC } from "react";
-import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
 import { DialogTitleWithClose } from "../../../../Shared/DialogTitleWithClose/DialogTitleWithClose";
@@ -23,16 +29,19 @@ export const ReserveFromDeckDialog: FC<ReserveFromDeckDialogProps> = ({
         Reserve from deck
       </DialogTitleWithClose>
       <DialogContent>
-        <p className={"text-gray-500"}>
+        <DialogContentText>
           Would you like to reserve from the deck at level {level + 1}?
-        </p>
+        </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onConfirm}>
-          <CheckIcon /> Confirm
+        <Button onClick={onConfirm} startIcon={<CheckIcon />}>
+          Confirm
         </Button>
-        <Button onClick={onClose} variant={"outlined"}>
-          <CloseIcon />
+        <Button
+          onClick={onClose}
+          startIcon={<CloseIcon />}
+          variant={"outlined"}
+        >
           Cancel
         </Button>
       </DialogActions>

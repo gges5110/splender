@@ -1,4 +1,4 @@
-import { Card, Player } from "../../../../Interfaces";
+import { Card, Player } from "../../../../interfaces/Interfaces";
 import { FC, useState } from "react";
 import { CardDialog } from "./CardDialog/CardDialog";
 import { CardsOnTable } from "./CardsOnTable/CardsOnTable";
@@ -10,12 +10,12 @@ interface CardsSectionProps {
   build(...args: any[]): void;
   buildDialogProps?: BuildDialogProps;
   cards: Array<Array<Card | undefined>>;
-  cardsInDeck: Array<Array<Card>>;
   closeDialog(): void;
   dialogOpen: boolean;
   disabled?: boolean;
-
   hideAffordableHint?: boolean;
+
+  numCardsInDeck: Array<number>;
   onClick(buildDialogProps: BuildDialogProps): void;
   player: Player;
   reserve(...args: any[]): void;
@@ -29,7 +29,7 @@ export const CardsSection: FC<CardsSectionProps> = ({
   buildDialogProps,
   player,
   cards,
-  cardsInDeck,
+  numCardsInDeck,
   onClick,
   hideAffordableHint,
   disabled,
@@ -76,10 +76,10 @@ export const CardsSection: FC<CardsSectionProps> = ({
           <CardsOnTable
             cardOnClick={onClick}
             cards={cards}
-            cardsInDeck={cardsInDeck}
             deckOnClick={deckOnClick}
             disabled={disabled}
             hideAffordableHint={hideAffordableHint}
+            numCardsInDeck={numCardsInDeck}
             player={player}
           />
         </div>

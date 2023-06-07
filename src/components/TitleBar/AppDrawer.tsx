@@ -97,7 +97,7 @@ export const AppDrawer: FC<AppDrawerProps> = ({ open, onClose }) => {
           <ListItemIcon sx={{ minWidth: 32 }}>
             <BuildOutlinedIcon />
           </ListItemIcon>
-          <ListItemText primary={"Debug"} secondary={"Reload required"} />
+          <ListItemText primary={"Debug Panel"} />
           <Switch
             checked={gameBoardDebug}
             edge={"end"}

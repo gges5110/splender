@@ -1,6 +1,6 @@
 import { atomWithStorage } from "jotai/utils";
 import { atom } from "jotai";
-import { ColorTheme } from "./components/TitleBar/ColorThemeSelector/ColorThemeSelector";
+import { ColorTheme } from "./styles/paletteTheme";
 
 export const playerNameAtom = atomWithStorage<string | undefined>(
   "playerName",

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Noble } from "../../../Interfaces";
+import { Noble } from "../../../interfaces/Interfaces";
 import { GemDisplay } from "../GemDisplay/GemDisplay";
 import clsx from "clsx";
 
@@ -17,7 +17,7 @@ export const NobleDisplay: React.FC<NobleDisplayProps> = ({
     <div
       className={clsx(
         "noble-size",
-        "shadow-xl rounded-xl relative bg-gradient-to-l from-yellow-300 to-yellow-200 text-black",
+        "shadow-xl rounded-xl relative bg-gradient-to-l from-yellow-300 to-yellow-200",
         {
           "cursor-pointer": onClick !== undefined,
         }

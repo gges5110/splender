@@ -7,46 +7,9 @@ import {
   reserve,
 } from "./Moves";
 import { enumerateAIMoves } from "./AI";
-import { Card, GameState, Player } from "../Interfaces";
-import { level1Cards, level2Cards, level3Cards, nobles } from "../constants";
+import { GameState } from "../interfaces/Interfaces";
 import type { Ctx, Game } from "boardgame.io";
-
-const populateLevel1Cards = (): Card[] => {
-  return Object.assign([], level1Cards);
-};
-
-const populateLevel2Cards = (): Card[] => {
-  return Object.assign([], level2Cards);
-};
-
-const populateLevel3Cards = (): Card[] => {
-  return Object.assign([], level3Cards);
-};
-
-// Setup functions
-const setupGems = (numPlayers: number): number[] => {
-  switch (numPlayers) {
-    case 2:
-      return [4, 4, 4, 4, 4, 5];
-    case 3:
-      return [5, 5, 5, 5, 5, 5];
-    default:
-      return [7, 7, 7, 7, 7, 5];
-  }
-};
-
-export const getDefaultPlayer = (): Player => {
-  return {
-    cards: [],
-    reservedCards: [],
-    gems: [0, 0, 0, 0, 0, 0],
-    nobles: [],
-  };
-};
-
-const setupPlayers = (numPlayers: number): Player[] => {
-  return Array(numPlayers).fill(getDefaultPlayer());
-};
+import { setup } from "./GameSetup";
 
 const endIf = (G: GameState, ctx: Ctx) => {
   if (Number(ctx.currentPlayer) !== ctx.numPlayers - 1) {
@@ -77,30 +40,10 @@ const endIf = (G: GameState, ctx: Ctx) => {
   }
 };
 
-const setup = (ctx: Ctx) => {
-  // Setup gems, cards and nobles
-  const level1Cards: Card[] = ctx.random?.Shuffle(populateLevel1Cards()) || [];
-  const a = level1Cards.splice(0, 4);
-
-  const level2Cards: Card[] = ctx.random?.Shuffle(populateLevel2Cards()) || [];
-  const b = level2Cards.splice(0, 4);
-
-  const level3Cards = ctx.random?.Shuffle(populateLevel3Cards()) || [];
-  const c = level3Cards.splice(0, 4);
-
-  const cardsOnTable = [a, b, c];
-
-  return {
-    cardsOnTable: cardsOnTable,
-    cardsInDeck: [level1Cards, level2Cards, level3Cards],
-    gems: setupGems(ctx.numPlayers),
-    players: setupPlayers(ctx.numPlayers),
-    nobles: ctx.random?.Shuffle(nobles).splice(0, ctx.numPlayers + 1) || [],
-  };
-};
+export const GameName = "splendor";
 
 export const SplendorGame: Game<GameState> = {
-  name: "splendor",
+  name: GameName,
   setup,
   endIf,
   turn: {
@@ -109,8 +52,8 @@ export const SplendorGame: Game<GameState> = {
       Main: {
         moves: {
           pick,
-          build,
-          reserve,
+          build: { move: build, client: false },
+          reserve: { move: reserve, client: false },
           buildFromReserve,
         },
       },
@@ -121,10 +64,15 @@ export const SplendorGame: Game<GameState> = {
   ai: {
     enumerate: enumerateAIMoves,
   },
+  playerView: (G) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { cardsInDeck, ...strippedGameState } = G;
+    return strippedGameState;
+  },
   moves: {
     pick,
-    build,
-    reserve,
+    build: { move: build, client: false },
+    reserve: { move: reserve, client: false },
     buildFromReserve,
     pickNoble,
     discardGems,

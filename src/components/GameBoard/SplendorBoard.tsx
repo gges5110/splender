@@ -1,6 +1,6 @@
 import * as React from "react";
 import { BoardProps } from "boardgame.io/react";
-import { GameState } from "../../Interfaces";
+import { GameState } from "../../interfaces/Interfaces";
 import { PlayingTable } from "./PlayingTable/PlayingTable";
 import { PlayerBoards } from "./PlayerBoards/PlayerBoards";
 import { GameEndDialog } from "../Shared/Dialogs/GameEndDialog";
@@ -29,7 +29,7 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
   ] = useState(false);
 
   return (
-    <Box>
+    <Box display={"flex"} flexDirection={"column"}>
       <RoomInfoDialog
         matchData={match}
         onClose={() => {
@@ -37,7 +37,13 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
         }}
         open={isDrawerOpen}
       />
-      <Box alignItems={"center"} display={"flex"} gap={2} mb={1}>
+      <Box
+        alignItems={"center"}
+        display={"flex"}
+        gap={2}
+        mb={1}
+        width={"fit-content"}
+      >
         <Button
           onClick={() => {
             setIsDrawerOpen(true);
@@ -49,10 +55,13 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
       </Box>
 
       <Box
+        alignSelf={"center"}
         display={"flex"}
-        flexWrap={{ xs: "wrap", sm: "nowrap" }}
+        flexWrap={{ xs: "wrap", lg: "nowrap" }}
         gap={4}
         justifyItems={"center"}
+        mx={"auto"}
+        width={{ xs: "100%", md: "fit-content" }}
       >
         <NewGameConfirmationDialog
           onClose={() => {
@@ -72,10 +81,10 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
           winner={ctx.gameover?.winner}
         />
 
-        <Box width={{ xs: "100%", sm: "max-content" }}>
+        <Box width={{ xs: "100%", md: "max-content" }}>
           <PlayingTable G={G} ctx={ctx} moves={moves} playerID={playerID} />
         </Box>
-        <Box width={{ xs: "100%", sm: "max-content" }}>
+        <Box width={{ xs: "100%", md: "max-content" }}>
           <PlayerBoards
             buildFromReserve={moves.buildFromReserve}
             currentPlayer={ctx.currentPlayer}

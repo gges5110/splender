@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { lobbyClient } from "../pages/Lobby";
 import { matchInfoAtom } from "../Atoms";
+import { GameName } from "../engine/SplendorGame";
 
 export interface JoinMatchArgs {
   matchID: string;
@@ -20,7 +21,7 @@ export const useJoinMatch = () => {
   return useMutation({
     mutationFn: ({ matchID, playerName }: JoinMatchArgs) => {
       setSelectedMatchID(matchID);
-      return lobbyClient.joinMatch("splendor", matchID, {
+      return lobbyClient.joinMatch(GameName, matchID, {
         playerName,
       });
     },

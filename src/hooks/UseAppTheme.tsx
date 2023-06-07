@@ -2,22 +2,8 @@ import { createTheme, useMediaQuery } from "@mui/material";
 import { useAtomValue } from "jotai";
 import { useMemo } from "react";
 import { colorModeAtom } from "../Atoms";
-
-declare module "@mui/material/styles" {
-  interface Palette {
-    reserve: Palette["primary"];
-  }
-
-  interface PaletteOptions {
-    reserve: PaletteOptions["primary"];
-  }
-}
-
-declare module "@mui/material/Button" {
-  interface ButtonPropsColorOverrides {
-    reserve: true;
-  }
-}
+import { themeOptions } from "../styles/theme";
+import { paletteTheme } from "../styles/paletteTheme";
 
 export const useAppTheme = () => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -30,43 +16,10 @@ export const useAppTheme = () => {
       createTheme({
         palette: {
           mode: mode,
-          reserve: {
-            main: "gold",
-            contrastText: "#fff",
-          },
+          ...paletteTheme,
         },
-        typography: {
-          fontFamily: [
-            "Nunito",
-            "Arial",
-            "sans-serif",
-            "BlinkMacSystemFont",
-            "-apple-system",
-          ].join(","),
-        },
-        components: {
-          MuiButton: {
-            defaultProps: {
-              variant: "contained",
-            },
-            styleOverrides: {
-              root: {
-                textTransform: "none",
-              },
-            },
-          },
-          MuiCard: {
-            defaultProps: {
-              raised: true,
-            },
-            styleOverrides: {
-              root: {
-                borderRadius: 8,
-              },
-            },
-          },
-        },
+        ...themeOptions,
       }),
-    [prefersDarkMode, mode]
+    [mode]
   );
 };

@@ -30,8 +30,9 @@ export interface GameState {
   cardsInDeck: Card[][];
   // intentionally allow undefined element to remember the card position on the table
   // Index: [level][column], level 0 is the lowest/cheapest and level 2 is the highest.
-  cardsOnTable: Array<Array<Card | undefined>>;
+  cardsOnTable: Array<Array<Card | undefined>>; // secret
   gems: number[];
   nobles: Noble[];
+  numCardsInDeck: Array<number>;
   players: Player[];
 }

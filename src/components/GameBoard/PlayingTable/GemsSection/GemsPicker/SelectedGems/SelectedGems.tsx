@@ -1,9 +1,9 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
-import { gemsColorStyle, gemsTextColorStyle } from "../../../../../../styles";
 import { Button } from "@mui/material";
 import { FC, useState } from "react";
+import { colorIndexToPalette } from "../../../../../../styles/paletteTheme";
 
 interface SelectedGemsProps {
   selectedGemOnClick(index: number): void;
@@ -69,15 +69,12 @@ const SelectedGem: FC<SelectedGemProps> = ({
             }}
           >
             <Button
-              className={clsx(
-                "gem-size gem-button-deselect flex-initial",
-                gemsTextColorStyle[index],
-                gemsColorStyle[index]
-              )}
+              className={clsx("gem-size gem-button-deselect flex-initial")}
+              color={colorIndexToPalette[index]}
               onClick={() => {
                 selectedGemOnClick(index);
               }}
-              sx={{ minWidth: 0, borderRadius: "100%" }}
+              sx={{ borderRadius: "100%" }}
             >
               {selectedGems[index]}
             </Button>

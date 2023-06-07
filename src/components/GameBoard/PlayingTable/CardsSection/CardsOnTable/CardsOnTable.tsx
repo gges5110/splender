@@ -1,4 +1,4 @@
-import { Card, Player } from "../../../../../Interfaces";
+import { Card, Player } from "../../../../../interfaces/Interfaces";
 import * as React from "react";
 import { CardOnTable } from "./CardOnTable/CardOnTable";
 import { BuildDialogProps } from "../../PlayingTable";
@@ -6,17 +6,17 @@ import { BuildDialogProps } from "../../PlayingTable";
 interface CardsOnTableProps {
   cardOnClick(buildDialogProps: BuildDialogProps): void;
   cards: Array<Array<Card | undefined>>;
-  cardsInDeck: Array<Array<Card>>;
-
   deckOnClick(level: number): void;
+
   disabled?: boolean;
   hideAffordableHint?: boolean;
+  numCardsInDeck: Array<number>;
   player: Player;
 }
 
 export const CardsOnTable: React.FC<CardsOnTableProps> = ({
   cards: cardsPerLevel,
-  cardsInDeck,
+  numCardsInDeck,
   player,
   cardOnClick,
   deckOnClick,
@@ -34,13 +34,13 @@ export const CardsOnTable: React.FC<CardsOnTableProps> = ({
           <React.Fragment key={level}>
             <button
               className={"deck-button"}
-              disabled={cardsInDeck[level].length === 0 || disabled}
+              disabled={numCardsInDeck[level] === 0 || disabled}
               key={level}
               onClick={() => {
                 deckOnClick(level);
               }}
             >
-              <div>{cardsInDeck[level].length}</div>
+              <div>{numCardsInDeck[level]}</div>
             </button>
             {cards.map((card, index) => {
               const onClick = () => {
