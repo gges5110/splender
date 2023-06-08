@@ -13,14 +13,11 @@ import {
 } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
-import animals from "../../utils/animals.json";
 import { useSetAtom } from "jotai";
 import MenuIcon from "@mui/icons-material/Menu";
 import { AppDrawer } from "./AppDrawer";
+import { generateName } from "../../utils/GameUtils";
 
-export function generateName() {
-  return "Anonymous " + animals[Math.floor(Math.random() * animals.length)];
-}
 interface TitleBarProps {}
 
 export const TitleBar: FC<TitleBarProps> = () => {

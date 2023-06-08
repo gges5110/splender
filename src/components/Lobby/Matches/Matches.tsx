@@ -15,12 +15,12 @@ import { lobbyClient } from "../../../pages/Lobby";
 import { MatchPlayerList } from "./MatchPlayerList";
 import { blueGrey, grey } from "@mui/material/colors";
 import { LocalAIMatchCard } from "./LocalAIMatchCard";
-import { GameName } from "../../../engine/SplendorGame";
+import { GAME_NAME } from "../../../config";
 
 export const Matches = () => {
   const { data } = useQuery({
     queryKey: ["matches"],
-    queryFn: () => lobbyClient.listMatches(GameName),
+    queryFn: () => lobbyClient.listMatches(GAME_NAME),
   });
 
   const playerName = useAtomValue(playerNameAtom) || "";

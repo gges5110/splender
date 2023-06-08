@@ -2,6 +2,7 @@ import { Card, Player } from "../../../../../interfaces/Interfaces";
 import * as React from "react";
 import { CardOnTable } from "./CardOnTable/CardOnTable";
 import { BuildDialogProps } from "../../PlayingTable";
+import { Button, Tooltip } from "@mui/material";
 
 interface CardsOnTableProps {
   cardOnClick(buildDialogProps: BuildDialogProps): void;
@@ -32,16 +33,19 @@ export const CardsOnTable: React.FC<CardsOnTableProps> = ({
       {cardsPerLevel
         .map((cards, level: number) => (
           <React.Fragment key={level}>
-            <button
-              className={"deck-button"}
-              disabled={numCardsInDeck[level] === 0 || disabled}
-              key={level}
-              onClick={() => {
-                deckOnClick(level);
-              }}
-            >
-              <div>{numCardsInDeck[level]}</div>
-            </button>
+            <Tooltip placement={"left"} title={"Deck"}>
+              <Button
+                color={"neutral"}
+                disabled={numCardsInDeck[level] === 0 || disabled}
+                key={level}
+                onClick={() => {
+                  deckOnClick(level);
+                }}
+                sx={{ width: "60%", mx: "auto" }}
+              >
+                <div>{numCardsInDeck[level]}</div>
+              </Button>
+            </Tooltip>
             {cards.map((card, index) => {
               const onClick = () => {
                 if (card) {

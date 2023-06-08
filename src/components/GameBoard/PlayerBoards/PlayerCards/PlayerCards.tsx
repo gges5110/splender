@@ -13,8 +13,9 @@ interface PlayerCardsProps {
   buildFromReserve(cardIdx: number): void;
   cards: Card[];
   isActivePlayer: boolean;
-  player: Player;
+  onCardClick(): void;
 
+  player: Player;
   reservedCards: Card[];
 }
 
@@ -24,6 +25,7 @@ export const PlayerCards: React.FC<PlayerCardsProps> = ({
   player,
   isActivePlayer,
   buildFromReserve,
+  onCardClick,
 }) => {
   const [reserveDialogOpen, setReserveDialogOpen] = useState<boolean>(false);
 
@@ -39,6 +41,7 @@ export const PlayerCards: React.FC<PlayerCardsProps> = ({
           {cardCount > 0 && (
             <Button
               color={colorIndexToPalette[index]}
+              onClick={onCardClick}
               sx={{ height: "100%", width: "100%", borderRadius: 2 }}
             >
               {cardCount}

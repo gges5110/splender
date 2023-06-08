@@ -3,18 +3,25 @@ import { playerNameAtom, usernameDialogOpenAtom } from "../../../../Atoms";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import {
+  Box,
   Button,
-  Container,
   Dialog,
   DialogActions,
+  DialogContent,
   DialogTitle,
   TextField,
 } from "@mui/material";
+import { generateName } from "../../../../utils/GameUtils";
 
 export const UsernameDialog = () => {
   const [playerName, setPlayerName] = useAtom(playerNameAtom);
   const [input, setInput] = useState<string>(playerName || "");
   const [open, setOpen] = useAtom(usernameDialogOpenAtom);
+
+  const handleSetPlayerName = (name: string) => {
+    setPlayerName(name);
+    setOpen(false);
+  };
 
   useEffect(() => {
     if (playerName) {
@@ -29,28 +36,41 @@ export const UsernameDialog = () => {
       open={open}
     >
       <DialogTitle sx={{ fontWeight: "600" }}>Set Name</DialogTitle>
-      <Container>
-        <TextField
-          autoFocus={true}
-          id={"username"}
-          label={"username"}
-          margin={"dense"}
-          name={"username"}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setInput(event.target.value);
-          }}
-          onKeyDown={(event) => {
-            if (event.key === "Enter") {
-              event.preventDefault();
-              setPlayerName(input);
-              setOpen(false);
-            }
-          }}
-          type={"text"}
-          value={input}
-          variant={"standard"}
-        />
-      </Container>
+      <DialogContent>
+        <Box alignItems={"center"} display={"flex"} gap={1}>
+          <TextField
+            autoFocus={true}
+            fullWidth={true}
+            id={"username"}
+            label={"username"}
+            name={"username"}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setInput(event.target.value);
+            }}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                event.preventDefault();
+                handleSetPlayerName(input);
+              }
+            }}
+            sx={{ minWidth: 300 }}
+            type={"text"}
+            value={input}
+            variant={"standard"}
+          />
+          <Button
+            onClick={() => {
+              const newName = generateName();
+              setInput(newName);
+            }}
+            sx={{ whiteSpace: "nowrap" }}
+            variant={"text"}
+          >
+            Auto Generate
+          </Button>
+        </Box>
+      </DialogContent>
+
       <DialogActions>
         <Button
           onClick={() => {
@@ -62,8 +82,7 @@ export const UsernameDialog = () => {
         </Button>
         <Button
           onClick={() => {
-            setPlayerName(input);
-            setOpen(false);
+            handleSetPlayerName(input);
           }}
         >
           Set name

@@ -6,7 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import { lobbyClient } from "../pages/Lobby";
 import { queryClient } from "../App";
 import { useState } from "react";
-import { GameName } from "../engine/SplendorGame";
+import { GAME_NAME } from "../config";
 
 interface CreateMatchArgs {
   matchType: MatchType;
@@ -22,7 +22,7 @@ export const useCreateMatch = () => {
   const createMatchMutation = useMutation({
     mutationFn: ({ numPlayers, matchType }: CreateMatchArgs) => {
       setMatchType(matchType);
-      return lobbyClient.createMatch(GameName, {
+      return lobbyClient.createMatch(GAME_NAME, {
         numPlayers,
         unlisted: matchType !== "online" ? true : undefined,
       });

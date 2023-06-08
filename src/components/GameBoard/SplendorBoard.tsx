@@ -54,6 +54,24 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
         <Typography>Turn: {ctx.turn}</Typography>
       </Box>
 
+      <NewGameConfirmationDialog
+        onClose={() => {
+          setNewGameConfirmationDialogOpen(false);
+        }}
+        onConfirm={() => {
+          reset();
+          setNewGameConfirmationDialogOpen(false);
+        }}
+        open={newGameConfirmationDialogOpen}
+      />
+      <GameEndDialog
+        players={G.players}
+        reset={() => {
+          reset();
+        }}
+        winner={ctx.gameover?.winner}
+      />
+
       <Box
         alignSelf={"center"}
         display={"flex"}
@@ -63,24 +81,6 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
         mx={"auto"}
         width={{ xs: "100%", md: "fit-content" }}
       >
-        <NewGameConfirmationDialog
-          onClose={() => {
-            setNewGameConfirmationDialogOpen(false);
-          }}
-          onConfirm={() => {
-            reset();
-            setNewGameConfirmationDialogOpen(false);
-          }}
-          open={newGameConfirmationDialogOpen}
-        />
-        <GameEndDialog
-          players={G.players}
-          reset={() => {
-            reset();
-          }}
-          winner={ctx.gameover?.winner}
-        />
-
         <Box width={{ xs: "100%", md: "max-content" }}>
           <PlayingTable G={G} ctx={ctx} moves={moves} playerID={playerID} />
         </Box>

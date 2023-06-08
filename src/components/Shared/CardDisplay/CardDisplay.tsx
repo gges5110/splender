@@ -19,12 +19,12 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
   affordable = false,
 }) => {
   if (card == null) {
-    return <button className={"card-size"} />;
+    return <Button className={"card-size"} />;
   }
 
   return (
     <Button
-      className={clsx("card-size rounded-lg relative shadow-xl select-none", {
+      className={clsx("card-size rounded-lg relative shadow-xl", {
         "card-affordable": affordable,
       })}
       color={colorIndexToPalette[card.color]}
@@ -33,7 +33,6 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
           onClick?.();
         }
       }}
-      onMouseDown={(event) => event.preventDefault()}
     >
       <div
         className={clsx(

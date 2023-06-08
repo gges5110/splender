@@ -74,6 +74,7 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
                 buildFromReserve={buildFromReserve}
                 cards={player.cards}
                 isActivePlayer={Number(currentPlayer) === index}
+                onCardClick={() => setPlayerDialogIndex(index)}
                 player={player}
                 reservedCards={player.reservedCards}
               />

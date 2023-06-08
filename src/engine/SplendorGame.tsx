@@ -10,6 +10,7 @@ import { enumerateAIMoves } from "./AI";
 import { GameState } from "../interfaces/Interfaces";
 import type { Ctx, Game } from "boardgame.io";
 import { setup } from "./GameSetup";
+import { GAME_NAME } from "../config";
 
 const endIf = (G: GameState, ctx: Ctx) => {
   if (Number(ctx.currentPlayer) !== ctx.numPlayers - 1) {
@@ -40,10 +41,8 @@ const endIf = (G: GameState, ctx: Ctx) => {
   }
 };
 
-export const GameName = "splendor";
-
 export const SplendorGame: Game<GameState> = {
-  name: GameName,
+  name: GAME_NAME,
   setup,
   endIf,
   turn: {

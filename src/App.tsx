@@ -1,6 +1,6 @@
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Button, CssBaseline, ThemeProvider } from "@mui/material";
 import "@fontsource/nunito/300.css";
 import "@fontsource/nunito/400.css";
 import "@fontsource/nunito/500.css";
@@ -18,7 +18,7 @@ const App = () => {
       <CssBaseline enableColorScheme={true} />
       <SnackbarProvider
         action={(snackbarId) => (
-          <button onClick={() => closeSnackbar(snackbarId)}>Dismiss</button>
+          <Button onClick={() => closeSnackbar(snackbarId)}>Dismiss</Button>
         )}
       >
         <QueryClientProvider client={queryClient}>
