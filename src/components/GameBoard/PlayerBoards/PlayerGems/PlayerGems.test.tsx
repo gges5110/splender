@@ -7,6 +7,6 @@ describe("PlayerGems", function () {
     render(<PlayerGems gems={gems} />);
 
     expect(screen.getByText("1")).toBeInTheDocument();
-    expect(screen.getByText("1")).toHaveClass("bg-gray-50");
+    expect(screen.getByText("1")).toHaveClass("gem-size");
   });
 });
