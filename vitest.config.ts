@@ -1,8 +1,6 @@
 import { defineConfig } from "vitest/config";
-import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  plugins: [react()],
   test: {
     globals: true,
     setupFiles: "src/setupTests.ts",
@@ -12,6 +10,7 @@ export default defineConfig({
     coverage: {
       reporter: ["text", "cobertura"],
       include: ["src/components/**/*.tsx"],
+      provider: "v8",
       all: true,
     },
   },
