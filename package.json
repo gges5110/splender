@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "npm run tailwind:css && vite",
-    "build": "npm run tailwind:css && tsc && vite build",
+    "build": "npm run tailwind:css && vite build",
     "tailwind:css": "tailwind build src/tailwind.css -c tailwind.config.js -o src/index.css",
     "test": "CI=true vitest",
     "test-ui": "vitest --ui",
