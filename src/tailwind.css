@@ -4,10 +4,10 @@
 
 @layer components {
     .card-size {
-        @apply w-16 h-24 sm:w-24 sm:h-32;
+        @apply w-full max-w-[6rem] sm:max-w-none sm:w-24 sm:h-32 aspect-[3/4];
     }
     .gem-size {
-        @apply w-8 sm:w-12 h-8 sm:h-12 flex-none;
+        @apply w-12 aspect-square sm:w-12 sm:h-12;
     }
     .gem-size-small {
         @apply w-6 sm:w-8 h-6 sm:h-8;
@@ -19,7 +19,7 @@
         @apply rounded-full select-none;
     }
     .noble-size {
-        @apply h-16 w-16 sm:h-28 sm:w-28;
+        @apply w-full max-w-[6rem] sm:max-w-none sm:h-28 sm:w-28 aspect-square;
     }
     .title {
         @apply text-gray-500 dark:text-gray-50;
@@ -28,15 +28,12 @@
         @apply ring-4 ring-gray-400;
     }
     .sections-container {
-        @apply rounded-xl sm:bg-slate-100 p-2 sm:p-8 mx-auto sm:shadow-xl h-full dark:bg-slate-800
+        @apply rounded-xl  p-2 sm:p-8 mx-auto sm:shadow-xl h-full
     }
     .playing-table-subsections-container {
         @apply p-1 sm:p-4
     }
     .playing-table-subsections-title {
         @apply flex w-full justify-between rounded-lg bg-blue-500/20 px-4 py-2 text-left font-medium hover:bg-blue-500/30 focus:outline-none focus-visible:ring focus-visible:ring-slate-500 focus-visible:ring-opacity-75
-    }
-    .deck-button {
-        @apply w-10 h-24 sm:w-16 sm:h-32 rounded-xl bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 flex justify-center items-center m-auto sm:mr-2 shadow-xl
     }
 }

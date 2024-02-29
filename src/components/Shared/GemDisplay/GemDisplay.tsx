@@ -1,12 +1,12 @@
-import { Color } from "../../../Interfaces";
 import * as React from "react";
 import clsx from "clsx";
-import { gemsColorStyle, gemsTextColorStyle } from "../../../styles";
+import { Box } from "@mui/material";
+import { colorIndexToPalette } from "../../../styles/paletteTheme";
 
 interface GemDisplayProps {
-  color: Color;
-  count: number;
   className?: string;
+  color: number;
+  count: number;
 }
 
 export const GemDisplay: React.FC<GemDisplayProps> = ({
@@ -15,15 +15,19 @@ export const GemDisplay: React.FC<GemDisplayProps> = ({
   className,
 }) => {
   return (
-    <div
-      className={clsx(
-        "rounded-full flex items-center justify-center select-none gem-size",
-        gemsTextColorStyle[color],
-        gemsColorStyle[color],
-        className
-      )}
+    <Box
+      alignItems={"center"}
+      borderRadius={"100%"}
+      className={clsx("gem-size", className)}
+      display={"flex"}
+      justifyContent={"center"}
+      sx={{
+        userSelect: "none",
+        color: `${colorIndexToPalette[color]}.contrastText`,
+        backgroundColor: `${colorIndexToPalette[color]}.main`,
+      }}
     >
       {count}
-    </div>
+    </Box>
   );
 };

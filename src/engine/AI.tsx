@@ -1,10 +1,10 @@
-import { Ctx } from "boardgame.io";
-import { GameState } from "../Interfaces";
+import { AiEnumerate, Ctx } from "boardgame.io";
+import { GameState } from "../interfaces/Interfaces";
 import { gemsInHandLimit } from "./Moves";
 import { getTotalCount, playerCanAffordCard } from "./MovesUtil";
 
-export const enumerateAIMoves = (G: GameState, ctx: Ctx) => {
-  const moves: any[] = [];
+export const enumerateAIMoves = (G: GameState, ctx: Ctx): AiEnumerate => {
+  const moves: AiEnumerate = [];
 
   // discard
   if (
@@ -98,6 +98,9 @@ export const enumerateAIMoves = (G: GameState, ctx: Ctx) => {
     });
   });
 
+  if (moves.length === 0) {
+    moves.push({ event: "endTurn" });
+  }
   return moves;
 };
 

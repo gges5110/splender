@@ -1,4 +1,4 @@
-import { Card, Color, Noble } from "./Interfaces";
+import { Card, Color, Noble } from "./interfaces/Interfaces";
 
 export const level1Cards: Card[] = [
   {

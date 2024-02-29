@@ -1,68 +1,82 @@
-import * as React from "react";
-import { FC, useState } from "react";
-import { useLocalStorage } from "usehooks-ts";
-import { WelcomeDialog } from "../Shared/Dialogs/WelcomeDialog";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
-import { GitHubIcon } from "../Shared/Icons";
-import { Button } from "../Shared/Button";
+import { FC, useEffect, useState } from "react";
 import { ColorThemeSelector } from "./ColorThemeSelector/ColorThemeSelector";
-import { NewGameConfirmationDialog } from "./NewGameConfirmationDialog/NewGameConfirmationDialog";
+import { Link as RouterLink } from "react-router-dom";
+import { useAtom } from "jotai/index";
+import { playerNameAtom, usernameDialogOpenAtom } from "../../Atoms";
+import {
+  AppBar,
+  Button,
+  IconButton,
+  Link,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
+import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
+import { useSetAtom } from "jotai";
+import MenuIcon from "@mui/icons-material/Menu";
+import { AppDrawer } from "./AppDrawer";
+import { generateName } from "../../utils/GameUtils";
 
-interface TitleBarProps {
-  startNewGame(): void;
-}
+interface TitleBarProps {}
 
-export const TitleBar: FC<TitleBarProps> = ({ startNewGame }) => {
-  const [showWelcomeDialog] = useLocalStorage("showWelcomeDialog", true);
-  const [welcomeDialogOpen, setWelcomeDialogOpen] = useState(showWelcomeDialog);
-  const [
-    newGameConfirmationDialogOpen,
-    setNewGameConfirmationDialogOpen,
-  ] = useState(false);
+export const TitleBar: FC<TitleBarProps> = () => {
+  const setOpen = useSetAtom(usernameDialogOpenAtom);
+  const [playerName, setPlayerName] = useAtom(playerNameAtom);
+  useEffect(() => {
+    if (localStorage.getItem("playerName") == null) {
+      setPlayerName(generateName());
+    }
+  }, [playerName]);
 
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   return (
-    <>
-      <WelcomeDialog
-        open={welcomeDialogOpen}
-        onClose={() => {
-          setWelcomeDialogOpen(false);
-        }}
-      />
-      <NewGameConfirmationDialog
-        open={newGameConfirmationDialogOpen}
-        onClose={() => {
-          setNewGameConfirmationDialogOpen(false);
-        }}
-        onConfirm={() => {
-          startNewGame();
-          setNewGameConfirmationDialogOpen(false);
-        }}
-      />
-      <div className={"flex flex-row justify-between items-center"}>
-        <h1 className={"font-semibold text-lg"}>Splendor</h1>
-        <div className={"flex flex-row gap-2 items-center"}>
-          <ColorThemeSelector />
-          <button
-            className={"rounded-full hover:bg-gray-200 p-1.5"}
-            onClick={() => {
-              setWelcomeDialogOpen(true);
-            }}
-          >
-            <InformationCircleIcon className={"h-6 w-6"} />
-          </button>
-          <a href={"https://github.com/gges5110/splender"}>
-            <GitHubIcon />
-          </a>
+    <AppBar color={"inherit"}>
+      <Toolbar>
+        <AppDrawer
+          onClose={() => {
+            setIsDrawerOpen(false);
+          }}
+          open={isDrawerOpen}
+        />
+        <IconButton
+          aria-label={"menu"}
+          color={"inherit"}
+          edge={"start"}
+          onClick={() => {
+            setIsDrawerOpen(true);
+          }}
+          size={"large"}
+          sx={{ mr: 2 }}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Link
+          color={"inherit"}
+          component={RouterLink}
+          sx={{ display: "flex", gap: 1, alignItems: "center", flexGrow: 1 }}
+          to={"/"}
+          underline={"hover"}
+        >
+          <DiamondOutlinedIcon />
+          <Typography variant={"h5"}>Splendor</Typography>
+        </Link>
 
-          <Button
-            onClick={() => {
-              setNewGameConfirmationDialogOpen(true);
-            }}
-          >
-            New Game
-          </Button>
-        </div>
-      </div>
-    </>
+        <Button
+          color={"inherit"}
+          onClick={() => {
+            setOpen(true);
+          }}
+          variant={"text"}
+        >
+          <PersonIcon />
+          <Typography variant={"body2"} whiteSpace={"nowrap"}>
+            {playerName}
+          </Typography>
+        </Button>
+
+        <ColorThemeSelector />
+      </Toolbar>
+    </AppBar>
   );
 };
