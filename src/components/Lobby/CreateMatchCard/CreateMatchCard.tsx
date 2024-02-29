@@ -22,7 +22,7 @@ export const CreateMatchCard = () => {
     setNumberOfPlayers(Number((event.target as HTMLInputElement).value));
   };
 
-  const [matchType, setMatchType] = useState<MatchType>("online");
+  const [matchType, setMatchType] = useState<MatchType>("localAI");
   const handleMatchTypeChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -66,11 +66,13 @@ export const CreateMatchCard = () => {
                 control={<Radio />}
                 label={"Online"}
                 value={"online"}
+                disabled={true}
               />
               <FormControlLabel
                 control={<Radio />}
                 label={"Local"}
                 value={"local"}
+                disabled={true}
               />
               <FormControlLabel
                 control={<Radio />}
