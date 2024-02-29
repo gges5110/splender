@@ -15,7 +15,7 @@ export const DiscardGemsDialog: React.FC<DiscardGemDialogProps> = ({
   discardGems,
 }) => {
   return (
-    <Dialog onClose={() => {}} open={open}>
+    <Dialog open={open}>
       <DialogTitle className={"text-lg leading-6 font-medium text-gray-700"}>
         Discard gems
       </DialogTitle>

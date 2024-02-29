@@ -21,7 +21,7 @@ export const PickNobleDialog: FC<PickNobleDialogProps> = ({
   pick,
 }) => {
   return (
-    <Dialog onClose={() => {}} open={open}>
+    <Dialog open={open}>
       <DialogTitle className={"text-lg leading-6 font-medium text-gray-700"}>
         Pick Noble
       </DialogTitle>

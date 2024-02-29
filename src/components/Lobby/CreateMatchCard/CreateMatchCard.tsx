@@ -64,15 +64,15 @@ export const CreateMatchCard = () => {
             >
               <FormControlLabel
                 control={<Radio />}
+                disabled={true}
                 label={"Online"}
                 value={"online"}
-                disabled={true}
               />
               <FormControlLabel
                 control={<Radio />}
+                disabled={true}
                 label={"Local"}
                 value={"local"}
-                disabled={true}
               />
               <FormControlLabel
                 control={<Radio />}
