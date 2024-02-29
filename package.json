@@ -37,8 +37,7 @@
     "preview": "vite preview",
     "build-server": "npx tsc",
     "dev": "DEBUG=* ts-node-dev -P tsconfig-server.json --watch src/server src/server/server.ts",
-    "lint:fix": "eslint -c .eslintrc.json 'src/**/*.tsx' --fix",
-    "cypress:open": "cypress open"
+    "lint:fix": "eslint -c .eslintrc.json 'src/**/*.tsx' --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -69,7 +68,6 @@
     "@vitest/coverage-c8": "^0.25.2",
     "@vitest/ui": "^0.25.2",
     "autoprefixer": "^10.4.7",
-    "cypress": "^12.13.0",
     "eslint": "^8.41.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-config-react": "^1.1.7",
