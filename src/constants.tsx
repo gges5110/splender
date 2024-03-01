@@ -498,27 +498,27 @@ export const nobles: Noble[] = [
   },
   {
     cardCountByColors: [4, 4, 0, 0, 0],
-    points: 4,
+    points: 3,
     acquired: false,
   },
   {
     cardCountByColors: [0, 4, 4, 0, 0],
-    points: 4,
+    points: 3,
     acquired: false,
   },
   {
     cardCountByColors: [0, 0, 4, 4, 0],
-    points: 4,
+    points: 3,
     acquired: false,
   },
   {
     cardCountByColors: [0, 0, 0, 4, 4],
-    points: 4,
+    points: 3,
     acquired: false,
   },
   {
     cardCountByColors: [4, 0, 0, 0, 4],
-    points: 4,
+    points: 3,
     acquired: false,
   },
 ];
