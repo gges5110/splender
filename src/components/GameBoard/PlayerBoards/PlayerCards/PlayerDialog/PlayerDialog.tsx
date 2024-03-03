@@ -7,14 +7,15 @@ import { DialogTitleWithClose } from "../../../../Shared/DialogTitleWithClose/Di
 interface PlayerDialogProps {
   closePlayerDialog(): void;
   player: Player;
-
   playerDialogOpen: boolean;
+  playerName: string;
 }
 
 export const PlayerDialog: React.FC<PlayerDialogProps> = ({
   playerDialogOpen,
   closePlayerDialog,
   player,
+  playerName,
 }) => {
   return (
     <Dialog
@@ -23,7 +24,7 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
       open={playerDialogOpen}
     >
       <DialogTitleWithClose onClose={closePlayerDialog}>
-        Player nobles and cards
+        <PlayerName playerName={playerName} /> nobles and cards
       </DialogTitleWithClose>
       <DialogContent>
         <div className={"flex flex-col justify-center gap-2"}>
@@ -33,7 +34,8 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
             ))}
             {player.nobles.length === 0 && (
               <Typography variant={"body1"}>
-                The player does not have any nobles yet.
+                <PlayerName playerName={playerName} /> does not have any nobles
+                yet.
               </Typography>
             )}
           </div>
@@ -43,7 +45,8 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
             ))}
             {player.cards.length === 0 && (
               <Typography variant={"body1"}>
-                The player does not have any cards yet.
+                <PlayerName playerName={playerName} /> does not have any cards
+                yet.
               </Typography>
             )}
           </Box>
@@ -52,3 +55,11 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
     </Dialog>
   );
 };
+
+export const PlayerName: React.FC<{ playerName: string }> = ({
+  playerName,
+}) => (
+  <Typography display={"inline"} fontWeight={600} variant={"body1"}>
+    {playerName}
+  </Typography>
+);
