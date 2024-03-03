@@ -12,15 +12,13 @@ export const ResetButton: FC<ResetButtonProps> = ({ onClick, disabled }) => {
   return (
     <Button
       className={
-        "font-semibold py-2 px-4 rounded-full shadow-md bg-gray-100 hover:bg-gray-200"
+        "font-semibold py-2 px-4 rounded-full shadow-md bg-gray-100 hover:bg-gray-200 col-span-2"
       }
       disabled={disabled}
       onClick={onClick}
       variant={"outlined"}
     >
-      <span>
-        <AutorenewIcon /> Reset
-      </span>
+      <AutorenewIcon /> Reset
     </Button>
   );
 };
