@@ -22,7 +22,7 @@ export const DiscardGemsDialog: React.FC<DiscardGemDialogProps> = ({
       <DialogContent>
         <GemsPicker
           gems={playerGems}
-          gemsToDiscard={playerGems.slice(0, 5).reduce((p, v) => p + v, 0) - 10}
+          gemsToDiscard={playerGems.reduce((p, v) => p + v, 0) - 10}
           mode={GemsPickerMode.DISCARD}
           onSelect={discardGems}
         />
