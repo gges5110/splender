@@ -98,9 +98,7 @@ const getPlayerPoints = (player: Player): number => {
   return (
     (player.cards.length > 0 &&
       player.cards.map((card) => card.points).reduce((p, c) => p + c, 0) +
-        player.nobles
-          .map((noble) => noble.points)
-          .reduce((p, c) => p + c, 0)) ||
+        player.nobles.length * 3) ||
     0
   );
 };

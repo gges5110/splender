@@ -23,9 +23,7 @@ const endIf = (G: GameState, ctx: Ctx) => {
     const score =
       (player.cards.length > 0 &&
         player.cards.map((card) => card.points).reduce((p, c) => p + c, 0) +
-          player.nobles
-            .map((noble) => noble.points)
-            .reduce((p, c) => p + c, 0)) ||
+          player.nobles.length * 3) ||
       0;
 
     if (score > highestScore) {

@@ -47,7 +47,6 @@ export const ReservedCardsDialog: React.FC<ReservedCardsDialogProps> = ({
                     reservedCardOnClick(reservedCard, index);
                   }}
                   startIcon={<AddIcon />}
-                  variant={"outlined"}
                 >
                   Purchase
                 </Button>

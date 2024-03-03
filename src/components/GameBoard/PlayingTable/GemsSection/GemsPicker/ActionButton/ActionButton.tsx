@@ -16,15 +16,12 @@ export const ActionButton: FC<ActionButtonProps> = ({
 }) => {
   return (
     <Button
-      className={
-        "w-24 flex-none h-8 sm:h-10 inline-flex items-center bg-blue-100 text-blue-900 text-base font-semibold py-2 px-4 rounded-full shadow-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-50"
-      }
+      className={"col-span-2"}
       disabled={disabled}
       onClick={onClick}
+      sx={{ borderRadius: 100 }}
     >
-      <span>
-        <CheckIcon /> {actionLabelText}
-      </span>
+      <CheckIcon /> {actionLabelText}
     </Button>
   );
 };

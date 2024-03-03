@@ -51,7 +51,7 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
         >
           Room Info
         </Button>
-        <Typography>Turn: {ctx.turn}</Typography>
+        <Typography>Turn: {Math.ceil(ctx.turn / ctx.numPlayers)}</Typography>
       </Box>
 
       <NewGameConfirmationDialog

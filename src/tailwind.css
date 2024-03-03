@@ -7,7 +7,7 @@
         @apply w-full max-w-[6rem] sm:max-w-none sm:w-24 sm:h-32 aspect-[3/4];
     }
     .gem-size {
-        @apply w-12 aspect-square sm:w-12 sm:h-12;
+        @apply w-12 aspect-square;
     }
     .gem-size-small {
         @apply w-6 sm:w-8 h-6 sm:h-8;

@@ -41,7 +41,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
 
   return (
     <>
-      <div className={"flex justify-between items-center gap-2"}>
+      <div className={"gap-2 grid grid-cols-8"}>
         <SelectableGems
           disabled={disabled}
           gems={gems}
@@ -69,7 +69,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
         />
       </div>
 
-      <div className={"flex justify-between items-center gap-2"}>
+      <div className={"gap-2 grid grid-cols-8"}>
         <SelectedGems
           selectedGemOnClick={(index) => {
             setGems(
