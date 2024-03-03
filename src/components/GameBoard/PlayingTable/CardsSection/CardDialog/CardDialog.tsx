@@ -31,7 +31,7 @@ export const CardDialog: React.FC<CardDialogProps> = ({
   return (
     <Dialog onClose={closeDialog} open={open}>
       <DialogTitleWithClose onClose={closeDialog}>Card</DialogTitleWithClose>
-      <DialogContent sx={{ marginX: "auto" }}>
+      <DialogContent sx={{ display: "flex", justifyContent: "center" }}>
         {buildDialogProps && (
           <CardDisplay card={buildDialogProps.card} enabled={true} />
         )}
