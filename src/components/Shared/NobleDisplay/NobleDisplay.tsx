@@ -29,7 +29,7 @@ export const NobleDisplay: React.FC<NobleDisplayProps> = ({
           "absolute top-0 right-0 h-6 leading-6 sm:h-8 sm:leading-8 w-6 sm:w-8 text-center align-middle select-none"
         }
       >
-        {noble.points}
+        3
       </div>
       <div className={"absolute bottom-0 left-0 p-1 sm:p-2 h-18"}>
         <div className={"flex flex-wrap-reverse w-full h-full gap-1"}>

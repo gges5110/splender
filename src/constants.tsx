@@ -473,52 +473,42 @@ export const level3Cards: Card[] = [
 export const nobles: Noble[] = [
   {
     cardCountByColors: [3, 3, 3, 0, 0],
-    points: 3,
     acquired: false,
   },
   {
     cardCountByColors: [3, 3, 0, 0, 3],
-    points: 3,
     acquired: false,
   },
   {
     cardCountByColors: [3, 0, 0, 3, 3],
-    points: 3,
     acquired: false,
   },
   {
     cardCountByColors: [0, 3, 3, 3, 0],
-    points: 3,
     acquired: false,
   },
   {
     cardCountByColors: [0, 0, 3, 3, 3],
-    points: 3,
     acquired: false,
   },
   {
     cardCountByColors: [4, 4, 0, 0, 0],
-    points: 3,
     acquired: false,
   },
   {
     cardCountByColors: [0, 4, 4, 0, 0],
-    points: 3,
     acquired: false,
   },
   {
     cardCountByColors: [0, 0, 4, 4, 0],
-    points: 3,
     acquired: false,
   },
   {
     cardCountByColors: [0, 0, 0, 4, 4],
-    points: 3,
     acquired: false,
   },
   {
     cardCountByColors: [4, 0, 0, 0, 4],
-    points: 3,
     acquired: false,
   },
 ];

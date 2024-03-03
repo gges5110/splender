@@ -964,11 +964,6 @@ video {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity)) !important;
 }
 
-.bg-sky-500 {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(14 165 233 / var(--tw-bg-opacity)) !important;
-}
-
 .bg-slate-200 {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(226 232 240 / var(--tw-bg-opacity)) !important;
