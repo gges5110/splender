@@ -3,9 +3,9 @@ import { INVALID_MOVE } from "boardgame.io/core";
 import { GameState } from "../interfaces/Interfaces";
 import {
   considerTriggerDiscardPhase,
-  getCardCountByColor,
   getTotalCount,
   nobleVisits,
+  playerIsEligibleToPickNoble,
   purchaseDevelopmentCard,
   replenishCards,
 } from "./MovesUtil";
@@ -93,13 +93,10 @@ export const pickNoble: MoveFn<GameState> = (
 ) => {
   const noble = G.nobles[index];
 
-  // Check if player is eligible
-  const playerCards = G.players[Number(ctx.currentPlayer)].cards;
-  const cardCountByColors: number[] = getCardCountByColor(playerCards);
-  for (let i = 0; i < noble.cardCountByColors.length; i++) {
-    if (noble.cardCountByColors[i] > cardCountByColors[i]) {
-      return INVALID_MOVE;
-    }
+  if (
+    !playerIsEligibleToPickNoble(G.players[Number(ctx.currentPlayer)], noble)
+  ) {
+    return INVALID_MOVE;
   }
 
   G.players[Number(ctx.currentPlayer)].nobles.push(noble);

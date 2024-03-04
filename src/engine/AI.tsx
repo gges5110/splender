@@ -1,7 +1,11 @@
 import { AiEnumerate, Ctx } from "boardgame.io";
 import { GameState } from "../interfaces/Interfaces";
 import { gemsInHandLimit } from "./Moves";
-import { getTotalCount, playerCanAffordCard } from "./MovesUtil";
+import {
+  getTotalCount,
+  playerCanAffordCard,
+  playerIsEligibleToPickSomeNobles,
+} from "./MovesUtil";
 
 export const enumerateAIMoves = (G: GameState, ctx: Ctx): AiEnumerate => {
   const moves: AiEnumerate = [];
@@ -40,6 +44,20 @@ export const enumerateAIMoves = (G: GameState, ctx: Ctx): AiEnumerate => {
           moves.push({
             move: "build",
             args: [rowIndex, columnIndex],
+          });
+        }
+
+        // might need to pick noble
+        const nonAcquiredNobles = G.nobles.filter((noble) => !noble.acquired);
+        if (
+          playerIsEligibleToPickSomeNobles(
+            G.players[Number(ctx.currentPlayer)],
+            nonAcquiredNobles
+          )
+        ) {
+          moves.push({
+            move: "pickNoble",
+            args: [Math.floor(Math.random() * nonAcquiredNobles.length)],
           });
         }
       }

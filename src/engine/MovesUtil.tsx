@@ -151,3 +151,23 @@ export const getCardCountByColor = (cards: Card[]): number[] => {
   cards.map((card) => cardCountByColor[card.color]++);
   return cardCountByColor;
 };
+
+export const playerIsEligibleToPickSomeNobles = (
+  player: Player,
+  nobles: Noble[]
+): boolean =>
+  nobles.some((noble) => playerIsEligibleToPickNoble(player, noble));
+
+export const playerIsEligibleToPickNoble = (
+  player: Player,
+  noble: Noble
+): boolean => {
+  const playerCards = player.cards;
+  const cardCountByColors: number[] = getCardCountByColor(playerCards);
+  for (let i = 0; i < noble.cardCountByColors.length; i++) {
+    if (noble.cardCountByColors[i] > cardCountByColors[i]) {
+      return false;
+    }
+  }
+  return true;
+};
