@@ -19,7 +19,7 @@ export const Room = () => {
   const { matchID } = useParams();
   const isLocalAI = matchID === "localAI";
   const matchInfo = useAtomValue(matchInfoAtom);
-  const playerID = isLocalAI ? "0" : matchInfo?.playerID;
+
   const playerCredentials = matchInfo?.playerCredentials;
   const matchType = matchInfo?.matchType;
   const playerName = useAtomValue(playerNameAtom);
@@ -53,6 +53,7 @@ export const Room = () => {
   const userPosition =
     Number(searchParams.get("position")) ||
     Math.floor(Math.random() * defaultNumberOfPlayers) + 1;
+  const playerID = isLocalAI ? String(userPosition - 1) : matchInfo?.playerID;
 
   const getDefaultPlayers = (numPlayers: number): PublicPlayerMetadata[] => {
     const players = [];
