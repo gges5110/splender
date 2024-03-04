@@ -48,17 +48,24 @@ export const Room = () => {
   const leaveMatch = useLeaveMatch();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  const [searchParams] = useSearchParams();
+  const defaultNumberOfPlayers = Number(searchParams.get("numPlayers"));
+  const userPosition =
+    Number(searchParams.get("position")) ||
+    Math.floor(Math.random() * defaultNumberOfPlayers) + 1;
 
   const getDefaultPlayers = (numPlayers: number): PublicPlayerMetadata[] => {
     const players = [];
     for (let i = 0; i < numPlayers; i++) {
-      players.push({ id: i, name: i === 0 ? playerName : undefined });
+      players.push({
+        id: i,
+        name: i === userPosition - 1 ? playerName : undefined,
+      });
     }
 
     return players;
   };
 
-  const [searchParams] = useSearchParams();
   const resolvedMatchData: LobbyAPI.Match | undefined = isLocalAI
     ? {
         matchID: "localAI",
@@ -69,8 +76,14 @@ export const Room = () => {
       }
     : matchData;
 
-  const GameClient = useGameClient(resolvedMatchData, gameBoardDebug);
-  console.log(playerName);
+  const gameSeed = searchParams.get("gameSeed") || undefined;
+
+  const GameClient = useGameClient(
+    resolvedMatchData,
+    gameBoardDebug,
+    gameSeed,
+    userPosition
+  );
   useEffect(() => {
     return () => {
       if (matchID && !isLocalAI) {
@@ -145,6 +158,7 @@ export const Room = () => {
               match={resolvedMatchData}
               matchID={matchID}
               playerID={playerID}
+              seed={gameSeed}
             />
           )}
         </>

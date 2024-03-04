@@ -9,8 +9,10 @@ import { useState } from "react";
 import { GAME_NAME } from "../config";
 
 interface CreateMatchArgs {
+  gameSeed?: string;
   matchType: MatchType;
   numPlayers: number;
+  position?: number;
 }
 export const useCreateMatch = () => {
   const joinMatch = useJoinMatch();
@@ -64,7 +66,9 @@ export const useCreateMatch = () => {
   return (createMatchArgs: CreateMatchArgs) => {
     if (createMatchArgs.matchType === "localAI") {
       resetLocalAI();
-      navigate(`/room/localAI?numPlayers=${createMatchArgs.numPlayers}`);
+      navigate(
+        `/room/localAI?numPlayers=${createMatchArgs.numPlayers}&gameSeed=${createMatchArgs.gameSeed}&position=${createMatchArgs.position}`
+      );
     } else {
       createMatchMutation.mutate(createMatchArgs);
     }

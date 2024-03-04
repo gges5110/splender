@@ -4,7 +4,6 @@ import { GameState } from "../../interfaces/Interfaces";
 import { PlayingTable } from "./PlayingTable/PlayingTable";
 import { PlayerBoards } from "./PlayerBoards/PlayerBoards";
 import { GameEndDialog } from "../Shared/Dialogs/GameEndDialog";
-import { NewGameConfirmationDialog } from "../TitleBar/NewGameConfirmationDialog/NewGameConfirmationDialog";
 import { useState } from "react";
 import { LobbyAPI } from "boardgame.io/src/types";
 import { Box, Button, Typography } from "@mui/material";
@@ -12,6 +11,7 @@ import { RoomInfoDialog } from "../Room/RoomInfoDrawer/RoomInfoDialog";
 
 interface SplendorBoardProps extends BoardProps<GameState> {
   match: LobbyAPI.Match;
+  seed?: Exclude<BoardProps<GameState>["ctx"]["_random"], undefined>["seed"];
 }
 
 export const SplendorBoard: React.FC<SplendorBoardProps> = ({
@@ -21,16 +21,14 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
   playerID,
   reset,
   match,
+  seed,
 }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [
-    newGameConfirmationDialogOpen,
-    setNewGameConfirmationDialogOpen,
-  ] = useState(false);
 
   return (
     <Box display={"flex"} flexDirection={"column"}>
       <RoomInfoDialog
+        gameSeed={seed}
         matchData={match}
         onClose={() => {
           setIsDrawerOpen(false);
@@ -53,22 +51,12 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
         </Button>
         <Typography>Turn: {Math.ceil(ctx.turn / ctx.numPlayers)}</Typography>
       </Box>
-
-      <NewGameConfirmationDialog
-        onClose={() => {
-          setNewGameConfirmationDialogOpen(false);
-        }}
-        onConfirm={() => {
-          reset();
-          setNewGameConfirmationDialogOpen(false);
-        }}
-        open={newGameConfirmationDialogOpen}
-      />
       <GameEndDialog
         players={G.players}
         reset={() => {
           reset();
         }}
+        seed={seed}
         winner={ctx.gameover?.winner}
       />
 
