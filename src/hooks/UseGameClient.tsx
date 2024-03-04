@@ -15,7 +15,9 @@ export type PublicPlayerMetadata = Omit<Server.PlayerMetadata, "credentials">;
 
 export const useGameClient = (
   matchData: LobbyAPI.Match | undefined,
-  gameBoardDebug: boolean
+  gameBoardDebug: boolean,
+  gameSeed: string | number | undefined,
+  userPosition: number
 ) => {
   const { matchID } = useParams();
   const isLocalAI = matchID === "localAI";
@@ -27,7 +29,7 @@ export const useGameClient = (
   const getLocalAIConfig = useMemo(() => {
     const bots: Record<string, typeof Bot> = {};
     for (const player of players || []) {
-      if (player.id !== 0) {
+      if (player.id !== userPosition - 1) {
         bots[String(player.id)] = DelayedRandomBot;
       }
     }
@@ -36,11 +38,11 @@ export const useGameClient = (
       persist: true,
       bots: bots,
     });
-  }, [JSON.stringify(players)]);
+  }, [JSON.stringify(players), userPosition]);
 
   return useMemo(() => {
     return Client({
-      game: SplendorGame,
+      game: { ...SplendorGame, seed: gameSeed },
       board: SplendorBoard,
       numPlayers: numPlayers,
       multiplayer:

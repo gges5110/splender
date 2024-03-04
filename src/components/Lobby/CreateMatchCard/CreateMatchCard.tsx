@@ -9,17 +9,25 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
+  InputLabel,
+  MenuItem,
   Radio,
   RadioGroup,
+  Select,
+  SelectChangeEvent,
+  TextField,
 } from "@mui/material";
 import { MatchType } from "../../../Atoms";
 import { useCreateMatch } from "../../../hooks/UseCreateMatch";
 
+type NumberOfPlayers = 2 | 3 | 4;
 export const CreateMatchCard = () => {
   const createMatch = useCreateMatch();
-  const [numberOfPlayers, setNumberOfPlayers] = useState(2);
+  const [numberOfPlayers, setNumberOfPlayers] = useState<NumberOfPlayers>(3);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNumberOfPlayers(Number((event.target as HTMLInputElement).value));
+    setNumberOfPlayers(
+      Number((event.target as HTMLInputElement).value) as NumberOfPlayers
+    );
   };
 
   const [matchType, setMatchType] = useState<MatchType>("localAI");
@@ -29,11 +37,21 @@ export const CreateMatchCard = () => {
     setMatchType((event.target as HTMLInputElement).value as MatchType);
   };
 
+  const [gameSeed, setGameSeed] = useState<string>("1");
+  const handleGameSeedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGameSeed((event.target as HTMLInputElement).value);
+  };
+
+  const [position, setPosition] = useState<string>("");
+  const handlePositionChange = (event: SelectChangeEvent) => {
+    setPosition(event.target.value);
+  };
+
   return (
     <Card>
       <CardHeader title={"Match Configuration"} />
       <CardContent>
-        <Box display={"flex"} flexDirection={"column"}>
+        <Box display={"flex"} flexDirection={"column"} gap={2}>
           <FormControl>
             <FormLabel id={"set-number-of-players-radio-buttons-group"}>
               Number of players
@@ -81,6 +99,28 @@ export const CreateMatchCard = () => {
               />
             </RadioGroup>
           </FormControl>
+          <TextField
+            id={"game-seed"}
+            label={"Game Seed"}
+            onChange={handleGameSeedChange}
+            value={gameSeed}
+            variant={"outlined"}
+          />
+          <FormControl>
+            <InputLabel id={"select-label"}>Position</InputLabel>
+            <Select
+              label={"Position"}
+              labelId={"select-label"}
+              onChange={handlePositionChange}
+              value={position}
+            >
+              {Array.from({ length: numberOfPlayers }).map((_, index) => (
+                <MenuItem key={index} value={index + 1}>
+                  {index + 1}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Box>
       </CardContent>
       <CardActions>
@@ -90,6 +130,8 @@ export const CreateMatchCard = () => {
             createMatch({
               numPlayers: numberOfPlayers,
               matchType,
+              gameSeed,
+              position: Number(position),
             });
           }}
           variant={"contained"}
