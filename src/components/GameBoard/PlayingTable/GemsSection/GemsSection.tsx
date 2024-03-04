@@ -15,14 +15,12 @@ export const GemsSection: FC<GemsSectionProps> = ({
 }) => (
   <SectionCollapse title={"Gems"}>
     <div className={"p-2"}>
-      <div className={"flex flex-col justify-between gap-2"}>
-        <GemsPicker
-          disabled={disabled}
-          gems={gems}
-          mode={GemsPickerMode.PICK}
-          onSelect={onSelect}
-        />
-      </div>
+      <GemsPicker
+        disabled={disabled}
+        gems={gems}
+        mode={GemsPickerMode.PICK}
+        onSelect={onSelect}
+      />
     </div>
   </SectionCollapse>
 );

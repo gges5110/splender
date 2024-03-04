@@ -40,7 +40,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
   }
 
   return (
-    <>
+    <div className={"flex flex-col justify-between gap-2"}>
       <div className={"gap-2 grid grid-cols-8"}>
         <SelectableGems
           disabled={disabled}
@@ -60,7 +60,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
           disabled={
             mode === GemsPickerMode.PICK
               ? selectedGems.every((gem) => gem === 0)
-              : selectedGems.reduce((p, v) => p + v, 0) < (gemsToDiscard || 0)
+              : selectedGems.reduce((p, v) => p + v, 0) !== (gemsToDiscard || 0)
           }
           onClick={() => {
             onSelect(selectedGems);
@@ -86,7 +86,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
           onClick={() => setGems(Array(5).fill(0))}
         />
       </div>
-    </>
+    </div>
   );
 };
 
