@@ -2,7 +2,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
 import {
   gameBoardDebugAtom,
-  localAiUserPositionAtom,
+  localAiInfoAtom,
   matchInfoAtom,
   playerNameAtom,
 } from "src/Atoms";
@@ -55,18 +55,9 @@ export const Room = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const [searchParams] = useSearchParams();
-  const defaultNumberOfPlayers = Number(searchParams.get("numPlayers"));
-  const [localAiUserPosition, setLocalAiUserPosition] = useAtom(
-    localAiUserPositionAtom
-  );
+  const [localAiInfo] = useAtom(localAiInfoAtom);
 
-  const userPosition =
-    localAiUserPosition ||
-    Math.floor(Math.random() * defaultNumberOfPlayers) + 1;
-  if (localAiUserPosition === undefined) {
-    setLocalAiUserPosition(userPosition);
-  }
-
+  const userPosition = localAiInfo?.position || 1;
   const playerID = isLocalAI ? String(userPosition - 1) : matchInfo?.playerID;
 
   const getDefaultPlayers = (numPlayers: number): PublicPlayerMetadata[] => {
@@ -90,13 +81,11 @@ export const Room = () => {
         updatedAt: 0,
       }
     : matchData;
-
-  const gameSeed = searchParams.get("gameSeed") || undefined;
-
+  const seed = localAiInfo?.seed;
   const GameClient = useGameClient(
     resolvedMatchData,
     gameBoardDebug,
-    gameSeed,
+    seed,
     userPosition
   );
   useEffect(() => {
@@ -179,7 +168,7 @@ export const Room = () => {
               match={resolvedMatchData}
               matchID={matchID}
               playerID={playerID}
-              seed={gameSeed}
+              seed={seed}
             />
           )}
         </>

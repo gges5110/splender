@@ -1,6 +1,7 @@
 import { atomWithStorage } from "jotai/utils";
 import { atom } from "jotai";
 import { ColorTheme } from "./styles/paletteTheme";
+import { GameHistory } from "src/pages/HistoryPage";
 
 export const playerNameAtom = atomWithStorage<string | undefined>(
   "playerName",
@@ -28,7 +29,8 @@ export const colorModeAtom = atomWithStorage<ColorTheme>(
 );
 export const gameBoardDebugAtom = atomWithStorage("gameBoardDebug", false);
 
-export const localAiUserPositionAtom = atomWithStorage<number | undefined>(
-  "localAiUserPosition",
-  undefined
-);
+export const localAiInfoAtom = atomWithStorage<
+  { position: number; seed: string } | undefined
+>("localAiInfo", undefined);
+
+export const historyAtom = atomWithStorage<GameHistory[]>("history", []);

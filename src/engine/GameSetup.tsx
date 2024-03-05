@@ -1,4 +1,4 @@
-import { Card, Player } from "src/interfaces/Interfaces";
+import { Card, GemsTypeWithGold, Player } from "src/interfaces/Interfaces";
 import { level1Cards, level2Cards, level3Cards, nobles } from "src/constants";
 import { Ctx } from "boardgame.io";
 
@@ -12,7 +12,7 @@ const populateLevel3Cards = (): Card[] => {
   return Object.assign([], level3Cards);
 };
 // Setup functions
-const setupGems = (numPlayers: number): number[] => {
+const setupGems = (numPlayers: number): GemsTypeWithGold => {
   switch (numPlayers) {
     case 2:
       return [4, 4, 4, 4, 4, 5];
