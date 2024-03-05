@@ -14,4 +14,9 @@ export default defineConfig({
       all: true,
     },
   },
+  resolve: {
+    alias: {
+      src: "/src",
+    },
+  },
 });
