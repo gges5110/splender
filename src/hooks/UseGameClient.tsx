@@ -1,15 +1,17 @@
 import { LobbyAPI, Server } from "boardgame.io/src/types";
 import { useAtomValue } from "jotai";
-import { matchInfoAtom } from "../Atoms";
+import { historyAtom, matchInfoAtom } from "src/Atoms";
 import { useMemo } from "react";
 import { Bot } from "boardgame.io/ai";
-import { DelayedRandomBot } from "../engine/DelayedRandomBot";
+import { DelayedRandomBot } from "src/engine/DelayedRandomBot";
 import { Local, SocketIO } from "boardgame.io/multiplayer";
 import { Client } from "boardgame.io/react";
-import { SplendorGame } from "../engine/SplendorGame";
-import { SplendorBoard } from "../components/GameBoard/SplendorBoard";
-import { serverPort } from "../config";
+import { SplendorGame } from "src/engine/SplendorGame";
+import { SplendorBoard } from "src/components/GameBoard/SplendorBoard";
+import { serverPort } from "src/config";
 import { useParams } from "react-router-dom";
+import { useAtom } from "jotai/index";
+import { GameHistory } from "src/pages/HistoryPage";
 
 export type PublicPlayerMetadata = Omit<Server.PlayerMetadata, "credentials">;
 
@@ -40,9 +42,29 @@ export const useGameClient = (
     });
   }, [JSON.stringify(players), userPosition]);
 
+  const [history, setHistory] = useAtom(historyAtom);
+
   return useMemo(() => {
     return Client({
-      game: { ...SplendorGame, seed: gameSeed },
+      game: {
+        ...SplendorGame,
+        seed: gameSeed,
+        onEnd: (G, ctx) => {
+          setHistory((prev: GameHistory[]): GameHistory[] => {
+            return [
+              ...prev,
+              {
+                date: new Date().toISOString(),
+                id: matchData?.matchID || "",
+                numberOfPlayers: numPlayers,
+                seed: String(ctx._random?.seed) || "",
+                turns: Math.ceil(ctx.turn / ctx.numPlayers),
+                winner: ctx.gameover?.winner,
+              },
+            ];
+          });
+        },
+      },
       board: SplendorBoard,
       numPlayers: numPlayers,
       multiplayer:

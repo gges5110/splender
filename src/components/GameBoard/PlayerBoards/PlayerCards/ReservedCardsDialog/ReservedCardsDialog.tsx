@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Card, Player } from "../../../../../interfaces/Interfaces";
-import { CardDisplay } from "../../../../Shared/CardDisplay/CardDisplay";
-import { playerCanAffordCard } from "../../../../../engine/MovesUtil";
+import { Card, Player } from "src/interfaces/Interfaces";
+import { CardDisplay } from "src/components/Shared/CardDisplay/CardDisplay";
+import { playerCanAffordCard } from "src/engine/MovesUtil";
 import AddIcon from "@mui/icons-material/Add";
 import { Box, Button, Container, Dialog, DialogContent } from "@mui/material";
-import { DialogTitleWithClose } from "../../../../Shared/DialogTitleWithClose/DialogTitleWithClose";
+import { DialogTitleWithClose } from "src/components/Shared/DialogTitleWithClose/DialogTitleWithClose";
 
 interface ReservedCardsDialogProps {
   closeReservedCardsDialog(): void;

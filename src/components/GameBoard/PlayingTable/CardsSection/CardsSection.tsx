@@ -1,10 +1,10 @@
-import { Card, Player } from "../../../../interfaces/Interfaces";
+import { Card, Player } from "src/interfaces/Interfaces";
 import { FC, useState } from "react";
 import { CardDialog } from "./CardDialog/CardDialog";
 import { CardsOnTable } from "./CardsOnTable/CardsOnTable";
-import { BuildDialogProps } from "../PlayingTable";
+import { BuildDialogProps } from "src/components/GameBoard/PlayingTable/PlayingTable";
 import { ReserveFromDeckDialog } from "./ReserveFromDeckDialog/ReserveFromDeckDialog";
-import { SectionCollapse } from "../../../Shared/SectionCollapse/SectionCollapse";
+import { SectionCollapse } from "src/components/Shared/SectionCollapse/SectionCollapse";
 
 interface CardsSectionProps {
   build(...args: any[]): void;

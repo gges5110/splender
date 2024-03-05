@@ -1,5 +1,5 @@
 import { Server, Origins } from "boardgame.io/server";
-import { SplendorGame } from "../engine/SplendorGame";
+import { SplendorGame } from "src/engine/SplendorGame";
 
 const server = Server({
   games: [SplendorGame],

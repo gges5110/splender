@@ -7,20 +7,23 @@ export enum Color {
   Gold,
 }
 
+export type GemsType = [number, number, number, number, number];
+export type GemsTypeWithGold = [number, number, number, number, number, number];
+
 export interface Card {
   color: Color;
-  cost: number[];
+  cost: GemsType;
   points: number;
 }
 
 export interface Noble {
   acquired: boolean;
-  cardCountByColors: number[];
+  cardCountByColors: GemsType;
 }
 
 export interface Player {
   cards: Card[];
-  gems: number[];
+  gems: GemsTypeWithGold;
   nobles: Noble[];
   reservedCards: Card[];
 }
@@ -30,7 +33,7 @@ export interface GameState {
   // intentionally allow undefined element to remember the card position on the table
   // Index: [level][column], level 0 is the lowest/cheapest and level 2 is the highest.
   cardsOnTable: Array<Array<Card | undefined>>; // secret
-  gems: number[];
+  gems: GemsTypeWithGold;
   nobles: Noble[];
   numCardsInDeck: Array<number>;
   players: Player[];

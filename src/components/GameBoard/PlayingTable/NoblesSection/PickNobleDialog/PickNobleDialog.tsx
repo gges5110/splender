@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { NobleDisplay } from "../../../../Shared/NobleDisplay/NobleDisplay";
-import { Noble, Player } from "../../../../../interfaces/Interfaces";
-import { getVisitingNobleIndexArray } from "../../../../../engine/MovesUtil";
+import { NobleDisplay } from "src/components/Shared/NobleDisplay/NobleDisplay";
+import { Noble, Player } from "src/interfaces/Interfaces";
+import { getVisitingNobleIndexArray } from "src/engine/MovesUtil";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 
 interface PickNobleDialogProps {

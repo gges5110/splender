@@ -1,13 +1,13 @@
 import * as React from "react";
 import { BoardProps } from "boardgame.io/react";
-import { GameState } from "../../interfaces/Interfaces";
+import { GameState } from "src/interfaces/Interfaces";
 import { PlayingTable } from "./PlayingTable/PlayingTable";
 import { PlayerBoards } from "./PlayerBoards/PlayerBoards";
-import { GameEndDialog } from "../Shared/Dialogs/GameEndDialog";
+import { GameEndDialog } from "src/components/Shared/Dialogs/GameEndDialog";
 import { useState } from "react";
 import { LobbyAPI } from "boardgame.io/src/types";
 import { Box, Button, Typography } from "@mui/material";
-import { RoomInfoDialog } from "../Room/RoomInfoDrawer/RoomInfoDialog";
+import { RoomInfoDialog } from "src/components/Room/RoomInfoDrawer/RoomInfoDialog";
 
 interface SplendorBoardProps extends BoardProps<GameState> {
   match: LobbyAPI.Match;
@@ -26,7 +26,12 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
-    <Box display={"flex"} flexDirection={"column"}>
+    <Box
+      display={"flex"}
+      flexDirection={"column"}
+      mx={"auto"}
+      width={"fit-content"}
+    >
       <RoomInfoDialog
         gameSeed={seed}
         matchData={match}
@@ -61,12 +66,9 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
       />
 
       <Box
-        alignSelf={"center"}
         display={"flex"}
         flexWrap={{ xs: "wrap", lg: "nowrap" }}
         gap={4}
-        justifyItems={"center"}
-        mx={"auto"}
         width={{ xs: "100%", md: "fit-content" }}
       >
         <Box width={{ xs: "100%", md: "max-content" }}>

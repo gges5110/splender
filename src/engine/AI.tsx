@@ -1,5 +1,5 @@
 import { AiEnumerate, Ctx } from "boardgame.io";
-import { GameState } from "../interfaces/Interfaces";
+import { GameState } from "src/interfaces/Interfaces";
 import { gemsInHandLimit } from "./Moves";
 import {
   getTotalCount,

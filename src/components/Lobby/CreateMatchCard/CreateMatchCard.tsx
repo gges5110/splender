@@ -17,8 +17,8 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
-import { MatchType } from "../../../Atoms";
-import { useCreateMatch } from "../../../hooks/UseCreateMatch";
+import { MatchType } from "src/Atoms";
+import { useCreateMatch } from "src/hooks/UseCreateMatch";
 
 type NumberOfPlayers = 2 | 3 | 4;
 export const CreateMatchCard = () => {
@@ -37,7 +37,7 @@ export const CreateMatchCard = () => {
     setMatchType((event.target as HTMLInputElement).value as MatchType);
   };
 
-  const [gameSeed, setGameSeed] = useState<string>("1");
+  const [seed, setGameSeed] = useState<string>("1");
   const handleGameSeedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGameSeed((event.target as HTMLInputElement).value);
   };
@@ -103,7 +103,7 @@ export const CreateMatchCard = () => {
             id={"game-seed"}
             label={"Game Seed"}
             onChange={handleGameSeedChange}
-            value={gameSeed}
+            value={seed}
             variant={"outlined"}
           />
           <FormControl>
@@ -130,8 +130,16 @@ export const CreateMatchCard = () => {
             createMatch({
               numPlayers: numberOfPlayers,
               matchType,
-              gameSeed,
-              position: Number(position),
+              localAiInfo:
+                matchType === "localAI"
+                  ? {
+                      position:
+                        position !== ""
+                          ? Number(position)
+                          : Math.floor(Math.random() * numberOfPlayers) + 1,
+                      seed,
+                    }
+                  : undefined,
             });
           }}
           variant={"contained"}

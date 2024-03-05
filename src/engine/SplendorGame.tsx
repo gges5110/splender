@@ -7,10 +7,10 @@ import {
   reserve,
 } from "./Moves";
 import { enumerateAIMoves } from "./AI";
-import { GameState } from "../interfaces/Interfaces";
+import { GameState } from "src/interfaces/Interfaces";
 import type { Ctx, Game } from "boardgame.io";
 import { setup } from "./GameSetup";
-import { GAME_NAME } from "../config";
+import { GAME_NAME } from "src/config";
 
 const endIf = (G: GameState, ctx: Ctx) => {
   if (Number(ctx.currentPlayer) !== ctx.numPlayers - 1) {

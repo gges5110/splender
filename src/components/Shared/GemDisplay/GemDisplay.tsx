@@ -1,7 +1,7 @@
 import * as React from "react";
 import clsx from "clsx";
 import { Box } from "@mui/material";
-import { colorIndexToPalette } from "../../../styles/paletteTheme";
+import { colorIndexToPalette } from "src/styles/paletteTheme";
 
 interface GemDisplayProps {
   className?: string;

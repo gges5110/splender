@@ -1,4 +1,4 @@
-import { Player } from "../../../interfaces/Interfaces";
+import { Player } from "src/interfaces/Interfaces";
 import { PlayerGems } from "./PlayerGems/PlayerGems";
 import { PlayerCards } from "./PlayerCards/PlayerCards";
 import { FC, useState } from "react";
@@ -28,21 +28,32 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
   return (
     <Paper className={"sections-container"} elevation={6}>
       <Box
-        className={
-          "flex flex-row gap-6 flex-nowrap sm:flex-col h-full pt-2 pl-4"
-        }
+        display={"flex"}
+        flexDirection={{ xs: "row", sm: "column" }}
+        flexWrap={"nowrap"}
+        pl={4}
+        pt={2}
         sx={{ overflowY: "hidden" }}
       >
         {players.map((player, index: number) => {
           const playerName =
             match?.players[index].name || `Bot ${match?.players[index].id}`;
           return (
-            <div
+            <Box
               className={clsx(
-                "flex items-center bg-slate-200 my-4 rounded-xl relative p-2 pt-8 shadow-md",
-                { "bg-slate-400": Number(currentPlayer) === index }
+                " bg-slate-200 dark:bg-slate-600 rounded-xl shadow-md",
+                {
+                  "bg-slate-400 dark:bg-slate-800":
+                    Number(currentPlayer) === index,
+                }
               )}
+              display={"flex"}
+              justifyItems={"center"}
               key={index}
+              my={4}
+              p={2}
+              position={"relative"}
+              pt={4}
             >
               <Button
                 className={clsx(
@@ -92,7 +103,7 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
               >
                 {getPlayerPoints(player)} points
               </div>
-            </div>
+            </Box>
           );
         })}
       </Box>

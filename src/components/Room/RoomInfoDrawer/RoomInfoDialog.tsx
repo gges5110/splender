@@ -1,8 +1,8 @@
 import { LobbyAPI } from "boardgame.io/src/types";
-import { useLeaveMatch } from "../../../hooks/UseLeaveMatch";
+import { useLeaveMatch } from "src/hooks/UseLeaveMatch";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
-import { playerNameAtom } from "../../../Atoms";
+import { playerNameAtom } from "src/Atoms";
 import {
   Button,
   Dialog,
@@ -11,10 +11,10 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
-import { DialogProps } from "../../../interfaces/DialogProps";
-import { MatchPlayerList } from "../../Lobby/Matches/MatchPlayerList";
+import { DialogProps } from "src/interfaces/DialogProps";
+import { MatchPlayerList } from "src/components/Lobby/Matches/MatchPlayerList";
 import { BoardProps } from "boardgame.io/react";
-import { GameState } from "../../../interfaces/Interfaces";
+import { GameState } from "src/interfaces/Interfaces";
 
 interface RoomInfoDialogProps extends DialogProps {
   gameSeed?: Exclude<

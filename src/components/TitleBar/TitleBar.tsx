@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { ColorThemeSelector } from "./ColorThemeSelector/ColorThemeSelector";
 import { Link as RouterLink } from "react-router-dom";
 import { useAtom } from "jotai/index";
-import { playerNameAtom, usernameDialogOpenAtom } from "../../Atoms";
+import { playerNameAtom, usernameDialogOpenAtom } from "src/Atoms";
 import {
   AppBar,
   Button,
@@ -16,7 +16,7 @@ import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
 import { useSetAtom } from "jotai";
 import MenuIcon from "@mui/icons-material/Menu";
 import { AppDrawer } from "./AppDrawer";
-import { generateName } from "../../utils/GameUtils";
+import { generateName } from "src/utils/GameUtils";
 
 interface TitleBarProps {}
 

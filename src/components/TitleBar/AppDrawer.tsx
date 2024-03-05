@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useAtom } from "jotai";
-import { gameBoardDebugAtom } from "../../Atoms";
+import { gameBoardDebugAtom } from "src/Atoms";
 import {
   Box,
   Drawer,
@@ -21,6 +21,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import BuildOutlinedIcon from "@mui/icons-material/BuildOutlined";
+import HistoryIcon from "@mui/icons-material/History";
 
 interface AppDrawerProps {
   onClose(): void;
@@ -78,6 +79,19 @@ export const AppDrawer: FC<AppDrawerProps> = ({ open, onClose }) => {
               <InfoOutlinedIcon />
             </ListItemIcon>
             <Typography>Help</Typography>
+          </ListItemButton>
+        </ListItem>
+        <ListItem sx={{ py: 0 }}>
+          <ListItemButton
+            component={RouterLink}
+            onClick={onClose}
+            sx={{ borderRadius: 1, py: "6px" }}
+            to={"/history"}
+          >
+            <ListItemIcon sx={{ minWidth: 32 }}>
+              <HistoryIcon />
+            </ListItemIcon>
+            <Typography>History</Typography>
           </ListItemButton>
         </ListItem>
         <ListItem sx={{ py: 0 }}>

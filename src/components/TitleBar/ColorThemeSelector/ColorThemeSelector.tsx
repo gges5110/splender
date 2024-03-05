@@ -4,8 +4,8 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import ComputerOutlinedIcon from "@mui/icons-material/ComputerOutlined";
 import { Box, IconButton, Menu, MenuItem } from "@mui/material";
 import { useAtom } from "jotai";
-import { colorModeAtom } from "../../../Atoms";
-import { ColorTheme } from "../../../styles/paletteTheme";
+import { colorModeAtom } from "src/Atoms";
+import { ColorTheme } from "src/styles/paletteTheme";
 
 const options = [
   { theme: ColorTheme.Light, icon: <LightModeOutlinedIcon /> },

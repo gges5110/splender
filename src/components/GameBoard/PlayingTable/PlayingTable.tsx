@@ -1,4 +1,4 @@
-import { Card, GameState } from "../../../interfaces/Interfaces";
+import { Card, GameState } from "src/interfaces/Interfaces";
 import { DiscardGemsDialog } from "./GemsSection/DiscardGemsDialog/DiscardGemsDialog";
 import { Ctx } from "boardgame.io";
 import { FC, useState } from "react";

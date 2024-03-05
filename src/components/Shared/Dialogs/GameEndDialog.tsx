@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Player } from "../../../interfaces/Interfaces";
+import { Player } from "src/interfaces/Interfaces";
 import { useState } from "react";
 import { Button, Dialog, TextField } from "@mui/material";
-import { MatchType } from "../../../Atoms";
+import { MatchType } from "src/Atoms";
+import { resetLocalAI } from "src/hooks/UseCreateMatch";
 
 interface GameEndDialogProps {
   players: Player[];
@@ -39,6 +40,7 @@ export const GameEndDialog: React.FC<GameEndDialogProps> = ({
         <Button
           onClick={() => {
             reset();
+            resetLocalAI();
           }}
         >
           New Game

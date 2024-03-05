@@ -1,9 +1,9 @@
 import { LobbyClient } from "boardgame.io/client";
 import { useAtomValue } from "jotai";
-import { playerNameAtom } from "../Atoms";
-import { serverPort } from "../config";
-import { CreateMatchCard } from "../components/Lobby/CreateMatchCard/CreateMatchCard";
-import { Matches } from "../components/Lobby/Matches/Matches";
+import { playerNameAtom } from "src/Atoms";
+import { serverPort } from "src/config";
+import { CreateMatchCard } from "src/components/Lobby/CreateMatchCard/CreateMatchCard";
+import { Matches } from "src/components/Lobby/Matches/Matches";
 import { Container, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 

@@ -1,18 +1,24 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
-import { gameBoardDebugAtom, matchInfoAtom, playerNameAtom } from "../../Atoms";
+import {
+  gameBoardDebugAtom,
+  localAiInfoAtom,
+  matchInfoAtom,
+  playerNameAtom,
+} from "src/Atoms";
 import { useQuery } from "@tanstack/react-query";
-import { lobbyClient } from "../Lobby";
-import { useLeaveMatch } from "../../hooks/UseLeaveMatch";
+import { lobbyClient } from "src/pages/Lobby";
+import { useLeaveMatch } from "src/hooks/UseLeaveMatch";
 import { Button, Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSnackbar } from "notistack";
 import { LobbyClientError } from "boardgame.io/client";
-import { queryClient } from "../../App";
+import { queryClient } from "src/App";
 import { LobbyAPI } from "boardgame.io/src/types";
-import { PublicPlayerMetadata, useGameClient } from "../../hooks/UseGameClient";
-import { GAME_NAME } from "../../config";
+import { PublicPlayerMetadata, useGameClient } from "src/hooks/UseGameClient";
+import { GAME_NAME } from "src/config";
 import { RoomWaiting } from "./RoomWaiting";
+import { useAtom } from "jotai/index";
 
 type RoomPhase = "waiting" | "playing";
 export const Room = () => {
@@ -49,10 +55,9 @@ export const Room = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const [searchParams] = useSearchParams();
-  const defaultNumberOfPlayers = Number(searchParams.get("numPlayers"));
-  const userPosition =
-    Number(searchParams.get("position")) ||
-    Math.floor(Math.random() * defaultNumberOfPlayers) + 1;
+  const [localAiInfo] = useAtom(localAiInfoAtom);
+
+  const userPosition = localAiInfo?.position || 1;
   const playerID = isLocalAI ? String(userPosition - 1) : matchInfo?.playerID;
 
   const getDefaultPlayers = (numPlayers: number): PublicPlayerMetadata[] => {
@@ -60,7 +65,7 @@ export const Room = () => {
     for (let i = 0; i < numPlayers; i++) {
       players.push({
         id: i,
-        name: i === userPosition - 1 ? playerName : undefined,
+        name: i === userPosition - 1 ? playerName : `Bot ${i}`,
       });
     }
 
@@ -76,13 +81,11 @@ export const Room = () => {
         updatedAt: 0,
       }
     : matchData;
-
-  const gameSeed = searchParams.get("gameSeed") || undefined;
-
+  const seed = localAiInfo?.seed;
   const GameClient = useGameClient(
     resolvedMatchData,
     gameBoardDebug,
-    gameSeed,
+    seed,
     userPosition
   );
   useEffect(() => {
@@ -107,7 +110,13 @@ export const Room = () => {
   }, [isLocalAI]);
 
   return (
-    <Container maxWidth={"xl"}>
+    <Container
+      maxWidth={"xl"}
+      sx={{
+        paddingLeft: { xs: 0, sm: 2 },
+        paddingRight: { xs: 0, sm: 2 },
+      }}
+    >
       {matchError ? (
         <>
           Match is no longer available
@@ -159,7 +168,7 @@ export const Room = () => {
               match={resolvedMatchData}
               matchID={matchID}
               playerID={playerID}
-              seed={gameSeed}
+              seed={seed}
             />
           )}
         </>

@@ -1,6 +1,6 @@
 import { SelectableGems } from "./SelectableGems";
 import { render, screen } from "@testing-library/react";
-import { GemsPickerMode } from "../GemsPicker";
+import { GemsPickerMode } from "src/components/GameBoard/PlayingTable/GemsSection/GemsPicker/GemsPicker";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 

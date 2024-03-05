@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-key */
 import { SyntheticEvent, useState } from "react";
-import { GemDisplay } from "../components/Shared/GemDisplay/GemDisplay";
-import { Color } from "../interfaces/Interfaces";
-import { CardDisplay } from "../components/Shared/CardDisplay/CardDisplay";
-import { level2Cards, nobles } from "../constants";
-import { NobleDisplay } from "../components/Shared/NobleDisplay/NobleDisplay";
+import { GemDisplay } from "src/components/Shared/GemDisplay/GemDisplay";
+import { Color } from "src/interfaces/Interfaces";
+import { CardDisplay } from "src/components/Shared/CardDisplay/CardDisplay";
+import { level2Cards, nobles } from "src/constants";
+import { NobleDisplay } from "src/components/Shared/NobleDisplay/NobleDisplay";
 import { Paper, Tab } from "@mui/material";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";

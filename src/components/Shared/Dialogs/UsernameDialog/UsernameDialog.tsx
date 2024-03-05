@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { playerNameAtom, usernameDialogOpenAtom } from "../../../../Atoms";
+import { playerNameAtom, usernameDialogOpenAtom } from "src/Atoms";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import {
@@ -11,7 +11,7 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { generateName } from "../../../../utils/GameUtils";
+import { generateName } from "src/utils/GameUtils";
 
 export const UsernameDialog = () => {
   const [playerName, setPlayerName] = useAtom(playerNameAtom);

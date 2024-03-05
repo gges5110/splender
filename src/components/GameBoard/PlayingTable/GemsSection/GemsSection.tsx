@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { GemsPicker, GemsPickerMode } from "./GemsPicker/GemsPicker";
-import { SectionCollapse } from "../../../Shared/SectionCollapse/SectionCollapse";
+import { SectionCollapse } from "src/components/Shared/SectionCollapse/SectionCollapse";
 
 interface GemsSectionProps {
   disabled?: boolean;

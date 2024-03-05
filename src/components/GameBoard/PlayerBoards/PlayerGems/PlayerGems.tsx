@@ -1,5 +1,5 @@
 import * as React from "react";
-import { GemDisplay } from "../../../Shared/GemDisplay/GemDisplay";
+import { GemDisplay } from "src/components/Shared/GemDisplay/GemDisplay";
 import { Box } from "@mui/material";
 import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
 
@@ -8,15 +8,15 @@ interface PlayerGemsProps {
 }
 
 export const PlayerGems: React.FC<PlayerGemsProps> = ({ gems }) => (
-  <div className={"flex gap-1 sm:gap-4 items-center"}>
+  <Box alignItems={"center"} display={"flex"} gap={{ xs: 0.5, sm: 2 }}>
     {gems.map((gemCount, index) => (
-      <div className={"gem-size"} key={index}>
+      <Box className={"gem-size"} key={index}>
         {gemCount > 0 && <GemDisplay color={index} count={gemCount} />}
-      </div>
+      </Box>
     ))}
     <Box>
       {gems.reduce((p, v) => p + v, 0)}
       <DiamondOutlinedIcon />
     </Box>
-  </div>
+  </Box>
 );

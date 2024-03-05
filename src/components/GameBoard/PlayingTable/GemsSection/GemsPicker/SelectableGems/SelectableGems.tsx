@@ -1,9 +1,9 @@
 import { FC } from "react";
 import clsx from "clsx";
-import { gemsSelectable } from "../../../../../../utils/GemUtils";
-import { GemsPickerMode } from "../GemsPicker";
+import { gemsSelectable } from "src/utils/GemUtils";
+import { GemsPickerMode } from "src/components/GameBoard/PlayingTable/GemsSection/GemsPicker/GemsPicker";
 import { Button } from "@mui/material";
-import { colorIndexToPalette } from "../../../../../../styles/paletteTheme";
+import { colorIndexToPalette } from "src/styles/paletteTheme";
 
 interface SelectableGemsProps {
   disabled?: boolean;

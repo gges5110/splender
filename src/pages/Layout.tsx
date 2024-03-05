@@ -1,7 +1,7 @@
 import * as React from "react";
-import { TitleBar } from "../components/TitleBar/TitleBar";
+import { TitleBar } from "src/components/TitleBar/TitleBar";
 import { Outlet } from "react-router-dom";
-import { UsernameDialog } from "../components/Shared/Dialogs/UsernameDialog/UsernameDialog";
+import { UsernameDialog } from "src/components/Shared/Dialogs/UsernameDialog/UsernameDialog";
 import { Box, Paper, useTheme } from "@mui/material";
 import { blueGrey } from "@mui/material/colors";
 

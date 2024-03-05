@@ -1,12 +1,12 @@
 import * as React from "react";
-import { Player } from "../../../../../interfaces/Interfaces";
-import { CardDisplay } from "../../../../Shared/CardDisplay/CardDisplay";
-import { BuildDialogProps } from "../../PlayingTable";
-import { playerCanAffordCard } from "../../../../../engine/MovesUtil";
+import { Player } from "src/interfaces/Interfaces";
+import { CardDisplay } from "src/components/Shared/CardDisplay/CardDisplay";
+import { BuildDialogProps } from "src/components/GameBoard/PlayingTable/PlayingTable";
+import { playerCanAffordCard } from "src/engine/MovesUtil";
 import AddIcon from "@mui/icons-material/Add";
 import SystemUpdateAltIcon from "@mui/icons-material/SystemUpdateAlt";
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
-import { DialogTitleWithClose } from "../../../../Shared/DialogTitleWithClose/DialogTitleWithClose";
+import { DialogTitleWithClose } from "src/components/Shared/DialogTitleWithClose/DialogTitleWithClose";
 
 interface CardDialogProps {
   build(level: number, index: number): void;

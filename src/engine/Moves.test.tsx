@@ -9,7 +9,7 @@ import {
 import { SplendorGame } from "./SplendorGame";
 import { INVALID_MOVE } from "boardgame.io/core";
 import { Ctx } from "boardgame.io";
-import { Card, Color, GameState, Noble } from "../interfaces/Interfaces";
+import { Card, Color, GameState, Noble } from "src/interfaces/Interfaces";
 import { vi } from "vitest";
 
 const getDefaultCtx = (): Ctx => {

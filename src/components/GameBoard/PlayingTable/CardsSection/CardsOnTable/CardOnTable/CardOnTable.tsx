@@ -1,10 +1,10 @@
-import { Card, Player } from "../../../../../../interfaces/Interfaces";
+import { Card, Player } from "src/interfaces/Interfaces";
 import { FC, useEffect, useRef, useState } from "react";
 import * as React from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { CardDisplay } from "../../../../../Shared/CardDisplay/CardDisplay";
-import { playerCanAffordCard } from "../../../../../../engine/MovesUtil";
+import { CardDisplay } from "src/components/Shared/CardDisplay/CardDisplay";
+import { playerCanAffordCard } from "src/engine/MovesUtil";
 
 const variants: Variants = {
   fadeIn: {
@@ -61,13 +61,13 @@ export const CardOnTable: FC<CardOnTableProps> = ({
   const [state, setState] = useState<boolean>(false);
 
   if (card == null) {
-    return <div className={"col-span-1"} />;
+    return <div className={"col-span-2"} />;
   }
 
   return (
     <motion.div
       animate={state ? "fadeIn" : "stop"}
-      className={"col-span-1"}
+      className={"col-span-2"}
       initial={"stop"}
       key={elementKey}
       variants={variants}

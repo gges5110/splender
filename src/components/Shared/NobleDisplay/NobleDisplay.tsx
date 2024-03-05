@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Noble } from "../../../interfaces/Interfaces";
-import { GemDisplay } from "../GemDisplay/GemDisplay";
+import { Noble } from "src/interfaces/Interfaces";
+import { GemDisplay } from "src/components/Shared/GemDisplay/GemDisplay";
 import clsx from "clsx";
+import { Box } from "@mui/material";
 
 interface NobleDisplayProps {
   noble: Noble;
@@ -24,15 +25,24 @@ export const NobleDisplay: React.FC<NobleDisplayProps> = ({
       )}
       onClick={onClick}
     >
-      <div
+      <Box
         className={
-          "absolute top-0 right-0 h-6 leading-6 sm:h-8 sm:leading-8 w-6 sm:w-8 text-center align-middle select-none"
+          "h-6 leading-6 sm:h-8 sm:leading-8 w-6 sm:w-8 text-center align-middle select-none"
         }
+        position={"absolute"}
+        right={0}
+        top={0}
       >
         3
-      </div>
-      <div className={"absolute bottom-0 left-0 p-1 sm:p-2 h-18"}>
-        <div className={"flex flex-wrap-reverse w-full h-full gap-1"}>
+      </Box>
+      <Box bottom={0} left={0} p={{ xs: 0.5, sm: 1 }} position={"absolute"}>
+        <Box
+          display={"flex"}
+          flexWrap={"wrap-reverse"}
+          gap={0.5}
+          height={"100%"}
+          width={"100%"}
+        >
           {noble.cardCountByColors.map(
             (gemCount, index) =>
               gemCount > 0 && (
@@ -44,8 +54,8 @@ export const NobleDisplay: React.FC<NobleDisplayProps> = ({
                 />
               )
           )}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </div>
   );
 };
