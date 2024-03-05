@@ -100,6 +100,7 @@ export const enumerateAIMoves = (G: GameState, ctx: Ctx): AiEnumerate => {
     }
   });
 
+  shuffleArray(moves);
   if (moves.length > 0) {
     return moves;
   }
@@ -116,6 +117,7 @@ export const enumerateAIMoves = (G: GameState, ctx: Ctx): AiEnumerate => {
     });
   });
 
+  shuffleArray(moves);
   if (moves.length === 0) {
     moves.push({ event: "endTurn" });
   }
@@ -148,3 +150,10 @@ const permute = (gems: number[]): number[][] => {
 
   return perms;
 };
+
+function shuffleArray(array: any[]) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
