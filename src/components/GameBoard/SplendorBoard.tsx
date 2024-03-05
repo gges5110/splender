@@ -57,7 +57,6 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
         <Typography>Turn: {Math.ceil(ctx.turn / ctx.numPlayers)}</Typography>
       </Box>
       <GameEndDialog
-        players={G.players}
         reset={() => {
           reset();
         }}

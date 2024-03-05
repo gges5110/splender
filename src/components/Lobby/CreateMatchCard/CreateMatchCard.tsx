@@ -37,12 +37,25 @@ export const CreateMatchCard = () => {
     setMatchType((event.target as HTMLInputElement).value as MatchType);
   };
 
-  const [seed, setGameSeed] = useState<string>("1");
+  const initialSeed: string | null = JSON.parse(
+    localStorage.getItem("localAiInfo") || ""
+  )?.seed;
+  const initialPosition: number | null = JSON.parse(
+    localStorage.getItem("localAiInfo") || ""
+  )?.position;
+
+  const [seed, setGameSeed] = useState<string>(
+    initialSeed ? String(Number(initialSeed) + 1) : "1"
+  );
   const handleGameSeedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGameSeed((event.target as HTMLInputElement).value);
   };
 
-  const [position, setPosition] = useState<string>("");
+  const [position, setPosition] = useState<string>(
+    initialPosition && initialPosition <= numberOfPlayers
+      ? String(initialPosition)
+      : ""
+  );
   const handlePositionChange = (event: SelectChangeEvent) => {
     setPosition(event.target.value);
   };

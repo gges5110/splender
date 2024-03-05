@@ -11,6 +11,7 @@ import { SplendorBoard } from "src/components/GameBoard/SplendorBoard";
 import { serverPort } from "src/config";
 import { useParams } from "react-router-dom";
 import { GameHistory } from "src/pages/HistoryPage";
+import { useSnackbar } from "notistack";
 
 export type PublicPlayerMetadata = Omit<Server.PlayerMetadata, "credentials">;
 
@@ -43,13 +44,22 @@ export const useGameClient = (
 
   const setHistory = useSetAtom(historyAtom);
   const localAiInfo = useAtomValue(localAiInfoAtom);
+  const { enqueueSnackbar } = useSnackbar();
 
   const onEnd: Game["onEnd"] = (_G, ctx) => {
     if (!localAiInfo) {
+      enqueueSnackbar("Missing info for local AI game. Cannot save history.", {
+        variant: "error",
+      });
       return;
     }
     const { seed, position } = localAiInfo;
     setHistory((prev: GameHistory[]): GameHistory[] => {
+      const winnerName = ctx.gameover?.winner === position ? "You" : "AI";
+      enqueueSnackbar(`${winnerName} won, game saved to history!`, {
+        variant: "success",
+      });
+
       return [
         ...prev,
         {
@@ -58,7 +68,7 @@ export const useGameClient = (
           numberOfPlayers: numPlayers,
           seed: seed || "",
           turns: Math.ceil(ctx.turn / ctx.numPlayers),
-          winner: ctx.gameover?.winner === position ? "You" : "AI",
+          winner: winnerName,
         },
       ];
     });

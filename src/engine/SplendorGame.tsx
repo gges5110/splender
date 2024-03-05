@@ -35,7 +35,7 @@ const endIf = (G: GameState, ctx: Ctx) => {
   });
 
   if (scores.some((point) => point >= 15)) {
-    return { winner: highestScorePlayerIndex };
+    return { winner: highestScorePlayerIndex + 1 };
   }
 };
 
