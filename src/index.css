@@ -904,11 +904,6 @@ video {
   background-color: rgb(59 130 246 / 0.2) !important;
 }
 
-.bg-emerald-500 {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(16 185 129 / var(--tw-bg-opacity)) !important;
-}
-
 .bg-gray-100 {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity)) !important;
