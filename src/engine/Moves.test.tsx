@@ -55,7 +55,6 @@ const getDefaultCard = (): Card => {
 const getDefaultNoble = (): Noble => {
   return {
     cardCountByColors: [3, 3, 3, 0, 0],
-    points: 3,
     acquired: false,
   };
 };
@@ -76,7 +75,7 @@ describe("Moves", () => {
     });
 
     test("picking more than the amount available", () => {
-      G = { ...G, gems: [0, 1, 1, 0, 0] };
+      G = { ...G, gems: [0, 1, 1, 0, 0, 0] };
 
       expect(pick(G, ctx, [1, 1, 1, 0, 0])).toEqual(INVALID_MOVE);
     });
