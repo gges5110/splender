@@ -29,12 +29,12 @@ export const PlayerCards: React.FC<PlayerCardsProps> = ({
   const cardCountByColor = getCardCountByColor(cards);
   return (
     <Box
-      className={"gap-1 sm:gap-4"}
       display={"flex"}
+      gap={{ xs: 0.5, sm: 2 }}
       justifyContent={"flex-start"}
     >
       {cardCountByColor.map((cardCount, index) => (
-        <div className={"w-12 h-20"} key={index}>
+        <Box className={"card"} key={index}>
           {cardCount > 0 && (
             <Button
               color={colorIndexToPalette[index]}
@@ -44,9 +44,9 @@ export const PlayerCards: React.FC<PlayerCardsProps> = ({
               {cardCount}
             </Button>
           )}
-        </div>
+        </Box>
       ))}
-      <div className={"w-12 h-20"}>
+      <Box className={"card"}>
         {reservedCards.length > 0 && (
           <Button
             color={colorIndexToPalette[5]}
@@ -57,7 +57,7 @@ export const PlayerCards: React.FC<PlayerCardsProps> = ({
             {reservedCards.length}
           </Button>
         )}
-      </div>
+      </Box>
 
       <ReservedCardsDialog
         closeReservedCardsDialog={() => {

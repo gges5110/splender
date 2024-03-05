@@ -2,7 +2,7 @@ import { NobleDisplay } from "src/components/Shared/NobleDisplay/NobleDisplay";
 import { CardDisplay } from "src/components/Shared/CardDisplay/CardDisplay";
 import { Player } from "src/interfaces/Interfaces";
 import * as React from "react";
-import { Box, Dialog, DialogContent, Typography } from "@mui/material";
+import { Box, Dialog, DialogContent } from "@mui/material";
 import { DialogTitleWithClose } from "src/components/Shared/DialogTitleWithClose/DialogTitleWithClose";
 interface PlayerDialogProps {
   closePlayerDialog(): void;
@@ -38,10 +38,10 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
               <NobleDisplay key={index} noble={noble} />
             ))}
             {player.nobles.length === 0 && (
-              <Typography variant={"body1"}>
+              <Box>
                 <PlayerName playerName={playerName} /> does not have any nobles
                 yet.
-              </Typography>
+              </Box>
             )}
           </Box>
           <Box display={"flex"} flexWrap={"wrap"} gap={2}>
@@ -49,10 +49,10 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
               <CardDisplay card={card} enabled={false} key={index} />
             ))}
             {player.cards.length === 0 && (
-              <Typography variant={"body1"}>
+              <Box>
                 <PlayerName playerName={playerName} /> does not have any cards
                 yet.
-              </Typography>
+              </Box>
             )}
           </Box>
         </Box>
@@ -64,7 +64,7 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
 export const PlayerName: React.FC<{ playerName: string }> = ({
   playerName,
 }) => (
-  <Typography display={"inline"} fontWeight={600} variant={"body1"}>
+  <Box display={"inline"} fontWeight={600}>
     {playerName}
-  </Typography>
+  </Box>
 );

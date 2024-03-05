@@ -73,7 +73,11 @@ export const useCreateMatch = () => {
     if (createMatchArgs.matchType === "localAI") {
       resetLocalAI();
 
-      setLocalAiUserPosition(createMatchArgs.position);
+      if (createMatchArgs.position !== undefined) {
+        setLocalAiUserPosition(createMatchArgs.position);
+      } else {
+        setLocalAiUserPosition(undefined);
+      }
       navigate(
         `/room/localAI?numPlayers=${createMatchArgs.numPlayers}&gameSeed=${createMatchArgs.gameSeed}`
       );

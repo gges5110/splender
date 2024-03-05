@@ -35,7 +35,7 @@ export const ReserveFromDeckDialog: FC<ReserveFromDeckDialogProps> = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={onConfirm} startIcon={<CheckIcon />}>
-          Confirm
+          Reserve
         </Button>
         <Button
           onClick={onClose}

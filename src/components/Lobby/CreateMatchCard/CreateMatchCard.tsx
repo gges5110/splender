@@ -131,7 +131,7 @@ export const CreateMatchCard = () => {
               numPlayers: numberOfPlayers,
               matchType,
               gameSeed,
-              position: Number(position),
+              position: position !== "" ? Number(position) : undefined,
             });
           }}
           variant={"contained"}

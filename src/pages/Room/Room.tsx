@@ -18,6 +18,7 @@ import { LobbyAPI } from "boardgame.io/src/types";
 import { PublicPlayerMetadata, useGameClient } from "src/hooks/UseGameClient";
 import { GAME_NAME } from "src/config";
 import { RoomWaiting } from "./RoomWaiting";
+import { useAtom } from "jotai/index";
 
 type RoomPhase = "waiting" | "playing";
 export const Room = () => {
@@ -55,10 +56,17 @@ export const Room = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [searchParams] = useSearchParams();
   const defaultNumberOfPlayers = Number(searchParams.get("numPlayers"));
-  const localAiUserPosition = useAtomValue(localAiUserPositionAtom);
+  const [localAiUserPosition, setLocalAiUserPosition] = useAtom(
+    localAiUserPositionAtom
+  );
+
   const userPosition =
     localAiUserPosition ||
     Math.floor(Math.random() * defaultNumberOfPlayers) + 1;
+  if (localAiUserPosition === undefined) {
+    setLocalAiUserPosition(userPosition);
+  }
+
   const playerID = isLocalAI ? String(userPosition - 1) : matchInfo?.playerID;
 
   const getDefaultPlayers = (numPlayers: number): PublicPlayerMetadata[] => {
