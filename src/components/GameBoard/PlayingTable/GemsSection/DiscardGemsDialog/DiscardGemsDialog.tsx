@@ -1,6 +1,12 @@
 import * as React from "react";
 import { GemsPicker, GemsPickerMode } from "../GemsPicker/GemsPicker";
-import { Box, Dialog, DialogContent, DialogTitle } from "@mui/material";
+import {
+  Box,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Typography,
+} from "@mui/material";
 
 interface DiscardGemDialogProps {
   discardGems(gems: number[]): void;
@@ -20,7 +26,12 @@ export const DiscardGemsDialog: React.FC<DiscardGemDialogProps> = ({
       <DialogTitle>Discard gems</DialogTitle>
       <DialogContent>
         <Box sx={{ py: 1 }}>
-          You need to discard {gemsToDiscard} gem{gemsToDiscard > 1 && "s"}.
+          You need to discard{" "}
+          <Typography display={"inline"} fontWeight={"bold"}>
+            {gemsToDiscard}
+          </Typography>{" "}
+          gem
+          {gemsToDiscard > 1 && "s"}.
         </Box>
         <GemsPicker
           gems={playerGems}

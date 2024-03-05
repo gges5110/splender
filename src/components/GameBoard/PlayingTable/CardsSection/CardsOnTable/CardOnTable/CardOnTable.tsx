@@ -61,13 +61,13 @@ export const CardOnTable: FC<CardOnTableProps> = ({
   const [state, setState] = useState<boolean>(false);
 
   if (card == null) {
-    return <div className={"col-span-1"} />;
+    return <div className={"col-span-2"} />;
   }
 
   return (
     <motion.div
       animate={state ? "fadeIn" : "stop"}
-      className={"col-span-1"}
+      className={"col-span-2"}
       initial={"stop"}
       key={elementKey}
       variants={variants}

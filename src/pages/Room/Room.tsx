@@ -107,7 +107,13 @@ export const Room = () => {
   }, [isLocalAI]);
 
   return (
-    <Container maxWidth={"xl"}>
+    <Container
+      maxWidth={"xl"}
+      sx={{
+        paddingLeft: { xs: 0, sm: 2 },
+        paddingRight: { xs: 0, sm: 2 },
+      }}
+    >
       {matchError ? (
         <>
           Match is no longer available

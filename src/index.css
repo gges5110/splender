@@ -835,12 +835,12 @@ video {
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
 }
 
-.grid-cols-5 {
-  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
-}
-
 .grid-cols-8 {
   grid-template-columns: repeat(8, minmax(0, 1fr)) !important;
+}
+
+.grid-cols-9 {
+  grid-template-columns: repeat(9, minmax(0, 1fr)) !important;
 }
 
 .grid-rows-3 {
