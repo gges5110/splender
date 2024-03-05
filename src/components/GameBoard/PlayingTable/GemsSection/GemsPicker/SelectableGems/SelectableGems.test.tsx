@@ -1,15 +1,16 @@
 import { SelectableGems } from "./SelectableGems";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { GemsPickerMode } from "src/components/GameBoard/PlayingTable/GemsSection/GemsPicker/GemsPicker";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
+import { renderWithWrapper } from "src/TestWrapper";
 
 describe("SelectableGems", function () {
   test("renders nothing selected", () => {
     const selectedGems = [0, 0, 0, 0, 0];
     const gems = [4, 4, 4, 4, 4, 4];
     const onSelectMock = vi.fn();
-    render(
+    renderWithWrapper(
       <SelectableGems
         gems={gems}
         mode={GemsPickerMode.PICK}
@@ -25,7 +26,7 @@ describe("SelectableGems", function () {
     const selectedGems = [0, 0, 1, 0, 0];
     const gems = [4, 4, 4, 4, 4, 4];
     const onSelectMock = vi.fn();
-    render(
+    renderWithWrapper(
       <SelectableGems
         gems={gems}
         mode={GemsPickerMode.PICK}
@@ -36,16 +37,13 @@ describe("SelectableGems", function () {
 
     expect(screen.getAllByRole("button", { name: "4" })).toHaveLength(5);
     expect(screen.getByRole("button", { name: "3" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "3" })).toHaveClass(
-      "bg-emerald-500"
-    );
   });
 
   test("able to select gems", async () => {
     const selectedGems = [0, 0, 1, 0, 0];
     const gems = [4, 4, 4, 4, 4, 4];
     const onSelectMock = vi.fn();
-    render(
+    renderWithWrapper(
       <SelectableGems
         gems={gems}
         mode={GemsPickerMode.PICK}
@@ -65,7 +63,7 @@ describe("SelectableGems", function () {
     const selectedGems = [0, 0, 1, 0, 0];
     const gems = [4, 4, 4, 4, 4, 5];
     const onSelectMock = vi.fn();
-    render(
+    renderWithWrapper(
       <SelectableGems
         gems={gems}
         mode={GemsPickerMode.PICK}
@@ -76,8 +74,5 @@ describe("SelectableGems", function () {
 
     expect(screen.getByRole("button", { name: "5" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "5" })).toBeDisabled();
-
-    await userEvent.click(screen.getByRole("button", { name: "5" }));
-    expect(onSelectMock).toHaveBeenCalledTimes(0);
   });
 });

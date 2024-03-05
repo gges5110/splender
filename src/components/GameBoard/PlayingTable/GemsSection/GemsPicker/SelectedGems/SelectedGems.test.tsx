@@ -1,13 +1,14 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { SelectedGems } from "./SelectedGems";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
+import { renderWithWrapper } from "src/TestWrapper";
 
 describe("SelectedGems", function () {
   test("renders", async () => {
     const gems = [1, 2, 3, 4, 5, 0];
     const selectedGemOnClickMock = vi.fn();
-    render(
+    renderWithWrapper(
       <SelectedGems
         selectedGemOnClick={selectedGemOnClickMock}
         selectedGems={gems}
