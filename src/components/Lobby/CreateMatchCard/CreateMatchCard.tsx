@@ -37,12 +37,13 @@ export const CreateMatchCard = () => {
     setMatchType((event.target as HTMLInputElement).value as MatchType);
   };
 
-  const initialSeed: string | null = JSON.parse(
-    localStorage.getItem("localAiInfo") || ""
-  )?.seed;
-  const initialPosition: number | null = JSON.parse(
-    localStorage.getItem("localAiInfo") || ""
-  )?.position;
+  const localStorageLocalAiInfo = localStorage.getItem("localAiInfo");
+  const initialSeed: string | null = localStorageLocalAiInfo
+    ? JSON.parse(localStorageLocalAiInfo)?.seed
+    : null;
+  const initialPosition: number | null = localStorageLocalAiInfo
+    ? JSON.parse(localStorageLocalAiInfo)?.position
+    : null;
 
   const [seed, setGameSeed] = useState<string>(
     initialSeed ? String(Number(initialSeed) + 1) : "1"
