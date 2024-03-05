@@ -56,13 +56,15 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
         </Button>
         <Typography>Turn: {Math.ceil(ctx.turn / ctx.numPlayers)}</Typography>
       </Box>
-      <GameEndDialog
-        reset={() => {
-          reset();
-        }}
-        seed={seed}
-        winner={ctx.gameover?.winner}
-      />
+      {ctx.gameover?.winner !== undefined && (
+        <GameEndDialog
+          reset={() => {
+            reset();
+          }}
+          seed={seed}
+          winner={ctx.gameover?.winner}
+        />
+      )}
 
       <Box
         display={"flex"}

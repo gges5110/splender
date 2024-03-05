@@ -1,5 +1,5 @@
 import { AiEnumerate, Ctx } from "boardgame.io";
-import { GameState } from "src/interfaces/Interfaces";
+import { GameState, Player } from "src/interfaces/Interfaces";
 import { gemsInHandLimit } from "./Moves";
 import {
   getTotalCount,
@@ -9,25 +9,22 @@ import {
 
 export const enumerateAIMoves = (G: GameState, ctx: Ctx): AiEnumerate => {
   const moves: AiEnumerate = [];
+  const currentPlayer = G.players[Number(ctx.currentPlayer)];
 
   // discard
   if (
     ctx.activePlayers != null &&
     ctx.activePlayers[Number(ctx.currentPlayer)] === "DiscardGems"
   ) {
-    let diff =
-      getTotalCount(G.players[Number(ctx.currentPlayer)].gems) -
-      gemsInHandLimit;
-    const discardingGems = G.players[Number(ctx.currentPlayer)].gems.map(
-      (gem) => {
-        if (gem > 0 && diff > 0) {
-          diff--;
-          return 1;
-        } else {
-          return 0;
-        }
+    let diff = getTotalCount(currentPlayer.gems) - gemsInHandLimit;
+    const discardingGems = currentPlayer.gems.map((gem) => {
+      if (gem > 0 && diff > 0) {
+        diff--;
+        return 1;
+      } else {
+        return 0;
       }
-    );
+    });
     return [
       {
         move: "discardGems",
@@ -37,37 +34,29 @@ export const enumerateAIMoves = (G: GameState, ctx: Ctx): AiEnumerate => {
   }
 
   // build
-  G.cardsOnTable.forEach((cardsAtLevel, rowIndex) => {
-    cardsAtLevel.forEach((card, columnIndex) => {
-      if (card !== undefined) {
-        if (playerCanAffordCard(card, G.players[Number(ctx.currentPlayer)])) {
-          moves.push({
-            move: "build",
-            args: [rowIndex, columnIndex],
-          });
-        }
+  buildCard(G, currentPlayer, moves);
 
-        // might need to pick noble
-        const nonAcquiredNobles = G.nobles.filter((noble) => !noble.acquired);
-        if (
-          playerIsEligibleToPickSomeNobles(
-            G.players[Number(ctx.currentPlayer)],
-            nonAcquiredNobles
-          )
-        ) {
-          moves.push({
-            move: "pickNoble",
-            args: [Math.floor(Math.random() * nonAcquiredNobles.length)],
-          });
-        }
-      }
-    });
+  // build from reserve
+  currentPlayer.reservedCards.forEach((card, index) => {
+    if (playerCanAffordCard(card, currentPlayer)) {
+      moves.push({
+        move: "buildFromReserve",
+        args: [index],
+      });
+    }
   });
-
-  // TODO: build from reserve
 
   if (moves.length > 0) {
     return moves;
+  }
+
+  // if user has 9 gems, they should reserve card rather than picking gems
+  if (getTotalCount(currentPlayer.gems) >= gemsInHandLimit - 1) {
+    reserveCards(G, moves);
+
+    if (moves.length > 0) {
+      return moves;
+    }
   }
 
   const gems = G.gems.slice(0, 5);
@@ -106,6 +95,51 @@ export const enumerateAIMoves = (G: GameState, ctx: Ctx): AiEnumerate => {
   }
 
   // reserve
+  reserveCards(G, moves);
+
+  if (moves.length === 0) {
+    moves.push({ event: "endTurn" });
+  }
+  return moves;
+};
+
+const buildCard = (
+  G: GameState,
+  currentPlayer: Player,
+  moves: AiEnumerate
+): void => {
+  G.cardsOnTable.forEach((cardsAtLevel, rowIndex) => {
+    cardsAtLevel.forEach((card, columnIndex) => {
+      if (card !== undefined) {
+        if (playerCanAffordCard(card, currentPlayer)) {
+          moves.push({
+            move: "build",
+            args: [rowIndex, columnIndex],
+          });
+        }
+
+        // might need to pick noble
+        pickNobles(G, currentPlayer, moves);
+      }
+    });
+  });
+};
+
+const pickNobles = (
+  G: GameState,
+  currentPlayer: Player,
+  moves: AiEnumerate
+): void => {
+  const nonAcquiredNobles = G.nobles.filter((noble) => !noble.acquired);
+  if (playerIsEligibleToPickSomeNobles(currentPlayer, nonAcquiredNobles)) {
+    moves.push({
+      move: "pickNoble",
+      args: [Math.floor(Math.random() * nonAcquiredNobles.length)],
+    });
+  }
+};
+
+const reserveCards = (G: GameState, moves: AiEnumerate): void => {
   G.cardsOnTable.forEach((cardsAtLevel, rowIndex) => {
     cardsAtLevel.forEach((card, columnIndex) => {
       if (card !== undefined) {
@@ -116,12 +150,7 @@ export const enumerateAIMoves = (G: GameState, ctx: Ctx): AiEnumerate => {
       }
     });
   });
-
   shuffleArray(moves);
-  if (moves.length === 0) {
-    moves.push({ event: "endTurn" });
-  }
-  return moves;
 };
 
 const permute = (gems: number[]): number[][] => {

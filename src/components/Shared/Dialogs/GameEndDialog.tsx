@@ -56,6 +56,7 @@ export const GameEndDialog: React.FC<GameEndDialogProps> = ({
                 seed,
                 position: localAiInfo?.position || 0,
               });
+              location.reload();
             }}
           >
             New Game
@@ -69,6 +70,7 @@ export const GameEndDialog: React.FC<GameEndDialogProps> = ({
               seed: String(Number(initialSeed)),
               position: localAiInfo?.position || 0,
             });
+            location.reload();
           }}
           variant={"outlined"}
         >

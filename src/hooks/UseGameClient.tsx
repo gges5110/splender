@@ -1,6 +1,6 @@
 import { Game, LobbyAPI, Server } from "boardgame.io/src/types";
-import { useAtomValue, useSetAtom } from "jotai";
-import { historyAtom, localAiInfoAtom, matchInfoAtom } from "src/Atoms";
+import { useAtomValue } from "jotai";
+import { localAiInfoAtom, matchInfoAtom } from "src/Atoms";
 import { useMemo } from "react";
 import { Bot } from "boardgame.io/ai";
 import { DelayedRandomBot } from "src/engine/DelayedRandomBot";
@@ -42,7 +42,6 @@ export const useGameClient = (
     });
   }, [JSON.stringify(players), userPosition]);
 
-  const setHistory = useSetAtom(historyAtom);
   const localAiInfo = useAtomValue(localAiInfoAtom);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -54,14 +53,18 @@ export const useGameClient = (
       return;
     }
     const { seed, position } = localAiInfo;
-    setHistory((prev: GameHistory[]): GameHistory[] => {
-      const winnerName = ctx.gameover?.winner === position ? "You" : "AI";
-      enqueueSnackbar(`${winnerName} won, game saved to history!`, {
-        variant: "success",
-      });
+    const winnerName = ctx.gameover?.winner === position ? "You" : "AI";
+    enqueueSnackbar(`${winnerName} won, game saved to history!`, {
+      variant: "success",
+    });
 
-      return [
-        ...prev,
+    const prevHistory: GameHistory[] = JSON.parse(
+      localStorage.getItem("history") || "[]"
+    );
+    localStorage.setItem(
+      "history",
+      JSON.stringify([
+        ...prevHistory,
         {
           date: new Date().toISOString(),
           id: matchData?.matchID || "",
@@ -70,8 +73,8 @@ export const useGameClient = (
           turns: Math.ceil(ctx.turn / ctx.numPlayers),
           winner: winnerName,
         },
-      ];
-    });
+      ])
+    );
   };
 
   return useMemo(() => {
