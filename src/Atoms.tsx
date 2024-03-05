@@ -27,3 +27,8 @@ export const colorModeAtom = atomWithStorage<ColorTheme>(
   "light" as ColorTheme
 );
 export const gameBoardDebugAtom = atomWithStorage("gameBoardDebug", false);
+
+export const localAiUserPositionAtom = atomWithStorage<number | undefined>(
+  "localAiUserPosition",
+  undefined
+);

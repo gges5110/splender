@@ -958,6 +958,11 @@ video {
   background-color: rgb(148 163 184 / var(--tw-bg-opacity)) !important;
 }
 
+.bg-slate-800 {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(30 41 59 / var(--tw-bg-opacity)) !important;
+}
+
 .bg-gradient-to-l {
   background-image: linear-gradient(to left, var(--tw-gradient-stops)) !important;
 }
@@ -1169,6 +1174,11 @@ video {
 
 .focus-visible\:ring-opacity-75:focus-visible {
   --tw-ring-opacity: 0.75 !important;
+}
+
+:is(.dark .dark\:bg-slate-600) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(71 85 105 / var(--tw-bg-opacity)) !important;
 }
 
 :is(.dark .dark\:bg-slate-800) {

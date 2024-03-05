@@ -1,6 +1,11 @@
 import { useJoinMatch } from "./UseJoinMatch";
 import { useAtomValue, useSetAtom } from "jotai";
-import { matchInfoAtom, MatchType, playerNameAtom } from "src/Atoms";
+import {
+  localAiUserPositionAtom,
+  matchInfoAtom,
+  MatchType,
+  playerNameAtom,
+} from "src/Atoms";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { lobbyClient } from "src/pages/Lobby";
@@ -19,6 +24,7 @@ export const useCreateMatch = () => {
   const playerName = useAtomValue(playerNameAtom) || "";
   const navigate = useNavigate();
   const [matchType, setMatchType] = useState<MatchType | undefined>(undefined);
+  const setLocalAiUserPosition = useSetAtom(localAiUserPositionAtom);
 
   const setMatchInfo = useSetAtom(matchInfoAtom);
   const createMatchMutation = useMutation({
@@ -66,8 +72,10 @@ export const useCreateMatch = () => {
   return (createMatchArgs: CreateMatchArgs) => {
     if (createMatchArgs.matchType === "localAI") {
       resetLocalAI();
+
+      setLocalAiUserPosition(createMatchArgs.position);
       navigate(
-        `/room/localAI?numPlayers=${createMatchArgs.numPlayers}&gameSeed=${createMatchArgs.gameSeed}&position=${createMatchArgs.position}`
+        `/room/localAI?numPlayers=${createMatchArgs.numPlayers}&gameSeed=${createMatchArgs.gameSeed}`
       );
     } else {
       createMatchMutation.mutate(createMatchArgs);

@@ -1,6 +1,11 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
-import { gameBoardDebugAtom, matchInfoAtom, playerNameAtom } from "src/Atoms";
+import {
+  gameBoardDebugAtom,
+  localAiUserPositionAtom,
+  matchInfoAtom,
+  playerNameAtom,
+} from "src/Atoms";
 import { useQuery } from "@tanstack/react-query";
 import { lobbyClient } from "src/pages/Lobby";
 import { useLeaveMatch } from "src/hooks/UseLeaveMatch";
@@ -50,8 +55,9 @@ export const Room = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [searchParams] = useSearchParams();
   const defaultNumberOfPlayers = Number(searchParams.get("numPlayers"));
+  const localAiUserPosition = useAtomValue(localAiUserPositionAtom);
   const userPosition =
-    Number(searchParams.get("position")) ||
+    localAiUserPosition ||
     Math.floor(Math.random() * defaultNumberOfPlayers) + 1;
   const playerID = isLocalAI ? String(userPosition - 1) : matchInfo?.playerID;
 
@@ -60,7 +66,7 @@ export const Room = () => {
     for (let i = 0; i < numPlayers; i++) {
       players.push({
         id: i,
-        name: i === userPosition - 1 ? playerName : undefined,
+        name: i === userPosition - 1 ? playerName : `Bot ${i}`,
       });
     }
 

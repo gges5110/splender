@@ -27,8 +27,13 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
         <PlayerName playerName={playerName} /> nobles and cards
       </DialogTitleWithClose>
       <DialogContent>
-        <div className={"flex flex-col justify-center gap-2"}>
-          <div className={"flex"}>
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          gap={1}
+          justifyContent={"center"}
+        >
+          <Box display={"flex"} gap={2}>
             {player.nobles.map((noble, index) => (
               <NobleDisplay key={index} noble={noble} />
             ))}
@@ -38,7 +43,7 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
                 yet.
               </Typography>
             )}
-          </div>
+          </Box>
           <Box display={"flex"} flexWrap={"wrap"} gap={2}>
             {player.cards.map((card, index) => (
               <CardDisplay card={card} enabled={false} key={index} />
@@ -50,7 +55,7 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
               </Typography>
             )}
           </Box>
-        </div>
+        </Box>
       </DialogContent>
     </Dialog>
   );

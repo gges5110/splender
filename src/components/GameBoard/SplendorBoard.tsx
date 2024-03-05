@@ -26,7 +26,12 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
-    <Box display={"flex"} flexDirection={"column"}>
+    <Box
+      display={"flex"}
+      flexDirection={"column"}
+      mx={"auto"}
+      width={"fit-content"}
+    >
       <RoomInfoDialog
         gameSeed={seed}
         matchData={match}
@@ -61,12 +66,9 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
       />
 
       <Box
-        alignSelf={"center"}
         display={"flex"}
         flexWrap={{ xs: "wrap", lg: "nowrap" }}
         gap={4}
-        justifyItems={"center"}
-        mx={"auto"}
         width={{ xs: "100%", md: "fit-content" }}
       >
         <Box width={{ xs: "100%", md: "max-content" }}>

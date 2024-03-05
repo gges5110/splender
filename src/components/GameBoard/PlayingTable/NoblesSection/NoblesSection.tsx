@@ -2,6 +2,7 @@ import { Noble } from "src/interfaces/Interfaces";
 import { FC } from "react";
 import { NobleDisplay } from "src/components/Shared/NobleDisplay/NobleDisplay";
 import { SectionCollapse } from "src/components/Shared/SectionCollapse/SectionCollapse";
+import { Box } from "@mui/material";
 
 interface NoblesSectionProps {
   nobles: Array<Noble>;
@@ -9,14 +10,14 @@ interface NoblesSectionProps {
 
 export const NoblesSection: FC<NoblesSectionProps> = ({ nobles }) => (
   <SectionCollapse title={"Nobles"}>
-    <div className={"px-2 mt-2"}>
-      <div className={"flex justify-between gap-2"}>
+    <Box mt={2} px={1}>
+      <Box display={"flex"} gap={1} justifyContent={"space-between"}>
         {nobles.map((noble, index) => (
           <div className={"noble-size"} key={index}>
             {!noble.acquired && <NobleDisplay noble={noble} />}
           </div>
         ))}
-      </div>
-    </div>
+      </Box>
+    </Box>
   </SectionCollapse>
 );
