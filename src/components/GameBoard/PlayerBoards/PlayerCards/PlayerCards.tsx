@@ -1,13 +1,10 @@
-import { Card, Player } from "../../../../interfaces/Interfaces";
+import { Card, Player } from "src/interfaces/Interfaces";
 import { useState } from "react";
 import * as React from "react";
 import { ReservedCardsDialog } from "./ReservedCardsDialog/ReservedCardsDialog";
-import {
-  getCardCountByColor,
-  playerCanAffordCard,
-} from "../../../../engine/MovesUtil";
+import { getCardCountByColor, playerCanAffordCard } from "src/engine/MovesUtil";
 import { Box, Button } from "@mui/material";
-import { colorIndexToPalette } from "../../../../styles/paletteTheme";
+import { colorIndexToPalette } from "src/styles/paletteTheme";
 
 interface PlayerCardsProps {
   buildFromReserve(cardIdx: number): void;

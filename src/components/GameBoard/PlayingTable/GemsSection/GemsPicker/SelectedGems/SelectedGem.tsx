@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@mui/material";
 import clsx from "clsx";
-import { colorIndexToPalette } from "../../../../../../styles/paletteTheme";
+import { colorIndexToPalette } from "src/styles/paletteTheme";
 
 interface SelectedGemProps {
   index: number;

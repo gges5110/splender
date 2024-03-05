@@ -1,4 +1,4 @@
-import { Player } from "../../../interfaces/Interfaces";
+import { Player } from "src/interfaces/Interfaces";
 import { PlayerGems } from "./PlayerGems/PlayerGems";
 import { PlayerCards } from "./PlayerCards/PlayerCards";
 import { FC, useState } from "react";

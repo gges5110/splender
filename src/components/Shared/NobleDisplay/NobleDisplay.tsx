@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Noble } from "../../../interfaces/Interfaces";
-import { GemDisplay } from "../GemDisplay/GemDisplay";
+import { Noble } from "src/interfaces/Interfaces";
+import { GemDisplay } from "src/components/Shared/GemDisplay/GemDisplay";
 import clsx from "clsx";
 
 interface NobleDisplayProps {

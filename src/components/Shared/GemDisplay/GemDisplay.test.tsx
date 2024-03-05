@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { GemDisplay } from "./GemDisplay";
-import { Color } from "../../../interfaces/Interfaces";
+import { Color } from "src/interfaces/Interfaces";
 
 describe("GemDisplay", function () {
   test("renders", () => {

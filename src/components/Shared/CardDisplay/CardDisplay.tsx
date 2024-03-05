@@ -1,9 +1,9 @@
-import { Card } from "../../../interfaces/Interfaces";
+import { Card } from "src/interfaces/Interfaces";
 import * as React from "react";
-import { GemDisplay } from "../GemDisplay/GemDisplay";
+import { GemDisplay } from "src/components/Shared/GemDisplay/GemDisplay";
 import clsx from "clsx";
 import { Button } from "@mui/material";
-import { colorIndexToPalette } from "../../../styles/paletteTheme";
+import { colorIndexToPalette } from "src/styles/paletteTheme";
 
 interface CardDisplayProps {
   affordable?: boolean;

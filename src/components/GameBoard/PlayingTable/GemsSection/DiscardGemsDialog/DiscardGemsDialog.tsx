@@ -1,5 +1,8 @@
 import * as React from "react";
-import { GemsPicker, GemsPickerMode } from "../GemsPicker/GemsPicker";
+import {
+  GemsPicker,
+  GemsPickerMode,
+} from "src/components/GameBoard/PlayingTable/GemsSection/GemsPicker/GemsPicker";
 import {
   Box,
   Dialog,

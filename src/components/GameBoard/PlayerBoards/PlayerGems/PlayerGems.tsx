@@ -1,5 +1,5 @@
 import * as React from "react";
-import { GemDisplay } from "../../../Shared/GemDisplay/GemDisplay";
+import { GemDisplay } from "src/components/Shared/GemDisplay/GemDisplay";
 import { Box } from "@mui/material";
 import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
 

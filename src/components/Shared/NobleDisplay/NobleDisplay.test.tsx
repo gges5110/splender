@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { NobleDisplay } from "./NobleDisplay";
-import { Noble } from "../../../interfaces/Interfaces";
+import { Noble } from "src/interfaces/Interfaces";
 
 describe("NobleDisplay", function () {
   test("renders card counts and points", () => {

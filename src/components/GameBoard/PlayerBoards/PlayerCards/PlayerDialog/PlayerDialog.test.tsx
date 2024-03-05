@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { PlayerDialog } from "./PlayerDialog";
-import { Player } from "../../../../../interfaces/Interfaces";
-import { level1Cards, nobles } from "../../../../../constants";
+import { Player } from "src/interfaces/Interfaces";
+import { level1Cards, nobles } from "src/constants";
 import { vi } from "vitest";
 
 describe("PlayerDialog", function () {

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { DialogProps } from "../../../interfaces/DialogProps";
+import { DialogProps } from "src/interfaces/DialogProps";
 import { Button, Dialog, DialogTitle } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 

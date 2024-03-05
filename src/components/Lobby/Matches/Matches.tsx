@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAtomValue } from "jotai";
-import { playerNameAtom } from "../../../Atoms";
-import { useJoinMatch } from "../../../hooks/UseJoinMatch";
+import { playerNameAtom } from "src/Atoms";
+import { useJoinMatch } from "src/hooks/UseJoinMatch";
 import {
   Box,
   Button,
@@ -11,11 +11,11 @@ import {
   CardHeader,
   useTheme,
 } from "@mui/material";
-import { lobbyClient } from "../../../pages/Lobby";
+import { lobbyClient } from "src/pages/Lobby";
 import { MatchPlayerList } from "./MatchPlayerList";
 import { blueGrey, grey } from "@mui/material/colors";
 import { LocalAIMatchCard } from "./LocalAIMatchCard";
-import { GAME_NAME } from "../../../config";
+import { GAME_NAME } from "src/config";
 
 export const Matches = () => {
   const { data } = useQuery({

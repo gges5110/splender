@@ -1,6 +1,6 @@
 import type { Ctx, MoveFn } from "boardgame.io";
 import { INVALID_MOVE } from "boardgame.io/core";
-import { GameState } from "../interfaces/Interfaces";
+import { GameState } from "src/interfaces/Interfaces";
 import {
   considerTriggerDiscardPhase,
   getTotalCount,

@@ -13,7 +13,8 @@
     "@typescript-eslint",
     "prettier",
     "unused-imports",
-    "typescript-sort-keys"
+    "typescript-sort-keys",
+    "no-relative-import-paths"
   ],
   "env": {
     "browser": true,
@@ -44,7 +45,11 @@
       }
     ],
     "unused-imports/no-unused-imports-ts": 2,
-    "typescript-sort-keys/interface": "error"
+    "typescript-sort-keys/interface": "error",
+    "no-relative-import-paths/no-relative-import-paths": [
+      "error",
+      { "allowSameFolder": true }
+    ]
   },
   "settings": {
     "react": {

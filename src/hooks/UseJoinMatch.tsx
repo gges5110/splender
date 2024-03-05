@@ -2,9 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { useSetAtom } from "jotai";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { lobbyClient } from "../pages/Lobby";
-import { matchInfoAtom } from "../Atoms";
-import { GAME_NAME } from "../config";
+import { lobbyClient } from "src/pages/Lobby";
+import { matchInfoAtom } from "src/Atoms";
+import { GAME_NAME } from "src/config";
 
 export interface JoinMatchArgs {
   matchID: string;

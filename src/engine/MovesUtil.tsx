@@ -1,4 +1,4 @@
-import { Card, GameState, Noble, Player } from "../interfaces/Interfaces";
+import { Card, GameState, Noble, Player } from "src/interfaces/Interfaces";
 import { Ctx } from "boardgame.io";
 import { INVALID_MOVE } from "boardgame.io/core";
 import { gemsInHandLimit, pickNoble } from "./Moves";

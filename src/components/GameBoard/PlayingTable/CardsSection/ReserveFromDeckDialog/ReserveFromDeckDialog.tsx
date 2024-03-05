@@ -1,4 +1,4 @@
-import { DialogProps } from "../../../../../interfaces/DialogProps";
+import { DialogProps } from "src/interfaces/DialogProps";
 import { FC } from "react";
 import {
   Button,
@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
-import { DialogTitleWithClose } from "../../../../Shared/DialogTitleWithClose/DialogTitleWithClose";
+import { DialogTitleWithClose } from "src/components/Shared/DialogTitleWithClose/DialogTitleWithClose";
 
 interface ReserveFromDeckDialogProps extends DialogProps {
   level: number;

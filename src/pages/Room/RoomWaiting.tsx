@@ -1,5 +1,5 @@
 import { LobbyAPI } from "boardgame.io/src/types";
-import { MatchType } from "../../Atoms";
+import { MatchType } from "src/Atoms";
 import { FC } from "react";
 import { useSnackbar } from "notistack";
 import {
@@ -10,7 +10,7 @@ import {
   CardHeader,
   Container,
 } from "@mui/material";
-import { MatchPlayerList } from "../../components/Lobby/Matches/MatchPlayerList";
+import { MatchPlayerList } from "src/components/Lobby/Matches/MatchPlayerList";
 
 interface RoomWaitingProps {
   matchData: LobbyAPI.Match | undefined;

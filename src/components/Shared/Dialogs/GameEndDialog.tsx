@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Player } from "../../../interfaces/Interfaces";
+import { Player } from "src/interfaces/Interfaces";
 import { useState } from "react";
 import { Button, Dialog, TextField } from "@mui/material";
-import { MatchType } from "../../../Atoms";
+import { MatchType } from "src/Atoms";
 
 interface GameEndDialogProps {
   players: Player[];

@@ -1,7 +1,7 @@
-import { Noble } from "../../../../interfaces/Interfaces";
+import { Noble } from "src/interfaces/Interfaces";
 import { FC } from "react";
-import { NobleDisplay } from "../../../Shared/NobleDisplay/NobleDisplay";
-import { SectionCollapse } from "../../../Shared/SectionCollapse/SectionCollapse";
+import { NobleDisplay } from "src/components/Shared/NobleDisplay/NobleDisplay";
+import { SectionCollapse } from "src/components/Shared/SectionCollapse/SectionCollapse";
 
 interface NoblesSectionProps {
   nobles: Array<Noble>;

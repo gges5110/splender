@@ -1,10 +1,10 @@
-import { Card, Player } from "../../../../../../interfaces/Interfaces";
+import { Card, Player } from "src/interfaces/Interfaces";
 import { FC, useEffect, useRef, useState } from "react";
 import * as React from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { CardDisplay } from "../../../../../Shared/CardDisplay/CardDisplay";
-import { playerCanAffordCard } from "../../../../../../engine/MovesUtil";
+import { CardDisplay } from "src/components/Shared/CardDisplay/CardDisplay";
+import { playerCanAffordCard } from "src/engine/MovesUtil";
 
 const variants: Variants = {
   fadeIn: {

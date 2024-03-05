@@ -1,12 +1,12 @@
 import { useJoinMatch } from "./UseJoinMatch";
 import { useAtomValue, useSetAtom } from "jotai";
-import { matchInfoAtom, MatchType, playerNameAtom } from "../Atoms";
+import { matchInfoAtom, MatchType, playerNameAtom } from "src/Atoms";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { lobbyClient } from "../pages/Lobby";
-import { queryClient } from "../App";
+import { lobbyClient } from "src/pages/Lobby";
+import { queryClient } from "src/App";
 import { useState } from "react";
-import { GAME_NAME } from "../config";
+import { GAME_NAME } from "src/config";
 
 interface CreateMatchArgs {
   gameSeed?: string;

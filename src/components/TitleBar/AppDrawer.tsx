@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useAtom } from "jotai";
-import { gameBoardDebugAtom } from "../../Atoms";
+import { gameBoardDebugAtom } from "src/Atoms";
 import {
   Box,
   Drawer,

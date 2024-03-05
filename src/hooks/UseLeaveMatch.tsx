@@ -1,9 +1,9 @@
 import { useAtom } from "jotai";
-import { matchInfoAtom } from "../Atoms";
+import { matchInfoAtom } from "src/Atoms";
 import { useMutation } from "@tanstack/react-query";
-import { lobbyClient } from "../pages/Lobby";
-import { queryClient } from "../App";
-import { GAME_NAME } from "../config";
+import { lobbyClient } from "src/pages/Lobby";
+import { queryClient } from "src/App";
+import { GAME_NAME } from "src/config";
 
 interface LeaveMatchArgs {
   matchID: string;

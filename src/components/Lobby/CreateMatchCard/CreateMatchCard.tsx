@@ -17,8 +17,8 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
-import { MatchType } from "../../../Atoms";
-import { useCreateMatch } from "../../../hooks/UseCreateMatch";
+import { MatchType } from "src/Atoms";
+import { useCreateMatch } from "src/hooks/UseCreateMatch";
 
 type NumberOfPlayers = 2 | 3 | 4;
 export const CreateMatchCard = () => {

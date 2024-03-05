@@ -1,5 +1,5 @@
-import { Card, Player } from "../interfaces/Interfaces";
-import { level1Cards, level2Cards, level3Cards, nobles } from "../constants";
+import { Card, Player } from "src/interfaces/Interfaces";
+import { level1Cards, level2Cards, level3Cards, nobles } from "src/constants";
 import { Ctx } from "boardgame.io";
 
 const populateLevel1Cards = (): Card[] => {

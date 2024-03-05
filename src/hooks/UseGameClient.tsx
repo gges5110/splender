@@ -1,14 +1,14 @@
 import { LobbyAPI, Server } from "boardgame.io/src/types";
 import { useAtomValue } from "jotai";
-import { matchInfoAtom } from "../Atoms";
+import { matchInfoAtom } from "src/Atoms";
 import { useMemo } from "react";
 import { Bot } from "boardgame.io/ai";
-import { DelayedRandomBot } from "../engine/DelayedRandomBot";
+import { DelayedRandomBot } from "src/engine/DelayedRandomBot";
 import { Local, SocketIO } from "boardgame.io/multiplayer";
 import { Client } from "boardgame.io/react";
-import { SplendorGame } from "../engine/SplendorGame";
-import { SplendorBoard } from "../components/GameBoard/SplendorBoard";
-import { serverPort } from "../config";
+import { SplendorGame } from "src/engine/SplendorGame";
+import { SplendorBoard } from "src/components/GameBoard/SplendorBoard";
+import { serverPort } from "src/config";
 import { useParams } from "react-router-dom";
 
 export type PublicPlayerMetadata = Omit<Server.PlayerMetadata, "credentials">;

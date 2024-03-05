@@ -1,17 +1,17 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
-import { gameBoardDebugAtom, matchInfoAtom, playerNameAtom } from "../../Atoms";
+import { gameBoardDebugAtom, matchInfoAtom, playerNameAtom } from "src/Atoms";
 import { useQuery } from "@tanstack/react-query";
-import { lobbyClient } from "../Lobby";
-import { useLeaveMatch } from "../../hooks/UseLeaveMatch";
+import { lobbyClient } from "src/pages/Lobby";
+import { useLeaveMatch } from "src/hooks/UseLeaveMatch";
 import { Button, Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSnackbar } from "notistack";
 import { LobbyClientError } from "boardgame.io/client";
-import { queryClient } from "../../App";
+import { queryClient } from "src/App";
 import { LobbyAPI } from "boardgame.io/src/types";
-import { PublicPlayerMetadata, useGameClient } from "../../hooks/UseGameClient";
-import { GAME_NAME } from "../../config";
+import { PublicPlayerMetadata, useGameClient } from "src/hooks/UseGameClient";
+import { GAME_NAME } from "src/config";
 import { RoomWaiting } from "./RoomWaiting";
 
 type RoomPhase = "waiting" | "playing";

@@ -1,9 +1,9 @@
-import { NobleDisplay } from "../../../../Shared/NobleDisplay/NobleDisplay";
-import { CardDisplay } from "../../../../Shared/CardDisplay/CardDisplay";
-import { Player } from "../../../../../interfaces/Interfaces";
+import { NobleDisplay } from "src/components/Shared/NobleDisplay/NobleDisplay";
+import { CardDisplay } from "src/components/Shared/CardDisplay/CardDisplay";
+import { Player } from "src/interfaces/Interfaces";
 import * as React from "react";
 import { Box, Dialog, DialogContent, Typography } from "@mui/material";
-import { DialogTitleWithClose } from "../../../../Shared/DialogTitleWithClose/DialogTitleWithClose";
+import { DialogTitleWithClose } from "src/components/Shared/DialogTitleWithClose/DialogTitleWithClose";
 interface PlayerDialogProps {
   closePlayerDialog(): void;
   player: Player;
