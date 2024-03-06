@@ -919,30 +919,6 @@ video {
   background-color: rgb(226 232 240 / var(--tw-bg-opacity)) !important;
 }
 
-.bg-slate-400 {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(148 163 184 / var(--tw-bg-opacity)) !important;
-}
-
-.bg-slate-800 {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(30 41 59 / var(--tw-bg-opacity)) !important;
-}
-
-.bg-gradient-to-l {
-  background-image: linear-gradient(to left, var(--tw-gradient-stops)) !important;
-}
-
-.from-yellow-300 {
-  --tw-gradient-from: #fde047 var(--tw-gradient-from-position) !important;
-  --tw-gradient-to: rgb(253 224 71 / 0) var(--tw-gradient-to-position) !important;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
-}
-
-.to-yellow-200 {
-  --tw-gradient-to: #fef08a var(--tw-gradient-to-position) !important;
-}
-
 .p-1 {
   padding: 0.25rem !important;
 }
@@ -982,11 +958,6 @@ video {
 .py-3 {
   padding-top: 0.75rem !important;
   padding-bottom: 0.75rem !important;
-}
-
-.py-4 {
-  padding-top: 1rem !important;
-  padding-bottom: 1rem !important;
 }
 
 .py-6 {
@@ -1125,11 +1096,6 @@ video {
   --tw-ring-opacity: 0.75 !important;
 }
 
-:is(.dark .dark\:bg-slate-600) {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(71 85 105 / var(--tw-bg-opacity)) !important;
-}
-
 :is(.dark .dark\:bg-slate-800) {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(30 41 59 / var(--tw-bg-opacity)) !important;
@@ -1152,11 +1118,6 @@ video {
 
   .sm\:top-2 {
     top: 0.5rem !important;
-  }
-
-  .sm\:my-auto {
-    margin-top: auto !important;
-    margin-bottom: auto !important;
   }
 
   .sm\:h-12 {
@@ -1189,10 +1150,6 @@ video {
 
   .sm\:p-6 {
     padding: 1.5rem !important;
-  }
-
-  .sm\:p-8 {
-    padding: 2rem !important;
   }
 
   .sm\:px-6 {

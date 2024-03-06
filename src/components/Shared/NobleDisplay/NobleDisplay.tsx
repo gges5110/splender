@@ -3,6 +3,7 @@ import { Noble } from "src/interfaces/Interfaces";
 import { GemDisplay } from "src/components/Shared/GemDisplay/GemDisplay";
 import clsx from "clsx";
 import { Box } from "@mui/material";
+import { yellow } from "@mui/material/colors";
 
 interface NobleDisplayProps {
   noble: Noble;
@@ -15,15 +16,15 @@ export const NobleDisplay: React.FC<NobleDisplayProps> = ({
   onClick,
 }) => {
   return (
-    <div
-      className={clsx(
-        "noble-size",
-        "shadow-xl rounded-xl relative bg-gradient-to-l from-yellow-300 to-yellow-200",
-        {
-          "cursor-pointer": onClick !== undefined,
-        }
-      )}
+    <Box
+      bgcolor={(theme) =>
+        theme.palette.mode === "dark" ? yellow[700] : yellow[400]
+      }
+      className={clsx("noble-size", "shadow-xl rounded-xl", {
+        "cursor-pointer": onClick !== undefined,
+      })}
       onClick={onClick}
+      position={"relative"}
     >
       <Box
         className={
@@ -56,6 +57,6 @@ export const NobleDisplay: React.FC<NobleDisplayProps> = ({
           )}
         </Box>
       </Box>
-    </div>
+    </Box>
   );
 };

@@ -45,6 +45,7 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
         display={"flex"}
         gap={2}
         mb={1}
+        ml={{ xs: 1, sm: 0 }}
         width={"fit-content"}
       >
         <Button

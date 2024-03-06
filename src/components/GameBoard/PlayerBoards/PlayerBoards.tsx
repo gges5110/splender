@@ -6,6 +6,7 @@ import clsx from "clsx";
 import { PlayerDialog } from "./PlayerCards/PlayerDialog/PlayerDialog";
 import { LobbyAPI } from "boardgame.io/src/types";
 import { Badge, Box, Button, Paper } from "@mui/material";
+import { blueGrey, grey } from "@mui/material/colors";
 
 interface PlayerBoardsProps {
   buildFromReserve(cardIdx: number): void;
@@ -41,13 +42,17 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
             match?.players[index].name || `Bot ${match?.players[index].id}`;
           return (
             <Box
-              className={clsx(
-                " bg-slate-200 dark:bg-slate-600 rounded-xl shadow-md",
-                {
-                  "bg-slate-400 dark:bg-slate-800":
-                    Number(currentPlayer) === index,
+              bgcolor={(theme) => {
+                if (Number(currentPlayer) === index) {
+                  return theme.palette.mode === "dark"
+                    ? blueGrey[700]
+                    : grey[500];
                 }
-              )}
+                return theme.palette.mode === "dark"
+                  ? blueGrey[300]
+                  : grey[300];
+              }}
+              className={"rounded-xl shadow-md"}
               display={"flex"}
               justifyItems={"center"}
               key={index}
