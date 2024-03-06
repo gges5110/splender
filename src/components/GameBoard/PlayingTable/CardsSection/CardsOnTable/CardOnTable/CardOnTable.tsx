@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { CardDisplay } from "src/components/Shared/CardDisplay/CardDisplay";
 import { playerCanAffordCard } from "src/engine/MovesUtil";
+import { Box } from "@mui/material";
 
 const variants: Variants = {
   fadeIn: {
@@ -61,15 +62,15 @@ export const CardOnTable: FC<CardOnTableProps> = ({
   const [state, setState] = useState<boolean>(false);
 
   if (card == null) {
-    return <div className={"col-span-2"} />;
+    return <Box gridColumn={"span 2 / span 2"} />;
   }
 
   return (
     <motion.div
       animate={state ? "fadeIn" : "stop"}
-      className={"col-span-2"}
       initial={"stop"}
       key={elementKey}
+      style={{ gridColumn: "span 2 / span 2" }}
       variants={variants}
     >
       <CardDisplay

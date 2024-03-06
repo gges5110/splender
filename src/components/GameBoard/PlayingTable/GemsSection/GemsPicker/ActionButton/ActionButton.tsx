@@ -13,15 +13,12 @@ export const ActionButton: FC<ActionButtonProps> = ({
   disabled,
   actionLabelText,
   onClick,
-}) => {
-  return (
-    <Button
-      className={"col-span-2"}
-      disabled={disabled}
-      onClick={onClick}
-      sx={{ borderRadius: 100 }}
-    >
-      <CheckIcon /> {actionLabelText}
-    </Button>
-  );
-};
+}) => (
+  <Button
+    disabled={disabled}
+    onClick={onClick}
+    sx={{ borderRadius: 100, gridColumn: "span 2 / span 2" }}
+  >
+    <CheckIcon /> {actionLabelText}
+  </Button>
+);

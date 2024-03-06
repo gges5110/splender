@@ -4,6 +4,7 @@ import { SelectedGems } from "./SelectedGems/SelectedGems";
 import { SelectableGems } from "./SelectableGems/SelectableGems";
 import { ActionButton } from "./ActionButton/ActionButton";
 import { ResetButton } from "./ResetButton/ResetButton";
+import { Box } from "@mui/material";
 
 export enum GemsPickerMode {
   PICK,
@@ -40,8 +41,17 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
   }
 
   return (
-    <div className={"flex flex-col justify-between gap-2"}>
-      <div className={"gap-2 grid grid-cols-8"}>
+    <Box
+      display={"flex"}
+      flexDirection={"column"}
+      gap={1}
+      justifyContent={"space-between"}
+    >
+      <Box
+        display={"grid"}
+        gap={1}
+        gridTemplateColumns={"repeat(8, minmax(0, 1fr))"}
+      >
         <SelectableGems
           disabled={disabled}
           gems={gems}
@@ -67,7 +77,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
             setGems(Array(5).fill(0));
           }}
         />
-      </div>
+      </Box>
 
       <div className={"gap-2 grid grid-cols-8"}>
         <SelectedGems
@@ -86,7 +96,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
           onClick={() => setGems(Array(5).fill(0))}
         />
       </div>
-    </div>
+    </Box>
   );
 };
 

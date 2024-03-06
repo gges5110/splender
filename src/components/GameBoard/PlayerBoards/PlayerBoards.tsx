@@ -6,7 +6,7 @@ import clsx from "clsx";
 import { PlayerDialog } from "./PlayerCards/PlayerDialog/PlayerDialog";
 import { LobbyAPI } from "boardgame.io/src/types";
 import { Badge, Box, Button, Paper } from "@mui/material";
-import { blueGrey, grey } from "@mui/material/colors";
+import { blueGrey, grey, orange } from "@mui/material/colors";
 
 interface PlayerBoardsProps {
   buildFromReserve(cardIdx: number): void;
@@ -54,7 +54,8 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
                   ? blueGrey[300]
                   : grey[300];
               }}
-              className={"rounded-xl shadow-md"}
+              borderRadius={"12px"}
+              className={"shadow-md"}
               display={"flex"}
               justifyItems={"center"}
               key={index}
@@ -89,10 +90,10 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
                 playerDialogOpen={playerDialogIndex === index}
                 playerName={playerName}
               />
-              <div className={"w-2"} />
-              <div className={"text-center"}>
+              <Box width={"0.5rem"} />
+              <Box textAlign={"center"}>
                 <PlayerGems gems={player.gems} />
-                <div className={"h-2"} />
+                <Box height={"0.5rem"} />
                 <PlayerCards
                   buildFromReserve={buildFromReserve}
                   cards={player.cards}
@@ -101,15 +102,19 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
                   player={player}
                   reservedCards={player.reservedCards}
                 />
-              </div>
-              <div className={"w-8"} />
-              <div
-                className={
-                  "absolute leading-8 top-1 right-2 text-center w-18 h-8 rounded-xl font-semibold text-yellow-500"
-                }
+              </Box>
+              <Box width={"2rem"} />
+              <Box
+                color={orange[500]}
+                fontWeight={600}
+                height={32}
+                lineHeight={"32px"}
+                position={"absolute"}
+                right={8}
+                top={4}
               >
                 {getPlayerPoints(player)} points
-              </div>
+              </Box>
             </Box>
           );
         })}
