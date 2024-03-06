@@ -24,7 +24,7 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
   seed,
 }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
+  const gameEnded = ctx.gameover?.winner !== undefined;
   return (
     <Box
       display={"flex"}
@@ -57,7 +57,7 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
         </Button>
         <Typography>Turn: {Math.ceil(ctx.turn / ctx.numPlayers)}</Typography>
       </Box>
-      {ctx.gameover?.winner !== undefined && (
+      {gameEnded && (
         <GameEndDialog
           reset={() => {
             reset();
@@ -80,6 +80,7 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
           <PlayerBoards
             buildFromReserve={moves.buildFromReserve}
             currentPlayer={ctx.currentPlayer}
+            gameEnded={gameEnded}
             match={match}
             playerID={playerID}
             players={G.players}

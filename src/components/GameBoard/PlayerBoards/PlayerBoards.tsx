@@ -11,6 +11,7 @@ import { blueGrey, grey } from "@mui/material/colors";
 interface PlayerBoardsProps {
   buildFromReserve(cardIdx: number): void;
   currentPlayer: string;
+  gameEnded: boolean;
   match: LobbyAPI.Match;
   playerID: string | null;
   players: Player[];
@@ -22,6 +23,7 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
   playerID,
   buildFromReserve,
   match,
+  gameEnded,
 }) => {
   const [playerDialogIndex, setPlayerDialogIndex] = useState<
     number | undefined
@@ -43,7 +45,7 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
           return (
             <Box
               bgcolor={(theme) => {
-                if (Number(currentPlayer) === index) {
+                if (Number(currentPlayer) === index && !gameEnded) {
                   return theme.palette.mode === "dark"
                     ? blueGrey[700]
                     : grey[500];
