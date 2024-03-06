@@ -30,7 +30,7 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
       display={"flex"}
       flexDirection={"column"}
       mx={"auto"}
-      width={"fit-content"}
+      width={{ xs: "100%", sm: "fit-content" }}
     >
       <RoomInfoDialog
         gameSeed={seed}
