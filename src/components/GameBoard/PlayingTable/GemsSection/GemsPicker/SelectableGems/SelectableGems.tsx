@@ -1,5 +1,4 @@
 import { FC } from "react";
-import clsx from "clsx";
 import { gemsSelectable } from "src/utils/GemUtils";
 import { GemsPickerMode } from "src/components/GameBoard/PlayingTable/GemsSection/GemsPicker/GemsPicker";
 import { Button } from "@mui/material";
@@ -32,9 +31,6 @@ export const SelectableGems: FC<SelectableGemsProps> = ({
 
         return (
           <Button
-            className={clsx(
-              "w-12 aspect-square sm:w-12 sm:h-12 rounded-full flex-initial"
-            )}
             color={colorIndexToPalette[index]}
             disabled={isDisabled}
             key={index}
@@ -42,6 +38,12 @@ export const SelectableGems: FC<SelectableGemsProps> = ({
               if (!isDisabled) {
                 onSelect(index);
               }
+            }}
+            style={{
+              width: "48px",
+              aspectRatio: "1/1",
+              borderRadius: "100%",
+              flex: "0 1 auto",
             }}
           >
             {availableCount}

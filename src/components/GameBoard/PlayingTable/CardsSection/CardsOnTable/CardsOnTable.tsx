@@ -3,6 +3,7 @@ import * as React from "react";
 import { CardOnTable } from "./CardOnTable/CardOnTable";
 import { BuildDialogProps } from "src/components/GameBoard/PlayingTable/PlayingTable";
 import { DeckPile } from "./DeckPile/DeckPile";
+import { Box } from "@mui/material";
 
 interface CardsOnTableProps {
   cardOnClick(buildDialogProps: BuildDialogProps): void;
@@ -25,10 +26,14 @@ export const CardsOnTable: React.FC<CardsOnTableProps> = ({
   disabled,
 }) => {
   return (
-    <div
-      className={
-        "grid grid-flow-row grid-cols-9 grid-rows-3 gap-4 sm:gap-2 w-full"
-      }
+    <Box
+      display={"grid"}
+      gap={{ xs: 2, sm: 1 }}
+      gridAutoFlow={"row"}
+      gridTemplateColumns={"repeat(9, minmax(0, 1fr))"}
+      gridTemplateRows={"repeat(3, minmax(0, 1fr))"}
+      justifyItems={{ xs: "unset", sm: "center" }}
+      width={"100%"}
     >
       {cardsPerLevel
         .map((cards, level: number) => (
@@ -65,6 +70,6 @@ export const CardsOnTable: React.FC<CardsOnTableProps> = ({
           </React.Fragment>
         ))
         .reverse()}
-    </div>
+    </Box>
   );
 };

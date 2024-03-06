@@ -11,11 +11,9 @@ interface ResetButtonProps {
 export const ResetButton: FC<ResetButtonProps> = ({ onClick, disabled }) => {
   return (
     <Button
-      className={
-        "font-semibold py-2 px-4 rounded-full shadow-md bg-gray-100 hover:bg-gray-200 col-span-2"
-      }
       disabled={disabled}
       onClick={onClick}
+      sx={{ borderRadius: 100, gridColumn: "span 2 / span 2" }}
       variant={"outlined"}
     >
       <AutorenewIcon /> Reset
