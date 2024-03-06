@@ -4,6 +4,7 @@ import { Box, Button, Dialog, TextField } from "@mui/material";
 import { localAiInfoAtom, MatchType } from "src/Atoms";
 import { resetLocalAI } from "src/hooks/UseCreateMatch";
 import { useAtom } from "jotai/index";
+import { Link as RouterLink } from "react-router-dom";
 
 interface GameEndDialogProps {
   reset(): void;
@@ -75,6 +76,9 @@ export const GameEndDialog: React.FC<GameEndDialogProps> = ({
           variant={"outlined"}
         >
           Replay Same Game
+        </Button>
+        <Button component={RouterLink} to={"/history"} variant={"text"}>
+          History
         </Button>
       </Box>
     </Dialog>
