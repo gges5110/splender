@@ -7,7 +7,7 @@ import { lobbyClient } from "src/pages/Lobby";
 import { queryClient } from "src/App";
 import { useState } from "react";
 import { GAME_NAME } from "src/config";
-import { resetLocalAI, useSetLocalAiInfo } from "src/hooks/UseLocalAiInfo";
+import { resetLocalGame, useSetLocalAiInfo } from "src/hooks/UseLocalAiInfo";
 
 interface CreateMatchArgs {
   localAiInfo?: {
@@ -64,7 +64,7 @@ export const useCreateMatch = () => {
 
   return (createMatchArgs: CreateMatchArgs) => {
     if (createMatchArgs.matchType === "localAI") {
-      resetLocalAI();
+      resetLocalGame();
 
       if (createMatchArgs.localAiInfo !== undefined) {
         setLocalAiUserPosition(createMatchArgs.localAiInfo);

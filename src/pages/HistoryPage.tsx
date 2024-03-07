@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useAtomValue } from "jotai";
 import { historyAtom } from "src/Atoms";
-import { Paper } from "@mui/material";
+import { Box, Button, Paper } from "@mui/material";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 
 export interface GameHistory {
@@ -57,22 +57,27 @@ const HistoryTable = () => {
   const history = useAtomValue(historyAtom);
 
   return (
-    <DataGrid
-      columns={columns}
-      disableRowSelectionOnClick={true}
-      getRowId={(row) => `${row.seed}-${row.date}`}
-      initialState={{
-        sorting: {
-          sortModel: [
-            {
-              field: "date",
-              sort: "desc",
-            },
-          ],
-        },
-      }}
-      pageSizeOptions={[20, 30, 50]}
-      rows={history}
-    />
+    <Box display={"flex"} flexDirection={"column"} gap={4}>
+      <DataGrid
+        columns={columns}
+        disableRowSelectionOnClick={true}
+        getRowId={(row) => `${row.seed}-${row.date}`}
+        initialState={{
+          sorting: {
+            sortModel: [
+              {
+                field: "date",
+                sort: "desc",
+              },
+            ],
+          },
+        }}
+        pageSizeOptions={[20, 30, 50]}
+        rows={history}
+      />
+      <Box>
+        <Button>Sync to Cloud</Button>
+      </Box>
+    </Box>
   );
 };
