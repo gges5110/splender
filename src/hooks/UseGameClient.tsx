@@ -13,6 +13,7 @@ import { useParams } from "react-router-dom";
 import { GameHistory } from "src/pages/HistoryPage";
 import { useSnackbar } from "notistack";
 import { useLocalAiInfo } from "src/hooks/UseLocalAiInfo";
+import { saveGameToRemote } from "src/repository/Remote";
 
 export type PublicPlayerMetadata = Omit<Server.PlayerMetadata, "credentials">;
 
@@ -46,7 +47,7 @@ export const useGameClient = (
   const { seed, position } = useLocalAiInfo();
   const { enqueueSnackbar } = useSnackbar();
 
-  const onEnd: Game["onEnd"] = (_G, ctx) => {
+  const onGameEnd: Game["onEnd"] = (_G, ctx) => {
     if (!seed || !position) {
       enqueueSnackbar("Missing info for local AI game. Cannot save history.", {
         variant: "error",
@@ -77,12 +78,24 @@ export const useGameClient = (
     );
   };
 
+  const onTurnEnd: Exclude<Game["turn"], undefined>["onEnd"] = (_, ctx) => {
+    // send game state to server only when it's the player's turn
+    if (Number(ctx.currentPlayer) !== userPosition - 1) {
+      return;
+    }
+    saveGameToRemote();
+  };
+
   return useMemo(() => {
     return Client({
       game: {
         ...SplendorGame,
+        turn: {
+          ...SplendorGame.turn,
+          onEnd: onTurnEnd,
+        },
         seed: gameSeed,
-        onEnd,
+        onEnd: onGameEnd,
       },
       board: SplendorBoard,
       numPlayers: numPlayers,

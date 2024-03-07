@@ -41,7 +41,7 @@ export interface LocalAiInfo {
   seed: string | undefined;
 }
 
-export const resetLocalAI = () => {
+export const resetLocalGame = () => {
   localStorage.removeItem("bgio_metadata");
   localStorage.removeItem("bgio_state");
   localStorage.removeItem("bgio_initial");

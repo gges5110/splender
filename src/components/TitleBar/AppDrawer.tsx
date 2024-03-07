@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useAtom } from "jotai";
-import { gameBoardDebugAtom } from "src/Atoms";
+import { gameBoardDebugAtom, userAtom } from "src/Atoms";
 import {
   Box,
   Drawer,
@@ -22,6 +22,14 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import BuildOutlinedIcon from "@mui/icons-material/BuildOutlined";
 import HistoryIcon from "@mui/icons-material/History";
+import GoogleIcon from "@mui/icons-material/Google";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+} from "firebase/auth";
+import { useSnackbar } from "notistack";
 
 interface AppDrawerProps {
   onClose(): void;
@@ -31,6 +39,12 @@ interface AppDrawerProps {
 
 export const AppDrawer: FC<AppDrawerProps> = ({ open, onClose }) => {
   const [gameBoardDebug, setGameBoardDebug] = useAtom(gameBoardDebugAtom);
+  const provider = new GoogleAuthProvider();
+  provider.addScope("profile");
+  provider.addScope("email");
+  const { enqueueSnackbar } = useSnackbar();
+  const auth = getAuth();
+  const [user, setUser] = useAtom(userAtom);
 
   return (
     <Drawer
@@ -119,6 +133,44 @@ export const AppDrawer: FC<AppDrawerProps> = ({ open, onClose }) => {
               setGameBoardDebug(checked);
             }}
           />
+        </ListItem>
+        <ListItem sx={{ py: 0 }}>
+          <ListItemButton
+            onClick={() => {
+              if (user) {
+                signOut(auth)
+                  .then(() => {
+                    enqueueSnackbar("Sign-out successful");
+                  })
+                  .catch((error) => {
+                    enqueueSnackbar(`Sign in with Google failed. ${error}`, {
+                      variant: "error",
+                    });
+                  });
+                return;
+              }
+              signInWithPopup(auth, provider)
+                .then(() => {
+                  enqueueSnackbar("Sign in with Google success");
+                })
+                .catch((error) => {
+                  const errorCode = error.code;
+                  const errorMessage = error.message;
+                  enqueueSnackbar(
+                    `Sign in with Google failed. ${errorCode} ${errorMessage}`,
+                    {
+                      variant: "error",
+                    }
+                  );
+                });
+            }}
+            sx={{ borderRadius: 1, py: "6px" }}
+          >
+            <ListItemIcon sx={{ minWidth: 32 }}>
+              <GoogleIcon />
+            </ListItemIcon>
+            <Typography>{user ? "Sign Out" : "Sign In"}</Typography>
+          </ListItemButton>
         </ListItem>
       </List>
     </Drawer>

@@ -30,3 +30,9 @@ export const colorModeAtom = atomWithStorage<ColorTheme>(
 export const gameBoardDebugAtom = atomWithStorage("gameBoardDebug", false);
 
 export const historyAtom = atomWithStorage<GameHistory[]>("history", []);
+
+export interface User {
+  displayName: string;
+  uid: string;
+}
+export const userAtom = atomWithStorage<User | undefined>("user", undefined);

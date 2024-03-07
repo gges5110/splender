@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { LobbyAPI } from "boardgame.io/src/types";
 import { Box, Button, Typography } from "@mui/material";
 import { RoomInfoDialog } from "src/components/Room/RoomInfoDrawer/RoomInfoDialog";
-import { resetLocalAI, useIncrementSeed } from "src/hooks/UseLocalAiInfo";
+import { resetLocalGame, useIncrementSeed } from "src/hooks/UseLocalAiInfo";
 
 interface SplendorBoardProps extends BoardProps<GameState> {
   match: LobbyAPI.Match;
@@ -30,7 +30,7 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
   useEffect(() => {
     return () => {
       if (gameEnded) {
-        resetLocalAI();
+        resetLocalGame();
         incrementSeed();
       }
     };
