@@ -1,12 +1,12 @@
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Button, CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import "@fontsource/nunito/300.css";
 import "@fontsource/nunito/400.css";
 import "@fontsource/nunito/500.css";
 import "@fontsource/nunito/700.css";
 import { useAppTheme } from "./hooks/UseAppTheme";
-import { closeSnackbar, SnackbarProvider } from "notistack";
+import { SnackbarProvider } from "notistack";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./pages/Router";
 
@@ -16,11 +16,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme={true} />
-      <SnackbarProvider
-        action={(snackbarId) => (
-          <Button onClick={() => closeSnackbar(snackbarId)}>Dismiss</Button>
-        )}
-      >
+      <SnackbarProvider>
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
         </QueryClientProvider>

@@ -1,15 +1,8 @@
 import { FC } from "react";
 import { useAtomValue } from "jotai";
 import { historyAtom } from "src/Atoms";
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
+import { Paper } from "@mui/material";
+import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 
 export interface GameHistory {
   date: string;
@@ -29,42 +22,57 @@ export const HistoryPage: FC<HistoryProps> = () => {
   );
 };
 
+const columns: GridColDef[] = [
+  {
+    field: "seed",
+    headerName: "Seed",
+    type: "number",
+  },
+  {
+    field: "date",
+    headerName: "Date",
+    type: "dateTime",
+    width: 200,
+    valueGetter: (params: GridValueGetterParams) => new Date(params.row.date),
+  },
+  {
+    field: "numberOfPlayers",
+    headerName: "Players",
+    type: "number",
+  },
+
+  {
+    field: "turns",
+    headerName: "Turns",
+    type: "number",
+  },
+  {
+    field: "winner",
+    headerName: "Winner",
+    type: "number",
+  },
+];
+
 const HistoryTable = () => {
   const history = useAtomValue(historyAtom);
 
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label={"simple table"} sx={{ minWidth: 650 }}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Id</TableCell>
-            <TableCell align={"right"}>Number of Players</TableCell>
-            <TableCell align={"right"}>Date</TableCell>
-            <TableCell align={"right"}>Turns</TableCell>
-            <TableCell align={"right"}>Winner</TableCell>
-            <TableCell align={"right"}>Seed</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {history.map((row, index) => (
-            <TableRow
-              key={index}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component={"th"} scope={"row"}>
-                {row.id}
-              </TableCell>
-              <TableCell align={"right"}>{row.numberOfPlayers}</TableCell>
-              <TableCell align={"right"}>
-                {new Date(row.date).toLocaleString()}
-              </TableCell>
-              <TableCell align={"right"}>{row.turns}</TableCell>
-              <TableCell align={"right"}>{row.winner}</TableCell>
-              <TableCell align={"right"}>{row.seed}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <DataGrid
+      columns={columns}
+      disableRowSelectionOnClick={true}
+      getRowId={(row) => `${row.seed}-${row.date}`}
+      initialState={{
+        sorting: {
+          sortModel: [
+            {
+              field: "date",
+              sort: "desc",
+            },
+          ],
+        },
+      }}
+      pageSizeOptions={[20, 30, 50]}
+      rows={history}
+    />
   );
 };
