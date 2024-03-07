@@ -1,6 +1,6 @@
 import { Game, LobbyAPI, Server } from "boardgame.io/src/types";
 import { useAtomValue } from "jotai";
-import { localAiInfoAtom, matchInfoAtom } from "src/Atoms";
+import { matchInfoAtom } from "src/Atoms";
 import { useMemo } from "react";
 import { Bot } from "boardgame.io/ai";
 import { DelayedRandomBot } from "src/engine/DelayedRandomBot";
@@ -12,6 +12,7 @@ import { serverPort } from "src/config";
 import { useParams } from "react-router-dom";
 import { GameHistory } from "src/pages/HistoryPage";
 import { useSnackbar } from "notistack";
+import { useLocalAiInfo } from "src/hooks/UseLocalAiInfo";
 
 export type PublicPlayerMetadata = Omit<Server.PlayerMetadata, "credentials">;
 
@@ -42,17 +43,16 @@ export const useGameClient = (
     });
   }, [JSON.stringify(players), userPosition]);
 
-  const localAiInfo = useAtomValue(localAiInfoAtom);
+  const { seed, position } = useLocalAiInfo();
   const { enqueueSnackbar } = useSnackbar();
 
   const onEnd: Game["onEnd"] = (_G, ctx) => {
-    if (!localAiInfo) {
+    if (!seed || !position) {
       enqueueSnackbar("Missing info for local AI game. Cannot save history.", {
         variant: "error",
       });
       return;
     }
-    const { seed, position } = localAiInfo;
     const winnerName = ctx.gameover?.winner === position ? "You" : "AI";
     enqueueSnackbar(`${winnerName} won, game saved to history!`, {
       variant: "success",

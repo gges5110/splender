@@ -1,11 +1,6 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
-import {
-  gameBoardDebugAtom,
-  localAiInfoAtom,
-  matchInfoAtom,
-  playerNameAtom,
-} from "src/Atoms";
+import { gameBoardDebugAtom, matchInfoAtom, playerNameAtom } from "src/Atoms";
 import { useQuery } from "@tanstack/react-query";
 import { lobbyClient } from "src/pages/Lobby";
 import { useLeaveMatch } from "src/hooks/UseLeaveMatch";
@@ -18,7 +13,7 @@ import { LobbyAPI } from "boardgame.io/src/types";
 import { PublicPlayerMetadata, useGameClient } from "src/hooks/UseGameClient";
 import { GAME_NAME } from "src/config";
 import { RoomWaiting } from "./RoomWaiting";
-import { useAtom } from "jotai/index";
+import { useLocalAiInfo } from "src/hooks/UseLocalAiInfo";
 
 type RoomPhase = "waiting" | "playing";
 export const Room = () => {
@@ -55,9 +50,9 @@ export const Room = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const [searchParams] = useSearchParams();
-  const [localAiInfo] = useAtom(localAiInfoAtom);
+  const { seed, position } = useLocalAiInfo();
 
-  const userPosition = localAiInfo?.position || 1;
+  const userPosition = position || 1;
   const playerID = isLocalAI ? String(userPosition - 1) : matchInfo?.playerID;
 
   const getDefaultPlayers = (numPlayers: number): PublicPlayerMetadata[] => {
@@ -81,7 +76,6 @@ export const Room = () => {
         updatedAt: 0,
       }
     : matchData;
-  const seed = localAiInfo?.seed;
   const GameClient = useGameClient(
     resolvedMatchData,
     gameBoardDebug,

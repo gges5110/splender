@@ -1,17 +1,13 @@
 import { useJoinMatch } from "./UseJoinMatch";
 import { useAtomValue, useSetAtom } from "jotai";
-import {
-  localAiInfoAtom,
-  matchInfoAtom,
-  MatchType,
-  playerNameAtom,
-} from "src/Atoms";
+import { matchInfoAtom, MatchType, playerNameAtom } from "src/Atoms";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { lobbyClient } from "src/pages/Lobby";
 import { queryClient } from "src/App";
 import { useState } from "react";
 import { GAME_NAME } from "src/config";
+import { resetLocalAI, useSetLocalAiInfo } from "src/hooks/UseLocalAiInfo";
 
 interface CreateMatchArgs {
   localAiInfo?: {
@@ -26,7 +22,7 @@ export const useCreateMatch = () => {
   const playerName = useAtomValue(playerNameAtom) || "";
   const navigate = useNavigate();
   const [matchType, setMatchType] = useState<MatchType | undefined>(undefined);
-  const setLocalAiUserPosition = useSetAtom(localAiInfoAtom);
+  const setLocalAiUserPosition = useSetLocalAiInfo();
 
   const setMatchInfo = useSetAtom(matchInfoAtom);
   const createMatchMutation = useMutation({
@@ -80,11 +76,4 @@ export const useCreateMatch = () => {
       createMatchMutation.mutate(createMatchArgs);
     }
   };
-};
-
-export const resetLocalAI = () => {
-  localStorage.removeItem("bgio_metadata");
-  localStorage.removeItem("bgio_state");
-  localStorage.removeItem("bgio_initial");
-  localStorage.removeItem("bgio_log");
 };

@@ -29,8 +29,4 @@ export const colorModeAtom = atomWithStorage<ColorTheme>(
 );
 export const gameBoardDebugAtom = atomWithStorage("gameBoardDebug", false);
 
-export const localAiInfoAtom = atomWithStorage<
-  { position: number; seed: string } | undefined
->("localAiInfo", undefined);
-
 export const historyAtom = atomWithStorage<GameHistory[]>("history", []);

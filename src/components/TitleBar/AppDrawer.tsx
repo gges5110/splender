@@ -38,8 +38,8 @@ export const AppDrawer: FC<AppDrawerProps> = ({ open, onClose }) => {
       onClose={onClose}
       open={open}
     >
-      <Toolbar sx={{ px: 0, minWidth: 300 }}>
-        <Box sx={{ flexGrow: 1 }}>
+      <Toolbar sx={{ minWidth: 300 }}>
+        <Box flexGrow={1}>
           <DiamondOutlinedIcon />
         </Box>
 

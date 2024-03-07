@@ -4,10 +4,11 @@ import { GameState } from "src/interfaces/Interfaces";
 import { PlayingTable } from "./PlayingTable/PlayingTable";
 import { PlayerBoards } from "./PlayerBoards/PlayerBoards";
 import { GameEndDialog } from "src/components/Shared/Dialogs/GameEndDialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LobbyAPI } from "boardgame.io/src/types";
 import { Box, Button, Typography } from "@mui/material";
 import { RoomInfoDialog } from "src/components/Room/RoomInfoDrawer/RoomInfoDialog";
+import { resetLocalAI, useIncrementSeed } from "src/hooks/UseLocalAiInfo";
 
 interface SplendorBoardProps extends BoardProps<GameState> {
   match: LobbyAPI.Match;
@@ -19,12 +20,22 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
   G,
   moves,
   playerID,
-  reset,
   match,
   seed,
 }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const gameEnded = ctx.gameover?.winner !== undefined;
+  const incrementSeed = useIncrementSeed();
+
+  useEffect(() => {
+    return () => {
+      if (gameEnded) {
+        resetLocalAI();
+        incrementSeed();
+      }
+    };
+  }, [gameEnded]);
+
   return (
     <Box
       display={"flex"}
@@ -56,16 +67,9 @@ export const SplendorBoard: React.FC<SplendorBoardProps> = ({
           Room Info
         </Button>
         <Typography>Turn: {Math.ceil(ctx.turn / ctx.numPlayers)}</Typography>
+        <Typography>Seed: {seed}</Typography>
       </Box>
-      {gameEnded && (
-        <GameEndDialog
-          reset={() => {
-            reset();
-          }}
-          seed={seed}
-          winner={ctx.gameover?.winner}
-        />
-      )}
+      {gameEnded && <GameEndDialog winner={ctx.gameover?.winner} />}
 
       <Box
         display={"flex"}
