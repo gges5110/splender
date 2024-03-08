@@ -4,7 +4,9 @@ export default {
   important: true,
   content: ["./src/**/*.{html,tsx}"],
   theme: {
-    extend: {},
+    screens: {
+      sm: "600px",
+    },
   },
   plugins: [],
 };

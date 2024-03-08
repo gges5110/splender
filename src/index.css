@@ -517,33 +517,9 @@ video {
   width: 100%;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 600px) {
   .container {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px;
+    max-width: 600px;
   }
 }
 
@@ -553,7 +529,7 @@ video {
   max-width: 6rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 600px) {
   .card-size {
     height: 8rem;
     width: 6rem;
@@ -561,9 +537,29 @@ video {
   }
 }
 
+.card {
+  height: 3rem;
+  width: 2rem;
+}
+
+@media (min-width: 600px) {
+  .card {
+    height: 5rem;
+    width: 3rem;
+  }
+}
+
 .gem-size {
   aspect-ratio: 1 / 1;
-  width: 3rem;
+  height: 2rem;
+  width: 2rem;
+}
+
+@media (min-width: 600px) {
+  .gem-size {
+    height: 3rem;
+    width: 3rem;
+  }
 }
 
 .gem-size-small {
@@ -571,7 +567,7 @@ video {
   width: 1.5rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 600px) {
   .gem-size-small {
     height: 2rem;
     width: 2rem;
@@ -593,7 +589,7 @@ video {
   max-width: 6rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 600px) {
   .noble-size {
     height: 7rem;
     width: 7rem;
@@ -627,7 +623,7 @@ video {
   padding: 0.5rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 600px) {
   .sections-container {
     padding: 2rem;
     --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
@@ -640,7 +636,7 @@ video {
   padding: 0.25rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 600px) {
   .playing-table-subsections-container {
     padding: 1rem;
   }
@@ -1000,7 +996,7 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 600px) {
   .sm\:right-2 {
     right: 0.5rem !important;
   }

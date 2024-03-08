@@ -6,8 +6,11 @@
     .card-size {
         @apply w-full max-w-[6rem] sm:max-w-none sm:w-24 sm:h-32 aspect-[3/4];
     }
+    .card {
+        @apply w-8 sm:w-12 h-12 sm:h-20;
+    }
     .gem-size {
-        @apply w-12 aspect-square;
+        @apply w-8 sm:w-12 h-8 sm:h-12 aspect-square;
     }
     .gem-size-small {
         @apply w-6 sm:w-8 h-6 sm:h-8;

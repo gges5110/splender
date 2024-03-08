@@ -35,7 +35,7 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
         flexDirection={{ xs: "row", sm: "column" }}
         flexWrap={"nowrap"}
         gap={4}
-        pl={4}
+        pl={{ xs: 2, sm: 4 }}
         pt={4}
         sx={{ overflowY: "hidden" }}
       >
@@ -103,7 +103,7 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
                   reservedCards={player.reservedCards}
                 />
               </Box>
-              <Box width={"2rem"} />
+              <Box width={{ sm: "2rem" }} />
               <Box
                 color={orange[500]}
                 fontWeight={600}

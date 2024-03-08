@@ -44,7 +44,16 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
               </Box>
             )}
           </Box>
-          <Box display={"flex"} flexWrap={"wrap"} gap={2}>
+          <Box
+            display={"grid"}
+            gap={{ xs: 2, sm: 1 }}
+            gridAutoFlow={"row"}
+            gridTemplateColumns={{
+              xs: "repeat(3, minmax(0, 1fr))",
+              sm: "repeat(auto-fit, minmax(100px, 1fr))",
+            }}
+            justifyItems={{ xs: "unset", sm: "center" }}
+          >
             {player.cards.map((card, index) => (
               <CardDisplay card={card} enabled={false} key={index} />
             ))}
