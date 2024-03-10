@@ -1,33 +1,25 @@
 import { Game, LobbyAPI, Server } from "boardgame.io/src/types";
-import { useAtomValue } from "jotai";
-import { matchInfoAtom } from "src/Atoms";
 import { useMemo } from "react";
 import { Bot } from "boardgame.io/ai";
 import { DelayedRandomBot } from "src/engine/DelayedRandomBot";
-import { Local, SocketIO } from "boardgame.io/multiplayer";
+import { Local } from "boardgame.io/multiplayer";
 import { Client } from "boardgame.io/react";
 import { SplendorGame } from "src/engine/SplendorGame";
 import { SplendorBoard } from "src/components/GameBoard/SplendorBoard";
-import { serverPort } from "src/config";
-import { useParams } from "react-router-dom";
-import { GameHistory } from "src/pages/HistoryPage";
 import { useSnackbar } from "notistack";
 import { useLocalAiInfo } from "src/hooks/UseLocalAiInfo";
 import { saveGameToRemote } from "src/repository/Remote";
+import { useSaveGameResult } from "src/repository/GameHistory";
 
 export type PublicPlayerMetadata = Omit<Server.PlayerMetadata, "credentials">;
 
-export const useGameClient = (
-  matchData: LobbyAPI.Match | undefined,
+export const useCreateGameClient = (
+  matchData: LobbyAPI.Match,
   gameBoardDebug: boolean,
   gameSeed: string | number | undefined,
   userPosition: number
 ) => {
-  const { matchID } = useParams();
-  const isLocalAI = matchID === "localAI";
-  const matchInfo = useAtomValue(matchInfoAtom);
-  const matchType = isLocalAI ? "localAI" : matchInfo?.matchType;
-  const players = matchData?.players;
+  const players = matchData.players;
   const numPlayers = players?.length || 2;
 
   const getLocalAIConfig = useMemo(() => {
@@ -46,7 +38,7 @@ export const useGameClient = (
 
   const { seed, position } = useLocalAiInfo();
   const { enqueueSnackbar } = useSnackbar();
-
+  const { saveGameResult } = useSaveGameResult();
   const onGameEnd: Game["onEnd"] = (_G, ctx) => {
     if (!seed || !position) {
       enqueueSnackbar("Missing info for local AI game. Cannot save history.", {
@@ -59,23 +51,7 @@ export const useGameClient = (
       variant: "success",
     });
 
-    const prevHistory: GameHistory[] = JSON.parse(
-      localStorage.getItem("history") || "[]"
-    );
-    localStorage.setItem(
-      "history",
-      JSON.stringify([
-        ...prevHistory,
-        {
-          date: new Date().toISOString(),
-          id: matchData?.matchID || "",
-          numberOfPlayers: numPlayers,
-          seed: seed || "",
-          turns: Math.ceil(ctx.turn / ctx.numPlayers),
-          winner: winnerName,
-        },
-      ])
-    );
+    saveGameResult(matchData, ctx, seed, winnerName);
   };
 
   const onTurnEnd: Exclude<Game["turn"], undefined>["onEnd"] = (_, ctx) => {
@@ -99,12 +75,7 @@ export const useGameClient = (
       },
       board: SplendorBoard,
       numPlayers: numPlayers,
-      multiplayer:
-        matchType === "online"
-          ? SocketIO({ server: `localhost:${serverPort}` })
-          : matchType === "localAI"
-          ? getLocalAIConfig
-          : getLocalAIConfig,
+      multiplayer: getLocalAIConfig,
     });
-  }, [matchType, numPlayers, gameBoardDebug]);
+  }, [numPlayers, gameBoardDebug]);
 };

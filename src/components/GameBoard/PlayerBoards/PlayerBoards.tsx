@@ -5,7 +5,7 @@ import { FC, useState } from "react";
 import clsx from "clsx";
 import { PlayerDialog } from "./PlayerCards/PlayerDialog/PlayerDialog";
 import { LobbyAPI } from "boardgame.io/src/types";
-import { Badge, Box, Button, Paper } from "@mui/material";
+import { Box, Button, Paper } from "@mui/material";
 import { blueGrey, grey, orange } from "@mui/material/colors";
 
 interface PlayerBoardsProps {
@@ -69,18 +69,10 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
                 )}
                 onClick={() => setPlayerDialogIndex(index)}
               >
-                <Badge
-                  color={"success"}
-                  invisible={!match.players[index]?.isConnected}
-                  variant={"dot"}
-                >
-                  <span className={"text-slate-700"}>
-                    {playerName}
-                    {match?.players[index].id === Number(playerID) && (
-                      <> (you)</>
-                    )}
-                  </span>
-                </Badge>
+                <span className={"text-slate-700"}>
+                  {playerName}
+                  {match?.players[index].id === Number(playerID) && <> (you)</>}
+                </span>
               </Button>
               <PlayerDialog
                 closePlayerDialog={() => {
