@@ -19,25 +19,10 @@ jobs:
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
-  test-engine:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v4
-
-      - name: Install dependencies ⬇️
-        run: npm install
-
-      - name: Test coverage 🚨
-        run: npm run coverage-engine
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
   build:
     runs-on: ubuntu-latest
     needs:
-      #      - test
-      - test-engine
+      - test
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4

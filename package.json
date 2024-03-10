@@ -15,7 +15,6 @@
     "@tanstack/react-query": "^4.29.7",
     "boardgame.io": "^0.49.12",
     "clsx": "^1.1.1",
-    "express": "^4.18.2",
     "firebase": "^10.8.1",
     "framer-motion": "^10.12.16",
     "jotai": "^2.1.0",
@@ -32,12 +31,8 @@
     "tailwind:css": "tailwind build src/tailwind.css -c tailwind.config.js -o src/index.css",
     "test": "CI=true vitest",
     "test-ui": "vitest --ui",
-    "test-engine": "CI=true vitest --config vitest.engine.config.ts",
     "coverage": "CI=true vitest --coverage",
-    "coverage-engine": "CI=true vitest --config vitest.engine.config.ts --coverage",
     "preview": "vite preview",
-    "build-server": "npx tsc",
-    "dev": "DEBUG=* ts-node-dev -P tsconfig-server.json --watch src/server src/server/server.ts",
     "lint:fix": "eslint -c .eslintrc.json 'src/**/*.tsx' --fix"
   },
   "eslintConfig": {
@@ -62,7 +57,6 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.4.3",
-    "@types/node": "^20.11.24",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/parser": "^5.59.7",
@@ -83,7 +77,6 @@
     "prettier": "^2.2.1",
     "rollup-plugin-copy": "^3.5.0",
     "tailwindcss": "^3.3.2",
-    "ts-node-dev": "^2.0.0",
     "vite-plugin-svgr": "^4.2.0",
     "vitest": "^1.3.1"
   }
