@@ -32,7 +32,7 @@ const columns: GridColDef[] = [
     field: "date",
     headerName: "Date",
     type: "dateTime",
-    width: 200,
+    width: 180,
     valueGetter: (params: GridValueGetterParams) => new Date(params.row.date),
   },
   {
@@ -50,6 +50,12 @@ const columns: GridColDef[] = [
     field: "winner",
     headerName: "Winner",
     type: "number",
+  },
+  {
+    field: "id",
+    headerName: "ID",
+    type: "string",
+    width: 200,
   },
 ];
 
