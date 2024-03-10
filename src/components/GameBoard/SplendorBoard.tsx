@@ -7,7 +7,7 @@ import { GameEndDialog } from "src/components/Shared/Dialogs/GameEndDialog";
 import { useEffect } from "react";
 import { LobbyAPI } from "boardgame.io/src/types";
 import { Box, Typography } from "@mui/material";
-import { resetLocalGame, useIncrementSeed } from "src/hooks/UseLocalAiInfo";
+import { resetLocalGame, useIncrementSeed } from "src/hooks/UseLocalMatchInfo";
 
 interface SplendorBoardProps extends BoardProps<GameState> {
   match: LobbyAPI.Match;

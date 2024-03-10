@@ -17,8 +17,8 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
-import { useCreateMatch } from "src/hooks/UseCreateMatch";
-import { useLocalAiInfo } from "src/hooks/UseLocalAiInfo";
+import { useCreateMatch } from "src/components/Lobby/CreateMatchCard/UseCreateMatch";
+import { useLocalMatchInfo } from "src/hooks/UseLocalMatchInfo";
 
 type NumberOfPlayers = 2 | 3 | 4;
 export const CreateMatchCard = () => {
@@ -30,16 +30,18 @@ export const CreateMatchCard = () => {
     );
   };
 
-  const { seed: initialSeed, position: initialPosition } = useLocalAiInfo();
+  const localMatchInfo = useLocalMatchInfo();
 
-  const [seed, setGameSeed] = useState<string>(initialSeed ? initialSeed : "1");
+  const [seed, setGameSeed] = useState<string>(
+    localMatchInfo ? localMatchInfo.seed : "1"
+  );
   const handleGameSeedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGameSeed((event.target as HTMLInputElement).value);
   };
 
   const [position, setPosition] = useState<string>(
-    initialPosition && initialPosition <= numberOfPlayers
-      ? String(initialPosition)
+    localMatchInfo?.position && localMatchInfo.position <= numberOfPlayers
+      ? String(localMatchInfo.position)
       : ""
   );
   const handlePositionChange = (event: SelectChangeEvent) => {
@@ -97,13 +99,11 @@ export const CreateMatchCard = () => {
           onClick={() => {
             createMatch({
               numPlayers: numberOfPlayers,
-              localAiInfo: {
-                position:
-                  position !== ""
-                    ? Number(position)
-                    : Math.floor(Math.random() * numberOfPlayers) + 1,
-                seed,
-              },
+              position:
+                position !== ""
+                  ? Number(position)
+                  : Math.floor(Math.random() * numberOfPlayers) + 1,
+              seed,
             });
           }}
           variant={"contained"}

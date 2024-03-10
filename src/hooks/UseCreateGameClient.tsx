@@ -7,7 +7,7 @@ import { Client } from "boardgame.io/react";
 import { SplendorGame } from "src/engine/SplendorGame";
 import { SplendorBoard } from "src/components/GameBoard/SplendorBoard";
 import { useSnackbar } from "notistack";
-import { useLocalAiInfo } from "src/hooks/UseLocalAiInfo";
+import { useLocalMatchInfo } from "src/hooks/UseLocalMatchInfo";
 import { saveGameToRemote } from "src/repository/Remote";
 import { useSaveGameResult } from "src/repository/GameHistory";
 
@@ -36,22 +36,23 @@ export const useCreateGameClient = (
     });
   }, [JSON.stringify(players), userPosition]);
 
-  const { seed, position } = useLocalAiInfo();
+  const localMatchInfo = useLocalMatchInfo();
   const { enqueueSnackbar } = useSnackbar();
   const { saveGameResult } = useSaveGameResult();
   const onGameEnd: Game["onEnd"] = (_G, ctx) => {
-    if (!seed || !position) {
+    if (!localMatchInfo) {
       enqueueSnackbar("Missing info for local AI game. Cannot save history.", {
         variant: "error",
       });
       return;
     }
-    const winnerName = ctx.gameover?.winner === position ? "You" : "AI";
+    const winnerName =
+      ctx.gameover?.winner === localMatchInfo.position ? "You" : "AI";
     enqueueSnackbar(`${winnerName} won, game saved to history!`, {
       variant: "success",
     });
 
-    saveGameResult(matchData, ctx, seed, winnerName);
+    saveGameResult(localMatchInfo, ctx, winnerName);
   };
 
   const onTurnEnd: Exclude<Game["turn"], undefined>["onEnd"] = (_, ctx) => {

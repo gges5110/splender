@@ -1,4 +1,4 @@
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
 import { gameBoardDebugAtom, playerNameAtom } from "src/Atoms";
 import { Container } from "@mui/material";
@@ -6,7 +6,7 @@ import {
   PublicPlayerMetadata,
   useCreateGameClient,
 } from "src/hooks/UseCreateGameClient";
-import { useLocalAiInfo } from "src/hooks/UseLocalAiInfo";
+import { useLocalMatchInfo } from "src/hooks/UseLocalMatchInfo";
 import { LobbyAPI } from "boardgame.io/src/types";
 
 export const Room = () => {
@@ -14,11 +14,9 @@ export const Room = () => {
 
   const playerName = useAtomValue(playerNameAtom);
   const gameBoardDebug = useAtomValue(gameBoardDebugAtom);
-  const [searchParams] = useSearchParams();
-  const numberOfPlayers = Number(searchParams.get("numPlayers"));
-  const { seed, position } = useLocalAiInfo();
+  const localMatchInfo = useLocalMatchInfo();
 
-  const userPosition = position || 1;
+  const userPosition = localMatchInfo?.position || 1;
 
   const getDefaultPlayers = (numPlayers: number): PublicPlayerMetadata[] => {
     const players = [];
@@ -33,8 +31,8 @@ export const Room = () => {
   };
 
   const resolvedMatchData: LobbyAPI.Match = {
-    matchID: "localAI", // TODO: generate a unique matchID
-    players: getDefaultPlayers(numberOfPlayers), // TODO: store this in local storage
+    matchID: matchID || "",
+    players: getDefaultPlayers(localMatchInfo?.numPlayers || 1), // TODO: store this in local storage
     gameName: "splender",
     createdAt: 0,
     updatedAt: 0,
@@ -43,7 +41,7 @@ export const Room = () => {
   const GameClient = useCreateGameClient(
     resolvedMatchData,
     gameBoardDebug,
-    seed,
+    localMatchInfo?.seed || 0,
     userPosition
   );
 
@@ -65,7 +63,7 @@ export const Room = () => {
         match={resolvedMatchData}
         matchID={matchID}
         playerID={String(userPosition - 1)}
-        seed={seed}
+        seed={localMatchInfo?.seed || 0}
       />
     </Container>
   );

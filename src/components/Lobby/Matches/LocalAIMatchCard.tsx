@@ -9,12 +9,15 @@ import {
 } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
 import { Link as RouterLink } from "react-router-dom";
+import { useLocalMatchInfo } from "src/hooks/UseLocalMatchInfo";
 
 export const LocalAIMatchCard = () => {
+  const localMatchInfo = useLocalMatchInfo();
+  const matchID = localMatchInfo?.matchID;
   const state = JSON.parse(localStorage.getItem("bgio_state") || "")[0][1];
-  const numPlayers = state.ctx.numPlayers;
+  const numPlayers = localMatchInfo?.numPlayers || 1;
   const turn = state.ctx.turn;
-  const seed = state.plugins.random.data.seed;
+  const seed = localMatchInfo?.seed;
   const theme = useTheme();
   return (
     <Card
@@ -23,7 +26,7 @@ export const LocalAIMatchCard = () => {
           theme.palette.mode === "light" ? blueGrey[50] : grey[900],
       }}
     >
-      <CardHeader subheader={`Match ID: localAI`} />
+      <CardHeader subheader={`Match ID: ${matchID}`} />
       <CardContent>
         <Box display={"flex"} flexDirection={"column"}>
           <span>Turn: {Math.ceil(turn / numPlayers)}</span>
@@ -34,7 +37,7 @@ export const LocalAIMatchCard = () => {
       <CardActions>
         <Button
           component={RouterLink}
-          to={`/room/localAI?numPlayers=${numPlayers}`}
+          to={`/room/${matchID}`}
           variant={"contained"}
         >
           Resume

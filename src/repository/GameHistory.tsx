@@ -1,13 +1,12 @@
 import { GameHistory } from "src/pages/HistoryPage";
-import { LobbyAPI } from "boardgame.io/src/types";
 import { Ctx } from "boardgame.io";
+import { LocalMatchInfo } from "src/hooks/UseLocalMatchInfo";
 
 export const useSaveGameResult = () => {
   return {
     saveGameResult: (
-      matchData: LobbyAPI.Match,
+      localMatchInfo: LocalMatchInfo,
       ctx: Ctx,
-      seed: string,
       winnerName: string
     ) => {
       const prevHistory: GameHistory[] = JSON.parse(
@@ -19,9 +18,9 @@ export const useSaveGameResult = () => {
           ...prevHistory,
           {
             date: new Date().toISOString(),
-            id: matchData.matchID,
-            numberOfPlayers: matchData.players.length,
-            seed: seed || "",
+            id: localMatchInfo.matchID,
+            numberOfPlayers: localMatchInfo.numPlayers,
+            seed: localMatchInfo.seed,
             turns: Math.ceil(ctx.turn / ctx.numPlayers),
             winner: winnerName,
           },
