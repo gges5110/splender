@@ -1,5 +1,4 @@
 import "./App.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import "@fontsource/nunito/300.css";
 import "@fontsource/nunito/400.css";
@@ -10,16 +9,13 @@ import { SnackbarProvider } from "notistack";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./pages/Router";
 
-export const queryClient = new QueryClient();
 const App = () => {
   const theme = useAppTheme();
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme={true} />
       <SnackbarProvider>
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-        </QueryClientProvider>
+        <RouterProvider router={router} />
       </SnackbarProvider>
     </ThemeProvider>
   );

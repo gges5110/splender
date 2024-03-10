@@ -6,7 +6,7 @@ import {
 import { Layout } from "./Layout";
 import { HelpPage } from "./HelpPage";
 import { Lobby } from "./Lobby";
-import { Room } from "./Room/Room";
+import { Room } from "./Room";
 import { HistoryPage } from "src/pages/HistoryPage";
 export const router = createBrowserRouter(
   createRoutesFromElements(

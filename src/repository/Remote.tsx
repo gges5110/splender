@@ -22,7 +22,7 @@ export const loadGameToLocal = async (user: User) => {
       localStorage.setItem("bgio_state", value.state);
       localStorage.setItem("bgio_initial", value.initial);
       localStorage.setItem("bgio_log", value.log);
-      localStorage.setItem("localAiInfo", value.localAiInfo);
+      localStorage.setItem("localMatchInfo", value.localMatchInfo);
 
       return Promise.resolve("success");
     } else {
@@ -49,13 +49,13 @@ export const saveGameToRemote = () => {
   const state = localStorage.getItem("bgio_state");
   const initial = localStorage.getItem("bgio_initial");
   const log = localStorage.getItem("bgio_log");
-  const localAiInfo = localStorage.getItem("localAiInfo");
+  const localMatchInfo = localStorage.getItem("localMatchInfo");
   set(ref(database, "users/" + user.uid), {
     metadata,
     state,
     initial,
     log,
-    localAiInfo,
+    localMatchInfo,
     sessionId: window.navigator.userAgent,
     updateTimestamp: new Date().toISOString(),
   }).then(() => {

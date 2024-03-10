@@ -17,9 +17,8 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
-import { MatchType } from "src/Atoms";
-import { useCreateMatch } from "src/hooks/UseCreateMatch";
-import { useLocalAiInfo } from "src/hooks/UseLocalAiInfo";
+import { useCreateMatch } from "src/components/Lobby/CreateMatchCard/UseCreateMatch";
+import { useLocalMatchInfo } from "src/hooks/UseLocalMatchInfo";
 
 type NumberOfPlayers = 2 | 3 | 4;
 export const CreateMatchCard = () => {
@@ -31,23 +30,18 @@ export const CreateMatchCard = () => {
     );
   };
 
-  const [matchType, setMatchType] = useState<MatchType>("localAI");
-  const handleMatchTypeChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setMatchType((event.target as HTMLInputElement).value as MatchType);
-  };
+  const localMatchInfo = useLocalMatchInfo();
 
-  const { seed: initialSeed, position: initialPosition } = useLocalAiInfo();
-
-  const [seed, setGameSeed] = useState<string>(initialSeed ? initialSeed : "1");
+  const [seed, setGameSeed] = useState<string>(
+    localMatchInfo ? localMatchInfo.seed : "1"
+  );
   const handleGameSeedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGameSeed((event.target as HTMLInputElement).value);
   };
 
   const [position, setPosition] = useState<string>(
-    initialPosition && initialPosition <= numberOfPlayers
-      ? String(initialPosition)
+    localMatchInfo?.position && localMatchInfo.position <= numberOfPlayers
+      ? String(localMatchInfo.position)
       : ""
   );
   const handlePositionChange = (event: SelectChangeEvent) => {
@@ -73,37 +67,6 @@ export const CreateMatchCard = () => {
               <FormControlLabel control={<Radio />} label={"2"} value={"2"} />
               <FormControlLabel control={<Radio />} label={"3"} value={"3"} />
               <FormControlLabel control={<Radio />} label={"4"} value={"4"} />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl>
-            <FormLabel id={"set-number-of-players-radio-buttons-group"}>
-              Match Type
-            </FormLabel>
-            <RadioGroup
-              aria-labelledby={"set-number-of-players-radio-buttons-group"}
-              name={"set-number-of-players-radio-buttons-group"}
-              onChange={handleMatchTypeChange}
-              row={true}
-              value={matchType}
-            >
-              <FormControlLabel
-                control={<Radio />}
-                disabled={true}
-                label={"Online"}
-                value={"online"}
-              />
-              <FormControlLabel
-                control={<Radio />}
-                disabled={true}
-                label={"Local"}
-                value={"local"}
-              />
-              <FormControlLabel
-                control={<Radio />}
-                label={"Local AI"}
-                value={"localAI"}
-              />
             </RadioGroup>
           </FormControl>
           <TextField
@@ -136,17 +99,11 @@ export const CreateMatchCard = () => {
           onClick={() => {
             createMatch({
               numPlayers: numberOfPlayers,
-              matchType,
-              localAiInfo:
-                matchType === "localAI"
-                  ? {
-                      position:
-                        position !== ""
-                          ? Number(position)
-                          : Math.floor(Math.random() * numberOfPlayers) + 1,
-                      seed,
-                    }
-                  : undefined,
+              position:
+                position !== ""
+                  ? Number(position)
+                  : Math.floor(Math.random() * numberOfPlayers) + 1,
+              seed,
             });
           }}
           variant={"contained"}
