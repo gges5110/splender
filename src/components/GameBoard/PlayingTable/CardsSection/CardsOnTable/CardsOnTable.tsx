@@ -28,7 +28,7 @@ export const CardsOnTable: React.FC<CardsOnTableProps> = ({
   return (
     <Box
       display={"grid"}
-      gap={{ xs: 2, sm: 1 }}
+      gap={{ xs: 1, sm: 2 }}
       gridAutoFlow={"row"}
       gridTemplateColumns={"repeat(9, minmax(0, 1fr))"}
       gridTemplateRows={"repeat(3, minmax(0, 1fr))"}

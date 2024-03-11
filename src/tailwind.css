@@ -27,4 +27,7 @@
     .playing-table-subsections-container {
         @apply p-1 sm:p-4
     }
+    .card-affordable {
+         @apply ring-4 ring-gray-400;
+    }
 }
