@@ -1,6 +1,9 @@
 import { GameHistory } from "src/pages/HistoryPage";
 import { Ctx } from "boardgame.io";
 import { LocalMatchInfo } from "src/hooks/UseLocalMatchInfo";
+import { User } from "src/Atoms";
+import { child, get, ref, set } from "firebase/database";
+import { database } from "src/firebase/FirebaseApp";
 
 export const useSaveGameResult = () => {
   return {
@@ -28,4 +31,29 @@ export const useSaveGameResult = () => {
       );
     },
   };
+};
+
+export const sendGameHistoryWithCloud = async (user: User) => {
+  const prevHistory: GameHistory[] = JSON.parse(
+    localStorage.getItem("history") || "[]"
+  );
+  try {
+    await set(ref(database, `users/${user.uid}/history`), prevHistory);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const loadGameHistoryFromCloud = async (
+  user: User
+): Promise<GameHistory[] | undefined> => {
+  const dbRef = ref(database);
+  try {
+    const snapshot = await get(child(dbRef, `users/${user.uid}/history`));
+    if (snapshot.exists()) {
+      return snapshot.val();
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };

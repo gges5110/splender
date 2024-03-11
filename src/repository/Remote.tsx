@@ -1,5 +1,5 @@
 import { User } from "src/Atoms";
-import { child, get, getDatabase, ref, set } from "firebase/database";
+import { child, get, ref, set } from "firebase/database";
 import { database } from "src/firebase/FirebaseApp";
 import { LobbyAPI } from "boardgame.io/src/types";
 
@@ -8,9 +8,9 @@ export const loadGameToLocal = async (user: User) => {
     return Promise.resolve();
   }
 
-  const dbRef = ref(getDatabase());
+  const dbRef = ref(database);
   try {
-    const snapshot = await get(child(dbRef, `users/${user?.uid}`));
+    const snapshot = await get(child(dbRef, `users/${user.uid}/gameState`));
     if (snapshot.exists()) {
       const value = snapshot.val();
       const sessionId = value.sessionId;
@@ -48,7 +48,7 @@ export const saveGameToRemote = (matchData: LobbyAPI.Match) => {
   const metadata = localStorage.getItem("bgio_metadata");
   const state = localStorage.getItem("bgio_state");
   const localMatchInfo = localStorage.getItem("localMatchInfo");
-  set(ref(database, "users/" + user.uid), {
+  set(ref(database, `users/${user.uid}/gameState`), {
     metadata,
     state,
     id: matchData.matchID,

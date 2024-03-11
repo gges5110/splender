@@ -31,7 +31,7 @@ export const UserDialog = () => {
     if (playerName) {
       setInput(playerName);
     }
-  }, [playerName]);
+  }, [playerName, user]);
   return (
     <Dialog
       onClose={() => {
@@ -39,42 +39,10 @@ export const UserDialog = () => {
       }}
       open={open}
     >
-      <DialogTitle sx={{ fontWeight: "600" }}>Set Name</DialogTitle>
+      <DialogTitle sx={{ fontWeight: "600" }}>User Dialog</DialogTitle>
       <DialogContent>
         <Box display={"flex"} flexDirection={"column"} gap={1}>
-          <Box alignItems={"center"} display={"flex"} gap={1}>
-            <TextField
-              autoFocus={true}
-              fullWidth={true}
-              id={"username"}
-              label={"username"}
-              name={"username"}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                setInput(event.target.value);
-              }}
-              onKeyDown={(event) => {
-                if (event.key === "Enter") {
-                  event.preventDefault();
-                  handleSetPlayerName(input);
-                }
-              }}
-              sx={{ minWidth: 300 }}
-              type={"text"}
-              value={input}
-              variant={"standard"}
-            />
-            <Button
-              onClick={() => {
-                const newName = generateName();
-                setInput(newName);
-              }}
-              sx={{ whiteSpace: "nowrap" }}
-              variant={"text"}
-            >
-              Auto Generate
-            </Button>
-          </Box>
-          {user && (
+          {user ? (
             <Button
               onClick={() => {
                 const key = enqueueSnackbar("Loading", {
@@ -109,6 +77,39 @@ export const UserDialog = () => {
             >
               Load Game from Cloud
             </Button>
+          ) : (
+            <Box alignItems={"center"} display={"flex"} gap={1}>
+              <TextField
+                autoFocus={true}
+                fullWidth={true}
+                id={"username"}
+                label={"username"}
+                name={"username"}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  setInput(event.target.value);
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    event.preventDefault();
+                    handleSetPlayerName(input);
+                  }
+                }}
+                sx={{ minWidth: 300 }}
+                type={"text"}
+                value={input}
+                variant={"standard"}
+              />
+              <Button
+                onClick={() => {
+                  const newName = generateName();
+                  setInput(newName);
+                }}
+                sx={{ whiteSpace: "nowrap" }}
+                variant={"text"}
+              >
+                Auto Generate
+              </Button>
+            </Box>
           )}
         </Box>
       </DialogContent>

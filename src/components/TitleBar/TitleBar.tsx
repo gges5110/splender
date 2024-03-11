@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { ColorThemeSelector } from "./ColorThemeSelector/ColorThemeSelector";
 import { Link as RouterLink } from "react-router-dom";
 import { useAtom } from "jotai/index";
-import { playerNameAtom, usernameDialogOpenAtom } from "src/Atoms";
+import { playerNameAtom, userAtom, usernameDialogOpenAtom } from "src/Atoms";
 import {
   AppBar,
   Button,
@@ -23,6 +23,8 @@ interface TitleBarProps {}
 export const TitleBar: FC<TitleBarProps> = () => {
   const setOpen = useSetAtom(usernameDialogOpenAtom);
   const [playerName, setPlayerName] = useAtom(playerNameAtom);
+  const [user] = useAtom(userAtom);
+
   useEffect(() => {
     if (localStorage.getItem("playerName") == null) {
       setPlayerName(generateName());
@@ -71,7 +73,7 @@ export const TitleBar: FC<TitleBarProps> = () => {
         >
           <PersonIcon />
           <Typography variant={"body2"} whiteSpace={"nowrap"}>
-            {playerName}
+            {user?.displayName || playerName}
           </Typography>
         </Button>
 

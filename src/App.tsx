@@ -14,7 +14,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme={true} />
-      <SnackbarProvider>
+      <SnackbarProvider autoHideDuration={3000}>
         <RouterProvider router={router} />
       </SnackbarProvider>
     </ThemeProvider>

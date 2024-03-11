@@ -1,8 +1,13 @@
 import { FC } from "react";
-import { useAtomValue } from "jotai";
-import { historyAtom } from "src/Atoms";
+import { historyAtom, userAtom } from "src/Atoms";
 import { Box, Button, Paper } from "@mui/material";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { useAtom } from "jotai/index";
+import {
+  loadGameHistoryFromCloud,
+  sendGameHistoryWithCloud,
+} from "src/repository/GameHistory";
+import { useSnackbar } from "notistack";
 
 export interface GameHistory {
   date: string;
@@ -60,8 +65,9 @@ const columns: GridColDef[] = [
 ];
 
 const HistoryTable = () => {
-  const history = useAtomValue(historyAtom);
-
+  const [history, setHistory] = useAtom(historyAtom);
+  const [user] = useAtom(userAtom);
+  const { enqueueSnackbar } = useSnackbar();
   return (
     <Box display={"flex"} flexDirection={"column"} gap={4}>
       <DataGrid
@@ -81,9 +87,42 @@ const HistoryTable = () => {
         pageSizeOptions={[20, 30, 50]}
         rows={history}
       />
-      <Box>
-        <Button>Sync to Cloud</Button>
-      </Box>
+      {user !== undefined && (
+        <Box display={"flex"} gap={1} p={1}>
+          <Button
+            onClick={() => {
+              sendGameHistoryWithCloud(user).then(() => {
+                enqueueSnackbar("Synced to Cloud", { variant: "success" });
+              });
+            }}
+          >
+            Sync to Cloud
+          </Button>
+          <Button
+            onClick={() => {
+              loadGameHistoryFromCloud(user).then((history) => {
+                if (!history) {
+                  return;
+                }
+                setHistory((prev) => {
+                  const mergedHistory = [...prev];
+                  history.forEach((h) => {
+                    if (prev.find((p) => p.id === h.id) === undefined) {
+                      mergedHistory.push(h);
+                    }
+                  });
+                  return mergedHistory;
+                });
+                enqueueSnackbar("Loaded from Cloud", {
+                  variant: "success",
+                });
+              });
+            }}
+          >
+            Load from Cloud
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 };
