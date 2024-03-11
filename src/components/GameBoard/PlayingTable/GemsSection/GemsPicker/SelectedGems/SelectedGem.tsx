@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@mui/material";
-import clsx from "clsx";
 import { colorIndexToPalette } from "src/styles/paletteTheme";
 
 interface SelectedGemProps {
@@ -44,7 +43,7 @@ export const SelectedGem: FC<SelectedGemProps> = ({
             }}
           >
             <Button
-              className={clsx("gem-size flex-initial")}
+              className={"gem-size flex-initial"}
               color={colorIndexToPalette[index]}
               onClick={() => {
                 selectedGemOnClick(index);

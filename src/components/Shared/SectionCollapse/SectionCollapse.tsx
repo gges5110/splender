@@ -21,6 +21,9 @@ export const SectionCollapse: FC<SectionCollapseProps> = ({
         onClick={() => {
           setOpen((prevState) => !prevState);
         }}
+        sx={{
+          py: { xs: 0, sm: 1 },
+        }}
       >
         <ListItemText primary={title} />
         <ExpandLess

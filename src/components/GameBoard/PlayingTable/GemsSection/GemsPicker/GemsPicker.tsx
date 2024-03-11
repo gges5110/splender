@@ -90,7 +90,10 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
           }}
           selectedGems={selectedGems}
         />
-        <div className={"gem-size gem-button flex-initial"} key={5} />
+        <div
+          className={"gem-size rounded-full select-none shadow-sm flex-initial"}
+          key={5}
+        />
         <ResetButton
           disabled={selectedGems.every((gem) => gem === 0)}
           onClick={() => setGems(Array(5).fill(0))}

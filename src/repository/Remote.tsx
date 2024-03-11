@@ -1,6 +1,7 @@
 import { User } from "src/Atoms";
 import { child, get, getDatabase, ref, set } from "firebase/database";
 import { database } from "src/firebase/FirebaseApp";
+import { LobbyAPI } from "boardgame.io/src/types";
 
 export const loadGameToLocal = async (user: User) => {
   if (!user) {
@@ -20,8 +21,7 @@ export const loadGameToLocal = async (user: User) => {
 
       localStorage.setItem("bgio_metadata", value.metadata);
       localStorage.setItem("bgio_state", value.state);
-      localStorage.setItem("bgio_initial", value.initial);
-      localStorage.setItem("bgio_log", value.log);
+      localStorage.setItem("bgio_initial", value.state);
       localStorage.setItem("localMatchInfo", value.localMatchInfo);
 
       return Promise.resolve("success");
@@ -33,7 +33,7 @@ export const loadGameToLocal = async (user: User) => {
   }
 };
 
-export const saveGameToRemote = () => {
+export const saveGameToRemote = (matchData: LobbyAPI.Match) => {
   const rawUser = localStorage.getItem("user");
   if (!rawUser) {
     return;
@@ -47,14 +47,11 @@ export const saveGameToRemote = () => {
 
   const metadata = localStorage.getItem("bgio_metadata");
   const state = localStorage.getItem("bgio_state");
-  const initial = localStorage.getItem("bgio_initial");
-  const log = localStorage.getItem("bgio_log");
   const localMatchInfo = localStorage.getItem("localMatchInfo");
   set(ref(database, "users/" + user.uid), {
     metadata,
     state,
-    initial,
-    log,
+    id: matchData.matchID,
     localMatchInfo,
     sessionId: window.navigator.userAgent,
     updateTimestamp: new Date().toISOString(),

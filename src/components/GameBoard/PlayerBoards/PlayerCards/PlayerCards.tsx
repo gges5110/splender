@@ -34,7 +34,7 @@ export const PlayerCards: React.FC<PlayerCardsProps> = ({
       justifyContent={"flex-start"}
     >
       {cardCountByColor.map((cardCount, index) => (
-        <Box className={"card"} key={index}>
+        <Box className={"player-card-size"} key={index}>
           {cardCount > 0 && (
             <Button
               color={colorIndexToPalette[index]}
@@ -46,7 +46,7 @@ export const PlayerCards: React.FC<PlayerCardsProps> = ({
           )}
         </Box>
       ))}
-      <Box className={"card"}>
+      <Box className={"player-card-size"}>
         {reservedCards.length > 0 && (
           <Button
             color={colorIndexToPalette[5]}

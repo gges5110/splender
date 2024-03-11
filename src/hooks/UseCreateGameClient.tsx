@@ -60,7 +60,7 @@ export const useCreateGameClient = (
     if (Number(ctx.currentPlayer) !== userPosition - 1) {
       return;
     }
-    saveGameToRemote();
+    saveGameToRemote(matchData);
   };
 
   return useMemo(() => {
