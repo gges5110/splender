@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useAtom } from "jotai";
-import { gameBoardDebugAtom, userAtom } from "src/Atoms";
+import { gameBoardDebugAtom, jotaiDebugAtom, userAtom } from "src/Atoms";
 import {
   Box,
   Drawer,
@@ -44,7 +44,9 @@ export const AppDrawer: FC<AppDrawerProps> = ({ open, onClose }) => {
   provider.addScope("email");
   const { enqueueSnackbar } = useSnackbar();
   const auth = getAuth();
-  const [user, setUser] = useAtom(userAtom);
+  const [user] = useAtom(userAtom);
+  // const { enabled: jotaiDevtoolsEnabled, setEnabled } = useJotaiDevtools();
+  const [enabled, setEnabled] = useAtom(jotaiDebugAtom);
 
   return (
     <Drawer
@@ -131,6 +133,19 @@ export const AppDrawer: FC<AppDrawerProps> = ({ open, onClose }) => {
             edge={"end"}
             onChange={(event, checked) => {
               setGameBoardDebug(checked);
+            }}
+          />
+        </ListItem>
+        <ListItem sx={{ py: 0, px: 4 }}>
+          <ListItemIcon sx={{ minWidth: 32 }}>
+            <BuildOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary={"Jotai Devtools"} />
+          <Switch
+            checked={enabled}
+            edge={"end"}
+            onChange={(event, checked) => {
+              setEnabled(checked);
             }}
           />
         </ListItem>

@@ -1,7 +1,7 @@
-import { User } from "src/Atoms";
 import { child, get, ref, set } from "firebase/database";
 import { database } from "src/firebase/FirebaseApp";
 import { LobbyAPI } from "boardgame.io/src/types";
+import { User } from "src/interfaces/Interfaces";
 
 export const loadGameToLocal = async (user: User) => {
   if (!user) {
@@ -35,7 +35,7 @@ export const loadGameToLocal = async (user: User) => {
 
 export const saveGameToRemote = (matchData: LobbyAPI.Match) => {
   const rawUser = localStorage.getItem("user");
-  if (!rawUser) {
+  if (!rawUser || rawUser === "undefined") {
     return;
   }
   const user = JSON.parse(rawUser);

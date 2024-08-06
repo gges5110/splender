@@ -38,3 +38,8 @@ export interface GameState {
   numCardsInDeck: Array<number>;
   players: Player[];
 }
+
+export interface User {
+  displayName: string;
+  uid: string;
+}

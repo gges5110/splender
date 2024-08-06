@@ -6,10 +6,7 @@ import { themeOptions } from "src/styles/theme";
 import { paletteTheme } from "src/styles/paletteTheme";
 
 export const useAppTheme = () => {
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  const colorMode = useAtomValue(colorModeAtom);
-  const mode =
-    colorMode === "system" ? (prefersDarkMode ? "dark" : "light") : colorMode;
+  const mode = useColorMode();
 
   return useMemo(
     () =>
@@ -22,4 +19,14 @@ export const useAppTheme = () => {
       }),
     [mode]
   );
+};
+
+export const useColorMode = () => {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const colorMode = useAtomValue(colorModeAtom);
+  return colorMode === "system"
+    ? prefersDarkMode
+      ? "dark"
+      : "light"
+    : colorMode;
 };

@@ -11,7 +11,14 @@ export default defineConfig({
       input: entryPoints("index.html", "404.html"),
     },
   },
-  plugins: [svgrPlugin(), react()],
+  plugins: [
+    svgrPlugin(),
+    react({
+      babel: {
+        presets: ["jotai/babel/preset"],
+      },
+    }),
+  ],
   base: "/splender/",
   appType: "spa",
   resolve: {

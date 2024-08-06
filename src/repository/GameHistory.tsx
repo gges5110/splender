@@ -1,9 +1,9 @@
-import { GameHistory } from "src/pages/HistoryPage";
 import { Ctx } from "boardgame.io";
 import { LocalMatchInfo } from "src/hooks/UseLocalMatchInfo";
-import { User } from "src/Atoms";
 import { child, get, ref, set } from "firebase/database";
 import { database } from "src/firebase/FirebaseApp";
+import { GameHistory } from "src/components/History/HistoryTable";
+import { User } from "src/interfaces/Interfaces";
 
 export const useSaveGameResult = () => {
   return {

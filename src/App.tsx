@@ -4,7 +4,7 @@ import "@fontsource/nunito/300.css";
 import "@fontsource/nunito/400.css";
 import "@fontsource/nunito/500.css";
 import "@fontsource/nunito/700.css";
-import { useAppTheme } from "./hooks/UseAppTheme";
+import { useAppTheme } from "./styles/UseAppTheme";
 import { SnackbarProvider } from "notistack";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./pages/Router";

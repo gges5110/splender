@@ -5,7 +5,10 @@ import { UserDialog } from "src/components/Shared/Dialogs/UserDialog/UserDialog"
 import { Box } from "@mui/material";
 import { getAuth } from "firebase/auth";
 import { useSetAtom } from "jotai";
-import { userAtom } from "src/Atoms";
+import { jotaiDebugAtom, userAtom } from "src/Atoms";
+import { DevTools } from "jotai-devtools";
+import { useAtomValue } from "jotai/index";
+import { useColorMode } from "src/styles/UseAppTheme";
 
 interface LayoutProps {}
 
@@ -23,6 +26,9 @@ export const Layout: React.FC<LayoutProps> = () => {
       setUser(undefined);
     }
   });
+
+  const enabled = useAtomValue(jotaiDebugAtom);
+  const mode = useColorMode();
   return (
     <Box
       sx={{
@@ -38,6 +44,11 @@ export const Layout: React.FC<LayoutProps> = () => {
         <Outlet />
       </Box>
       <UserDialog />
+      {enabled && (
+        <Box bottom={10} left={10} position={"absolute"}>
+          <DevTools theme={mode} />
+        </Box>
+      )}
     </Box>
   );
 };
