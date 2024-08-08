@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import { useCreateMatch } from "src/components/Lobby/CreateMatchCard/UseCreateMatch";
 import { useLocalMatchInfo } from "src/hooks/UseLocalMatchInfo";
+import ShuffleIcon from "@mui/icons-material/Shuffle";
 
 type NumberOfPlayers = 2 | 3 | 4;
 export const CreateMatchCard = () => {
@@ -48,6 +49,10 @@ export const CreateMatchCard = () => {
     setPosition(event.target.value);
   };
 
+  const setRandomSeed = () => {
+    setGameSeed(Math.floor(Math.random() * 1000000).toString());
+  };
+
   return (
     <Card>
       <CardHeader title={"Match Configuration"} />
@@ -69,13 +74,28 @@ export const CreateMatchCard = () => {
               <FormControlLabel control={<Radio />} label={"4"} value={"4"} />
             </RadioGroup>
           </FormControl>
-          <TextField
-            id={"game-seed"}
-            label={"Game Seed"}
-            onChange={handleGameSeedChange}
-            value={seed}
-            variant={"outlined"}
-          />
+          <Box
+            display={"flex"}
+            flexDirection={"row"}
+            gap={2}
+            justifyContent={"space-between"}
+          >
+            <TextField
+              id={"game-seed"}
+              label={"Game Seed"}
+              onChange={handleGameSeedChange}
+              value={seed}
+              variant={"outlined"}
+            />
+            <Button
+              onClick={setRandomSeed}
+              startIcon={<ShuffleIcon />}
+              type={"button"}
+            >
+              Random
+            </Button>
+          </Box>
+
           <FormControl>
             <InputLabel id={"select-label"}>Position</InputLabel>
             <Select

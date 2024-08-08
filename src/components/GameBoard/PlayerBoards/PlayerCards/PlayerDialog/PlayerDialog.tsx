@@ -52,7 +52,7 @@ export const PlayerDialog: React.FC<PlayerDialogProps> = ({
               xs: "repeat(3, minmax(0, 1fr))",
               sm: "repeat(auto-fit, minmax(100px, 1fr))",
             }}
-            justifyItems={{ xs: "unset", sm: "center" }}
+            justifyItems={{ xs: "unset" }}
           >
             {player.cards.map((card, index) => (
               <CardDisplay card={card} enabled={false} key={index} />
