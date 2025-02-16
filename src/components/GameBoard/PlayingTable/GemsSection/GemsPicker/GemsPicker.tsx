@@ -91,7 +91,7 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
           selectedGems={selectedGems}
         />
         <div
-          className={"gem-size rounded-full select-none shadow-sm flex-initial"}
+          className={"gem-size rounded-full select-none shadow-xs flex-initial"}
           key={5}
         />
         <ResetButton
