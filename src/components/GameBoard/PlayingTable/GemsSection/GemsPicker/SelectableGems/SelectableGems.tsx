@@ -3,6 +3,7 @@ import { gemsSelectable } from "src/utils/GemUtils";
 import { GemsPickerMode } from "src/components/GameBoard/PlayingTable/GemsSection/GemsPicker/GemsPicker";
 import { Button } from "@mui/material";
 import { colorIndexToPalette } from "src/styles/paletteTheme";
+import { motion } from "motion/react";
 
 interface SelectableGemsProps {
   disabled?: boolean;
@@ -30,24 +31,30 @@ export const SelectableGems: FC<SelectableGemsProps> = ({
           gemCount - (index === 5 ? 0 : selectedGems[index]);
 
         return (
-          <Button
-            color={colorIndexToPalette[index]}
-            disabled={isDisabled}
+          <motion.div
             key={index}
-            onClick={() => {
-              if (!isDisabled) {
-                onSelect(index);
-              }
-            }}
-            style={{
-              width: "48px",
-              aspectRatio: "1/1",
-              borderRadius: "100%",
-              flex: "0 1 auto",
-            }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
           >
-            {availableCount}
-          </Button>
+            <Button
+              color={colorIndexToPalette[index]}
+              disabled={isDisabled}
+              key={index}
+              onClick={() => {
+                if (!isDisabled) {
+                  onSelect(index);
+                }
+              }}
+              style={{
+                width: "48px",
+                aspectRatio: "1/1",
+                borderRadius: "100%",
+                flex: "0 1 auto",
+              }}
+            >
+              {availableCount}
+            </Button>
+          </motion.div>
         );
       })}
     </>

@@ -68,10 +68,13 @@ export const CardOnTable: FC<CardOnTableProps> = ({
       ) : (
         <motion.div
           animate={state ? "fadeIn" : "stop"}
+          exit={{ opacity: 0, scale: 0 }}
           initial={"stop"}
           key={elementKey}
           style={{ gridColumn: "span 2 / span 2" }}
           variants={variants}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
         >
           <CardDisplay
             affordable={
