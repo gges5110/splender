@@ -13,7 +13,7 @@ export const AnimateNumber: FC<AnimateNumberProps> = ({ value }) => {
         exit={{ opacity: 0, y: 20 }}
         initial={{ opacity: 0, y: -20 }}
         key={value}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.2 }}
       >
         {value}
       </motion.div>
