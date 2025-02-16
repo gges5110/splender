@@ -16,7 +16,7 @@ export const SectionCollapse: FC<SectionCollapseProps> = ({
     <>
       <ListItemButton
         className={
-          "rounded-lg bg-blue-500/20 hover:bg-blue-500/30 focus:outline-none focus-visible:ring focus-visible:ring-slate-500 focus-visible:ring-opacity-75"
+          "rounded-lg bg-blue-500/20 hover:bg-blue-500/30 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-slate-500 focus-visible:ring-opacity-75"
         }
         onClick={() => {
           setOpen((prevState) => !prevState);
