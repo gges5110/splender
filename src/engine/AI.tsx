@@ -33,6 +33,19 @@ export const enumerateAIMoves = (G: GameState, ctx: Ctx): AiEnumerate => {
     ];
   }
 
+  // pick noble
+  if (
+    ctx.activePlayers != null &&
+    ctx.activePlayers[Number(ctx.currentPlayer)] === "PickNoble"
+  ) {
+    return [
+      {
+        move: "pickNoble",
+        args: [0],
+      },
+    ];
+  }
+
   // build
   buildCard(G, currentPlayer, moves);
 
