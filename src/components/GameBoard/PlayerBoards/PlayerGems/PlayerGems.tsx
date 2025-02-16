@@ -2,6 +2,7 @@ import * as React from "react";
 import { GemDisplay } from "src/components/Shared/GemDisplay/GemDisplay";
 import { Box } from "@mui/material";
 import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
+import { AnimateNumber } from "src/components/Shared/AnimateNumber";
 
 interface PlayerGemsProps {
   gems: number[];
@@ -20,8 +21,9 @@ export const PlayerGems: React.FC<PlayerGemsProps> = ({ gems }) => (
         )}
       </Box>
     ))}
-    <Box>
-      {gems.reduce((p, v) => p + v, 0)}
+    <Box alignItems={"center"} display={"flex"} gap={{ xs: 0.5 }}>
+      <AnimateNumber value={gems.reduce((p, v) => p + v, 0)}></AnimateNumber>
+
       <DiamondOutlinedIcon />
     </Box>
   </Box>
