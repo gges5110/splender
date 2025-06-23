@@ -1,10 +1,10 @@
 import * as React from "react";
-import clsx from "clsx";
-import { Box } from "@mui/material";
+import { Box, SxProps, Theme } from "@mui/material";
 import { colorIndexToPalette } from "src/styles/paletteTheme";
+import { gameStyles } from "src/styles/gameStyles";
 
 interface GemDisplayProps {
-  className?: string;
+  sx?: SxProps<Theme>;
   color: number;
   count: number;
 }
@@ -12,19 +12,20 @@ interface GemDisplayProps {
 export const GemDisplay: React.FC<GemDisplayProps> = ({
   color,
   count,
-  className,
+  sx,
 }) => {
   return (
     <Box
-      alignItems={"center"}
-      borderRadius={"100%"}
-      className={clsx("gem-size", className)}
-      display={"flex"}
-      justifyContent={"center"}
       sx={{
+        ...gameStyles.gemSize,
+        alignItems: "center",
+        borderRadius: "50%",
+        display: "flex",
+        justifyContent: "center",
         userSelect: "none",
         color: `${colorIndexToPalette[color]}.contrastText`,
         backgroundColor: `${colorIndexToPalette[color]}.main`,
+        ...sx,
       }}
     >
       {count}

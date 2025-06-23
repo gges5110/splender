@@ -5,6 +5,7 @@ import { ReservedCardsDialog } from "./ReservedCardsDialog/ReservedCardsDialog";
 import { getCardCountByColor, playerCanAffordCard } from "src/engine/MovesUtil";
 import { Box, Button } from "@mui/material";
 import { colorIndexToPalette } from "src/styles/paletteTheme";
+import { gameStyles } from "src/styles/gameStyles";
 
 interface PlayerCardsProps {
   buildFromReserve(cardIdx: number): void;
@@ -34,7 +35,7 @@ export const PlayerCards: React.FC<PlayerCardsProps> = ({
       justifyContent={"flex-start"}
     >
       {cardCountByColor.map((cardCount, index) => (
-        <Box className={"player-card-size"} key={index}>
+        <Box sx={gameStyles.playerCardSize} key={index}>
           {cardCount > 0 && (
             <Button
               color={colorIndexToPalette[index]}
@@ -46,7 +47,7 @@ export const PlayerCards: React.FC<PlayerCardsProps> = ({
           )}
         </Box>
       ))}
-      <Box className={"player-card-size"}>
+      <Box sx={gameStyles.playerCardSize}>
         {reservedCards.length > 0 && (
           <Button
             color={colorIndexToPalette[5]}

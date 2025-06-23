@@ -11,6 +11,16 @@ export const themeOptions: Omit<ThemeOptions, "palette"> = {
       "-apple-system",
     ].join(","),
   },
+  spacing: 8,
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+    },
+  },
   components: {
     MuiButton: {
       defaultProps: {

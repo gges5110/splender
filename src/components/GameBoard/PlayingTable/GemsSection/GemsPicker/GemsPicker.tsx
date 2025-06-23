@@ -5,6 +5,7 @@ import { SelectableGems } from "./SelectableGems/SelectableGems";
 import { ActionButton } from "./ActionButton/ActionButton";
 import { ResetButton } from "./ResetButton/ResetButton";
 import { Box } from "@mui/material";
+import { gameStyles } from "src/styles/gameStyles";
 
 export enum GemsPickerMode {
   PICK,
@@ -79,7 +80,13 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
         />
       </Box>
 
-      <div className={"gap-2 grid grid-cols-8"}>
+      <Box
+        sx={{
+          gap: 2,
+          display: "grid",
+          gridTemplateColumns: "repeat(8, minmax(0, 1fr))",
+        }}
+      >
         <SelectedGems
           selectedGemOnClick={(index) => {
             setGems(
@@ -90,15 +97,21 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
           }}
           selectedGems={selectedGems}
         />
-        <div
-          className={"gem-size rounded-full select-none shadow-xs flex-initial"}
+        <Box
+          sx={{
+            ...gameStyles.gemSize,
+            borderRadius: "50%",
+            userSelect: "none",
+            boxShadow: 1,
+            flexShrink: 0,
+          }}
           key={5}
         />
         <ResetButton
           disabled={selectedGems.every((gem) => gem === 0)}
           onClick={() => setGems(Array(5).fill(0))}
         />
-      </div>
+      </Box>
     </Box>
   );
 };

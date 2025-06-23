@@ -1,9 +1,9 @@
 import { Card } from "src/interfaces/Interfaces";
 import * as React from "react";
 import { GemDisplay } from "src/components/Shared/GemDisplay/GemDisplay";
-import clsx from "clsx";
-import { Button } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import { colorIndexToPalette } from "src/styles/paletteTheme";
+import { gameStyles } from "src/styles/gameStyles";
 
 interface CardDisplayProps {
   affordable?: boolean;
@@ -19,14 +19,18 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
   affordable = false,
 }) => {
   if (card == null) {
-    return <Button className={"card-size"} />;
+    return <Button sx={gameStyles.cardSize} />;
   }
 
   return (
     <Button
-      className={clsx("card-size rounded-lg relative shadow-xl", {
-        "card-affordable": affordable,
-      })}
+      sx={{
+        ...gameStyles.cardSize,
+        borderRadius: 2,
+        position: 'relative',
+        boxShadow: 24,
+        ...(affordable && gameStyles.cardAffordable),
+      }}
       color={colorIndexToPalette[card.color]}
       onClick={() => {
         if (enabled) {
@@ -34,17 +38,34 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
         }
       }}
     >
-      <div
-        className={clsx(
-          "absolute top-0 sm:top-2 right-0 sm:right-2 h-8 w-8 text-center align-middle"
-        )}
+      <Box
+        sx={{
+          position: 'absolute',
+          top: { xs: 0, sm: '8px' },
+          right: { xs: 0, sm: '8px' },
+          height: '32px',
+          width: '32px',
+          textAlign: 'center',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
       >
         {card.points > 0 && card.points}
-      </div>
-      <div
-        className={
-          "absolute bottom-0 left-0 p-1.5 sm:p-2 flex flex-col gap-1 h-24 sm:h-32 justify-end flex-wrap"
-        }
+      </Box>
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          p: { xs: 1.5, sm: 2 },
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 1,
+          height: { xs: '96px', sm: '128px' },
+          justifyContent: 'flex-end',
+          flexWrap: 'wrap',
+        }}
       >
         {card.cost.map((gemCount, index) => {
           if (gemCount === 0) {
@@ -53,16 +74,21 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
 
           return (
             <GemDisplay
-              className={clsx("shadow-xs gem-size-small", {
-                "border border-gray-300": card?.color === index,
-              })}
+              sx={{
+                ...gameStyles.gemSizeSmall,
+                boxShadow: 1,
+                ...(card?.color === index && {
+                  border: '1px solid',
+                  borderColor: 'grey.300',
+                }),
+              }}
               color={index}
               count={gemCount}
               key={index}
             />
           );
         })}
-      </div>
+      </Box>
     </Button>
   );
 };

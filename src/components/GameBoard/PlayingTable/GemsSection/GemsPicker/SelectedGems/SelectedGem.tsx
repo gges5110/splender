@@ -1,7 +1,8 @@
 import { FC, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Button } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import { colorIndexToPalette } from "src/styles/paletteTheme";
+import { gameStyles } from "src/styles/gameStyles";
 
 interface SelectedGemProps {
   index: number;
@@ -32,7 +33,11 @@ export const SelectedGem: FC<SelectedGemProps> = ({
               opacity: 1,
               y: 0,
             }}
-            className={"gem-size flex-initial"}
+            style={{
+              width: gameStyles.gemSize.width,
+              height: gameStyles.gemSize.height,
+              flexShrink: 0,
+            }}
             exit={{ opacity: 0, y: -50 }}
             initial={{
               opacity: 0,
@@ -43,12 +48,15 @@ export const SelectedGem: FC<SelectedGemProps> = ({
             }}
           >
             <Button
-              className={"gem-size flex-initial"}
+              sx={{
+                ...gameStyles.gemSize,
+                flexShrink: 0,
+                borderRadius: "50%",
+              }}
               color={colorIndexToPalette[index]}
               onClick={() => {
                 selectedGemOnClick(index);
               }}
-              sx={{ borderRadius: "100%" }}
             >
               {selectedGems[index]}
             </Button>
@@ -56,7 +64,13 @@ export const SelectedGem: FC<SelectedGemProps> = ({
         )}
       </AnimatePresence>
       {!visible && !shouldWaitForExit && (
-        <div className={"gem-size flex-initial"} key={"invisible" + index} />
+        <Box 
+          sx={{
+            ...gameStyles.gemSize,
+            flexShrink: 0,
+          }}
+          key={"invisible" + index} 
+        />
       )}
     </>
   );
