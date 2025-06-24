@@ -19,26 +19,26 @@ export const NobleDisplay: React.FC<NobleDisplayProps> = ({
       bgcolor={(theme) =>
         theme.palette.mode === "dark" ? yellow[700] : yellow[400]
       }
-      className="noble-size"
+      className={"noble-size"}
+      onClick={onClick}
+      position={"relative"}
       sx={{
         boxShadow: (theme) => theme.shadows[24],
         borderRadius: 3,
-        cursor: onClick !== undefined ? 'pointer' : 'default',
+        cursor: onClick !== undefined ? "pointer" : "default",
       }}
-      onClick={onClick}
-      position={"relative"}
     >
       <Box
-        sx={{
-          height: { xs: '1.5rem', sm: '2rem' },
-          width: { xs: '1.5rem', sm: '2rem' },
-          lineHeight: { xs: '1.5rem', sm: '2rem' },
-          textAlign: 'center',
-          verticalAlign: 'middle',
-          userSelect: 'none',
-        }}
         position={"absolute"}
         right={0}
+        sx={{
+          height: { xs: "1.5rem", sm: "2rem" },
+          width: { xs: "1.5rem", sm: "2rem" },
+          lineHeight: { xs: "1.5rem", sm: "2rem" },
+          textAlign: "center",
+          verticalAlign: "middle",
+          userSelect: "none",
+        }}
         top={0}
       >
         3
@@ -55,10 +55,10 @@ export const NobleDisplay: React.FC<NobleDisplayProps> = ({
             (gemCount, index) =>
               gemCount > 0 && (
                 <GemDisplay
-                  className={"gem-size-small"}
                   color={index}
                   count={gemCount}
                   key={index}
+                  size={"small"}
                 />
               )
           )}
