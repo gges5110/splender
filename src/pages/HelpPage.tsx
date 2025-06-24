@@ -21,69 +21,71 @@ enum MyTabs {
 const tabsMap = new Map([
   [
     "Legend",
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
       <Box
         sx={{
-          backgroundColor: '#e2e8f0',
+          backgroundColor: "#e2e8f0",
           padding: 2,
           borderRadius: 2,
-          margin: '0 auto',
-          width: '100%',
-          display: 'grid',
-          gridTemplateColumns: '2fr 1fr'
+          margin: "0 auto",
+          width: "100%",
+          display: "grid",
+          gridTemplateColumns: "2fr 1fr",
         }}
       >
         <Box>
           <Box>Gem</Box>
-          <Box sx={{ color: 'text.secondary', fontSize: '0.875rem' }}>3 green gems</Box>
+          <Box sx={{ color: "text.secondary", fontSize: "0.875rem" }}>
+            3 green gems
+          </Box>
         </Box>
-        <Box sx={{ justifySelf: 'center' }}>
+        <Box sx={{ justifySelf: "center" }}>
           <GemDisplay color={Color.Green} count={3} />
         </Box>
       </Box>
       <Box
         sx={{
-          backgroundColor: '#e2e8f0',
+          backgroundColor: "#e2e8f0",
           padding: 2,
           borderRadius: 2,
-          margin: '0 auto',
-          width: '100%',
-          display: 'grid',
-          gridTemplateColumns: '2fr 1fr'
+          margin: "0 auto",
+          width: "100%",
+          display: "grid",
+          gridTemplateColumns: "2fr 1fr",
         }}
       >
         <Box>
           <Box>Card</Box>
-          <Box sx={{ color: 'text.secondary', fontSize: '0.875rem' }}>
+          <Box sx={{ color: "text.secondary", fontSize: "0.875rem" }}>
             It costs 3 green gems, 2 red gems and 2 black gems.
             <br />
             This card is worth 1 point.
           </Box>
         </Box>
-        <Box sx={{ justifySelf: 'center' }}>
+        <Box sx={{ justifySelf: "center" }}>
           <CardDisplay card={level2Cards[0]} enabled={false} />
         </Box>
       </Box>
       <Box
         sx={{
-          backgroundColor: '#e2e8f0',
+          backgroundColor: "#e2e8f0",
           padding: 2,
           borderRadius: 2,
-          margin: '0 auto',
-          width: '100%',
-          display: 'grid',
-          gridTemplateColumns: '2fr 1fr'
+          margin: "0 auto",
+          width: "100%",
+          display: "grid",
+          gridTemplateColumns: "2fr 1fr",
         }}
       >
         <Box>
           <Box>Noble</Box>
-          <Box sx={{ color: 'text.secondary', fontSize: '0.875rem' }}>
+          <Box sx={{ color: "text.secondary", fontSize: "0.875rem" }}>
             This noble requires 3 green cards, 3 white cards and 3 blue cards.
             <br />
             This noble is worth 3 points.
           </Box>
         </Box>
-        <Box sx={{ justifySelf: 'center' }}>
+        <Box sx={{ justifySelf: "center" }}>
           <NobleDisplay noble={nobles[0]} />
         </Box>
       </Box>
@@ -147,10 +149,10 @@ export const HelpPage = () => {
   return (
     <Box
       sx={{
-        width: '100%',
+        width: "100%",
         px: { xs: 2, sm: 3 },
         pt: { xs: 2.5, sm: 3 },
-        pb: { xs: 2, sm: 2 }
+        pb: { xs: 2, sm: 2 },
       }}
     >
       <Box sx={{ mb: 2 }}>
@@ -158,22 +160,26 @@ export const HelpPage = () => {
         will be playing as player 1, against 2 other bots.
         <br />A player must choose to perform only one of the following four
         actions.
-        <Box component="ul" sx={{ listStyleType: 'disc', pl: 2, mt: 1 }}>
-          <Box component="li" sx={{ mb: 1 }}>
+        <Box component={"ul"} sx={{ listStyleType: "disc", pl: 2, mt: 1 }}>
+          <Box component={"li"} sx={{ mb: 1 }}>
             Take 3 gem tokens of different colors. Example:
-            <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, mt: 0.5 }}>
+            <Box
+              sx={{ display: "flex", flexDirection: "row", gap: 1, mt: 0.5 }}
+            >
               <GemDisplay color={Color.Blue} count={1} />
               <GemDisplay color={Color.Green} count={1} />
               <GemDisplay color={Color.Red} count={1} />
             </Box>
           </Box>
-          <Box component="li" sx={{ mb: 1 }}>
+          <Box component={"li"} sx={{ mb: 1 }}>
             Take 2 gem tokens of the same color. This action is only possible if
             there are at least 4 tokens of the chosen color left when the player
             takes them.
           </Box>
-          <Box component="li" sx={{ mb: 1 }}>Reserve 1 development card and take 1 gold token (joker).</Box>
-          <Box component="li" sx={{ mb: 1 }}>
+          <Box component={"li"} sx={{ mb: 1 }}>
+            Reserve 1 development card and take 1 gold token (joker).
+          </Box>
+          <Box component={"li"} sx={{ mb: 1 }}>
             Purchase 1 face-up development card from the middle of the table or
             a previously reserved one.
           </Box>

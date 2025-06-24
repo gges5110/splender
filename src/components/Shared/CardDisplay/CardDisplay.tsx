@@ -53,12 +53,11 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
 
           return (
             <GemDisplay
-              className={clsx("shadow-xs gem-size-small", {
-                "border border-gray-300": card?.color === index,
-              })}
               color={index}
               count={gemCount}
               key={index}
+              showBorder={card?.color === index}
+              size={"small"}
             />
           );
         })}

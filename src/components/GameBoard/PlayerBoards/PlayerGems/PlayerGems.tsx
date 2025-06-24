@@ -13,11 +13,7 @@ export const PlayerGems: React.FC<PlayerGemsProps> = ({ gems }) => (
     {gems.map((gemCount, index) => (
       <Box className={"gem-size-medium"} key={index}>
         {gemCount > 0 && (
-          <GemDisplay
-            className={"gem-size-medium"}
-            color={index}
-            count={gemCount}
-          />
+          <GemDisplay color={index} count={gemCount} size={"medium"} />
         )}
       </Box>
     ))}
