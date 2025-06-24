@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Button } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import { colorIndexToPalette } from "src/styles/paletteTheme";
 
 interface SelectedGemProps {
@@ -32,7 +32,6 @@ export const SelectedGem: FC<SelectedGemProps> = ({
               opacity: 1,
               y: 0,
             }}
-            className={"gem-size flex-initial"}
             exit={{ opacity: 0, y: -50 }}
             initial={{
               opacity: 0,
@@ -41,14 +40,25 @@ export const SelectedGem: FC<SelectedGemProps> = ({
             onAnimationStart={() => {
               setShouldWaitForExit(true);
             }}
+            style={{
+              width: 48,
+              height: 48,
+              aspectRatio: 1,
+              flex: "0 1 auto",
+            }}
           >
             <Button
-              className={"gem-size flex-initial"}
               color={colorIndexToPalette[index]}
               onClick={() => {
                 selectedGemOnClick(index);
               }}
-              sx={{ borderRadius: "100%" }}
+              sx={{
+                width: 48,
+                height: 48,
+                aspectRatio: 1,
+                flex: "0 1 auto",
+                borderRadius: "100%",
+              }}
             >
               {selectedGems[index]}
             </Button>
@@ -56,7 +66,15 @@ export const SelectedGem: FC<SelectedGemProps> = ({
         )}
       </AnimatePresence>
       {!visible && !shouldWaitForExit && (
-        <div className={"gem-size flex-initial"} key={"invisible" + index} />
+        <Box
+          key={"invisible" + index}
+          sx={{
+            width: 48,
+            height: 48,
+            aspectRatio: 1,
+            flex: "0 1 auto",
+          }}
+        />
       )}
     </>
   );
