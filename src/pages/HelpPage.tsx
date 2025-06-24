@@ -5,7 +5,7 @@ import { Color } from "src/interfaces/Interfaces";
 import { CardDisplay } from "src/components/Shared/CardDisplay/CardDisplay";
 import { level2Cards, nobles } from "src/constants";
 import { NobleDisplay } from "src/components/Shared/NobleDisplay/NobleDisplay";
-import { Paper, Tab } from "@mui/material";
+import { Paper, Tab, Box } from "@mui/material";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import TabContext from "@mui/lab/TabContext";
@@ -21,55 +21,73 @@ enum MyTabs {
 const tabsMap = new Map([
   [
     "Legend",
-    <div className={"flex flex-col gap-2"}>
-      <div
-        className={
-          "bg-slate-200  p-4 rounded-lg mx-auto w-full grid grid-cols-3"
-        }
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Box
+        sx={{
+          backgroundColor: '#e2e8f0',
+          padding: 2,
+          borderRadius: 2,
+          margin: '0 auto',
+          width: '100%',
+          display: 'grid',
+          gridTemplateColumns: '2fr 1fr'
+        }}
       >
-        <div className={"col-span-2"}>
-          <div className={""}>Gem</div>
-          <div className={"text-gray-500 text-sm"}>3 green gems</div>
-        </div>
-        <div className={"col-span-1 justify-self-center"}>
+        <Box>
+          <Box>Gem</Box>
+          <Box sx={{ color: 'text.secondary', fontSize: '0.875rem' }}>3 green gems</Box>
+        </Box>
+        <Box sx={{ justifySelf: 'center' }}>
           <GemDisplay color={Color.Green} count={3} />
-        </div>
-      </div>
-      <div
-        className={
-          "bg-slate-200 p-4 rounded-lg mx-auto w-full grid grid-cols-3"
-        }
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: '#e2e8f0',
+          padding: 2,
+          borderRadius: 2,
+          margin: '0 auto',
+          width: '100%',
+          display: 'grid',
+          gridTemplateColumns: '2fr 1fr'
+        }}
       >
-        <div className={"col-span-2"}>
-          <div className={""}>Card</div>
-          <div className={"text-gray-500 text-sm"}>
+        <Box>
+          <Box>Card</Box>
+          <Box sx={{ color: 'text.secondary', fontSize: '0.875rem' }}>
             It costs 3 green gems, 2 red gems and 2 black gems.
             <br />
             This card is worth 1 point.
-          </div>
-        </div>
-        <div className={"col-span-1 justify-self-center"}>
+          </Box>
+        </Box>
+        <Box sx={{ justifySelf: 'center' }}>
           <CardDisplay card={level2Cards[0]} enabled={false} />
-        </div>
-      </div>
-      <div
-        className={
-          "bg-slate-200 p-4 rounded-lg mx-auto w-full grid grid-cols-3"
-        }
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: '#e2e8f0',
+          padding: 2,
+          borderRadius: 2,
+          margin: '0 auto',
+          width: '100%',
+          display: 'grid',
+          gridTemplateColumns: '2fr 1fr'
+        }}
       >
-        <div className={"col-span-2"}>
-          <div className={""}>Noble</div>
-          <div className={"text-gray-500 text-sm"}>
+        <Box>
+          <Box>Noble</Box>
+          <Box sx={{ color: 'text.secondary', fontSize: '0.875rem' }}>
             This noble requires 3 green cards, 3 white cards and 3 blue cards.
             <br />
             This noble is worth 3 points.
-          </div>
-        </div>
-        <div className={"col-span-1 justify-self-center"}>
+          </Box>
+        </Box>
+        <Box sx={{ justifySelf: 'center' }}>
           <NobleDisplay noble={nobles[0]} />
-        </div>
-      </div>
-    </div>,
+        </Box>
+      </Box>
+    </Box>,
   ],
   [
     "Gems",
@@ -127,37 +145,40 @@ export const HelpPage = () => {
     setMyTab(newValue);
   };
   return (
-    <div
-      className={
-        "container px-4 pt-5 pb-4 sm:p-6 sm:pb-4 min-w-full dark:text-white"
-      }
+    <Box
+      sx={{
+        width: '100%',
+        px: { xs: 2, sm: 3 },
+        pt: { xs: 2.5, sm: 3 },
+        pb: { xs: 2, sm: 2 }
+      }}
     >
-      <div className={"mb-2"}>
+      <Box sx={{ mb: 2 }}>
         Welcome! This is an online single player version of Splendor, which you
         will be playing as player 1, against 2 other bots.
         <br />A player must choose to perform only one of the following four
         actions.
-        <ul className={"list-disc list-inside"}>
-          <li>
+        <Box component="ul" sx={{ listStyleType: 'disc', pl: 2, mt: 1 }}>
+          <Box component="li" sx={{ mb: 1 }}>
             Take 3 gem tokens of different colors. Example:
-            <span className={"flex flex-row gap-2"}>
-              <GemDisplay color={Color.Blue} count={1} />{" "}
-              <GemDisplay color={Color.Green} count={1} />{" "}
+            <Box sx={{ display: 'flex', flexDirection: 'row', gap: 1, mt: 0.5 }}>
+              <GemDisplay color={Color.Blue} count={1} />
+              <GemDisplay color={Color.Green} count={1} />
               <GemDisplay color={Color.Red} count={1} />
-            </span>
-          </li>
-          <li>
+            </Box>
+          </Box>
+          <Box component="li" sx={{ mb: 1 }}>
             Take 2 gem tokens of the same color. This action is only possible if
             there are at least 4 tokens of the chosen color left when the player
             takes them.
-          </li>
-          <li>Reserve 1 development card and take 1 gold token (joker).</li>
-          <li>
+          </Box>
+          <Box component="li" sx={{ mb: 1 }}>Reserve 1 development card and take 1 gold token (joker).</Box>
+          <Box component="li" sx={{ mb: 1 }}>
             Purchase 1 face-up development card from the middle of the table or
             a previously reserved one.
-          </li>
-        </ul>
-      </div>
+          </Box>
+        </Box>
+      </Box>
 
       <TabContext value={myTab}>
         <TabList
@@ -186,6 +207,6 @@ export const HelpPage = () => {
           ))}
         </Paper>
       </TabContext>
-    </div>
+    </Box>
   );
 };
