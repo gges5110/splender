@@ -16,9 +16,9 @@ export const GameEndDialog: React.FC<GameEndDialogProps> = ({ winner }) => {
       }}
       open={open}
     >
-      <div className={"px-4 pt-5 pb-4 sm:p-6 sm:pb-4"}>
+      <Box sx={{ px: 2, pt: 2.5, pb: 2, sm: { p: 3, pb: 2 } }}>
         Game over! Player {winner} is the winner.
-      </div>
+      </Box>
       <Box display={"flex"} flexDirection={"column"} gap={1} px={2} py={2}>
         <Button
           onClick={() => {
