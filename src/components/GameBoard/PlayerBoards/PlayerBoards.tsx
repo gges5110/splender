@@ -2,7 +2,6 @@ import { Player } from "src/interfaces/Interfaces";
 import { PlayerGems } from "./PlayerGems/PlayerGems";
 import { PlayerCards } from "./PlayerCards/PlayerCards";
 import { FC, useState } from "react";
-import clsx from "clsx";
 import { PlayerDialog } from "./PlayerCards/PlayerDialog/PlayerDialog";
 import { LobbyAPI } from "boardgame.io/src/types";
 import { Box, Button, Paper } from "@mui/material";
@@ -29,7 +28,19 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
     number | undefined
   >(undefined);
   return (
-    <Paper className={"sections-container"} elevation={6}>
+    <Paper
+      elevation={6}
+      sx={{
+        mx: "auto",
+        height: "100%",
+        borderRadius: 3,
+        p: { xs: 1, sm: 4 },
+        boxShadow: {
+          sm:
+            "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+        },
+      }}
+    >
       <Box
         display={"flex"}
         flexDirection={{ xs: "row", sm: "column" }}
@@ -56,7 +67,6 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
                   : grey[300];
               }}
               borderRadius={"12px"}
-              className={"shadow-md"}
               display={"flex"}
               justifyItems={"center"}
               key={index}
@@ -64,14 +74,23 @@ export const PlayerBoards: FC<PlayerBoardsProps> = ({
               pl={{ xs: 0, sm: 2 }}
               position={"relative"}
               pt={4}
+              sx={{ boxShadow: 3 }}
             >
               <Button
-                className={clsx(
-                  "absolute leading-8 -top-5 -left-4 w-fit h-8 rounded-lg bg-blue-300 px-3"
-                )}
                 onClick={() => setPlayerDialogIndex(index)}
+                sx={{
+                  position: "absolute",
+                  lineHeight: 2,
+                  top: -20,
+                  left: -16,
+                  width: "fit-content",
+                  height: 32,
+                  borderRadius: 2,
+                  bgcolor: "#93c5fd",
+                  px: 1.5,
+                }}
               >
-                <span className={"text-slate-700"}>
+                <span style={{ color: "#334155" }}>
                   {playerName}
                   {match?.players[index].id === Number(playerID) && <> (you)</>}
                 </span>
