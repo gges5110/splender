@@ -5,7 +5,6 @@ import { Button, Box } from "@mui/material";
 import { colorIndexToPalette } from "src/styles/paletteTheme";
 
 interface CardDisplayProps {
-  affordable?: boolean;
   card: Card | undefined;
   enabled: boolean;
   onClick?(): void;
@@ -15,15 +14,22 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
   card,
   enabled,
   onClick,
-  affordable = false,
 }) => {
   if (card == null) {
-    return <Button className={"card-size"} />;
+    return (
+      <Button
+        sx={{
+          width: "100%",
+          maxWidth: { xs: "6rem", sm: "none" },
+          height: { sm: 128 },
+          aspectRatio: "3/4",
+        }}
+      />
+    );
   }
 
   return (
     <Button
-      className={affordable ? "card-size card-affordable" : "card-size"}
       color={colorIndexToPalette[card.color]}
       onClick={() => {
         if (enabled) {
@@ -31,6 +37,10 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
         }
       }}
       sx={{
+        width: "100%",
+        maxWidth: { xs: "6rem", sm: "none" },
+        height: { sm: 128 },
+        aspectRatio: "3/4",
         borderRadius: 2,
         position: "relative",
         boxShadow: 8,
