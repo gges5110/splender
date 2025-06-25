@@ -1,4 +1,4 @@
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useAtom } from "jotai/index";
 import { historyAtom, userAtom } from "src/Atoms";
 import { useSnackbar } from "notistack";
@@ -19,7 +19,7 @@ const columns: GridColDef[] = [
     headerName: "Date",
     type: "dateTime",
     width: 180,
-    valueGetter: (params: GridValueGetterParams) => new Date(params.row.date),
+    valueGetter: (value, row) => new Date(row.date),
   },
   {
     field: "numberOfPlayers",
