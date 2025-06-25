@@ -61,6 +61,9 @@ export const CardOnTable: FC<CardOnTableProps> = ({
 
   const [state, setState] = useState<boolean>(false);
 
+  const isAffordable =
+    card && hideAffordableHint !== true && playerCanAffordCard(card, player);
+
   return (
     <AnimatePresence>
       {card == null ? (
@@ -71,19 +74,18 @@ export const CardOnTable: FC<CardOnTableProps> = ({
           exit={{ opacity: 0, scale: 0 }}
           initial={"stop"}
           key={elementKey}
-          style={{ gridColumn: "span 2 / span 2" }}
+          style={{
+            gridColumn: "span 2 / span 2",
+            boxShadow: isAffordable
+              ? "0 0 0 4px rgba(156, 163, 175, 1)"
+              : undefined,
+            borderRadius: 8,
+          }}
           variants={variants}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >
-          <CardDisplay
-            affordable={
-              hideAffordableHint !== true && playerCanAffordCard(card, player)
-            }
-            card={card}
-            enabled={!disabled}
-            onClick={cardOnClick}
-          />
+          <CardDisplay card={card} enabled={!disabled} onClick={cardOnClick} />
         </motion.div>
       )}
     </AnimatePresence>

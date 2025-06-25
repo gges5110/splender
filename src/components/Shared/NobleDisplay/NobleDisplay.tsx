@@ -19,14 +19,16 @@ export const NobleDisplay: React.FC<NobleDisplayProps> = ({
       bgcolor={(theme) =>
         theme.palette.mode === "dark" ? yellow[700] : yellow[400]
       }
-      className={"noble-size"}
       onClick={onClick}
       position={"relative"}
       sx={{
+        maxWidth: { xs: 96 },
+        aspectRatio: 1,
         boxShadow: (theme) => theme.shadows[24],
         borderRadius: 3,
         cursor: onClick !== undefined ? "pointer" : "default",
       }}
+      width={"100%"}
     >
       <Box
         position={"absolute"}

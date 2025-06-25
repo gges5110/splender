@@ -15,14 +15,22 @@ export const SectionCollapse: FC<SectionCollapseProps> = ({
   return (
     <>
       <ListItemButton
-        className={
-          "rounded-lg bg-blue-500/20 hover:bg-blue-500/30 focus:outline-hidden focus-visible:ring-3 focus-visible:ring-slate-500 focus-visible:ring-opacity-75"
-        }
         onClick={() => {
           setOpen((prevState) => !prevState);
         }}
         sx={{
           py: { xs: 0, sm: 1 },
+          borderRadius: 2,
+          bgcolor: "rgba(59, 130, 246, 0.2)",
+          "&:hover": {
+            bgcolor: "rgba(59, 130, 246, 0.3)",
+          },
+          "&:focus": {
+            outline: "none",
+          },
+          "&:focus-visible": {
+            outline: "3px solid rgba(100, 116, 139, 0.75)",
+          },
         }}
       >
         <ListItemText primary={title} />

@@ -6,7 +6,7 @@ import { PickNobleDialog } from "./NoblesSection/PickNobleDialog/PickNobleDialog
 import { NoblesSection } from "./NoblesSection/NoblesSection";
 import { CardsSection } from "./CardsSection/CardsSection";
 import { GemsSection } from "./GemsSection/GemsSection";
-import { Paper } from "@mui/material";
+import { Paper, Box } from "@mui/material";
 
 interface PlayingTableProps {
   G: GameState;
@@ -40,8 +40,20 @@ export const PlayingTable: FC<PlayingTableProps> = ({
   const currentPlayerActive = playerID === ctx.currentPlayer;
 
   return (
-    <Paper className={"sections-container"} elevation={6}>
-      <div className={"playing-table-subsections-container"}>
+    <Paper
+      elevation={6}
+      sx={{
+        mx: "auto",
+        height: "100%",
+        borderRadius: 3,
+        p: { xs: 1, sm: 4 },
+        boxShadow: {
+          sm:
+            "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+        },
+      }}
+    >
+      <Box sx={{ p: { xs: 0.5, sm: 2 } }}>
         <NoblesSection nobles={nobles} />
 
         <PickNobleDialog
@@ -56,9 +68,9 @@ export const PlayingTable: FC<PlayingTableProps> = ({
           }}
           players={players}
         />
-      </div>
+      </Box>
 
-      <div className={"playing-table-subsections-container"}>
+      <Box sx={{ p: { xs: 0.5, sm: 2 } }}>
         <CardsSection
           build={moves.build}
           buildDialogProps={buildDialogProps}
@@ -75,9 +87,9 @@ export const PlayingTable: FC<PlayingTableProps> = ({
           player={players[Number(ctx.currentPlayer)]}
           reserve={moves.reserve}
         />
-      </div>
+      </Box>
 
-      <div className={"playing-table-subsections-container"}>
+      <Box sx={{ p: { xs: 0.5, sm: 2 } }}>
         <GemsSection
           disabled={!currentPlayerActive}
           gems={gems}
@@ -92,7 +104,7 @@ export const PlayingTable: FC<PlayingTableProps> = ({
           }
           playerGems={players[Number(ctx.currentPlayer)].gems}
         />
-      </div>
+      </Box>
     </Paper>
   );
 };

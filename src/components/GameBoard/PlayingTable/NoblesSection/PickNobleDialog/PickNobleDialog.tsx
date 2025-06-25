@@ -2,7 +2,7 @@ import { FC } from "react";
 import { NobleDisplay } from "src/components/Shared/NobleDisplay/NobleDisplay";
 import { Noble, Player } from "src/interfaces/Interfaces";
 import { getVisitingNobleIndexArray } from "src/engine/MovesUtil";
-import { Dialog, DialogContent, DialogTitle } from "@mui/material";
+import { Dialog, DialogContent, DialogTitle, Box } from "@mui/material";
 
 interface PickNobleDialogProps {
   currentPlayer: string;
@@ -22,11 +22,18 @@ export const PickNobleDialog: FC<PickNobleDialogProps> = ({
 }) => {
   return (
     <Dialog open={open}>
-      <DialogTitle className={"text-lg leading-6 font-medium text-gray-700"}>
+      <DialogTitle
+        sx={{
+          fontSize: "1.125rem",
+          lineHeight: 1.5,
+          fontWeight: 500,
+          color: "#374151",
+        }}
+      >
         Pick Noble
       </DialogTitle>
       <DialogContent>
-        <div className={"flex justify-center gap-2"}>
+        <Box sx={{ display: "flex", justifyContent: "center", gap: 1 }}>
           {getVisitingNobleIndexArray(
             players[Number(currentPlayer)],
             nobles
@@ -37,7 +44,7 @@ export const PickNobleDialog: FC<PickNobleDialogProps> = ({
               onClick={() => pick(nobleIndex)}
             />
           ))}
-        </div>
+        </Box>
       </DialogContent>
     </Dialog>
   );

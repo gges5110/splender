@@ -34,7 +34,13 @@ export const PlayerCards: React.FC<PlayerCardsProps> = ({
       justifyContent={"flex-start"}
     >
       {cardCountByColor.map((cardCount, index) => (
-        <Box className={"player-card-size"} key={index}>
+        <Box
+          key={index}
+          sx={{
+            width: { xs: 32, sm: 48 },
+            height: { xs: 48, sm: 80 },
+          }}
+        >
           {cardCount > 0 && (
             <Button
               color={colorIndexToPalette[index]}
@@ -46,7 +52,12 @@ export const PlayerCards: React.FC<PlayerCardsProps> = ({
           )}
         </Box>
       ))}
-      <Box className={"player-card-size"}>
+      <Box
+        sx={{
+          width: { xs: 32, sm: 48 },
+          height: { xs: 48, sm: 80 },
+        }}
+      >
         {reservedCards.length > 0 && (
           <Button
             color={colorIndexToPalette[5]}

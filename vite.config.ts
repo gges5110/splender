@@ -2,8 +2,6 @@ import { defineConfig } from "vite";
 import svgrPlugin from "vite-plugin-svgr";
 import react from "@vitejs/plugin-react";
 import { join, parse, resolve } from "path";
-// @ts-ignore
-import tailwindcss from "@tailwindcss/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,7 +12,6 @@ export default defineConfig({
     },
   },
   plugins: [
-    tailwindcss(),
     svgrPlugin(),
     react({
       babel: {
