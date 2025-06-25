@@ -79,7 +79,11 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
         />
       </Box>
 
-      <div className={"gap-2 grid grid-cols-8"}>
+      <Box
+        display={"grid"}
+        gap={1}
+        gridTemplateColumns={"repeat(8, minmax(0, 1fr))"}
+      >
         <SelectedGems
           selectedGemOnClick={(index) => {
             setGems(
@@ -90,15 +94,22 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
           }}
           selectedGems={selectedGems}
         />
-        <div
-          className={"gem-size rounded-full select-none shadow-xs flex-initial"}
+        <Box
           key={5}
+          sx={{
+            width: 48,
+            height: 48,
+            aspectRatio: 1,
+            borderRadius: "50%",
+            userSelect: "none",
+            flex: "0 1 auto",
+          }}
         />
         <ResetButton
           disabled={selectedGems.every((gem) => gem === 0)}
           onClick={() => setGems(Array(5).fill(0))}
         />
-      </div>
+      </Box>
     </Box>
   );
 };
