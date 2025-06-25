@@ -13,9 +13,9 @@ export const NoblesSection: FC<NoblesSectionProps> = ({ nobles }) => (
     <Box mt={2} px={1}>
       <Box display={"flex"} gap={1} justifyContent={"space-between"}>
         {nobles.map((noble, index) => (
-          <div className={"noble-size"} key={index}>
+          <Box display={"contents"} key={index}>
             {!noble.acquired && <NobleDisplay noble={noble} />}
-          </div>
+          </Box>
         ))}
       </Box>
     </Box>

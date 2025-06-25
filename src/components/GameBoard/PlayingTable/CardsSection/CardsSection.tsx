@@ -5,6 +5,7 @@ import { CardsOnTable } from "./CardsOnTable/CardsOnTable";
 import { BuildDialogProps } from "src/components/GameBoard/PlayingTable/PlayingTable";
 import { ReserveFromDeckDialog } from "./ReserveFromDeckDialog/ReserveFromDeckDialog";
 import { SectionCollapse } from "src/components/Shared/SectionCollapse/SectionCollapse";
+import { Box } from "@mui/material";
 
 interface CardsSectionProps {
   build(...args: any[]): void;
@@ -72,7 +73,7 @@ export const CardsSection: FC<CardsSectionProps> = ({
       )}
 
       <SectionCollapse title={"Cards"}>
-        <div className={"mt-2"}>
+        <Box sx={{ marginTop: 1 }}>
           <CardsOnTable
             cardOnClick={onClick}
             cards={cards}
@@ -82,7 +83,7 @@ export const CardsSection: FC<CardsSectionProps> = ({
             numCardsInDeck={numCardsInDeck}
             player={player}
           />
-        </div>
+        </Box>
       </SectionCollapse>
     </>
   );

@@ -38,7 +38,7 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({
       }}
       sx={{
         width: "100%",
-        maxWidth: { xs: "6rem", sm: "none" },
+        maxWidth: { xs: "6rem" },
         height: { sm: 128 },
         aspectRatio: "3/4",
         borderRadius: 2,
