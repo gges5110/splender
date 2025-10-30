@@ -5,11 +5,10 @@ export default defineConfig({
     globals: true,
     setupFiles: "src/setupTests.ts",
     environment: "jsdom",
-    include: ["src/components/**/*.test.tsx"],
-    exclude: ["src/engine/"],
+    include: ["src/**/*.test.tsx"],
     coverage: {
       reporter: ["text", "cobertura"],
-      include: ["src/components/**/*.tsx"],
+      include: ["src/**/*.tsx"],
       provider: "v8",
       all: true,
     },
