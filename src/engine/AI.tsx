@@ -1,5 +1,5 @@
 import { AiEnumerate, Ctx } from "boardgame.io";
-import { Card, GameState, Noble, Player } from "src/interfaces/Interfaces";
+import { Card, GameState, Noble, Player } from "src/shared/types";
 import { gemsInHandLimit } from "./Moves";
 import {
   getCardCountByColor,

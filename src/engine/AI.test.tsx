@@ -6,7 +6,7 @@ import {
   GameState,
   Noble,
   Player,
-} from "src/interfaces/Interfaces";
+} from "src/shared/types";
 import { Ctx } from "boardgame.io";
 
 // Helper to create a basic player

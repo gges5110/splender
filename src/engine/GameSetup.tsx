@@ -1,5 +1,5 @@
-import { Card, GemsTypeWithGold, Player } from "src/interfaces/Interfaces";
-import { level1Cards, level2Cards, level3Cards, nobles } from "src/constants";
+import { Card, GemsTypeWithGold, Player } from "src/shared/types";
+import { level1Cards, level2Cards, level3Cards, nobles } from "src/data";
 import { Ctx } from "boardgame.io";
 
 const populateLevel1Cards = (): Card[] => {
