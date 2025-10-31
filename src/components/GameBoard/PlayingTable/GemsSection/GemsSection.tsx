@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { GemsPicker, GemsPickerMode } from "./GemsPicker/GemsPicker";
-import { SectionCollapse } from "src/components/Shared/SectionCollapse/SectionCollapse";
 import { Box } from "@mui/material";
 
 interface GemsSectionProps {
@@ -14,14 +13,12 @@ export const GemsSection: FC<GemsSectionProps> = ({
   onSelect,
   disabled,
 }) => (
-  <SectionCollapse title={"Gems"}>
-    <Box p={1}>
-      <GemsPicker
-        disabled={disabled}
-        gems={gems}
-        mode={GemsPickerMode.PICK}
-        onSelect={onSelect}
-      />
-    </Box>
-  </SectionCollapse>
+  <Box p={1}>
+    <GemsPicker
+      disabled={disabled}
+      gems={gems}
+      mode={GemsPickerMode.PICK}
+      onSelect={onSelect}
+    />
+  </Box>
 );

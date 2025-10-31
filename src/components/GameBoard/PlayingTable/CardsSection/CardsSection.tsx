@@ -4,7 +4,6 @@ import { CardDialog } from "./CardDialog/CardDialog";
 import { CardsOnTable } from "./CardsOnTable/CardsOnTable";
 import { BuildDialogProps } from "src/components/GameBoard/PlayingTable/PlayingTable";
 import { ReserveFromDeckDialog } from "./ReserveFromDeckDialog/ReserveFromDeckDialog";
-import { SectionCollapse } from "src/components/Shared/SectionCollapse/SectionCollapse";
 import { Box } from "@mui/material";
 
 interface CardsSectionProps {
@@ -72,19 +71,17 @@ export const CardsSection: FC<CardsSectionProps> = ({
         />
       )}
 
-      <SectionCollapse title={"Cards"}>
-        <Box sx={{ marginTop: 1 }}>
-          <CardsOnTable
-            cardOnClick={onClick}
-            cards={cards}
-            deckOnClick={deckOnClick}
-            disabled={disabled}
-            hideAffordableHint={hideAffordableHint}
-            numCardsInDeck={numCardsInDeck}
-            player={player}
-          />
-        </Box>
-      </SectionCollapse>
+      <Box sx={{ marginTop: 1 }}>
+        <CardsOnTable
+          cardOnClick={onClick}
+          cards={cards}
+          deckOnClick={deckOnClick}
+          disabled={disabled}
+          hideAffordableHint={hideAffordableHint}
+          numCardsInDeck={numCardsInDeck}
+          player={player}
+        />
+      </Box>
     </>
   );
 };
