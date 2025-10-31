@@ -1,5 +1,9 @@
 import { useAtom } from "jotai";
-import { playerNameAtom, userAtom, usernameDialogOpenAtom } from "src/state/atoms";
+import {
+  playerNameAtom,
+  userAtom,
+  usernameDialogOpenAtom,
+} from "src/state/atoms";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import {

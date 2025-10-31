@@ -1,4 +1,4 @@
-import { LocalMatchInfo } from 'src/features/lobby/types';
+import { LocalMatchInfo } from "src/features/lobby/types";
 
 export const useLocalMatchInfo = (): LocalMatchInfo | undefined => {
   const localStorageLocalMatchInfo = localStorage.getItem("localMatchInfo");

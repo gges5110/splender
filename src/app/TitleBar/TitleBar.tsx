@@ -2,7 +2,11 @@ import { FC, useEffect, useState } from "react";
 import { ColorThemeSelector } from "./ColorThemeSelector/ColorThemeSelector";
 import { Link as RouterLink } from "react-router-dom";
 import { useAtom } from "jotai/index";
-import { playerNameAtom, userAtom, usernameDialogOpenAtom } from "src/state/atoms";
+import {
+  playerNameAtom,
+  userAtom,
+  usernameDialogOpenAtom,
+} from "src/state/atoms";
 import {
   AppBar,
   Button,

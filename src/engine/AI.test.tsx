@@ -1,12 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { enumerateAIMoves } from "./AI";
-import {
-  Card,
-  Color,
-  GameState,
-  Noble,
-  Player,
-} from "src/shared/types";
+import { Card, Color, GameState, Noble, Player } from "src/shared/types";
 import { Ctx } from "boardgame.io";
 
 // Helper to create a basic player

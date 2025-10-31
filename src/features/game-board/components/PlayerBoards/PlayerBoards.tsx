@@ -4,7 +4,7 @@ import { PlayerCards } from "./PlayerCards/PlayerCards";
 import { FC, useState } from "react";
 import { PlayerDialog } from "./PlayerCards/PlayerDialog/PlayerDialog";
 import { LobbyAPI } from "boardgame.io/src/types";
-import { Box, Button, Paper } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { blueGrey, grey, orange } from "@mui/material/colors";
 
 interface PlayerBoardsProps {

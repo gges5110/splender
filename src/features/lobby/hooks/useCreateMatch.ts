@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import {
-  useSetLocalMatchInfo,
-} from "src/shared/hooks/useLocalMatchInfo";
+import { useSetLocalMatchInfo } from "src/shared/hooks/useLocalMatchInfo";
 import { resetLocalGame } from "src/shared/utils/localStorage";
 import { nanoid } from "nanoid";
 
