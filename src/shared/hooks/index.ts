@@ -2,4 +2,4 @@ export {
   useLocalMatchInfo,
   useSetLocalMatchInfo,
   useIncrementSeed,
-} from './useLocalMatchInfo';
+} from "./useLocalMatchInfo";

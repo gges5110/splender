@@ -6,8 +6,8 @@ export type {
   GameState,
   GemsType,
   GemsTypeWithGold,
-} from './game';
-export { Color } from './game';
+} from "./game";
+export { Color } from "./game";
 
 // Common types
-export type { User, DialogProps } from './common';
+export type { User, DialogProps } from "./common";

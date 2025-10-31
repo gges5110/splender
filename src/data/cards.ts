@@ -1,4 +1,4 @@
-import { Card, Color } from 'src/shared/types';
+import { Card, Color } from "src/shared/types";
 
 export const level1Cards: Card[] = [
   {

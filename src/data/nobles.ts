@@ -1,4 +1,4 @@
-import { Noble } from 'src/shared/types';
+import { Noble } from "src/shared/types";
 
 export const nobles: Noble[] = [
   {

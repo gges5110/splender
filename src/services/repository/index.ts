@@ -2,6 +2,6 @@ export {
   useSaveGameResult,
   sendGameHistoryWithCloud,
   loadGameHistoryFromCloud,
-} from './gameHistory';
+} from "./gameHistory";
 
-export { loadGameToLocal, saveGameToRemote } from './remote';
+export { loadGameToLocal, saveGameToRemote } from "./remote";
