@@ -55,7 +55,5 @@ export const saveGameToRemote = (matchData: LobbyAPI.Match) => {
     localMatchInfo,
     sessionId: window.navigator.userAgent,
     updateTimestamp: new Date().toISOString(),
-  }).then(() => {
-    console.log("saved game state to server");
   });
 };

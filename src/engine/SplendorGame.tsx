@@ -6,7 +6,7 @@ import {
   pickNoble,
   reserve,
 } from "./Moves";
-import { enumerateAIMoves } from "./AI";
+import { enumerateAIMoves } from "./ai";
 import { GameState } from "src/shared/types";
 import type { Ctx, Game } from "boardgame.io";
 import { setup } from "./GameSetup";
