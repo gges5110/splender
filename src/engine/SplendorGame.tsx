@@ -6,11 +6,11 @@ import {
   pickNoble,
   reserve,
 } from "./Moves";
-import { enumerateAIMoves } from "./AI";
-import { GameState } from "src/interfaces/Interfaces";
+import { enumerateAIMoves } from "./ai";
+import { GameState } from "src/shared/types";
 import type { Ctx, Game } from "boardgame.io";
 import { setup } from "./GameSetup";
-import { GAME_NAME } from "src/config";
+import { GAME_NAME } from "src/config/config";
 
 const endIf = (G: GameState, ctx: Ctx) => {
   if (Number(ctx.currentPlayer) !== ctx.numPlayers - 1) {

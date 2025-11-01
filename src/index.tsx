@@ -1,4 +1,4 @@
-import App from "./App";
+import App from "src/app/App";
 import reportWebVitals from "./reportWebVitals";
 import { createRoot } from "react-dom/client";
 
