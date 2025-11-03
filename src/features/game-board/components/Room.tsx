@@ -5,7 +5,7 @@ import { useLocalMatchInfo } from "src/shared/hooks/useLocalMatchInfo";
 import {
   PublicPlayerMetadata,
   useCreateGameClient,
-} from "src/features/game-board/components/UseCreateGameClient";
+} from "src/features/game-board/hooks/useCreateGameClient";
 import { LobbyAPI } from "boardgame.io/src/types";
 import { Container } from "@mui/material";
 import { GAME_NAME } from "src/config/config";
