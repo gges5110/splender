@@ -94,6 +94,7 @@ export const PlayingTable: FC<PlayingTableProps> = ({
           disabled={!currentPlayerActive}
           gems={gems}
           onSelect={moves.pick}
+          turn={ctx.turn}
         />
 
         <DiscardGemsDialog
@@ -103,6 +104,7 @@ export const PlayingTable: FC<PlayingTableProps> = ({
             currentPlayerActive
           }
           playerGems={players[Number(ctx.currentPlayer)].gems}
+          turn={ctx.turn}
         />
       </Box>
     </Paper>

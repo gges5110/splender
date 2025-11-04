@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as React from "react";
 import { SelectedGems } from "./SelectedGems/SelectedGems";
 import { SelectableGems } from "./SelectableGems/SelectableGems";
@@ -17,6 +17,7 @@ interface GemsPickerProps {
   gemsToDiscard?: number;
   mode: GemsPickerMode;
   onSelect(gems: number[]): void;
+  turn?: number;
 }
 
 export const GemsPicker: React.FC<GemsPickerProps> = ({
@@ -25,8 +26,14 @@ export const GemsPicker: React.FC<GemsPickerProps> = ({
   mode,
   gemsToDiscard,
   disabled,
+  turn,
 }) => {
   const [selectedGems, setGems] = useState<number[]>(Array(5).fill(0));
+
+  // Reset gem picker when turn changes
+  useEffect(() => {
+    setGems(Array(5).fill(0));
+  }, [turn]);
 
   let actionLabelText = "";
   switch (mode) {

@@ -16,12 +16,14 @@ interface DiscardGemDialogProps {
   open: boolean;
 
   playerGems: number[];
+  turn?: number;
 }
 
 export const DiscardGemsDialog: React.FC<DiscardGemDialogProps> = ({
   open,
   playerGems,
   discardGems,
+  turn,
 }) => {
   const gemsToDiscard = playerGems.reduce((p, v) => p + v, 0) - 10;
   return (
@@ -41,6 +43,7 @@ export const DiscardGemsDialog: React.FC<DiscardGemDialogProps> = ({
           gemsToDiscard={gemsToDiscard}
           mode={GemsPickerMode.DISCARD}
           onSelect={discardGems}
+          turn={turn}
         />
       </DialogContent>
     </Dialog>
