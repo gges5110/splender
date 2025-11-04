@@ -20,7 +20,8 @@ export interface CardScore {
 export const scoreCard = (
   card: Card,
   player: Player,
-  nobles: Noble[]
+  nobles: Noble[],
+  level?: number
 ): number => {
   let score = 0;
 
@@ -71,6 +72,27 @@ export const scoreCard = (
   const colorDeficit = Math.max(0, avgColorCount - colorCounts[card.color]);
   score += colorDeficit * 0.5;
 
+  // 5. Level-based strategy - prioritize lower level cards early game
+  // Early game: build engine with level 0 cards ONLY
+  // Mid/Late game: transition to level 1 and 2 cards for points
+  // Note: level is 0-indexed (0 = lowest/cheapest, 2 = highest)
+  if (level !== undefined) {
+    const gameProgress = Math.min(1, totalPlayerCards / 10); // 0 = early, 1 = late (10+ cards)
+
+    if (level === 0) {
+      // Level 0 (lowest): Strong priority early, dramatically decreases as game progresses
+      score += 50 * (1 - gameProgress);
+    } else if (level === 1) {
+      // Level 1 (middle): MASSIVE penalty early, increases strongly mid-game
+      // Penalty large enough to make these cards effectively invisible in early game
+      score += 40 * gameProgress - 100 * (1 - gameProgress);
+    } else if (level === 2) {
+      // Level 2 (highest): MASSIVE penalty early game, strong bonus late game
+      // Penalty large enough to make these cards effectively invisible in early game
+      score += 30 * gameProgress - 150 * (1 - gameProgress);
+    }
+  }
+
   return score;
 };
 
@@ -87,7 +109,7 @@ export const getScoredAffordableCards = (
   G.cardsOnTable.forEach((cardsAtLevel, rowIndex) => {
     cardsAtLevel.forEach((card, columnIndex) => {
       if (card !== undefined && playerCanAffordCard(card, player)) {
-        const score = scoreCard(card, player, G.nobles);
+        const score = scoreCard(card, player, G.nobles, rowIndex);
         scoredCards.push({ card, score, rowIndex, columnIndex });
       }
     });
@@ -113,18 +135,22 @@ export const getScoredAffordableCards = (
 export const getGemNeeds = (G: GameState, player: Player): number[] => {
   const gemNeeds = [0, 0, 0, 0, 0]; // Need score for each color
 
-  // Get all cards on table and in reserve
-  const allCards: Card[] = [];
-  G.cardsOnTable.forEach((cardsAtLevel) => {
+  // Get all cards on table with their levels and in reserve
+  const allCardsWithLevel: Array<{ card: Card; level?: number }> = [];
+  G.cardsOnTable.forEach((cardsAtLevel, level) => {
     cardsAtLevel.forEach((card) => {
-      if (card !== undefined) allCards.push(card);
+      if (card !== undefined) allCardsWithLevel.push({ card, level });
     });
   });
-  player.reservedCards.forEach((card) => allCards.push(card));
+  player.reservedCards.forEach((card) => allCardsWithLevel.push({ card }));
 
   // Score each card and calculate gem needs weighted by card value
-  allCards.forEach((card) => {
-    const cardValue = scoreCard(card, player, G.nobles);
+  allCardsWithLevel.forEach(({ card, level }) => {
+    const cardValue = scoreCard(card, player, G.nobles, level);
+
+    // Only consider cards with positive value (ignore cards penalized by level strategy)
+    if (cardValue <= 0) return;
+
     const playerBonuses = getCardCountByColor(player.cards);
 
     // Calculate how many gems needed for each color

@@ -22,7 +22,7 @@ export const calculateGemsToDiscard = (playerGems: number[]): number[] => {
 
 /**
  * Selects a single move from scored options using weighted randomness
- * Moves within 5% of the best score have equal chance, creating variety
+ * Moves within 1% of the best score have equal chance, creating variety
  * while still being competitive
  */
 export const selectMoveWithVariety = <T extends { score: number }>(
@@ -31,9 +31,9 @@ export const selectMoveWithVariety = <T extends { score: number }>(
   if (scoredMoves.length === 0) return undefined;
 
   const bestScore = scoredMoves[0].score;
-  const scoreThreshold = bestScore * 0.95;
+  const scoreThreshold = bestScore * 0.99; // Changed from 0.95 to 0.99 for tighter selection
 
-  // Get all competitive moves (within 5% of best)
+  // Get all competitive moves (within 1% of best)
   const competitiveMoves = scoredMoves.filter(
     (move) => move.score >= scoreThreshold
   );

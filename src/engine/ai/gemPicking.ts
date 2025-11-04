@@ -44,9 +44,10 @@ export const generateGemMoves = (
       }
     }
 
-    // Heavily prioritize picking more gems - use 100000 multiplier per gem
+    // Heavily prioritize picking more gems - use 1000000 multiplier per gem
     // This ensures 3-gem picks ALWAYS rank higher than 2-gem or 1-gem picks
-    const score = gemCount * 100000 + gemNeedScore;
+    // Scale gem need score by 10000x so differences are significant for selection
+    const score = gemCount * 1000000 + gemNeedScore * 10000;
 
     scoredGemMoves.push({
       args: p,
@@ -58,7 +59,7 @@ export const generateGemMoves = (
   // Only add "pick 2 of same" moves if we can't pick 3 different gems
   if (!has3GemMoves) {
     // Pick 2 gems of same kind - prefer colors we need most
-    // Give a 10000 point bonus for picking 2 of same vs 2 different (better strategy)
+    // Give a 100000 point bonus for picking 2 of same vs 2 different (better strategy)
     gems.forEach((gem, index) => {
       if (gem > 3) {
         const arr: number[] = Array(5).fill(0);
@@ -66,7 +67,7 @@ export const generateGemMoves = (
         scoredGemMoves.push({
           args: arr,
           move: "pick",
-          score: 210000 + gemNeeds[index] * 2,
+          score: 2100000 + gemNeeds[index] * 2 * 10000, // 2.1M base + 10000x scaled needs
         });
       }
     });
